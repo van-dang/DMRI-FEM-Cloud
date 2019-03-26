@@ -1,0 +1,30 @@
+# Copyright (C) 2017 Van-Dang Nguyen (vdnguyen@kth.se)
+
+# This file is part of FEniCS
+#
+# FEniCS is free software: you can redistribute it and/or modify
+# it under the terms of the GNU Lesser General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+
+Ve = FiniteElement("CG", tetrahedron, 1)
+TH = MixedElement([Ve,Ve, Ve, Ve])
+
+V_DG = FiniteElement("DG", tetrahedron, 0)
+
+phase = Coefficient(V_DG);
+
+v = TestFunction(TH)
+v0r, v0i, v1r, v1i = v[0], v[1], v[2], v[3]
+
+w = TrialFunction(TH);
+u0r, u0i, u1r, u1i = w[0], w[1], w[2], w[3]
+
+f = Coefficient(TH)
+
+a =   (u0r*v0r +  u0i*v0i)*(1-phase)*dx  + (u1r*v1r +  u1i*v1i)*phase*dx
+L =  (f[0]*v0r + f[1]*v0i)*(1-phase)*dx + (f[2]*v1r + f[3]*v1i)*phase*dx
+
+# a =   (u0r*v0r +  u0i*v0i)*dx  + (u1r*v1r +  u1i*v1i)*dx
+# L =  (f[0]*v0r + f[1]*v0i)*dx + (f[2]*v1r + f[3]*v1i)*dx
+

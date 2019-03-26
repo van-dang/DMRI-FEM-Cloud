@@ -1,0 +1,29 @@
+# Copyright (C) 2017 Van-Dang Nguyen (vdnguyen@kth.se)
+
+# This file is part of FEniCS
+#
+# FEniCS is free software: you can redistribute it and/or modify
+# it under the terms of the GNU Lesser General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+
+Ve = FiniteElement("CG", tetrahedron, 1)
+TH = MixedElement([Ve,Ve])
+
+v = TestFunction(TH)
+vr, vi = v[0], v[1]
+
+w = TrialFunction(TH);
+ur, ui = w[0], w[1]
+
+GX = Coefficient(Ve)
+K = Coefficient(Ve)
+mmk = Coefficient(Ve)
+smk = Coefficient(Ve)
+jmk = Coefficient(Ve)
+imk = Coefficient(Ve)
+       
+m = (ur*vr + ui*vi)*mmk*dx    
+j = -GX*(ui*vr - ur*vi)*jmk*dx
+s = K*( inner(grad(ur), grad(vr)) + inner(grad(ui), grad(vi)) )*smk*dx   
+a = m + j + s;

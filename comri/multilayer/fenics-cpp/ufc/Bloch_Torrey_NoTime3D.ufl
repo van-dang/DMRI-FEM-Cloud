@@ -1,0 +1,59 @@
+# Copyright (C) 2017 Van-Dang Nguyen (vdnguyen@kth.se)
+
+# This file is part of FEniCS
+#
+# FEniCS is free software: you can redistribute it and/or modify
+# it under the terms of the GNU Lesser General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+
+Ve = FiniteElement("CG", tetrahedron, 1)
+TH = MixedElement([Ve,Ve,Ve,Ve])
+
+v = TestFunction(TH)
+v0r, v0i, v1r, v1i = v[0], v[1], v[2], v[3]
+
+w = TrialFunction(TH);
+u0r, u0i, u1r, u1i = w[0], w[1], w[2], w[3]
+
+V_DG = FiniteElement("DG", tetrahedron, 0)
+
+phase = Coefficient(V_DG)
+
+GX = Coefficient(Ve)
+K = Coefficient(Ve)
+kappa = Coefficient(Ve)
+mmk = Coefficient(Ve)
+smk = Coefficient(Ve)
+jmk = Coefficient(Ve)
+imk = Coefficient(Ve)
+
+
+def interface_cond(kappa, u0rm, u1rm, v0r, v1r, u0im, u1im, v0i, v1i):
+    F_bcr = kappa*(u0rm-u1rm)*(v0r-v1r)
+    F_bci = kappa*(u0im-u1im)*(v0i-v1i)
+    return F_bcr + F_bci
+
+def NoTimeMatrices(u0r, u0i, v0r, v0i, u1r, u1i, v1r, v1i, K, GX, kappa, phase):
+    m0 = (u0r*v0r   + u0i*v0i)*(1-phase)*mmk*dx
+    m1 = (u1r*v1r   + u1i*v1i)*phase*mmk*dx
+    m = m0+m1;
+        
+    j0 = -GX*(u0i*v0r   - u0r*v0i)*(1-phase)*jmk*dx
+    j1 = -GX*(u1i*v1r   - u1r*v1i)*phase*jmk*dx
+    j = j0+j1;    
+    s0 = K*( inner(grad(u0r), grad(v0r)) + inner(grad(u0i), grad(v0i)) )*(1-phase)*smk*dx
+    s1 = K*( inner(grad(u1r), grad(v1r)) + inner(grad(u1i), grad(v1i)) )*phase*smk*dx
+    s = s0+s1;
+
+    im = imk*avg(  interface_cond(kappa, u0r , u1r , v0r, v1r, u0i  , u1i ,v0i, v1i) )*abs(jump(phase))*dS;
+   
+    a = m + s + j + im; 
+    
+    return a
+
+a = NoTimeMatrices(u0r, u0i, v0r, v0i, u1r, u1i, v1r, v1i, K, GX, kappa, phase);
+
+
+
+
