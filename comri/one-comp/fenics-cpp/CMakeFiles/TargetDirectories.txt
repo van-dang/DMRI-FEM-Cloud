@@ -1,3 +1,0 @@
-/home/singularity/Documents/comri/one-comp/fenics-cpp/CMakeFiles/rebuild_cache.dir
-/home/singularity/Documents/comri/one-comp/fenics-cpp/CMakeFiles/demo.dir
-/home/singularity/Documents/comri/one-comp/fenics-cpp/CMakeFiles/edit_cache.dir
