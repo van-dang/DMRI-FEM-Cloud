@@ -47,8 +47,8 @@ def GetPartitionMarkers(mshfile):
   for x in lineList:
     x = x.split(" ")
     if len(x) == len(lastline):
-        filename.write('      <value cell_index="'+str(int(x[0])-first_id)+'" local_entity="0" value="'+x[4]+'" />\n');
-        if (len(cmpts)==0 or not(x[4]==cmpts[len(cmpts)-1])):
+          filename.write('      <value cell_index="'+str(int(x[0])-first_id)+'" local_entity="0" value="'+x[4]+'" />\n');
+          if (len(cmpts)==0 or not(x[4]==cmpts[len(cmpts)-1])):
               cmpts.append(x[4])
 
   filename.write('    </mesh_value_collection>\n');
