@@ -57,5 +57,5 @@ filename.write('</dolfin>\n');
 filename.close();
 
 print("Extracted successfully on: "+str(numcells)+" elements")
-print("Marker list: " + str(cmpts))
+print("Partition marker list: " + str(cmpts))
 print("Wrote to: "+outfile)
