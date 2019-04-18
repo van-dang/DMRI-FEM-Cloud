@@ -46,10 +46,10 @@ For comp In {0:(ncomp-1)}
     i = i + N;
 EndFor
 
-Volume(1) = {29};
+Volume(0) = {29};
 j = 0;
 For comp In {1:(ncomp-1)}
-    Volume(j+2) = {29+j*N, 29+(j+1)*N};
+    Volume(j+1) = {29+j*N, 29+(j+1)*N};
     j = j + 1;
 EndFor
 
