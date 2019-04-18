@@ -37,7 +37,7 @@ def GetPartitionMarkers(mshfile, pfile=''):
   numcells = last_id - first_id + 1
 
   if (pfile==''):
-     outfile = 'volmk_'+filewithoutextention+'.xml'
+     outfile = 'pmk_'+filewithoutextention+'.xml'
   else:
      outfile = pfile
   filename = open(outfile,'w');
