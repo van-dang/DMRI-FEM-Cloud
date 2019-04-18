@@ -1,7 +1,7 @@
 # Copyright Van-Dang NGUYEN 2019
 import os, sys
 
-def GetPartitionMarkers(mshfile, pfile=''):
+def GetPartitionMarkers(mshfile, pfile=""):
 
   fext=mshfile[len(mshfile)-3:len(mshfile)]
   if not(fext =="msh"):
@@ -36,10 +36,11 @@ def GetPartitionMarkers(mshfile, pfile=''):
 
   numcells = last_id - first_id + 1
 
-  if (pfile==''):
+  if (pfile==""):
      outfile = 'pmk_'+filewithoutextention+'.xml'
   else:
      outfile = pfile
+
   filename = open(outfile,'w');
   filename.write('<?xml version="1.0"?>\n')
   filename.write('<dolfin xmlns:dolfin="http://fenicsproject.org">\n')
