@@ -43,10 +43,13 @@ filename.write('<dolfin xmlns:dolfin="http://fenicsproject.org">\n')
 filename.write('  <mesh_function>\n')
 filename.write('    <mesh_value_collection type="uint" dim="'+str(dim)+'" size="'+str(numcells)+'">\n');
 
+cmpts=[];
 for x in lineList:
   x = x.split(" ")
   if len(x) == len(lastline):
 	  filename.write('      <value cell_index="'+str(int(x[0])-first_id)+'" local_entity="0" value="'+x[4]+'" />\n');
+	  if (len(cmpts)==0 or not(x[4]==cmpts[len(cmpts)-1])):
+                cmpts.append(x[4])
 
 filename.write('    </mesh_value_collection>\n');
 filename.write('  </mesh_function>\n');
@@ -54,4 +57,5 @@ filename.write('</dolfin>\n');
 filename.close();
 
 print("Extracted successfully on: "+str(numcells)+" elements")
+print("Marker list: " + str(cmpts))
 print("Wrote to: "+outfile)
