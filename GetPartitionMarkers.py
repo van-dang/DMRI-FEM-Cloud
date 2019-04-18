@@ -1,7 +1,7 @@
 # Copyright Van-Dang NGUYEN 2019
 import os, sys
 
-def GetPartitionMarkers(mshfile, pfile=""):
+def GetPartitionMarkers(mshfile, pfile):
 
   fext=mshfile[len(mshfile)-3:len(mshfile)]
   if not(fext =="msh"):
