@@ -36,6 +36,3 @@ For r In {1:(ncomp-1)}
   }
   i += 1;
 EndFor
-
-//+
-Coherence;
