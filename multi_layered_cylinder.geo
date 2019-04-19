@@ -34,7 +34,3 @@ For r In {1:ncomp}
      //Recombine;
   }
 EndFor
-
-
-Mesh 3;
-Coherence Mesh;
