@@ -1,6 +1,7 @@
 lc = 0.2;
 L = 1; // length of the square
 R = 0.5; // circle radius
+TFpoints = 30;
 //+
 Point(1) = {-L, -L, 0, lc};
 //+
@@ -44,6 +45,9 @@ Line Loop(11) = {1, 2, 3, 4};
 //+
 Plane Surface(1) = {9, 11};
 
+
+//+
+Transfinite Line {1, 3} = TFpoints Using Progression 1;
+
 Mesh 2;
 Coherence Mesh;
-
