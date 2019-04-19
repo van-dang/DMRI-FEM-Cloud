@@ -6,7 +6,7 @@ xc[]={0,-L,0};
 Point(1) = {xc[0], xc[1], xc[2], 	lc};
 R[] = {5,7.5,10.0};
 ncomp = #R[];
-nlayers = 20;
+nlayers = 15;
 For comp In {0:(ncomp-1)}
   r = R[comp];
   Point(2+i) = {xc[0], r+xc[1], xc[2], 	lc};
