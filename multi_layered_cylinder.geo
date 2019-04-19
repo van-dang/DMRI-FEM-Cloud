@@ -24,7 +24,8 @@ Extrude {20,0,0} {
      Surface{1};
      Layers{10};
 }
-// Physical Volume(0) = {1};
+
+Physical Volume(0) = {1};
 
 i = 0;
 For r In {1:(ncomp-1)}
@@ -36,12 +37,5 @@ For r In {1:(ncomp-1)}
      //Recombine;
   }
   i += 1;
-  // Physical Volume(i) = {i};
+  Physical Volume(i) = {i+1};
 EndFor
-
-//+
-Physical Volume(0) = {1};
-//+
-Physical Volume(1) = {2};
-//+
-Physical Volume(2) = {3};
