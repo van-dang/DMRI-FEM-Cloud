@@ -22,22 +22,24 @@ For comp In {0:(ncomp-1)}
 EndFor
 
 Plane Surface(1) = {1};
+Physical Volume(1) = {0};
 out[] = Extrude { { 0,0,1 }, { 0,0,0 }, 2*Pi/3 } { Surface{1}; Layers{nlayers}; };
-Physical Volume(out[0]) = {1};
+Physical Volume(out[0]) = {0};
 out[] = Extrude { { 0,0,1 }, { 0,0,0 }, 2*Pi/3 } { Surface{out[0]}; Layers{nlayers}; };
-Physical Volume(out[0]) = {1};
+Physical Volume(out[0]) = {0};
 out[] = Extrude { { 0,0,1 }, { 0,0,0 }, 2*Pi/3 } { Surface{out[0]}; Layers{nlayers}; };
-Physical Volume(out[0]) = {1};
+Physical Volume(out[0]) = {0};
 
 i = 0;
 For r In {1:(ncomp-1)}
   Plane Surface(2+i) = {1+i*N, 1+(i+1)*N};
+  Physical Volume(2+i) = {1+i};
   out[] = Extrude { { 0,0,1 }, { 0,0,0 }, 2*Pi/3 } { Surface{2+i}; Layers{nlayers}; };
-  Physical Volume(out[0]) = {2+i};
+  Physical Volume(out[0]) = {1+i};
   out[] = Extrude { { 0,0,1 }, { 0,0,0 }, 2*Pi/3 } { Surface{out[0]}; Layers{nlayers}; };
-  Physical Volume(out[0]) = {2+i};
+  Physical Volume(out[0]) = {1+i};
   out[] = Extrude { { 0,0,1 }, { 0,0,0 }, 2*Pi/3 } { Surface{out[0]}; Layers{nlayers}; };
-  Physical Volume(out[0]) = {2+i};
+  Physical Volume(out[0]) = {1+i};
   i += 1;
 EndFor
 Mesh 3;
