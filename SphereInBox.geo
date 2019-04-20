@@ -125,3 +125,7 @@ Transfinite Surface {46};
 Transfinite Surface {52};
 //+
 Transfinite Surface {44};
+
+Physical Volume(0) = {0};
+//+
+Physical Volume(1) = {1};
