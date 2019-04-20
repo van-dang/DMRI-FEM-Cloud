@@ -50,4 +50,4 @@ Physical Surface(0) = {0};
 Physical Surface(1) = {1};
 
 //+
-Transfinite Line {1, 3} = TFpoints Using Progression 1;
+// Transfinite Line {1, 3} = TFpoints Using Progression 1;
