@@ -1,7 +1,7 @@
 lc = 1;
 L = 10; // length of the square
 R = 5.0; // circle radius
-TFpoints = 20;
+TFpoints = 10;
 //+
 Point(1) = {-L, -L, 0, lc};
 //+
@@ -51,6 +51,3 @@ Physical Surface(1) = {1};
 
 //+
 Transfinite Line {1, 3} = TFpoints Using Progression 1;
-
-Mesh 2;
-Coherence Mesh;
