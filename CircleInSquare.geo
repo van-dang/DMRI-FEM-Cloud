@@ -1,7 +1,7 @@
-lc = 1;
+lc = 1.5;
 L = 10; // length of the square
 R = 5.0; // circle radius
-TFpoints = 10;
+TFpoints = 5;
 //+
 Point(1) = {-L, -L, 0, lc};
 //+
