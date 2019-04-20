@@ -39,15 +39,18 @@ Circle(8) = {8, 5, 9};
 //+
 Line Loop(9) = {5, 6, 7, 8};
 //+
-Plane Surface(0) = {9};
+//Plane Surface(0) = {9};
 //+
 Line Loop(11) = {1, 2, 3, 4};
 //+
-Plane Surface(1) = {9, 11};
 
-Physical Surface(0) = {0};
+//Plane Surface(1) = {9, 11};
+
+Plane Surface(1) = {11};
+
+//Physical Surface(0) = {0};
 //+
-Physical Surface(1) = {1};
+//Physical Surface(1) = {1};
 
 //+
 // Transfinite Line {1, 3} = TFpoints Using Progression 1;
