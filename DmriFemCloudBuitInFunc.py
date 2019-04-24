@@ -461,6 +461,19 @@ def MyFunctionSpaces(mydomain, porder):
 class MyDomain():
     def __init__(self, mesh):
         self.mesh = mesh;
+        self.tol = 1e-6*mesh.hmin()
+        self.gdim = mesh.geometry().dim()
+        self.hmin = mesh.hmin()
+        self.hmax = mesh.hmax()      
+        self.xmin = mesh.coordinates()[:, 0].min()
+        self.xmax = mesh.coordinates()[:, 0].max()
+        self.ymin = mesh.coordinates()[:, 1].min()
+        self.ymax = mesh.coordinates()[:, 1].max()
+        self.zmin, self.zmax = 0, 0 
+        if (self.gdim==3):
+            self.zmin = mesh.coordinates()[:, 2].min()
+            self.zmax = mesh.coordinates()[:, 2].max()        
+        
     def WeakPseudoPeridicMarker(self):        
         if self.gdim==2:
             pmk = 3e-3/self.hmin*Expression("(x[0]<xmin+eps || x[0]>xmax-eps)*p0 || (x[1]<ymin+eps || x[1]>ymax-eps)*p1", 
@@ -479,22 +492,7 @@ class MyDomain():
             self.D = as_matrix(((k00, k01, k02), (k10, k11, k12), (k20, k21, k22)))
         print(self.D)
         
-    def Apply(self):
-        print(dir(self.mesh))
-        self.tol = 1e-6*self.mesh.hmin()
-        self.gdim = self.mesh.geometry().dim()
-        self.hmin = self.mesh.hmin()
-        self.hmax = self.mesh.hmax()      
-        self.xmin = self.mesh.coordinates()[:, 0].min()
-        self.xmax = self.mesh.coordinates()[:, 0].max()
-        self.ymin = self.mesh.coordinates()[:, 1].min()
-        self.ymax = self.mesh.coordinates()[:, 1].max()
-        self.zmin, self.zmax = 0, 0 
-        if (self.gdim==3):
-            self.zmin = self.mesh.coordinates()[:, 2].min()
-            self.zmax = self.mesh.coordinates()[:, 2].max()        
-
-      
+    def Apply(self):      
         self.fn = FacetNormal(self.mesh);
         self.fn0 = ieval(self.fn, 0, self.phase);
         self.kappa_e = self.WeakPseudoPeridicMarker()
