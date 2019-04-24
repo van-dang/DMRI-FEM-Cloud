@@ -1,4 +1,4 @@
-from dolfin import UserExpression
+from dolfin import UserExpression, SubDomain
 
 def GdotX(gdir, mesh):
   gdim = mesh.geometry().dim()
