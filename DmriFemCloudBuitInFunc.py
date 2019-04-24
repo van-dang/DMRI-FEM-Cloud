@@ -1,4 +1,4 @@
-from dolfin import UserExpression, SubDomain, as_matrix
+from dolfin import UserExpression, SubDomain, as_matrix, FacetNormal
 
 def GdotX(gdir, mesh):
   gdim = mesh.geometry().dim()
