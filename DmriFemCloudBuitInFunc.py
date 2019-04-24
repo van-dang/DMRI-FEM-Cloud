@@ -129,10 +129,10 @@ def ThetaMethodF_wBC2c(ft, ift, mri_para, w , v, sp, mydomain):
 
 # Strong periodic boundary conditions  
 def inner_interface(ift, kappa, gnorm, u0rm, u1rm, v0r, v1r, u0im, u1im, v0i, v1i, fn, g, D0, D1):
-    F_bcr  = (-kappa*avg(u0rm-u1rm)-0.5*gnorm*ift*(avg(u0im)*inner(D0*avg(g),fn)+avg(u1im)*inner(D1*avg(g),fn)))*avg(v0r-v1r)                      
-    F_bcr += -gnorm*ift*( avg(u0im)*inner(D0*avg(g),fn)-avg(u1im)*inner(D1*avg(g),fn) )*0.5*avg(v0r+v1r)                                                                                                                                                                                         
-    F_bci  = (-kappa*avg(u0im-u1im)+0.5*gnorm*ift*(avg(u0rm)*inner(D0*avg(g),fn)+avg(u1rm)*inner(D0*avg(g),fn)))*avg(v0i-v1i)                      
-    F_bci += gnorm*ift*(  avg(u0rm)*inner(D0*avg(g),fn)-avg(u1rm)*inner(D1*avg(g),fn) )*0.5*avg(v0i+v1i)                                         
+    F_bcr  = (-kappa*avg(u0rm-u1rm)-0.5*gnorm*ift*(avg(u0im)*inner(avg(D0)*avg(g),fn)+avg(u1im)*inner(avg(D1)*avg(g),fn)))*avg(v0r-v1r)                      
+    F_bcr += -gnorm*ift*( avg(u0im)*inner(avg(D0)*avg(g),fn)-avg(u1im)*inner(avg(D1)*avg(g),fn) )*0.5*avg(v0r+v1r)                                                                                                                                                                                         
+    F_bci  = (-kappa*avg(u0im-u1im)+0.5*gnorm*ift*(avg(u0rm)*inner(avg(D0)*avg(g),fn)+avg(u1rm)*inner(avg(D0)*avg(g),fn)))*avg(v0i-v1i)                      
+    F_bci += gnorm*ift*(  avg(u0rm)*inner(avg(D0)*avg(g),fn)-avg(u1rm)*inner(avg(D1)*avg(g),fn) )*0.5*avg(v0i+v1i)                                         
     return -F_bcr - F_bci
 
 def outer_interface(ift, gnorm, D, fn, ur, ui, vr, vi, g):
