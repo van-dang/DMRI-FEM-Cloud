@@ -480,6 +480,7 @@ class MyDomain():
         print(self.D)
         
     def Apply(self):
+        print(dir(self.mesh))
         self.tol = 1e-6*self.mesh.hmin()
         self.gdim = self.mesh.geometry().dim()
         self.hmin = self.mesh.hmin()
