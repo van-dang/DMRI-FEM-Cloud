@@ -237,12 +237,12 @@ def MassMatrix1c(w, v):
     return M;
   
 class WeakPseudoPeriodic_2c(UserExpression):
-    def __init__(self, mydomain, mri_para, **kwargs):
+    def __init__(self, mydomain, **kwargs):
         self.xmin, self.ymin, self.zmin, self.xmax, self.ymax, self.zmax = mydomain.xmin, mydomain.ymin, mydomain.zmin, mydomain.xmax, mydomain.ymax, mydomain.zmax 
         self.pdir = mydomain.PeriodicDir
         self.gdim = mydomain.gdim
-        self.gdir = mri_para.gdir        
-        self.gnorm = mri_para.gnorm        
+        self.gdir = mydomain.gdir        
+        self.gnorm = mydomain.gnorm        
         super().__init__(**kwargs)
         
 
@@ -358,20 +358,21 @@ class PeriodicBD(SubDomain):
               y[2] = x[2] - (self.zmax-self.zmin) + Lzz
 
 
-def MassMatrix(w, v, mydomain):
+def MassMatrix(mydomain):
     # Wrapper for the mass matrix
+    w = mydomain.w; v = mydomain.v;
     if mydomain.IsDomainMultiple==True:
         return MassMatrix2c(w, v, mydomain.phase)
     else:
         return MassMatrix1c(w, v)
 
 class WeakPseudoPeriodic_1c(UserExpression):
-    def __init__(self, mydomain, mri_para, **kwargs):
+    def __init__(self, mydomain, **kwargs):
         self.xmin, self.ymin, self.zmin, self.xmax, self.ymax, self.zmax = mydomain.xmin, mydomain.ymin, mydomain.zmin, mydomain.xmax, mydomain.ymax, mydomain.zmax 
         self.pdir = mydomain.PeriodicDir
         self.gdim = mydomain.gdim
-        self.gdir = mri_para.gdir
-        self.gnorm = mri_para.gnorm       
+        self.gdir = mydomain.gdir
+        self.gnorm = mydomain.gnorm       
         super().__init__(**kwargs)
         
 
@@ -432,8 +433,8 @@ class WeakPseudoPeriodic_1c(UserExpression):
         return (2,)
 
 
-def MyFunctionSpaces(mydomain, porder, periodicBD):  
-  Ve = FiniteElement("CG", mydomain.mymesh.ufl_cell(), porder)
+def MyFunctionSpaces(mydomain, periodicBD):  
+  Ve = FiniteElement("CG", mydomain.mymesh.ufl_cell(), mydomain.porder)
       
   if (mydomain.IsDomainMultiple==True):
         TH = MixedElement([Ve,Ve,Ve,Ve])
@@ -462,8 +463,9 @@ def MyFunctionSpaces(mydomain, porder, periodicBD):
 
 
 class MyDomain():
-    def __init__(self, mymesh):
+    def __init__(self, mymesh, mri_para):
         self.mymesh = mymesh;
+        self.porder = 1                                  # order of basis functions of FEM
         self.tol = 1e-6*mymesh.hmin()
         self.gdim = mymesh.geometry().dim()
         self.hmin = mymesh.hmin()
@@ -476,7 +478,10 @@ class MyDomain():
         if (self.gdim==3):
             self.zmin = mymesh.coordinates()[:, 2].min()
             self.zmax = mymesh.coordinates()[:, 2].max()        
-        
+
+        self.gdir = mri_para.gdir        
+        self.gnorm = mri_para.gnorm 
+            
     def WeakPseudoPeridicMarker(self):        
         if self.gdim==2:
             pmk = 3e-3/self.hmin*Expression("(x[0]<xmin+eps || x[0]>xmax-eps)*p0 || (x[1]<ymin+eps || x[1]>ymax-eps)*p1", 
@@ -499,11 +504,25 @@ class MyDomain():
         self.fn = FacetNormal(self.mymesh);
         self.fn0 = ieval(self.fn, 0, self.phase);
         self.kappa_e = self.WeakPseudoPeridicMarker()
+        
+        if (sum(self.PeriodicDir)>0):
+                periodicBD = PeriodicBD(self) 
+        else:
+                periodicBD = None
+      
+        self.Ve, self.V, self.W, self.V_DG = MyFunctionSpaces(self, periodicBD)
+        self.v = TestFunction(self.W); self.w = TrialFunction(self.W);
+
+        if self.IsDomainPeriodic == True:
+                self.wpperiodic = None
+        else:
+                self.wpperiodic = ComputeWeakBC(self)
+
 
 
 def ThetaMethodF(ft, ift, mri_para, mri_simu, mydomain):
-    w = mri_simu.w
-    v = mri_simu.v
+    w = mydomain.w
+    v = mydomain.v
     if (mydomain.IsDomainMultiple==True):
       if (mydomain.IsDomainPeriodic==True) and sum(mydomain.PeriodicDir)>0:
           F = ThetaMethodF_sBC2c(ft, ift, mri_para, w, v, mri_simu, mydomain)
@@ -517,10 +536,10 @@ def ThetaMethodF(ft, ift, mri_para, mri_simu, mydomain):
     return F      
 
 def ThetaMethodL(ft, ift, mri_para, mri_simu, mydomain):
-    w = mri_simu.w
-    v = mri_simu.v  
+    w = mydomain.w
+    v = mydomain.v  
     u_0 = mri_simu.u_0
-    wpperiodic = mri_simu.wpperiodic
+    wpperiodic = mydomain.wpperiodic
     if (mydomain.IsDomainMultiple==True):
       if (mydomain.IsDomainPeriodic==True) and sum(mydomain.PeriodicDir)>0:
           L = ThetaMethodL_sBC2c(ft, ift, mri_para, w, v ,u_0, mri_simu, mydomain);
@@ -533,11 +552,11 @@ def ThetaMethodL(ft, ift, mri_para, mri_simu, mydomain):
           L = ThetaMethodL_wBC1c(ft, ift, mri_para, w, v ,u_0, mri_simu, mydomain, wpperiodic);
     return L    
 
-def ComputeWeakBC(mydomain, mri_para):
+def ComputeWeakBC(mydomain):
       if mydomain.IsDomainMultiple == True:
-          wpperiodic = WeakPseudoPeriodic_2c(mydomain, mri_para, degree=1)
+          wpperiodic = WeakPseudoPeriodic_2c(mydomain, degree=1)
       else:
-          wpperiodic = WeakPseudoPeriodic_1c(mydomain, mri_para, degree=1)
+          wpperiodic = WeakPseudoPeriodic_1c(mydomain, degree=1)
       return wpperiodic
     
 def convert_q2g(qvalue):
