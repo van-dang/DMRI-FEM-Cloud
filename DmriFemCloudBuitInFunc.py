@@ -128,7 +128,7 @@ def ThetaMethodF_wBC2c(ft, ift, mri_para, w , v, sp, mydomain):
 
 
 # Strong periodic boundary conditions  
-def inner_interface(kappa, gnorm, u0rm, u1rm, v0r, v1r, u0im, u1im, v0i, v1i, fn, g, D0, D1):
+def inner_interface(ift, kappa, gnorm, u0rm, u1rm, v0r, v1r, u0im, u1im, v0i, v1i, fn, g, D0, D1):
     F_bcr  = (-kappa*avg(u0rm-u1rm)-0.5*gnorm*ift*(avg(u0im)*inner(D0*avg(g),fn)+avg(u1im)*inner(D1*avg(g),fn)))*avg(v0r-v1r)                      
     F_bcr += -gnorm*ift*( avg(u0im)*inner(D0*avg(g),fn)-avg(u1im)*inner(D1*avg(g),fn) )*0.5*avg(v0r+v1r)                                                                                                                                                                                         
     F_bci  = (-kappa*avg(u0im-u1im)+0.5*gnorm*ift*(avg(u0rm)*inner(D0*avg(g),fn)+avg(u1rm)*inner(D0*avg(g),fn)))*avg(v0i-v1i)                      
@@ -193,7 +193,7 @@ def ThetaMethodF_sBC2c(ft, ift, mri_para, w, v, sp, mydomain):
     u0r, u0i, u1r, u1i = w[0], w[1], w[2], w[3]
     a0 = (  -theta*FuncF_sBC(ift, gnorm, g, u0r  , u0i  , v0r, v0i, D))*(1-phase)*dx
     a1 = (  -theta*FuncF_sBC(ift, gnorm, g, u1r  , u1i  , v1r, v1i, D))*phase*dx
-    a_inner_bc  = (  (theta*inner_interface(kappa, gnorm, u0r  , u1r  , v0r, v1r, u0i  , u1i  , v0i, v1i, fn0, g, D, D)))*abs(jump(phase))*dS;
+    a_inner_bc  = (  (theta*inner_interface(ift, kappa, gnorm, u0r  , u1r  , v0r, v1r, u0i  , u1i  , v0i, v1i, fn0, g, D, D)))*abs(jump(phase))*dS;
     a0_outer_bc = theta*outer_interface(ift, gnorm , D, fn, u0r, u0i, v0r, v0i, g)*ds
     a1_outer_bc = theta*outer_interface(ift, gnorm , D, fn, u1r, u1i, v1r, v1i, g)*ds
     return a0+a1 +a_inner_bc + a0_outer_bc + a1_outer_bc
@@ -215,7 +215,7 @@ def ThetaMethodL_sBC2c(ft, ift, mri_para, w, v, u_0, sp, mydomain):
 
     L0 = (u0r_0/k*v0r + u0i_0/k*v0i +theta*FuncF_sBC(ift, gnorm, g, u0r_0, u0i_0, v0r, v0i, D))*(1-phase)*dx
     L1 = (u1r_0/k*v1r + u1i_0/k*v1i +theta*FuncF_sBC(ift, gnorm, g, u1r_0, u1i_0, v1r, v1i, D))*phase*dx
-    L_inner_bc  = -(theta*inner_interface(kappa, gnorm, u0r_0, u1r_0, v0r, v1r, u0i_0, u1i_0, v0i, v1i, fn0, g, D, D))*abs(jump(phase))*dS;
+    L_inner_bc  = -(theta*inner_interface(ift, kappa, gnorm, u0r_0, u1r_0, v0r, v1r, u0i_0, u1i_0, v0i, v1i, fn0, g, D, D))*abs(jump(phase))*dS;
     L0_outer_bc = -theta*outer_interface(ift, gnorm, D, fn, u0r_0, u0i_0, v0r, v0i, g)*ds
     L1_outer_bc = -theta*outer_interface(ift, gnorm, D, fn, u1r_0, u1i_0, v1r, v1i, g)*ds
     return L0+L1+L_inner_bc + L0_outer_bc+L1_outer_bc
