@@ -1,5 +1,3 @@
-from dolfin import *; from mshr import *
-
 def GdotX(gdir, mesh):
   gdim = mesh.geometry().dim()
   if (gdim==2):
