@@ -142,8 +142,8 @@ def outer_interface(ift, gnorm, D, fn, ur, ui, vr, vi, g):
 
   
 def FuncF_sBC(ift, gnorm, g, ur, ui, vr, vi, D):
-    Fr =   ift*gnorm*(inner(g,D*grad(ui))+inner(grad(ui),D*g))*vr - inner(g,D*g)*gnorm*gnorm*ift*ift*ur*vr-D*inner(grad(ur), grad(vr))
-    Fi = - ift*gnorm*(inner(g,D*grad(ur))+inner(grad(ur),D*g))*vi - inner(g,D*g)*gnorm*gnorm*ift*ift*ui*vi-D*inner(grad(ui), grad(vi))
+    Fr =   ift*gnorm*(inner(g,D*grad(ui))+inner(grad(ui),D*g))*vr - inner(g,D*g)*gnorm*gnorm*ift*ift*ur*vr-inner(D*grad(ur), grad(vr))
+    Fi = - ift*gnorm*(inner(g,D*grad(ur))+inner(grad(ur),D*g))*vi - inner(g,D*g)*gnorm*gnorm*ift*ift*ui*vi-inner(D*grad(ui), grad(vi))
     return Fr + Fi
 
 
