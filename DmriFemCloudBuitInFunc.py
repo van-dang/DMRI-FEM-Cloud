@@ -1,3 +1,5 @@
+from dolfin import UserExpression
+
 def GdotX(gdir, mesh):
   gdim = mesh.geometry().dim()
   if (gdim==2):
@@ -120,7 +122,6 @@ def ThetaMethodF_wBC2c(ft, ift, mri_para, w , v, sp, mydomain):
       a_pbc = theta*mydomain.kappa_e*(u1r*v1r   + u1i*v1i)*phase*ds + theta*mydomain.kappa_e*(u0r*v0r   + u0i*v0i)*(1-phase)*ds;
       
     return a0+a1+a_bc+a_pbc
-
 
 
 # Strong periodic boundary conditions  
