@@ -432,13 +432,8 @@ class WeakPseudoPeriodic_1c(UserExpression):
         return (2,)
 
 
-def MyFunctionSpaces(mydomain, porder):  
+def MyFunctionSpaces(mydomain, porder, periodicBD):  
   Ve = FiniteElement("CG", mydomain.mesh.ufl_cell(), porder)
-  
-  if (sum(mydomain.PeriodicDir)>0):
-        periodicBD = PeriodicBD(mydomain) 
-  else:
-        periodicBD = None
       
   if (mydomain.IsDomainMultiple==True):
         TH = MixedElement([Ve,Ve,Ve,Ve])
