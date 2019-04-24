@@ -483,18 +483,18 @@ class MyDomain():
         print(self.D)
         
     def Apply(self):
-        self.tol = 1e-6*mesh.hmin()
-        self.gdim = mesh.geometry().dim()
-        self.hmin = mesh.hmin()
-        self.hmax = mesh.hmax()      
-        self.xmin = mesh.coordinates()[:, 0].min()
-        self.xmax = mesh.coordinates()[:, 0].max()
-        self.ymin = mesh.coordinates()[:, 1].min()
-        self.ymax = mesh.coordinates()[:, 1].max()
+        self.tol = 1e-6*self.mesh.hmin()
+        self.gdim = self.mesh.geometry().dim()
+        self.hmin = self.mesh.hmin()
+        self.hmax = self.mesh.hmax()      
+        self.xmin = self.mesh.coordinates()[:, 0].min()
+        self.xmax = self.mesh.coordinates()[:, 0].max()
+        self.ymin = self.mesh.coordinates()[:, 1].min()
+        self.ymax = self.mesh.coordinates()[:, 1].max()
         self.zmin, self.zmax = 0, 0 
         if (self.gdim==3):
-            self.zmin = mesh.coordinates()[:, 2].min()
-            self.zmax = mesh.coordinates()[:, 2].max()        
+            self.zmin = self.mesh.coordinates()[:, 2].min()
+            self.zmax = self.mesh.coordinates()[:, 2].max()        
 
       
         self.fn = FacetNormal(self.mesh);
