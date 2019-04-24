@@ -1,5 +1,4 @@
-from dolfin import UserExpression, SubDomain, as_matrix, FacetNormal
-
+from dolfin import *
 def GdotX(gdir, mesh):
   gdim = mesh.geometry().dim()
   if (gdim==2):
@@ -8,7 +7,7 @@ def GdotX(gdir, mesh):
     GX=Expression("x[0]*g0+x[1]*g1+x[2]*g2", g0=gdir.x(), g1=gdir.y(), g2=gdir.z(), domain=mesh, degree=3);
   return GX;
 
-def FuncF_wBC(ft, gnorm, gdir, ur, ui, vr, vi, D):
+def FuncF_wBC(ft, gnorm, gdir, ur, ui, vr, vi, D, mesh):
     GX=GdotX(gdir, mesh)
     Fr = ft*gnorm*GX*ui*vr - inner(D*grad(ur), grad(vr))
     Fi = - ft*gnorm*GX*ur*vi - inner(D*grad(ui), grad(vi))
@@ -42,6 +41,7 @@ def ieval(u,omega, phase):
   
 def ThetaMethodL_wBC1c(ft, ift, mri_para , w , v, u_0, sp, mydomain, wpperiodic):
     D = mydomain.D
+    mesh = mydomain.mesh
     k = sp.k
     theta = sp.theta
     gnorm = mri_para.gnorm
@@ -49,7 +49,7 @@ def ThetaMethodL_wBC1c(ft, ift, mri_para , w , v, u_0, sp, mydomain, wpperiodic)
     u0r_0, u0i_0 = split(u_0)
     v0r, v0i = v[0], v[1]
     u0r, u0i = w[0], w[1]
-    L0 = (u0r_0/k*v0r + u0i_0/k*v0i+(1-theta)*FuncF_wBC(ft, gnorm, gdir, u0r_0, u0i_0, v0r, v0i, D))*dx
+    L0 = (u0r_0/k*v0r + u0i_0/k*v0i+(1-theta)*FuncF_wBC(ft, gnorm, gdir, u0r_0, u0i_0, v0r, v0i, D, mesh))*dx
     L_pbc = 0;
     if sum(mydomain.PeriodicDir)>0:
       # Start applying the weak pseudo-periodic BC
@@ -60,7 +60,8 @@ def ThetaMethodL_wBC1c(ft, ift, mri_para , w , v, u_0, sp, mydomain, wpperiodic)
     return L0+L_pbc
 
 def ThetaMethodF_wBC1c(ft, ift, mri_para, w , v, sp, mydomain):
-    D = mydomain.D  
+    D = mydomain.D
+    mesh = mydomain.mesh
     k = sp.k
     theta = sp.theta
     gnorm = mri_para.gnorm
@@ -68,7 +69,7 @@ def ThetaMethodF_wBC1c(ft, ift, mri_para, w , v, sp, mydomain):
     kappa = mydomain.kappa
     v0r, v0i = v[0], v[1]
     u0r, u0i = w[0], w[1]
-    a0 = (  -theta*FuncF_wBC(ft, gnorm, gdir, u0r, u0i, v0r, v0i, D))*dx
+    a0 = (  -theta*FuncF_wBC(ft, gnorm, gdir, u0r, u0i, v0r, v0i, D, mesh))*dx
     a_pbc = 0;
     if sum(mydomain.PeriodicDir)>0:
       a_pbc = theta*mydomain.kappa_e*(u0r*v0r   + u0i*v0i)*ds;
@@ -76,7 +77,8 @@ def ThetaMethodF_wBC1c(ft, ift, mri_para, w , v, sp, mydomain):
   
   
 def ThetaMethodL_wBC2c(ft, ift, mri_para , w , v, u_0, sp, mydomain, wpperiodic):
-    D = mydomain.D  
+    D = mydomain.D
+    mesh = mydomain.mesh
     k = sp.k
     theta = sp.theta
     gnorm = mri_para.gnorm
@@ -87,8 +89,8 @@ def ThetaMethodL_wBC2c(ft, ift, mri_para , w , v, u_0, sp, mydomain, wpperiodic)
     v0r, v0i, v1r, v1i = v[0], v[1], v[2], v[3]
     u0r, u0i, u1r, u1i = w[0], w[1], w[2], w[3]
 
-    L0 = (u0r_0/k*v0r + u0i_0/k*v0i+(1-theta)*FuncF_wBC(ft, gnorm, gdir, u0r_0, u0i_0, v0r, v0i, D))*(1-phase)*dx
-    L1 = (u1r_0/k*v1r +u1i_0/k*v1i+(1-theta)*FuncF_wBC(ft, gnorm, gdir, u1r_0, u1i_0, v1r, v1i, D))*phase*dx
+    L0 = (u0r_0/k*v0r + u0i_0/k*v0i+(1-theta)*FuncF_wBC(ft, gnorm, gdir, u0r_0, u0i_0, v0r, v0i, D, mesh))*(1-phase)*dx
+    L1 = (u1r_0/k*v1r +u1i_0/k*v1i+(1-theta)*FuncF_wBC(ft, gnorm, gdir, u1r_0, u1i_0, v1r, v1i, D, mesh))*phase*dx
     L_bc = avg((1-theta)*icondition_wBC(kappa, u0r_0, u1r_0, v0r, v1r, u0i_0, u1i_0, v0i, v1i))*abs(jump(phase))*dS;
     
     L_pbc = 0;
@@ -103,7 +105,8 @@ def ThetaMethodL_wBC2c(ft, ift, mri_para , w , v, u_0, sp, mydomain, wpperiodic)
   
   
 def ThetaMethodF_wBC2c(ft, ift, mri_para, w , v, sp, mydomain):
-    D = mydomain.D  
+    D = mydomain.D
+    mesh = mydomain.mesh
     k = sp.k
     theta = sp.theta  
     gnorm = mri_para.gnorm
@@ -113,8 +116,8 @@ def ThetaMethodF_wBC2c(ft, ift, mri_para, w , v, sp, mydomain):
 
     v0r, v0i, v1r, v1i = v[0], v[1], v[2], v[3]
     u0r, u0i, u1r, u1i = w[0], w[1], w[2], w[3]
-    a0 = (  -theta*FuncF_wBC(ft, gnorm, gdir, u0r  , u0i  , v0r, v0i, D))*(1-phase)*dx
-    a1 = (  -theta*FuncF_wBC(ft, gnorm, gdir, u1r  , u1i  , v1r, v1i, D))*phase*dx
+    a0 = (  -theta*FuncF_wBC(ft, gnorm, gdir, u0r  , u0i  , v0r, v0i, D, mesh))*(1-phase)*dx
+    a1 = (  -theta*FuncF_wBC(ft, gnorm, gdir, u1r  , u1i  , v1r, v1i, D, mesh))*phase*dx
     a_bc = avg(  (theta*icondition_wBC(kappa, u0r  , u1r  , v0r, v1r, u0i  , u1i  , v0i, v1i)))*abs(jump(phase))*dS;
     
     a_pbc = 0;
@@ -239,6 +242,7 @@ class WeakPseudoPeriodic_2c(UserExpression):
         self.pdir = mydomain.PeriodicDir
         self.gdim = mydomain.gdim
         self.gdir = mri_para.gdir        
+        self.gnorm = mri_para.gnorm        
         super().__init__(**kwargs)
         
 
@@ -292,7 +296,7 @@ class WeakPseudoPeriodic_2c(UserExpression):
                 temp_u0r, temp_u0i, temp_u1r, temp_u1i = self.u([x[0], x[1], self.zmin]);
 
         # exp(i*theta)= cos(theta)+i*sin(theta); 
-        theta_ln = mri_para.gnorm*(self.gdir.x()*xln + self.gdir.y()*yln + self.gdir.z()*zln)*self.ift;
+        theta_ln = self.gnorm*(self.gdir.x()*xln + self.gdir.y()*yln + self.gdir.z()*zln)*self.ift;
         value[0] = temp_u0r*cos(theta_ln)-temp_u0i*sin(theta_ln); # for Real part
         value[1] = temp_u0r*sin(theta_ln)+temp_u0i*cos(theta_ln); # for Imag part
 
@@ -366,7 +370,8 @@ class WeakPseudoPeriodic_1c(UserExpression):
         self.xmin, self.ymin, self.zmin, self.xmax, self.ymax, self.zmax = mydomain.xmin, mydomain.ymin, mydomain.zmin, mydomain.xmax, mydomain.ymax, mydomain.zmax 
         self.pdir = mydomain.PeriodicDir
         self.gdim = mydomain.gdim
-        self.gdir = mri_para.gdir        
+        self.gdir = mri_para.gdir
+        self.gnorm = mri_para.gnorm       
         super().__init__(**kwargs)
         
 
@@ -420,7 +425,7 @@ class WeakPseudoPeriodic_1c(UserExpression):
                 temp_u0r, temp_u0i = self.u([x[0], x[1], self.zmin]);
 
         # exp(i*theta)= cos(theta)+i*sin(theta); 
-        theta_ln = mri_para.gnorm*(self.gdir.x()*xln + self.gdir.y()*yln + self.gdir.z()*zln)*self.ift;
+        theta_ln = self.gnorm*(self.gdir.x()*xln + self.gdir.y()*yln + self.gdir.z()*zln)*self.ift;
         value[0] = temp_u0r*cos(theta_ln)-temp_u0i*sin(theta_ln); # for Real part
         value[1] = temp_u0r*sin(theta_ln)+temp_u0i*cos(theta_ln); # for Imag part
     def value_shape(self):
@@ -448,15 +453,17 @@ def MyFunctionSpaces(mydomain, porder):
         if sum(mydomain.PeriodicDir)>0:
             print("The pseudo-periodic BCS are weakly imposed.")
             print("The mesh does not need to be periodic.")
+        V_DG = FunctionSpace(mydomain.mesh, 'DG', 0)    
         V = FunctionSpace(mydomain.mesh,Ve);
         W = FunctionSpace(mydomain.mesh, TH)
   else:
         print("Initialize peridodic function spaces.")
         print("The pseudo-periodic BCS are strongly imposed.")
         print("The mesh needs to be periodic.")
+        V_DG = FunctionSpace(mydomain.mesh, 'DG', 0, constrained_domain=periodicBD)
         V = FunctionSpace(mydomain.mesh,Ve, constrained_domain=periodicBD)
         W = FunctionSpace(mydomain.mesh, TH, constrained_domain=periodicBD)    
-  return Ve, V, W
+  return Ve, V, W, V_DG
 
 
 class MyDomain():
