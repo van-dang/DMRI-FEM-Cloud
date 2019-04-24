@@ -463,7 +463,6 @@ def MyFunctionSpaces(mydomain, porder):
 class MyDomain():
     def __init__(self, mesh):
         self.mesh = mesh;
-        self.gdim = mesh.geometry().dim()
     def WeakPseudoPeridicMarker(self):        
         if self.gdim==2:
             pmk = 3e-3/self.hmin*Expression("(x[0]<xmin+eps || x[0]>xmax-eps)*p0 || (x[1]<ymin+eps || x[1]>ymax-eps)*p1", 
