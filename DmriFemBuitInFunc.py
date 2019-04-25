@@ -594,11 +594,12 @@ def convert_g2q(gnorm):
     g_ratio = 2.675e8;
     return gnorm/g_ratio*1e12
 
-def Create_phase_func(mymesh, cmpt_mesh , pmk ):
+def Create_phase_func(mymesh, cmpt_mesh , pmk):
     V_DG = FunctionSpace(mymesh, 'DG', 0)
     dofmap_DG = V_DG.dofmap()
     phase = Function(V_DG)
     cellmarker = MeshFunction("size_t", mymesh, mymesh.topology().dim())
+    partion_list = [];
     for cell in cells(mymesh):
         cmk = 0
         if not(pmk==None):
@@ -608,8 +609,12 @@ def Create_phase_func(mymesh, cmpt_mesh , pmk ):
             cmk = cmpt_mesh.bounding_box_tree().compute_first_entity_collision(p)<4294967295
         phase.vector()[dofmap_DG.cell_dofs(cell.index())] = cmk;
         cellmarker[cell.index()] = cmk; 
+        
+        if (len(partion_list)==0 or not(cmk in partion_list)):
+            partion_list.append(cmk)
+            
     if pmk==None:
         pmk = cellmarker
-    return cellmarker, phase, pmk 
+    return cellmarker, phase, pmk, partion_list 
 
   
