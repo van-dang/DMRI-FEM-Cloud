@@ -603,15 +603,17 @@ def Create_phase_func(mymesh, cmpt_mesh , pmk):
     for cell in cells(mymesh):
         cmk = 0
         if not(pmk==None):
-            cmk = pmk[cell.index()] % 2    
+            cmk0 = pmk[cell.index()]
+            cmk = cmk0 % 2    
         if not(cmpt_mesh==None):
             p = cell.midpoint();
-            cmk = cmpt_mesh.bounding_box_tree().compute_first_entity_collision(p)<4294967295
+            cmk0 = cmpt_mesh.bounding_box_tree().compute_first_entity_collision(p)<4294967295
+            cmk = cmk0
         phase.vector()[dofmap_DG.cell_dofs(cell.index())] = cmk;
         cellmarker[cell.index()] = cmk; 
         
-        if (len(partion_list)==0 or not(cmk in partion_list)):
-            partion_list.append(cmk)
+        if (len(partion_list)==0 or not(cmk0 in partion_list)):
+            partion_list.append(cmk0)
             
     if pmk==None:
         pmk = cellmarker
