@@ -495,6 +495,7 @@ class MyDomain():
         self.porder = 1                                  # order of basis functions of FEM
         self.tol = 1e-6*mymesh.hmin()
         self.gdim = mymesh.geometry().dim()
+        self.tdim = mymesh.topology().dim()
         self.hmin = mymesh.hmin()
         self.hmax = mymesh.hmax()      
         self.xmin = mymesh.coordinates()[:, 0].min()
