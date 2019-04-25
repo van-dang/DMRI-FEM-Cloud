@@ -1,3 +1,30 @@
+# This is a collection of functions and classes used to solve the Bloch-Torrey equation 
+# applied to computational diffusion MRI using the finite element method coupled with 
+# the theta-method for the spatial discretization.
+
+# Copyright (C) 2019 Van-Dang Nguyen (vdnguyen@kth.se or dang.1032170@gmail.com)
+
+# This file is part of DOLFIN.
+
+# DOLFIN is free software: you can redistribute it and/or modify
+# it under the terms of the GNU Lesser General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+
+# DOLFIN is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+# GNU Lesser General Public License for more details.
+
+# You should have received a copy of the GNU Lesser General Public License
+# along with DOLFIN. If not, see <http://www.gnu.org/licenses/>.
+
+# First added:  2017-10-10
+# Last changed: 2019-04-25
+
+# This demo is maintained by Van-Dang Nguyen
+# Please report possible problems to vdnguyen@kth.se or dang.1032170@gmail.com
+
 from dolfin import *
 def GdotX(gdir, mymesh):
   gdim = mymesh.geometry().dim()
