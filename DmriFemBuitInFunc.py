@@ -529,7 +529,10 @@ class MyDomain():
         
     def Apply(self):      
         self.fn = FacetNormal(self.mymesh);
-        self.fn0 = ieval(self.fn, 0, self.phase);
+        
+        if self.IsDomainMultiple == True: 
+              self.fn0 = ieval(self.fn, 0, self.phase);
+            
         self.kappa_e = self.WeakPseudoPeridicMarker()
         
         if (sum(self.PeriodicDir)>0):
