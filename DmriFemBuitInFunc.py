@@ -593,3 +593,21 @@ def convert_q2g(qvalue):
 def convert_g2q(gnorm):
     g_ratio = 2.675e8;
     return gnorm/g_ratio*1e12
+
+def Create_phase_func(mymesh, cmpt_mesh , pmk ):
+    V_DG = FunctionSpace(mymesh, 'DG', 0)
+    dofmap_DG = V_DG.dofmap()
+    phase = Function(V_DG)
+    cellmarker = MeshFunction("size_t", mymesh, mymesh.topology().dim())
+    for cell in cells(mymesh):
+        cmk = 0
+        if not(pmk==None):
+            cmk = pmk[cell.index()] % 2    
+        if not(cmpt_mesh==None):
+            p = cell.midpoint();
+            cmk = cmpt_mesh.bounding_box_tree().compute_first_entity_collision(p)<4294967295
+        phase.vector()[dofmap_DG.cell_dofs(cell.index())] = cmk;
+        cellmarker[cell.index()] = cmk;       
+    return cellmarker, phase 
+
+  
