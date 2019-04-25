@@ -48,10 +48,12 @@ EndFor
 
 Volume(0) = {29};
 j = 0;
+Physical Volume(0) = {0};
 For comp In {1:(ncomp-1)}
     Volume(j+1) = {29+j*N, 29+(j+1)*N};
+    Physical Volume(j+1) = {j+1};
     j = j + 1;
 EndFor
 
 Mesh 3;
-Coherence Mesh; // Save "spherical_layers.msh";
+Coherence Mesh; // Save "spherical_layers.msh";//+
