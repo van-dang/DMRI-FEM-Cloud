@@ -608,7 +608,7 @@ def Create_phase_func(mymesh, cmpt_mesh , pmk ):
             cmk = cmpt_mesh.bounding_box_tree().compute_first_entity_collision(p)<4294967295
         phase.vector()[dofmap_DG.cell_dofs(cell.index())] = cmk;
         cellmarker[cell.index()] = cmk; 
-    if not(pmk==None):
+    if pmk==None:
         pmk = cellmarker
     return cellmarker, phase, pmk 
 
