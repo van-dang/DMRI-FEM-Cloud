@@ -550,8 +550,8 @@ class MyDomain():
       
         self.Ve, self.V, self.W, self.V_DG = MyFunctionSpaces(self, periodicBD)
         self.v = TestFunction(self.W); self.w = TrialFunction(self.W);
-
-        if self.IsDomainPeriodic == True:
+      
+        if self.IsDomainPeriodic == True or sum(self.PeriodicDir)==0:
                 self.wpperiodic = None
         else:
                 self.wpperiodic = ComputeWeakBC(self)
