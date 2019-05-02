@@ -185,7 +185,6 @@ def ThetaMethodF_sBC1c(ft, ift, mri_para, w, v, sp, mydomain):
     gnorm = mri_para.gnorm
     g = mri_para.g
     fn = mydomain.fn
-    fn0 = mydomain.fn0
     kappa = mydomain.kappa
     v0r, v0i = v[0], v[1]
     u0r, u0i = w[0], w[1]
