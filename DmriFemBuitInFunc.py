@@ -26,6 +26,8 @@
 # Please report possible problems to vdnguyen@kth.se or dang.1032170@gmail.com
 
 from dolfin import *
+import sympy as sp
+
 def GdotX(gdir, mymesh):
   gdim = mymesh.geometry().dim()
   if (gdim==2):
