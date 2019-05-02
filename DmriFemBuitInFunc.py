@@ -757,8 +757,8 @@ def Post_processing(mydomain, mri_para, mri_simu, ms=''):
         print('Signal1: %.3e'%signal1)
         out_text = 'b: %.3f, Signal: %.3e, Normalized signal: %.3e, kappa: %.3e, dt: %.3f, hmin: %.3f, whole_vol: %.3f, vol_of_interest: %.3f, Free signal: %.3e, elasped time %.3f (s)\n'%(mri_para.bvalue, signal, signal/voi, mydomain.kappa, mri_simu.k, mydomain.hmin, whole_vol, voi, exp(-mri_para.bvalue*mydomain.D0), mri_simu.elapsed_time)
         
-        V0 = FunctionSpace(mesh0, mydomain.Ve);
-        V1 = FunctionSpace(mesh1, mydomain.Ve);
+        V0 = FunctionSpace(mydomain.mesh0, mydomain.Ve);
+        V1 = FunctionSpace(mydomain.mesh1, mydomain.Ve);
         u0r_0p = project(u0r_0,V0)
         u1r_0p = project(u1r_0,V1)
         if mydomain.tdim==mydomain.gdim:
@@ -770,7 +770,7 @@ def Post_processing(mydomain, mri_para, mri_simu, ms=''):
         ur, ui = split(mri_simu.u_0)
         signal = assemble(ur*dx);
         out_text = 'b: %.3f, Signal: %.3e, Normalized signal: %.3e, dt: %.3f, hmin: %.3e, whole_vol: %.3f, vol_of_interest: %.3f, Free signal: %.3e, elasped time %.3f (s)\n'%(mri_para.bvalue, signal, signal/voi, mri_simu.k, mydomain.hmin, whole_vol, voi, exp(-mri_para.bvalue*mydomain.D0), mri_simu.elapsed_time)
-        V = FunctionSpace(mymesh,mydomain.Ve);
+        V = FunctionSpace(mydomain.mymesh,mydomain.Ve);
         ur_p = project(ur,V)
         if mydomain.tdim==mydomain.gdim:        
             plot(ur_p, cmap="coolwarm")
