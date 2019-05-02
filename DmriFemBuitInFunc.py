@@ -742,7 +742,7 @@ class MRI_simulation():
           self.elapsed_time = time.time() - start_time
           print("Successfully Completed! Elapsed time: %f seconds"%self.elapsed_time)
           
-def Post_processing(mydomain, mri_simu, ms=''):
+def Post_processing(mydomain, mri_para, mri_simu, ms=''):
     one = Function(mydomain.V)
     one.vector()[:] = 1
     whole_vol = assemble(one*dx)
