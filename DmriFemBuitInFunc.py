@@ -693,21 +693,22 @@ class MRI_simulation():
           self.nskip = 5;    # Output frequency (for visualization only)
           self.theta = 0.5;  # theta=0.5: midpoint method
 
-    def InitialCondition(self, mydomain):
-          if mydomain.gdim==2:
-              Dirac_Delta = Expression("x[0]*x[0]+x[1]*x[1]<eps",eps=1e6, domain=mydomain.mymesh, degree=1);
-          if mydomain.gdim==3:
-              Dirac_Delta = Expression("x[0]*x[0]+x[1]*x[1]+x[2]*x[2]<eps",eps=1e6, domain=mydomain.mymesh, degree=1);
-          Dirac_Delta = interpolate(Dirac_Delta, mydomain.V);
+    def InitialCondition(self, mydomain, Dirac_Delta):
+          if Dirac_Delta==None:
+              if mydomain.gdim==2:
+                  Dirac_Delta = Expression("x[0]*x[0]+x[1]*x[1]<eps",eps=1e6, domain=mydomain.mymesh, degree=1);
+              if mydomain.gdim==3:
+                  Dirac_Delta = Expression("x[0]*x[0]+x[1]*x[1]+x[2]*x[2]<eps",eps=1e6, domain=mydomain.mymesh, degree=1);
+              Dirac_Delta = interpolate(Dirac_Delta, mydomain.V);
           u_0 = Function(mydomain.W);
           assign(u_0.sub(0), Dirac_Delta)
           if (mydomain.IsDomainMultiple==True):
               assign(u_0.sub(2), Dirac_Delta)  
           return Dirac_Delta, u_0
         
-    def solve(self, mydomain, mri_para, linsolver): 
+    def solve(self, mydomain, mri_para, linsolver, ic=None): 
       
-          self.Dirac_Delta, self.u_0 = self.InitialCondition(mydomain)
+          self.Dirac_Delta, self.u_0 = self.InitialCondition(mydomain, ic)
           
           stepcounter = 0;
 
