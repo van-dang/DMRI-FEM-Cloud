@@ -755,7 +755,7 @@ def Post_processing(mydomain, mri_para, mri_simu, ms=''):
         print('Signal on each compartment')
         print('Signal0: %.3e'%signal0)
         print('Signal1: %.3e'%signal1)
-        out_text = 'b: %.3f, Signal: %.3e, Normalized signal: %.3e, kappa: %.3e, dt: %.3f, hmin: %.3f, whole_vol: %.3f, vol_of_interest: %.3f, Free signal: %.3e, elasped time %.3f (s)\n'%(mri_para.bvalue, signal, signal/voi, mydomain.kappa, mri_simu.k, mydomain.hmin, whole_vol, voi, exp(-mri_para.bvalue*D0), mri_sim.elapsed_time)
+        out_text = 'b: %.3f, Signal: %.3e, Normalized signal: %.3e, kappa: %.3e, dt: %.3f, hmin: %.3f, whole_vol: %.3f, vol_of_interest: %.3f, Free signal: %.3e, elasped time %.3f (s)\n'%(mri_para.bvalue, signal, signal/voi, mydomain.kappa, mri_simu.k, mydomain.hmin, whole_vol, voi, exp(-mri_para.bvalue*mydomain.D0), mri_sim.elapsed_time)
         
         V0 = FunctionSpace(mesh0, mydomain.Ve);
         V1 = FunctionSpace(mesh1, mydomain.Ve);
