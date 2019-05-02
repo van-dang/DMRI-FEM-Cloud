@@ -629,4 +629,153 @@ def Create_phase_func(mymesh, cmpt_mesh , pmk):
         pmk = cellmarker
     return cellmarker, phase, pmk, partion_list 
 
-  
+  class MRI_parameters():
+    def __init__(self):
+        # Initialize default parameters
+        self.bvalue = None
+        self.qvalue = None        
+        self.gdir = [1, 0, 0];
+        self.nperiod = 0; # number of period for OGSE sequences
+        self.T2 = 1e16    # T2 relaxation time
+        self.s = sp.Symbol('s')
+    def set_gradient_dir(self, mymesh, g0, g1, g2):
+        gdim = mymesh.geometry().dim()
+        if gdim==2:
+            self.gdir = Point(g0, g1)
+            self.gdir /= self.gdir.norm()
+            self.g = Expression(("g0","g1"), g0=self.gdir.x(), g1=self.gdir.y(),domain=mymesh, degree=1);
+        if gdim==3:
+            self.gdir = Point(g0, g1, g2)
+            self.gdir /= self.gdir.norm()        
+            self.g = Expression(("g0","g1","g2"), g0=self.gdir.x(), g1=self.gdir.y(), g2=self.gdir.z(),domain=mymesh, degree=1);
+            
+    def integral_term_for_gb(self):
+        self.int4gb = float(sp.integrate(self.ifs_sym*self.ifs_sym, (self.s, 0, self.T)))
+
+    def itime_profile_sym(self):
+        # Return symbolic int_0^s f(u) du, change variable to ift(s)
+        u = sp.Symbol('u')
+        self.ifs_sym = sp.integrate(self.fs_sym.subs(self.s, u), (u, 0, self.s))
+        
+    def time_profile(self, t):
+        return (float(self.fs_sym.subs(self.s,t)))
+      
+    def itime_profile(self, t): 
+        return (float(self.ifs_sym.subs(self.s, t)))
+
+    def convert_b2g(self):
+        self.gnorm = 0;
+        self.gnorm = sqrt(self.bvalue)/sqrt(self.int4gb);
+        return self.gnorm
+    def convert_g2b(self):
+        self.bvalue = self.gnorm*self.gnorm*self.int4gb;
+        return self.bvalue
+      
+    def Apply(self):
+        self.itime_profile_sym(); 
+        self.integral_term_for_gb();
+        if not(self.bvalue==None):
+            self.gnorm = self.convert_b2g();
+            self.qvalue = convert_g2q(self.gnorm);
+        elif not(self.qvalue==None):
+            self.gnorm = convert_q2g(self.qvalue);
+            self.bvalue = self.convert_g2b();
+        elif (self.bvalue==None and self.bvalue==None):
+            print("bvalue or qvalue need to be specified.")
+            sys.exit()      
+          
+class MRI_simulation():
+    def __init__(self):
+          self.nskip = 5;    # Output frequency (for visualization only)
+          self.theta = 0.5;  # theta=0.5: midpoint method
+
+    def InitialCondition(self, mydomain):
+          if mydomain.gdim==2:
+              Dirac_Delta = Expression("x[0]*x[0]+x[1]*x[1]<eps",eps=1e6, domain=mydomain.mymesh, degree=1);
+          if mydomain.gdim==3:
+              Dirac_Delta = Expression("x[0]*x[0]+x[1]*x[1]+x[2]*x[2]<eps",eps=1e6, domain=mydomain.mymesh, degree=1);
+          Dirac_Delta = interpolate(Dirac_Delta, mydomain.V);
+          u_0 = Function(mydomain.W);
+          assign(u_0.sub(0), Dirac_Delta)
+          if (mydomain.IsDomainMultiple==True):
+              assign(u_0.sub(2), Dirac_Delta)  
+          return Dirac_Delta, u_0
+        
+    def solve(self, mydomain, mri_para, linsolver): 
+      
+          self.Dirac_Delta, self.u_0 = self.InitialCondition(mydomain)
+          
+          stepcounter = 0;
+
+          M = MassMatrix(mydomain);
+
+          self.t = 0;
+          ft_prev  =  mri_para.time_profile(self.t);
+          ift_prev = mri_para.itime_profile(self.t);
+
+          start_time = time.time()
+          
+          while self.t < mri_para.T + self.k: # Time-stepping loop
+              if stepcounter % self.nskip == 0:
+                  print('t: %6.2f '%self.t, 'T: %6.2f'%mri_para.T, 'dt: %.1f'%self.k,'gnorm: %e'%mri_para.gnorm,'Completed %3.2f%%'%(float(self.t)/float(mri_para.T+mri_simu.k)*100.0));
+
+              ft = mri_para.time_profile(self.t);
+              ift = mri_para.itime_profile(self.t);
+                            
+              L = ThetaMethodL(ft_prev, ift_prev, mri_para, self, mydomain);
+              A = 1/self.k*M + assemble(ThetaMethodF(ft, ift, mri_para, self, mydomain))
+
+              b = assemble(L);
+              
+              linsolver.solve(A, self.u_0.vector(),b);
+
+              ft_prev  = ft;
+              ift_prev = ift;
+
+              self.t += self.k;
+              stepcounter += 1;
+
+          self.elapsed_time = time.time() - start_time
+          print("Successfully Completed! Elapsed time: %f seconds"%self.elapsed_time)
+          
+def Post_processing(mydomain, mri_sim, ms=''):
+    one = Function(mydomain.V)
+    one.vector()[:] = 1
+    whole_vol = assemble(one*dx)
+    voi = assemble(mri_simu.Dirac_Delta*dx)
+    if mydomain.IsDomainMultiple == True:
+        u0r_0, u0i_0, u1r_0, u1i_0 = split(mri_simu.u_0)
+        signal0 = assemble(((1-mydomain.phase)*u0r_0)*dx)/assemble((1-mydomain.phase)*mri_simu.Dirac_Delta*dx);
+        signal1 = assemble((mydomain.phase*u1r_0)*dx)/assemble(mydomain.phase*mri_simu.Dirac_Delta*dx);
+        signal = assemble((mydomain.phase*u1r_0+(1-mydomain.phase)*u0r_0)*dx);
+        print('Signal on each compartment')
+        print('Signal0: %.3e'%signal0)
+        print('Signal1: %.3e'%signal1)
+        out_text = 'b: %.3f, Signal: %.3e, Normalized signal: %.3e, kappa: %.3e, dt: %.3f, hmin: %.3f, whole_vol: %.3f, vol_of_interest: %.3f, Free signal: %.3e, elasped time %.3f (s)\n'%(mri_para.bvalue, signal, signal/voi, mydomain.kappa, mri_simu.k, mydomain.hmin, whole_vol, voi, exp(-mri_para.bvalue*D0), mri_sim.elapsed_time)
+        
+        V0 = FunctionSpace(mesh0, mydomain.Ve);
+        V1 = FunctionSpace(mesh1, mydomain.Ve);
+        u0r_0p = project(u0r_0,V0)
+        u1r_0p = project(u1r_0,V1)
+        if mydomain.tdim==mydomain.gdim:
+            plot(u0r_0p, cmap="coolwarm")
+            plot(u1r_0p, cmap="coolwarm")  
+        File("u0r.pvd")<<u0r_0p
+        File("u1r.pvd")<<u1r_0p
+    else:
+        ur, ui = split(mri_simu.u_0)
+        signal = assemble(ur*dx);
+        out_text = 'b: %.3f, Signal: %.3e, Normalized signal: %.3e, dt: %.3f, hmin: %.3e, whole_vol: %.3f, vol_of_interest: %.3f, Free signal: %.3e, elasped time %.3f (s)\n'%(mri_para.bvalue, signal, signal/voi, mri_simu.k, mydomain.hmin, whole_vol, voi, exp(-mri_para.bvalue*D0), mri_sim.elapsed_time)
+        V = FunctionSpace(mymesh,mydomain.Ve);
+        ur_p = project(ur,V)
+        if mydomain.tdim==mydomain.gdim:        
+            plot(ur_p, cmap="coolwarm")
+        File("ur.pvd")<<ur_p
+
+    print(out_text)
+    print("save to log.txt")
+    outfile = open('log.txt', 'a')
+    if not(ms == ''):
+        outfile.write('%'+ms+'\n')
+    outfile.write(out_text)
+    outfile.close()
