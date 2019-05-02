@@ -783,3 +783,4 @@ def Post_processing(mydomain, mri_para, mri_simu, ms=''):
         outfile.write('%'+ms+'\n')
     outfile.write(out_text)
     outfile.close()
+    
