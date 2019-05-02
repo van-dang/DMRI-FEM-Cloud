@@ -516,9 +516,9 @@ class MyDomain():
         if (self.gdim==3):
             self.zmin = mymesh.coordinates()[:, 2].min()
             self.zmax = mymesh.coordinates()[:, 2].max()        
-
         self.gdir = mri_para.gdir        
         self.gnorm = mri_para.gnorm 
+        self.D0 = 3e-3
             
     def WeakPseudoPeridicMarker(self):        
         if self.gdim==2:
