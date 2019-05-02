@@ -721,7 +721,7 @@ class MRI_simulation():
           
           while self.t < mri_para.T + self.k: # Time-stepping loop
               if stepcounter % self.nskip == 0:
-                  print('t: %6.2f '%self.t, 'T: %6.2f'%mri_para.T, 'dt: %.1f'%self.k,'gnorm: %e'%mri_para.gnorm,'Completed %3.2f%%'%(float(self.t)/float(mri_para.T+mri_simu.k)*100.0));
+                  print('t: %6.2f '%self.t, 'T: %6.2f'%mri_para.T, 'dt: %.1f'%self.k,'gnorm: %e'%mri_para.gnorm,'Completed %3.2f%%'%(float(self.t)/float(mri_para.T+self.k)*100.0));
 
               ft = mri_para.time_profile(self.t);
               ift = mri_para.itime_profile(self.t);
@@ -742,7 +742,7 @@ class MRI_simulation():
           self.elapsed_time = time.time() - start_time
           print("Successfully Completed! Elapsed time: %f seconds"%self.elapsed_time)
           
-def Post_processing(mydomain, mri_sim, ms=''):
+def Post_processing(mydomain, mri_sim, mri_simu, ms=''):
     one = Function(mydomain.V)
     one.vector()[:] = 1
     whole_vol = assemble(one*dx)
