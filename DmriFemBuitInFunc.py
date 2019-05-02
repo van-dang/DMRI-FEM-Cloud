@@ -629,7 +629,7 @@ def Create_phase_func(mymesh, cmpt_mesh , pmk):
         pmk = cellmarker
     return cellmarker, phase, pmk, partion_list 
 
-  class MRI_parameters():
+class MRI_parameters():
     def __init__(self):
         # Initialize default parameters
         self.bvalue = None
