@@ -28,6 +28,8 @@
 from dolfin import *
 import sympy as sp
 
+import time, os, sys, shutil
+
 def GdotX(gdir, mymesh):
   gdim = mymesh.geometry().dim()
   if (gdim==2):
