@@ -29,6 +29,7 @@ from dolfin import *
 import sympy as sp
 
 import time, os, sys, shutil
+import matplotlib.pyplot as plt;
 
 def GdotX(gdir, mymesh):
   gdim = mymesh.geometry().dim()
