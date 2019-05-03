@@ -765,7 +765,9 @@ def Post_processing(mydomain, mri_para, mri_simu, ms=''):
         u0r_0p = project(u0r_0,V0)
         u1r_0p = project(u1r_0,V1)
         if mydomain.tdim==mydomain.gdim:
+            plt.figure(10000);
             plot(u0r_0p, cmap="coolwarm")
+            plt.figure(10001);            
             plot(u1r_0p, cmap="coolwarm")  
         File("u0r.pvd")<<u0r_0p
         File("u1r.pvd")<<u1r_0p
@@ -775,7 +777,8 @@ def Post_processing(mydomain, mri_para, mri_simu, ms=''):
         out_text = 'b: %.3f, Signal: %.3e, Normalized signal: %.3e, dt: %.3f, hmin: %.3e, whole_vol: %.3f, vol_of_interest: %.3f, Free signal: %.3e, elasped time %.3f (s)\n'%(mri_para.bvalue, signal, signal/voi, mri_simu.k, mydomain.hmin, whole_vol, voi, exp(-mri_para.bvalue*mydomain.D0), mri_simu.elapsed_time)
         V = FunctionSpace(mydomain.mymesh,mydomain.Ve);
         ur_p = project(ur,V)
-        if mydomain.tdim==mydomain.gdim:        
+        if mydomain.tdim==mydomain.gdim: 
+            plt.figure(10000);
             plot(ur_p, cmap="coolwarm")
         File("ur.pvd")<<ur_p
 
