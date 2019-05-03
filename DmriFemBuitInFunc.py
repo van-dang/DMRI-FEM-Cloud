@@ -750,12 +750,14 @@ def Post_processing(mydomain, mri_para, mri_simu, ms=''):
     voi = assemble(mri_simu.Dirac_Delta*dx)
     if mydomain.IsDomainMultiple == True:
         u0r_0, u0i_0, u1r_0, u1i_0 = split(mri_simu.u_0)
-        signal0 = assemble(((1-mydomain.phase)*u0r_0)*dx)/assemble((1-mydomain.phase)*mri_simu.Dirac_Delta*dx);
-        signal1 = assemble((mydomain.phase*u1r_0)*dx)/assemble(mydomain.phase*mri_simu.Dirac_Delta*dx);
+        initial0 = assemble((1-mydomain.phase)*mri_simu.Dirac_Delta*dx);
+        signal0 = assemble(((1-mydomain.phase)*u0r_0)*dx);
+        initial1 = assemble(mydomain.phase*mri_simu.Dirac_Delta*dx)
+        signal1 = assemble((mydomain.phase*u1r_0)*dx);
         signal = assemble((mydomain.phase*u1r_0+(1-mydomain.phase)*u0r_0)*dx);
         print('Signal on each compartment')
-        print('Signal0: %.3e'%signal0)
-        print('Signal1: %.3e'%signal1)
+        print('Sum initial0: %.3e, Signal0: %.3e'%(initial0, signal0))
+        print('Sum initial1: %.3e, Signal1: %.3e'%(initial1, signal1))
         out_text = 'b: %.3f, Signal: %.3e, Normalized signal: %.3e, kappa: %.3e, dt: %.3f, hmin: %.3f, whole_vol: %.3f, vol_of_interest: %.3f, Free signal: %.3e, elasped time %.3f (s)\n'%(mri_para.bvalue, signal, signal/voi, mydomain.kappa, mri_simu.k, mydomain.hmin, whole_vol, voi, exp(-mri_para.bvalue*mydomain.D0), mri_simu.elapsed_time)
         
         V0 = FunctionSpace(mydomain.mesh0, mydomain.Ve);
