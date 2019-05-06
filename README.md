@@ -8,7 +8,7 @@ The scope of usage:
 
 Copyright (C) 2019 Van-Dang Nguyen
 
-There are some examples that illustrate how the diffusion MRI simulations can be performed on Google Colab. Users can open the files in Github and execute it directly with Google Colab.
+We designed some examples that illustrate how the diffusion MRI simulations can be performed on Google Colab. Users can open the files in Github and execute it directly with Google Colab.
 
 https://github.com/van-dang/MRI-Cloud/blob/master/ArbitraryTimeSequence.ipynb
 
