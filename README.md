@@ -24,7 +24,7 @@ https://github.com/van-dang/MRI-Cloud/blob/master/T2_Relaxation.ipynb
 
 However, if there is any problem with the Github visualization, users can follow two steps:
 
-1. Download the files into local computer: Users can clone the whole repository using 'git@github.com:van-dang/MRI-Cloud.git'. However, it is possible to download the files individually in the raw mode for instance:
+1. Download the files into local computer: Users can clone the whole repository using 'git clone git@github.com:van-dang/MRI-Cloud.git'. However, it is possible to download the files individually in the raw mode for instance:
 wget https://raw.githubusercontent.com/van-dang/MRI-Cloud/master/T2_Relaxation.ipynb
 
 2. Open a new Colab notebook by clicking on https://colab.research.google.com and upload the downloaded notebook 'File/Upload notebook ...'
