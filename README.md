@@ -8,3 +8,17 @@ The scope of usage:
 
 Copyright (C) 2019 Van-Dang Nguyen
 
+https://github.com/van-dang/MRI-Cloud/blob/master/DiscontinuousInitialCondition.ipynb
+
+https://github.com/van-dang/MRI-Cloud/blob/master/ArbitraryTimeSequence.ipynb
+
+https://github.com/van-dang/MRI-Cloud/blob/master/ExtracellularSpace.ipynb
+
+https://github.com/van-dang/MRI-Cloud/blob/master/MultilayeredStructures.ipynb
+
+https://github.com/van-dang/MRI-Cloud/blob/master/RealNeurons.ipynb
+
+https://github.com/van-dang/MRI-Cloud/blob/master/T2_Relaxation.ipynb
+
+
+
