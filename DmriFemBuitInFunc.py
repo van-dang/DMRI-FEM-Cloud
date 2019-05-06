@@ -783,11 +783,16 @@ def Post_processing(mydomain, mri_para, mri_simu, ms=''):
             plot(ur_p, cmap="coolwarm")
         File("ur.pvd")<<ur_p
 
+    comm = MPI.comm_world
+    rank = comm.Get_rank()    
+    print("rank: ", rank);
+    
     print(out_text)
     print("save to log.txt")
     outfile = open('log.txt', 'a')
-    if not(ms == ''):
-        outfile.write('%'+ms+'\n')
-    outfile.write(out_text)
-    outfile.close()
+    if int(rank) == 0:
+            if not(ms == ''):
+                outfile.write('%'+ms+'\n')
+            outfile.write(out_text)
+    outfile.close()  
     
