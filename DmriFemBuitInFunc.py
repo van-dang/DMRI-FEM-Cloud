@@ -29,7 +29,6 @@ from dolfin import *
 import sympy as sp
 
 import time, os, sys, shutil
-import matplotlib.pyplot as plt;
 
 def GdotX(gdir, mymesh):
   gdim = mymesh.geometry().dim()
@@ -750,7 +749,7 @@ class MRI_simulation():
           self.elapsed_time = time.time() - start_time
           print("Successfully Completed! Elapsed time: %f seconds"%self.elapsed_time)
           
-def Post_processing(mydomain, mri_para, mri_simu, ms=''):
+def Post_processing(mydomain, mri_para, mri_simu, plt, ms=''):
     one = Function(mydomain.V)
     one.vector()[:] = 1
     whole_vol = assemble(one*dx)
@@ -771,7 +770,7 @@ def Post_processing(mydomain, mri_para, mri_simu, ms=''):
         V1 = FunctionSpace(mydomain.mesh1, mydomain.Ve);
         u0r_0p = project(u0r_0,V0)
         u1r_0p = project(u1r_0,V1)
-        if mydomain.tdim==mydomain.gdim:
+        if mydomain.tdim==mydomain.gdim and not(plt==None):
             plt.figure(10000);
             plot(u0r_0p, cmap="coolwarm")
             plt.figure(10001);            
@@ -784,7 +783,7 @@ def Post_processing(mydomain, mri_para, mri_simu, ms=''):
         out_text = 'b: %.3f, q: %.3f, Signal: %.3e, Normalized signal: %.3e, dt: %.3f, hmin: %.3e, whole_vol: %.3f, vol_of_interest: %.3f, Free signal: %.3e, elasped time %.3f (s)\n'%(mri_para.bvalue, mri_para.qvalue, signal, signal/voi, mri_simu.k, mydomain.hmin, whole_vol, voi, exp(-mri_para.bvalue*mydomain.D0), mri_simu.elapsed_time)
         V = FunctionSpace(mydomain.mymesh,mydomain.Ve);
         ur_p = project(ur,V)
-        if mydomain.tdim==mydomain.gdim: 
+        if mydomain.tdim==mydomain.gdim and not(plt==None): 
             plt.figure(10000);
             plot(ur_p, cmap="coolwarm")
         File("ur.pvd")<<ur_p
