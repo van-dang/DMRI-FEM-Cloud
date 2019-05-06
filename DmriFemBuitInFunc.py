@@ -647,14 +647,14 @@ class MRI_parameters():
         gdim = mymesh.geometry().dim()
         if gdim==2:
             self.gdir = Point(g0, g1)
-            if fabs(self.gdir.norm())>1e-10:
+            if abs(self.gdir.norm())>1e-10:
                   self.gdir /= self.gdir.norm()
             else:
                 print("|g| is too small!"); sys.exit()
             self.g = Expression(("g0","g1"), g0=self.gdir.x(), g1=self.gdir.y(),domain=mymesh, degree=1);
         if gdim==3:
             self.gdir = Point(g0, g1, g2)
-            if fabs(self.gdir.norm())>1e-10:
+            if abs(self.gdir.norm())>1e-10:
                 self.gdir /= self.gdir.norm()
             else:
                 print("|g| is too small!"); sys.exit() 
