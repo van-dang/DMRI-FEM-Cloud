@@ -647,11 +647,17 @@ class MRI_parameters():
         gdim = mymesh.geometry().dim()
         if gdim==2:
             self.gdir = Point(g0, g1)
-            self.gdir /= self.gdir.norm()
+            if fabs(self.gdir.norm())>1e-10:
+                  self.gdir /= self.gdir.norm()
+            else:
+                print("|g| is too small!"); sys.exit()
             self.g = Expression(("g0","g1"), g0=self.gdir.x(), g1=self.gdir.y(),domain=mymesh, degree=1);
         if gdim==3:
             self.gdir = Point(g0, g1, g2)
-            self.gdir /= self.gdir.norm()        
+            if fabs(self.gdir.norm())>1e-10:
+                self.gdir /= self.gdir.norm()
+            else:
+                print("|g| is too small!"); sys.exit() 
             self.g = Expression(("g0","g1","g2"), g0=self.gdir.x(), g1=self.gdir.y(), g2=self.gdir.z(),domain=mymesh, degree=1);
             
     def integral_term_for_gb(self):
