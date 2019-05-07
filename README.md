@@ -1,4 +1,4 @@
-## Simulation of diffusion MRI with Python notebooks
+# Simulation of diffusion MRI with Python notebooks
 
 The scope of usage: 
 (1) Single domains, Multilayered structures, manifolds
@@ -30,7 +30,9 @@ However, if there is any problem with the Github visualization, users can follow
 2. Open a new Colab notebook by clicking on https://colab.research.google.com and upload the downloaded notebook 'File/Upload notebook ...'
 
 
-## Google Cloud
+# Parellization with Google Cloud
+
+## Create VM instance
 
 https://cloud.google.com
 
@@ -41,6 +43,8 @@ Nivigation menu / Compute Engine / VM instances / Create Instances / SSH connect
 sudo apt-get update 
 
 sudo apt-get install mpich singularity-container
+
+## Create and Run with FEniCS Singularity Image
 
 sudo singularity build --writable fenics_stable.simg docker://fenicsproject/stable
 
