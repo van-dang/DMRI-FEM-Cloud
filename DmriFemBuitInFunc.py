@@ -753,8 +753,6 @@ def Post_processing(mydomain, mri_para, mri_simu, plt, ms=''):
         print(out_text)
         V0 = FunctionSpace(mydomain.mesh0, mydomain.Ve);
         V1 = FunctionSpace(mydomain.mesh1, mydomain.Ve);
-        u0r_0.set_allow_extrapolation(true)
-        u1r_0.set_allow_extrapolation(true)
         u0r_0p = project(u0r_0,V0)
         u1r_0p = project(u1r_0,V1)
         if mydomain.tdim==mydomain.gdim and not(plt==None):
@@ -770,7 +768,6 @@ def Post_processing(mydomain, mri_para, mri_simu, plt, ms=''):
         out_text = 'b: %.3f, q: %.3f, Signal: %.3e, Normalized signal: %.3e, dt: %.3f, hmin: %.3e, whole_vol: %.3f, vol_of_interest: %.3f, Free signal: %.3e, elasped time %.3f (s)\n'%(mri_para.bvalue, mri_para.qvalue, signal, signal/voi, mri_simu.k, mydomain.hmin, whole_vol, voi, exp(-mri_para.bvalue*mydomain.D0), mri_simu.elapsed_time)
         print(out_text)
         V = FunctionSpace(mydomain.mymesh,mydomain.Ve);
-        ur.set_allow_extrapolation(true)
         ur_p = project(ur,V)
         if mydomain.tdim==mydomain.gdim and not(plt==None): 
             plt.figure(10000);
