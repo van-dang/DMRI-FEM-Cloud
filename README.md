@@ -30,7 +30,7 @@ However, if there is any problem with the Github visualization, users can follow
 2. Open a new Colab notebook by clicking on https://colab.research.google.com and upload the downloaded notebook 'File/Upload notebook ...'
 
 
-# Parellization with Google Cloud
+# Simulations on Google Cloud
 
 ## Create VM instances
 
