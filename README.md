@@ -65,11 +65,11 @@ wget https://raw.githubusercontent.com/van-dang/MRI-Cloud/master/GCloudDmriSolve
 
 #### For multi-compartment domains
 ```bash
-singularity exec -B $PWD ../fenics_stable.simg python3 PreprocessingMultiCompt.py -o myfiles.h5
-singularity exec -B $PWD ../fenics_stable.simg python3 GCloudDmriSolver.py -f myfiles.h5 -M 1 -b 1000 -k 200 -gdir 0 1 0
+singularity exec -B $PWD ../fenics_stable.simg python3 PreprocessingMultiCompt.py -o multi_compt_files.h5
+singularity exec -B $PWD ../fenics_stable.simg python3 GCloudDmriSolver.py -f multi_compt_files.h5 -M 1 -b 1000 -k 200 -gdir 0 1 0
 ```
 #### For single-compartment domains
 ```bash
-singularity exec -B $PWD ../fenics_stable.simg python3 PreprocessingMultiCompt.py -o myfiles.h5
-singularity exec -B $PWD ../fenics_stable.simg python3 GCloudDmriSolver.py -f myfiles.h5 -M 1 -b 1000 -k 200 -gdir 0 1 0
+singularity exec -B $PWD ../fenics_stable.simg python3 PreprocessingMultiCompt.py -o one_compt_files.h5
+singularity exec -B $PWD ../fenics_stable.simg python3 GCloudDmriSolver.py -f one_compt_files.h5 -M 1 -b 1000 -k 200 -gdir 0 1 0
 ```
