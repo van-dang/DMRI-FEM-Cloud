@@ -1,4 +1,4 @@
-# Simulation of diffusion MRI with Python notebooks
+## Simulation of diffusion MRI with Python notebooks
 
 The scope of usage: 
 (1) Single domains, Multilayered structures, manifolds
@@ -30,7 +30,7 @@ However, if there is any problem with the Github visualization, users can follow
 2. Open a new Colab notebook by clicking on https://colab.research.google.com and upload the downloaded notebook 'File/Upload notebook ...'
 
 
-# Google Cloud
+## Google Cloud
 
 https://cloud.google.com
 
