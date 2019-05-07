@@ -202,6 +202,7 @@ linsolver = KrylovSolver("bicgstab")
 #linsolver.parameters["relative_tolerance"] = 1e-3
 #linsolver.parameters["maximum_iterations"] = 1000
 
+ic = None
 if is_IC_from_file == 1:
         print("Reading initial conditions from file: ", ffile)
         ic = Function(V_DG);
@@ -213,5 +214,5 @@ mri_simu.solve(mydomain, mri_para, linsolver)
 ctext = ''
 if bvalue == 1000:
         ctext = 'Torus R=[5, 7.5, 10], Delta=43.1ms, delta=10.6ms, D=[3 1 3]*1e-3 mm^2/s, kappa=1e-5m/s, gdir=100'
-Post_processing(mydomain, mri_para, mri_simu, None, ctext)
+Post_processing(mydomain, mri_para, mri_simu, ic, ctext)
 
