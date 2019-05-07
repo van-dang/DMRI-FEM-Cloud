@@ -32,6 +32,12 @@ However, if there is any problem with the Github visualization, users can follow
 
 # Google Cloud
 
+https://cloud.google.com
+
+Go to console
+
+Nivigation menu / Compute Engine / VM instances / Create Instances / SSH connect
+
 sudo apt-get install mpich singularity-container
 
 pip install mpi4py
@@ -42,5 +48,7 @@ sudo singularity exec --writable fenics_stable.simg sudo apt-get update
 
 sudo singularity exec --writable fenics_stable.simg sudo apt-get install zip unzip gmsh
 
- sudo singularity exec -B $PWD ../fenics_stable.simg python3 PreprocessingMultiCompt.py
+sudo singularity exec -B $PWD ../fenics_stable.simg python3 PreprocessingMultiCompt.py
+ 
+sudo singularity exec -B $PWD ../fenics_stable.simg python3 GCloudDmriSolver.py -f files.h5 -M 1 -b 1000 -k 200 -gdir 0 1 0
 
