@@ -32,9 +32,9 @@ However, if there is any problem with the Github visualization, users can follow
 
 # Parellization with Google Cloud
 
-## Create VM instance
+## Create VM instances
 
-https://cloud.google.com
+Access https://cloud.google.com
 
 Go to console
 
