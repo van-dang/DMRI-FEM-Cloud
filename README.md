@@ -28,3 +28,11 @@ However, if there is any problem with the Github visualization, users can follow
 'wget https://raw.githubusercontent.com/van-dang/MRI-Cloud/master/T2_Relaxation.ipynb'
 
 2. Open a new Colab notebook by clicking on https://colab.research.google.com and upload the downloaded notebook 'File/Upload notebook ...'
+
+
+# Google Cloud
+
+sudo singularity build --writable fenics_stable.simg docker://fenicsproject/stable
+sudo singularity exec --writable fenics_stable.simg sudo apt-get install zip unzip gmsh
+
+
