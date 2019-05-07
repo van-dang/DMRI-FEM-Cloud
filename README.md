@@ -71,6 +71,5 @@ singularity exec -B $PWD ../fenics_stable.simg python3 GCloudDmriSolver.py -f mu
 #### For single-compartment domains
 ```bash
 singularity exec -B $PWD ../fenics_stable.simg python3 PreprocessingOneCompt.py -o onecompt_files.h5
-mpirun -np 6 singularity exec -B $PWD ../fenics_stable.simg python3 GCloudDmriSolver.py -f onecompt_files.h5 -M 0 -b 100
-0 -d 10600 -D 43100 -k 200 -gdir 1 0 0 
+mpirun -np 6 singularity exec -B $PWD ../fenics_stable.simg python3 GCloudDmriSolver.py -f onecompt_files.h5 -M 0 -b 1000 -d 10600 -D 43100 -k 200 -gdir 1 0 0 
 ```
