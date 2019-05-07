@@ -1,0 +1,52 @@
+# Copyright (C) 2017 Van-Dang Nguyen (vdnguyen@kth.se)
+
+# This file is part of FEniCS
+#
+# FEniCS is free software: you can redistribute it and/or modify
+# it under the terms of the GNU Lesser General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+
+Ve = FiniteElement("CG", tetrahedron, 1)
+TH = MixedElement([Ve,Ve,Ve,Ve])
+
+v = TestFunction(TH)
+v0r, v0i, v1r, v1i = v[0], v[1], v[2], v[3]
+
+w = TrialFunction(TH);
+u0r, u0i, u1r, u1i = w[0], w[1], w[2], w[3]
+
+V_DG = FiniteElement("DG", tetrahedron, 0)
+
+phase = Coefficient(V_DG)
+
+
+u0r_0 = Coefficient(Ve)
+u0i_0 = Coefficient(Ve)
+u1r_0 = Coefficient(Ve)
+u1i_0 = Coefficient(Ve)
+GX = Coefficient(Ve)
+ft = Coefficient(Ve)
+gnorm = Coefficient(Ve)
+K = Coefficient(Ve)
+kappa = Coefficient(Ve)
+theta = Coefficient(Ve)
+
+def interface_cond(kappa, u0rm, u1rm, v0r, v1r, u0im, u1im, v0i, v1i):
+    F_bcr = kappa*(u0rm-u1rm)*(v0r-v1r)
+    F_bci = kappa*(u0im-u1im)*(v0i-v1i)
+    return F_bcr + F_bci
+
+def FuncF(ft, gnorm, GX, ur, ui, vr, vi, K):
+    Fr = ft*gnorm*GX*ui*vr - K*inner(grad(ur), grad(vr))
+    Fi = - ft*gnorm*GX*ur*vi - K*inner(grad(ui), grad(vi))
+    return Fr + Fi
+
+L0   = FuncF(ft, gnorm, GX, u0r_0, u0i_0, v0r, v0i, K)*(1-phase)*dx
+L1   = FuncF(ft, gnorm, GX, u1r_0, u1i_0, v1r, v1i, K)*phase*dx
+L_bc = avg(interface_cond(kappa, u0r_0, u1r_0, v0r, v1r, u0i_0, u1i_0, v0i, v1i))*abs(jump(phase))*dS;
+L    = L0+L1-L_bc;
+
+
+
+

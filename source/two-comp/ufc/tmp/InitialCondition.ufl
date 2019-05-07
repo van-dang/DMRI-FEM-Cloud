@@ -1,0 +1,21 @@
+# Copyright (C) 2017 Van-Dang Nguyen (vdnguyen@kth.se)
+
+# This file is part of FEniCS
+#
+# FEniCS is free software: you can redistribute it and/or modify
+# it under the terms of the GNU Lesser General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+
+Ve = FiniteElement("CG", triangle, 1)
+TH = MixedElement([Ve,Ve,Ve,Ve])
+
+v = TestFunction(TH)
+v0r, v0i, v1r, v1i = v[0], v[1], v[2], v[3]
+
+w = TrialFunction(TH);
+u0r, u0i, u1r, u1i = w[0], w[1], w[2], w[3]
+
+
+a = u0r*v0r*dx + u1r*v1r*dx + 1e-10*u0i*v0i*dx + 1e-10*u1i*v1i*dx 
+L = v0r*dx + v1r*dx

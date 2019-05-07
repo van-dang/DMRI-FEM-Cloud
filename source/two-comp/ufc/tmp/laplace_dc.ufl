@@ -1,0 +1,71 @@
+# Van-Dang NGUYEN 2016
+# N. Cem Degirmenci 2016
+
+
+r0 = 0.5; mu0 = 1.; mu1 = 1.;
+lambda_wbc=1e16; # panalty parameter for weak DirichletBC
+A, B, D = 0.5, 1., 1.
+beta = 1e-6;
+
+
+cell = triangle
+d = 2
+order = 1
+
+#V_DG = FunctionSpace(mesh, 'DG', 0)
+V_DG = FiniteElement("DG", cell, 0)
+W = VectorElement("Lagrange", cell, order);
+S = FiniteElement("Lagrange", cell, order);
+
+u = TrialFunction(W);
+v = TestFunction(W);
+
+
+n = FacetNormal(cell)
+facet_area = FacetArea(cell)
+theta = Coefficient(V_DG)
+vol = Coefficient(V_DG)
+h = Coefficient(V_DG)
+
+vol0 =  abs(avg(vol) + 0.5*jump(vol)*jump(theta))
+vol1 =  abs(avg(vol) - 0.5*jump(vol)*jump(theta)) 
+  
+h0 =  abs(avg(h) + 0.5*jump(h)*jump(theta)) 
+h1 =  abs(avg(h) - 0.5*jump(h)*jump(theta)) 
+
+alpha0 = vol0/(h0*h0)
+alpha1 = vol1/(h1*h1)
+gamma0 = avg(facet_area)/h0;
+gamma1 = avg(facet_area)/h1;
+
+lambda_i = avg(  1./facet_area)*( avg(D)+avg((1.0+B)*mu0*mu1)/( avg(A)*(  avg(mu0)*alpha1/(gamma1*gamma1)+avg(mu1)*alpha0/(gamma0*gamma0)  ) ))  
+
+k0 =  avg(mu1)*alpha0/(avg(mu0)*alpha1*(gamma0/gamma1)*(gamma0/gamma1)+avg(mu1)*alpha0) ;
+k1 =  avg(mu0)*alpha1/(avg(mu0)*alpha1+avg(mu1)*alpha0*(gamma1/gamma0)*(gamma1/gamma0)) ;
+
+#W = VectorFunctionSpace(mesh , "CG", 1);
+
+
+#uexact=Expression(("1.*(sqrt((x[0]-0.2)*(x[0]-0.2)+x[1]*x[1])<=0.5)+(1-log(2*sqrt(x[0]*x[0]+x[1]*x[1])))*(sqrt((x[0]-0.2)*(x[0]-0.2)+x[1]*x[1])>0.5)"))
+b = Coefficient(S)
+#Expression(("log(2.*sqrt(x[0]*x[0]+x[1]*x[1])+1e-16)*(sqrt(x[0]*x[0]+x[1]*x[1])>0.1)"))  # jump in u
+g = Coefficient(S)
+#Expression(("2.0-0.4*x[0]/(x[0]*x[0]+x[1]*x[1]+1e-16)*( (x[0]*x[0]+x[1]*x[1])>0 )")) # jump in flux
+
+
+proj_op = beta*u[0]*v[0]*theta*dx + beta*u[1]*v[1]*(1.-theta)*dx 
+
+#if Weak_DirichletBC:
+#    awbc = lambda_wbc*u[1]*v[1]*ds
+#    Lwbc = lambda_wbc*uexact*v[1]*ds
+#else:
+#awbc = Lwbc = 0;
+
+a = mu0*inner(grad(u[0]),grad(v[0]))*(1.-theta)*dx+mu1*inner(grad(u[1]),grad(v[1]))*theta*dx - avg(u[0]-u[1])*(  k0*avg(mu0*dot(grad(v[0]),n))+k1*avg(mu1*dot(grad(v[1]),n)) )*abs(jump(theta))*dS - (avg(v[0]-v[1]))*( k0*avg(mu0*dot(grad(u[0]),n))+k1*avg(mu1*dot(grad(u[1]),n)) )*abs(jump(theta))*dS + lambda_i*avg((u[0]-u[1])*(v[0]-v[1]))*abs(jump(theta))*dS + proj_op #+ awbc
+
+L =(  (avg(g)*(k1*avg(v[0])+k0*avg(v[1]))-avg(b)*(k0*avg(mu0*dot(grad(v[0]),n))+k1*avg(mu1*dot(grad(v[1]),n)) )) + lambda_i*avg(b*(v[0]-v[1]))  )*abs(jump(theta))*dS  #+Lwbc
+
+#if Weak_DirichletBC:
+#    bc1 = []
+
+
