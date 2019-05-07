@@ -615,7 +615,7 @@ def Create_phase_func(mymesh, cmpt_mesh , pmk):
     cellmarker = MeshFunction("size_t", mymesh, mymesh.topology().dim())
     partion_list = [];
     for cell in cells(mymesh):
-        cmk = 0
+        cmk0, cmk = 0, 0
         if not(pmk==None):
             cmk0 = pmk[cell.index()]
             cmk = cmk0 % 2    
