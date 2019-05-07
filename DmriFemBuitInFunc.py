@@ -181,8 +181,6 @@ def ThetaMethodF_sBC1c(ft, ift, mri_para, w, v, sp, mydomain):
     a0_outer_bc = theta*outer_interface(ift, gnorm , D, fn, u0r, u0i, v0r, v0i, g)*ds
     return a0 + a0_outer_bc 
 
-  
-
 def ThetaMethodL_sBC1c(ft, ift, mri_para, w, v, u_0, sp, mydomain):
     D = mydomain.D 
     T2 = mri_para.T2      
