@@ -1,4 +1,4 @@
-# Simulation of diffusion MRI with Python notebooks
+# Simulations with Python notebooks
 
 The scope of usage: 
 (1) Single domains, Multilayered structures, manifolds
@@ -74,3 +74,4 @@ mpirun -n 6 singularity exec -B $PWD ../fenics_stable.simg python3 GCloudDmriSol
 singularity exec -B $PWD ../fenics_stable.simg python3 PreprocessingOneCompt.py -o onecompt_files.h5
 mpirun -np 6 singularity exec -B $PWD ../fenics_stable.simg python3 GCloudDmriSolver.py -f onecompt_files.h5 -M 0 -b 1000 -d 10600 -D 43100 -k 200 -gdir 1 0 0 
 ```
+## Working with FEniCS-HPC Singularity Image
