@@ -46,7 +46,8 @@ sudo apt-get update
 sudo apt-get install mpich singularity-container
 ```
 
-## Create FEniCS Singularity Image
+## Working with FEniCS Singularity Image
+### Create Image
 
 ```bash
 sudo singularity build --writable fenics_stable.simg docker://fenicsproject/stable
@@ -54,21 +55,21 @@ sudo singularity exec --writable fenics_stable.simg sudo apt-get update
 sudo singularity exec --writable fenics_stable.simg sudo apt-get install zip unzip gmsh
 ```
 
-## Copy Python solvers to the VM instance
+### Copy Python solvers to the VM instance
 ```bash
 wget https://raw.githubusercontent.com/van-dang/MRI-Cloud/master/PreprocessingOneCompt.py
 wget https://raw.githubusercontent.com/van-dang/MRI-Cloud/master/PreprocessingMultiCompt.py
 wget https://raw.githubusercontent.com/van-dang/MRI-Cloud/master/GCloudDmriSolver.py
 ```
 
-## Execute the code with Singularity Image
+### Execute the code with Singularity Image
 
-#### For multi-compartment domains
+##### For multi-compartment domains
 ```bash
 singularity exec -B $PWD ../fenics_stable.simg python3 PreprocessingMultiCompt.py -o multcompt_files.h5
 singularity exec -B $PWD ../fenics_stable.simg python3 GCloudDmriSolver.py -f multcompt_files.h5 -M 1 -b 1000 -k 200 -gdir 0 1 0
 ```
-#### For single-compartment domains
+##### For single-compartment domains
 ```bash
 singularity exec -B $PWD ../fenics_stable.simg python3 PreprocessingOneCompt.py -o onecompt_files.h5
 mpirun -np 6 singularity exec -B $PWD ../fenics_stable.simg python3 GCloudDmriSolver.py -f onecompt_files.h5 -M 0 -b 1000 -d 10600 -D 43100 -k 200 -gdir 1 0 0 
