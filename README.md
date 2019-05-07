@@ -46,6 +46,7 @@ sudo apt-get install mpich singularity-container
 
 ## Create and Run with FEniCS Singularity Image
 
+```bash
 sudo singularity build --writable fenics_stable.simg docker://fenicsproject/stable
 
 sudo singularity exec --writable fenics_stable.simg sudo apt-get update
@@ -55,4 +56,4 @@ sudo singularity exec --writable fenics_stable.simg sudo apt-get install zip unz
 singularity exec -B $PWD ../fenics_stable.simg python3 PreprocessingMultiCompt.py -o myfiles.h5
  
 singularity exec -B $PWD ../fenics_stable.simg python3 GCloudDmriSolver.py -f myfiles.h5 -M 1 -b 1000 -k 200 -gdir 0 1 0
-
+'''
