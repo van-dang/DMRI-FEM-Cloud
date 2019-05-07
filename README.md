@@ -33,6 +33,7 @@ However, if there is any problem with the Github visualization, users can follow
 # Google Cloud
 
 sudo singularity build --writable fenics_stable.simg docker://fenicsproject/stable
+
 sudo singularity exec --writable fenics_stable.simg sudo apt-get install zip unzip gmsh
 
 
