@@ -51,7 +51,7 @@ parameters['allow_extrapolation'] = True
 ## default parameters
 g0, g1, g2 = 0, 1, 0; kcoeff = 3e-3; porder = 1; Nsteps = 100; bvalue = 1000; kappa = 1e-5;
 delta, Delta = 10600, 43100; T2 = 1e16; k = 200; nskip = 5; is_input_dt = 0; is_input_b = 0; is_input_q = 0;
-is_kcoeff_from_file = 1; is_T2_from_file = 1; is_IC_from_file = 1; IsDomainPeriodic = False; IsDomainMultiple = False
+is_kcoeff_from_file = 1; is_T2_from_file = 1; is_IC_from_file = 0; IsDomainPeriodic = False; IsDomainMultiple = False
 PeriodicDir = [0, 0, 0]; phase = None; mesh0 = None; mesh1 = None; ic = None
 ## end default parameters
 
