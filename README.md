@@ -34,6 +34,8 @@ However, if there is any problem with the Github visualization, users can follow
 
 sudo apt-get install mpich singularity-container
 
+pip install mpi4py
+
 sudo singularity build --writable fenics_stable.simg docker://fenicsproject/stable
 
 sudo singularity exec --writable fenics_stable.simg sudo apt-get install zip unzip gmsh
