@@ -32,7 +32,7 @@ However, if there is any problem with the Github visualization, users can follow
 
 # Google Cloud
 
-sudo apt-get install singularity-container
+sudo apt-get install mpich singularity-container
 
 sudo singularity build --writable fenics_stable.simg docker://fenicsproject/stable
 
