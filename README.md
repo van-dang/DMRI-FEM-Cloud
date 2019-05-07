@@ -38,6 +38,8 @@ pip install mpi4py
 
 sudo singularity build --writable fenics_stable.simg docker://fenicsproject/stable
 
+sudo singularity exec --writable fenics_stable.simg sudo apt-get update
+
 sudo singularity exec --writable fenics_stable.simg sudo apt-get install zip unzip gmsh
 
 
