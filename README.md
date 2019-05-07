@@ -42,4 +42,5 @@ sudo singularity exec --writable fenics_stable.simg sudo apt-get update
 
 sudo singularity exec --writable fenics_stable.simg sudo apt-get install zip unzip gmsh
 
+ sudo singularity exec -B $PWD ../fenics_stable.simg python3 PreprocessingMultiCompt.py
 
