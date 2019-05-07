@@ -50,18 +50,14 @@ sudo apt-get install mpich singularity-container
 
 ```bash
 sudo singularity build --writable fenics_stable.simg docker://fenicsproject/stable
-
 sudo singularity exec --writable fenics_stable.simg sudo apt-get update
-
 sudo singularity exec --writable fenics_stable.simg sudo apt-get install zip unzip gmsh
 ```
 
 ## Copy Python solvers to the VM instance
 ```bash
 wget https://raw.githubusercontent.com/van-dang/MRI-Cloud/master/PreprocessingOneCompt.py
-
 wget https://raw.githubusercontent.com/van-dang/MRI-Cloud/master/PreprocessingMultiCompt.py
-
 wget https://raw.githubusercontent.com/van-dang/MRI-Cloud/master/GCloudDmriSolver.py
 ```
 
@@ -69,6 +65,5 @@ wget https://raw.githubusercontent.com/van-dang/MRI-Cloud/master/GCloudDmriSolve
 
 ```bash
 singularity exec -B $PWD ../fenics_stable.simg python3 PreprocessingMultiCompt.py -o myfiles.h5
- 
 singularity exec -B $PWD ../fenics_stable.simg python3 GCloudDmriSolver.py -f myfiles.h5 -M 1 -b 1000 -k 200 -gdir 0 1 0
 ```
