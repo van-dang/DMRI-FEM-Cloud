@@ -42,7 +42,6 @@ Nivigation menu / Compute Engine / VM instances / Create Instances / SSH connect
 
 ```bash
 sudo apt-get update 
-
 sudo apt-get install mpich singularity-container
 ```
 
