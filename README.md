@@ -1,6 +1,7 @@
-
+# Buid images if neccessary
 ```bash
-sudo singularity build fenics_stable.simg docker://fenicsproject/stablesudo singularity build fenics-hpc-dmri.simg build_image_source_dmri
+sudo singularity build fenics_stable.simg docker://fenicsproject/stable
+sudo singularity build fenics-hpc-dmri.simg build_image_source_dmri
 ```
 
 # Download images from the terminal
