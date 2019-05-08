@@ -30,7 +30,7 @@ singularity exec -B $PWD ../../../writable_fenics-hpc-dmri.simg make -j 8
 # Download the existing meshes
 ```bash
 wget https://github.com/van-dang/NeuronVolumeMeshes/raw/master/pyramidals/04b_pyramidal7aACC.msh.zip
-unzip 05a_pyramidal8aACC.msh.zip
+unzip 04b_pyramidal7aACC.msh.zip
 ```
 
 # Convert .gmsh to .xml
