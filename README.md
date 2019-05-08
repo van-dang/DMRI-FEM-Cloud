@@ -1,3 +1,7 @@
+# Install Singularity
+```bash
+sudo apt-get singulariy-container
+```
 # Re-build images if neccessary
 #### FEniCS
 ```bash
