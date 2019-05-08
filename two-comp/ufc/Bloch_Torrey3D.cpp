@@ -26,65 +26,65 @@
 //   swig_binary:                    'swig'
 //   swig_path:                      ''
 
-#include "Bloch_Torrey_NoTime3D.h"
+#include "Bloch_Torrey3D.h"
 
 /// Constructor
-bloch_torrey_notime3d_finite_element_0::bloch_torrey_notime3d_finite_element_0() : ufc::finite_element()
+bloch_torrey3d_finite_element_0::bloch_torrey3d_finite_element_0() : ufc::finite_element()
 {
     // Do nothing
 }
 
 /// Destructor
-bloch_torrey_notime3d_finite_element_0::~bloch_torrey_notime3d_finite_element_0()
+bloch_torrey3d_finite_element_0::~bloch_torrey3d_finite_element_0()
 {
     // Do nothing
 }
 
 /// Return a string identifying the finite element
-const char* bloch_torrey_notime3d_finite_element_0::signature() const
+const char* bloch_torrey3d_finite_element_0::signature() const
 {
     return "FiniteElement('Discontinuous Lagrange', Cell('tetrahedron', Space(3)), 0, None)";
 }
 
 /// Return the cell shape
-ufc::shape bloch_torrey_notime3d_finite_element_0::cell_shape() const
+ufc::shape bloch_torrey3d_finite_element_0::cell_shape() const
 {
     return ufc::tetrahedron;
 }
 
 #ifndef UFC_BACKWARD_COMPATIBILITY
 /// Return the topological dimension of the cell shape
-unsigned int bloch_torrey_notime3d_finite_element_0::topological_dimension() const
+unsigned int bloch_torrey3d_finite_element_0::topological_dimension() const
 {
     return 3;
 }
 
 /// Return the geometric dimension of the cell shape
-unsigned int bloch_torrey_notime3d_finite_element_0::geometric_dimension() const
+unsigned int bloch_torrey3d_finite_element_0::geometric_dimension() const
 {
     return 3;
 }
 #endif
 /// Return the dimension of the finite element function space
-unsigned int bloch_torrey_notime3d_finite_element_0::space_dimension() const
+unsigned int bloch_torrey3d_finite_element_0::space_dimension() const
 {
     return 1;
 }
 
 /// Return the rank of the value space
-unsigned int bloch_torrey_notime3d_finite_element_0::value_rank() const
+unsigned int bloch_torrey3d_finite_element_0::value_rank() const
 {
     return 0;
 }
 
 /// Return the dimension of the value space for axis i
-unsigned int bloch_torrey_notime3d_finite_element_0::value_dimension(unsigned int i) const
+unsigned int bloch_torrey3d_finite_element_0::value_dimension(unsigned int i) const
 {
     return 1;
 }
 
 /// Evaluate basis function i at given point in cell
-void bloch_torrey_notime3d_finite_element_0::evaluate_basis(unsigned int i,
+void bloch_torrey3d_finite_element_0::evaluate_basis(unsigned int i,
                                    double* values,
                                    const double* coordinates,
                                    const ufc::cell& c) const
@@ -127,7 +127,7 @@ void bloch_torrey_notime3d_finite_element_0::evaluate_basis(unsigned int i,
 }
 
 /// Evaluate all basis functions at given point in cell
-void bloch_torrey_notime3d_finite_element_0::evaluate_basis_all(double* values,
+void bloch_torrey3d_finite_element_0::evaluate_basis_all(double* values,
                                        const double* coordinates,
                                        const ufc::cell& c) const
 {
@@ -136,7 +136,7 @@ void bloch_torrey_notime3d_finite_element_0::evaluate_basis_all(double* values,
 }
 
 /// Evaluate order n derivatives of basis function i at given point in cell
-void bloch_torrey_notime3d_finite_element_0::evaluate_basis_derivatives(unsigned int i,
+void bloch_torrey3d_finite_element_0::evaluate_basis_derivatives(unsigned int i,
                                                unsigned int n,
                                                double* values,
                                                const double* coordinates,
@@ -398,7 +398,7 @@ void bloch_torrey_notime3d_finite_element_0::evaluate_basis_derivatives(unsigned
 }
 
 /// Evaluate order n derivatives of all basis functions at given point in cell
-void bloch_torrey_notime3d_finite_element_0::evaluate_basis_derivatives_all(unsigned int n,
+void bloch_torrey3d_finite_element_0::evaluate_basis_derivatives_all(unsigned int n,
                                                    double* values,
                                                    const double* coordinates,
                                                    const ufc::cell& c) const
@@ -408,7 +408,7 @@ void bloch_torrey_notime3d_finite_element_0::evaluate_basis_derivatives_all(unsi
 }
 
 /// Evaluate linear functional for dof i on the function f
-double bloch_torrey_notime3d_finite_element_0::evaluate_dof(unsigned int i,
+double bloch_torrey3d_finite_element_0::evaluate_dof(unsigned int i,
                                    const ufc::function& f,
                                    const ufc::cell& c) const
 {
@@ -435,7 +435,7 @@ double bloch_torrey_notime3d_finite_element_0::evaluate_dof(unsigned int i,
 }
 
 /// Evaluate linear functionals for all dofs on the function f
-void bloch_torrey_notime3d_finite_element_0::evaluate_dofs(double* values,
+void bloch_torrey3d_finite_element_0::evaluate_dofs(double* values,
                                   const ufc::function& f,
                                   const ufc::cell& c) const
 {
@@ -453,7 +453,7 @@ void bloch_torrey_notime3d_finite_element_0::evaluate_dofs(double* values,
 }
 
 /// Interpolate vertex values from dof values
-void bloch_torrey_notime3d_finite_element_0::interpolate_vertex_values(double* vertex_values,
+void bloch_torrey3d_finite_element_0::interpolate_vertex_values(double* vertex_values,
                                               const double* dof_values,
                                               const ufc::cell& c) const
 {
@@ -466,7 +466,7 @@ void bloch_torrey_notime3d_finite_element_0::interpolate_vertex_values(double* v
 
 #ifndef UFC_BACKWARD_COMPATIBILITY
 /// Map coordinate xhat from reference cell to coordinate x in cell
-void bloch_torrey_notime3d_finite_element_0::map_from_reference_cell(double* x,
+void bloch_torrey3d_finite_element_0::map_from_reference_cell(double* x,
                                             const double* xhat,
                                             const ufc::cell& c) const
 {
@@ -474,7 +474,7 @@ void bloch_torrey_notime3d_finite_element_0::map_from_reference_cell(double* x,
 }
 
 /// Map from coordinate x in cell to coordinate xhat in reference cell
-void bloch_torrey_notime3d_finite_element_0::map_to_reference_cell(double* xhat,
+void bloch_torrey3d_finite_element_0::map_to_reference_cell(double* xhat,
                                           const double* x,
                                           const ufc::cell& c) const
 {
@@ -482,83 +482,83 @@ void bloch_torrey_notime3d_finite_element_0::map_to_reference_cell(double* xhat,
 }
 #endif
 /// Return the number of sub elements (for a mixed element)
-unsigned int bloch_torrey_notime3d_finite_element_0::num_sub_elements() const
+unsigned int bloch_torrey3d_finite_element_0::num_sub_elements() const
 {
     return 0;
 }
 
 /// Create a new finite element for sub element i (for a mixed element)
-ufc::finite_element* bloch_torrey_notime3d_finite_element_0::create_sub_element(unsigned int i) const
+ufc::finite_element* bloch_torrey3d_finite_element_0::create_sub_element(unsigned int i) const
 {
     return 0;
 }
 
 #ifndef UFC_BACKWARD_COMPATIBILITY
 /// Create a new class instance
-ufc::finite_element* bloch_torrey_notime3d_finite_element_0::create() const
+ufc::finite_element* bloch_torrey3d_finite_element_0::create() const
 {
-    return new bloch_torrey_notime3d_finite_element_0();
+    return new bloch_torrey3d_finite_element_0();
 }
 #endif
 
 
 /// Constructor
-bloch_torrey_notime3d_finite_element_1::bloch_torrey_notime3d_finite_element_1() : ufc::finite_element()
+bloch_torrey3d_finite_element_1::bloch_torrey3d_finite_element_1() : ufc::finite_element()
 {
     // Do nothing
 }
 
 /// Destructor
-bloch_torrey_notime3d_finite_element_1::~bloch_torrey_notime3d_finite_element_1()
+bloch_torrey3d_finite_element_1::~bloch_torrey3d_finite_element_1()
 {
     // Do nothing
 }
 
 /// Return a string identifying the finite element
-const char* bloch_torrey_notime3d_finite_element_1::signature() const
+const char* bloch_torrey3d_finite_element_1::signature() const
 {
     return "FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None)";
 }
 
 /// Return the cell shape
-ufc::shape bloch_torrey_notime3d_finite_element_1::cell_shape() const
+ufc::shape bloch_torrey3d_finite_element_1::cell_shape() const
 {
     return ufc::tetrahedron;
 }
 
 #ifndef UFC_BACKWARD_COMPATIBILITY
 /// Return the topological dimension of the cell shape
-unsigned int bloch_torrey_notime3d_finite_element_1::topological_dimension() const
+unsigned int bloch_torrey3d_finite_element_1::topological_dimension() const
 {
     return 3;
 }
 
 /// Return the geometric dimension of the cell shape
-unsigned int bloch_torrey_notime3d_finite_element_1::geometric_dimension() const
+unsigned int bloch_torrey3d_finite_element_1::geometric_dimension() const
 {
     return 3;
 }
 #endif
 /// Return the dimension of the finite element function space
-unsigned int bloch_torrey_notime3d_finite_element_1::space_dimension() const
+unsigned int bloch_torrey3d_finite_element_1::space_dimension() const
 {
     return 4;
 }
 
 /// Return the rank of the value space
-unsigned int bloch_torrey_notime3d_finite_element_1::value_rank() const
+unsigned int bloch_torrey3d_finite_element_1::value_rank() const
 {
     return 0;
 }
 
 /// Return the dimension of the value space for axis i
-unsigned int bloch_torrey_notime3d_finite_element_1::value_dimension(unsigned int i) const
+unsigned int bloch_torrey3d_finite_element_1::value_dimension(unsigned int i) const
 {
     return 1;
 }
 
 /// Evaluate basis function i at given point in cell
-void bloch_torrey_notime3d_finite_element_1::evaluate_basis(unsigned int i,
+void bloch_torrey3d_finite_element_1::evaluate_basis(unsigned int i,
                                    double* values,
                                    const double* coordinates,
                                    const ufc::cell& c) const
@@ -733,7 +733,7 @@ void bloch_torrey_notime3d_finite_element_1::evaluate_basis(unsigned int i,
 }
 
 /// Evaluate all basis functions at given point in cell
-void bloch_torrey_notime3d_finite_element_1::evaluate_basis_all(double* values,
+void bloch_torrey3d_finite_element_1::evaluate_basis_all(double* values,
                                        const double* coordinates,
                                        const ufc::cell& c) const
 {
@@ -749,7 +749,7 @@ void bloch_torrey_notime3d_finite_element_1::evaluate_basis_all(double* values,
 }
 
 /// Evaluate order n derivatives of basis function i at given point in cell
-void bloch_torrey_notime3d_finite_element_1::evaluate_basis_derivatives(unsigned int i,
+void bloch_torrey3d_finite_element_1::evaluate_basis_derivatives(unsigned int i,
                                                unsigned int n,
                                                double* values,
                                                const double* coordinates,
@@ -1564,7 +1564,7 @@ void bloch_torrey_notime3d_finite_element_1::evaluate_basis_derivatives(unsigned
 }
 
 /// Evaluate order n derivatives of all basis functions at given point in cell
-void bloch_torrey_notime3d_finite_element_1::evaluate_basis_derivatives_all(unsigned int n,
+void bloch_torrey3d_finite_element_1::evaluate_basis_derivatives_all(unsigned int n,
                                                    double* values,
                                                    const double* coordinates,
                                                    const ufc::cell& c) const
@@ -1598,7 +1598,7 @@ void bloch_torrey_notime3d_finite_element_1::evaluate_basis_derivatives_all(unsi
 }
 
 /// Evaluate linear functional for dof i on the function f
-double bloch_torrey_notime3d_finite_element_1::evaluate_dof(unsigned int i,
+double bloch_torrey3d_finite_element_1::evaluate_dof(unsigned int i,
                                    const ufc::function& f,
                                    const ufc::cell& c) const
 {
@@ -1652,7 +1652,7 @@ double bloch_torrey_notime3d_finite_element_1::evaluate_dof(unsigned int i,
 }
 
 /// Evaluate linear functionals for all dofs on the function f
-void bloch_torrey_notime3d_finite_element_1::evaluate_dofs(double* values,
+void bloch_torrey3d_finite_element_1::evaluate_dofs(double* values,
                                   const ufc::function& f,
                                   const ufc::cell& c) const
 {
@@ -1685,7 +1685,7 @@ void bloch_torrey_notime3d_finite_element_1::evaluate_dofs(double* values,
 }
 
 /// Interpolate vertex values from dof values
-void bloch_torrey_notime3d_finite_element_1::interpolate_vertex_values(double* vertex_values,
+void bloch_torrey3d_finite_element_1::interpolate_vertex_values(double* vertex_values,
                                               const double* dof_values,
                                               const ufc::cell& c) const
 {
@@ -1698,7 +1698,7 @@ void bloch_torrey_notime3d_finite_element_1::interpolate_vertex_values(double* v
 
 #ifndef UFC_BACKWARD_COMPATIBILITY
 /// Map coordinate xhat from reference cell to coordinate x in cell
-void bloch_torrey_notime3d_finite_element_1::map_from_reference_cell(double* x,
+void bloch_torrey3d_finite_element_1::map_from_reference_cell(double* x,
                                             const double* xhat,
                                             const ufc::cell& c) const
 {
@@ -1706,7 +1706,7 @@ void bloch_torrey_notime3d_finite_element_1::map_from_reference_cell(double* x,
 }
 
 /// Map from coordinate x in cell to coordinate xhat in reference cell
-void bloch_torrey_notime3d_finite_element_1::map_to_reference_cell(double* xhat,
+void bloch_torrey3d_finite_element_1::map_to_reference_cell(double* xhat,
                                           const double* x,
                                           const ufc::cell& c) const
 {
@@ -1714,77 +1714,77 @@ void bloch_torrey_notime3d_finite_element_1::map_to_reference_cell(double* xhat,
 }
 #endif
 /// Return the number of sub elements (for a mixed element)
-unsigned int bloch_torrey_notime3d_finite_element_1::num_sub_elements() const
+unsigned int bloch_torrey3d_finite_element_1::num_sub_elements() const
 {
     return 0;
 }
 
 /// Create a new finite element for sub element i (for a mixed element)
-ufc::finite_element* bloch_torrey_notime3d_finite_element_1::create_sub_element(unsigned int i) const
+ufc::finite_element* bloch_torrey3d_finite_element_1::create_sub_element(unsigned int i) const
 {
     return 0;
 }
 
 #ifndef UFC_BACKWARD_COMPATIBILITY
 /// Create a new class instance
-ufc::finite_element* bloch_torrey_notime3d_finite_element_1::create() const
+ufc::finite_element* bloch_torrey3d_finite_element_1::create() const
 {
-    return new bloch_torrey_notime3d_finite_element_1();
+    return new bloch_torrey3d_finite_element_1();
 }
 #endif
 
 
 /// Constructor
-bloch_torrey_notime3d_finite_element_2::bloch_torrey_notime3d_finite_element_2() : ufc::finite_element()
+bloch_torrey3d_finite_element_2::bloch_torrey3d_finite_element_2() : ufc::finite_element()
 {
     // Do nothing
 }
 
 /// Destructor
-bloch_torrey_notime3d_finite_element_2::~bloch_torrey_notime3d_finite_element_2()
+bloch_torrey3d_finite_element_2::~bloch_torrey3d_finite_element_2()
 {
     // Do nothing
 }
 
 /// Return a string identifying the finite element
-const char* bloch_torrey_notime3d_finite_element_2::signature() const
+const char* bloch_torrey3d_finite_element_2::signature() const
 {
     return "MixedElement(*[FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None)], **{'value_shape': (4,) })";
 }
 
 /// Return the cell shape
-ufc::shape bloch_torrey_notime3d_finite_element_2::cell_shape() const
+ufc::shape bloch_torrey3d_finite_element_2::cell_shape() const
 {
     return ufc::tetrahedron;
 }
 
 #ifndef UFC_BACKWARD_COMPATIBILITY
 /// Return the topological dimension of the cell shape
-unsigned int bloch_torrey_notime3d_finite_element_2::topological_dimension() const
+unsigned int bloch_torrey3d_finite_element_2::topological_dimension() const
 {
     return 3;
 }
 
 /// Return the geometric dimension of the cell shape
-unsigned int bloch_torrey_notime3d_finite_element_2::geometric_dimension() const
+unsigned int bloch_torrey3d_finite_element_2::geometric_dimension() const
 {
     return 3;
 }
 #endif
 /// Return the dimension of the finite element function space
-unsigned int bloch_torrey_notime3d_finite_element_2::space_dimension() const
+unsigned int bloch_torrey3d_finite_element_2::space_dimension() const
 {
     return 16;
 }
 
 /// Return the rank of the value space
-unsigned int bloch_torrey_notime3d_finite_element_2::value_rank() const
+unsigned int bloch_torrey3d_finite_element_2::value_rank() const
 {
     return 1;
 }
 
 /// Return the dimension of the value space for axis i
-unsigned int bloch_torrey_notime3d_finite_element_2::value_dimension(unsigned int i) const
+unsigned int bloch_torrey3d_finite_element_2::value_dimension(unsigned int i) const
 {
     switch (i)
     {
@@ -1799,7 +1799,7 @@ unsigned int bloch_torrey_notime3d_finite_element_2::value_dimension(unsigned in
 }
 
 /// Evaluate basis function i at given point in cell
-void bloch_torrey_notime3d_finite_element_2::evaluate_basis(unsigned int i,
+void bloch_torrey3d_finite_element_2::evaluate_basis(unsigned int i,
                                    double* values,
                                    const double* coordinates,
                                    const ufc::cell& c) const
@@ -2337,7 +2337,7 @@ void bloch_torrey_notime3d_finite_element_2::evaluate_basis(unsigned int i,
 }
 
 /// Evaluate all basis functions at given point in cell
-void bloch_torrey_notime3d_finite_element_2::evaluate_basis_all(double* values,
+void bloch_torrey3d_finite_element_2::evaluate_basis_all(double* values,
                                        const double* coordinates,
                                        const ufc::cell& c) const
 {
@@ -2356,7 +2356,7 @@ void bloch_torrey_notime3d_finite_element_2::evaluate_basis_all(double* values,
 }
 
 /// Evaluate order n derivatives of basis function i at given point in cell
-void bloch_torrey_notime3d_finite_element_2::evaluate_basis_derivatives(unsigned int i,
+void bloch_torrey3d_finite_element_2::evaluate_basis_derivatives(unsigned int i,
                                                unsigned int n,
                                                double* values,
                                                const double* coordinates,
@@ -5235,7 +5235,7 @@ void bloch_torrey_notime3d_finite_element_2::evaluate_basis_derivatives(unsigned
 }
 
 /// Evaluate order n derivatives of all basis functions at given point in cell
-void bloch_torrey_notime3d_finite_element_2::evaluate_basis_derivatives_all(unsigned int n,
+void bloch_torrey3d_finite_element_2::evaluate_basis_derivatives_all(unsigned int n,
                                                    double* values,
                                                    const double* coordinates,
                                                    const ufc::cell& c) const
@@ -5269,7 +5269,7 @@ void bloch_torrey_notime3d_finite_element_2::evaluate_basis_derivatives_all(unsi
 }
 
 /// Evaluate linear functional for dof i on the function f
-double bloch_torrey_notime3d_finite_element_2::evaluate_dof(unsigned int i,
+double bloch_torrey3d_finite_element_2::evaluate_dof(unsigned int i,
                                    const ufc::function& f,
                                    const ufc::cell& c) const
 {
@@ -5431,7 +5431,7 @@ double bloch_torrey_notime3d_finite_element_2::evaluate_dof(unsigned int i,
 }
 
 /// Evaluate linear functionals for all dofs on the function f
-void bloch_torrey_notime3d_finite_element_2::evaluate_dofs(double* values,
+void bloch_torrey3d_finite_element_2::evaluate_dofs(double* values,
                                   const ufc::function& f,
                                   const ufc::cell& c) const
 {
@@ -5524,7 +5524,7 @@ void bloch_torrey_notime3d_finite_element_2::evaluate_dofs(double* values,
 }
 
 /// Interpolate vertex values from dof values
-void bloch_torrey_notime3d_finite_element_2::interpolate_vertex_values(double* vertex_values,
+void bloch_torrey3d_finite_element_2::interpolate_vertex_values(double* vertex_values,
                                               const double* dof_values,
                                               const ufc::cell& c) const
 {
@@ -5552,7 +5552,7 @@ void bloch_torrey_notime3d_finite_element_2::interpolate_vertex_values(double* v
 
 #ifndef UFC_BACKWARD_COMPATIBILITY
 /// Map coordinate xhat from reference cell to coordinate x in cell
-void bloch_torrey_notime3d_finite_element_2::map_from_reference_cell(double* x,
+void bloch_torrey3d_finite_element_2::map_from_reference_cell(double* x,
                                             const double* xhat,
                                             const ufc::cell& c) const
 {
@@ -5560,7 +5560,7 @@ void bloch_torrey_notime3d_finite_element_2::map_from_reference_cell(double* x,
 }
 
 /// Map from coordinate x in cell to coordinate xhat in reference cell
-void bloch_torrey_notime3d_finite_element_2::map_to_reference_cell(double* xhat,
+void bloch_torrey3d_finite_element_2::map_to_reference_cell(double* xhat,
                                           const double* x,
                                           const ufc::cell& c) const
 {
@@ -5568,34 +5568,34 @@ void bloch_torrey_notime3d_finite_element_2::map_to_reference_cell(double* xhat,
 }
 #endif
 /// Return the number of sub elements (for a mixed element)
-unsigned int bloch_torrey_notime3d_finite_element_2::num_sub_elements() const
+unsigned int bloch_torrey3d_finite_element_2::num_sub_elements() const
 {
     return 4;
 }
 
 /// Create a new finite element for sub element i (for a mixed element)
-ufc::finite_element* bloch_torrey_notime3d_finite_element_2::create_sub_element(unsigned int i) const
+ufc::finite_element* bloch_torrey3d_finite_element_2::create_sub_element(unsigned int i) const
 {
     switch (i)
     {
     case 0:
       {
-        return new bloch_torrey_notime3d_finite_element_1();
+        return new bloch_torrey3d_finite_element_1();
         break;
       }
     case 1:
       {
-        return new bloch_torrey_notime3d_finite_element_1();
+        return new bloch_torrey3d_finite_element_1();
         break;
       }
     case 2:
       {
-        return new bloch_torrey_notime3d_finite_element_1();
+        return new bloch_torrey3d_finite_element_1();
         break;
       }
     case 3:
       {
-        return new bloch_torrey_notime3d_finite_element_1();
+        return new bloch_torrey3d_finite_element_1();
         break;
       }
     }
@@ -5605,9 +5605,9 @@ ufc::finite_element* bloch_torrey_notime3d_finite_element_2::create_sub_element(
 
 #ifndef UFC_BACKWARD_COMPATIBILITY
 /// Create a new class instance
-ufc::finite_element* bloch_torrey_notime3d_finite_element_2::create() const
+ufc::finite_element* bloch_torrey3d_finite_element_2::create() const
 {
-    return new bloch_torrey_notime3d_finite_element_2();
+    return new bloch_torrey3d_finite_element_2();
 }
 #endif
 
@@ -5615,28 +5615,28 @@ ufc::finite_element* bloch_torrey_notime3d_finite_element_2::create() const
 
 
 #ifndef UFC_BACKWARD_COMPATIBILITY
-bloch_torrey_notime3d_dofmap_0::bloch_torrey_notime3d_dofmap_0() : ufc::dofmap()
+bloch_torrey3d_dofmap_0::bloch_torrey3d_dofmap_0() : ufc::dofmap()
 #else
-bloch_torrey_notime3d_dofmap_0::bloch_torrey_notime3d_dofmap_0() : ufc::dof_map()
+bloch_torrey3d_dofmap_0::bloch_torrey3d_dofmap_0() : ufc::dof_map()
 #endif
 {
     _global_dimension = 0;
 }
 
 /// Destructor
-bloch_torrey_notime3d_dofmap_0::~bloch_torrey_notime3d_dofmap_0()
+bloch_torrey3d_dofmap_0::~bloch_torrey3d_dofmap_0()
 {
     // Do nothing
 }
 
 /// Return a string identifying the dofmap
-const char* bloch_torrey_notime3d_dofmap_0::signature() const
+const char* bloch_torrey3d_dofmap_0::signature() const
 {
     return "FFC dofmap for FiniteElement('Discontinuous Lagrange', Cell('tetrahedron', Space(3)), 0, None)";
 }
 
 /// Return true iff mesh entities of topological dimension d are needed
-bool bloch_torrey_notime3d_dofmap_0::needs_mesh_entities(unsigned int d) const
+bool bloch_torrey3d_dofmap_0::needs_mesh_entities(unsigned int d) const
 {
     switch (d)
     {
@@ -5666,79 +5666,79 @@ bool bloch_torrey_notime3d_dofmap_0::needs_mesh_entities(unsigned int d) const
 }
 
 /// Initialize dofmap for mesh (return true iff init_cell() is needed)
-bool bloch_torrey_notime3d_dofmap_0::init_mesh(const ufc::mesh& m)
+bool bloch_torrey3d_dofmap_0::init_mesh(const ufc::mesh& m)
 {
     _global_dimension = m.num_entities[3];
     return false;
 }
 
 /// Initialize dofmap for given cell
-void bloch_torrey_notime3d_dofmap_0::init_cell(const ufc::mesh& m,
+void bloch_torrey3d_dofmap_0::init_cell(const ufc::mesh& m,
                               const ufc::cell& c)
 {
     // Do nothing
 }
 
 /// Finish initialization of dofmap for cells
-void bloch_torrey_notime3d_dofmap_0::init_cell_finalize()
+void bloch_torrey3d_dofmap_0::init_cell_finalize()
 {
     // Do nothing
 }
 
 #ifndef UFC_BACKWARD_COMPATIBILITY
 /// Return the topological dimension of the associated cell shape
-unsigned int bloch_torrey_notime3d_dofmap_0::topological_dimension() const
+unsigned int bloch_torrey3d_dofmap_0::topological_dimension() const
 {
     return 3;
 }
 
 /// Return the geometric dimension of the associated cell shape
-unsigned int bloch_torrey_notime3d_dofmap_0::geometric_dimension() const
+unsigned int bloch_torrey3d_dofmap_0::geometric_dimension() const
 {
     return 3;
 }
 #endif
 /// Return the dimension of the global finite element function space
-unsigned int bloch_torrey_notime3d_dofmap_0::global_dimension() const
+unsigned int bloch_torrey3d_dofmap_0::global_dimension() const
 {
     return _global_dimension;
 }
 
 #ifndef UFC_BACKWARD_COMPATIBILITY
 /// Return the dimension of the local finite element function space for a cell
-unsigned int bloch_torrey_notime3d_dofmap_0::local_dimension(const ufc::cell& c) const
+unsigned int bloch_torrey3d_dofmap_0::local_dimension(const ufc::cell& c) const
 {
     return 1;
 }
 
 /// Return the maximum dimension of the local finite element function space
-unsigned int bloch_torrey_notime3d_dofmap_0::max_local_dimension() const
+unsigned int bloch_torrey3d_dofmap_0::max_local_dimension() const
 {
     return 1;
 }
 #else
 
 /// Return the dimension of the local finite element function space for a cell
-unsigned int bloch_torrey_notime3d_dofmap_0::local_dimension() const
+unsigned int bloch_torrey3d_dofmap_0::local_dimension() const
 {
     return 1;
 }
 
 /// Return the maximum dimension of the local finite element function space
-unsigned int bloch_torrey_notime3d_dofmap_0::geometric_dimension() const
+unsigned int bloch_torrey3d_dofmap_0::geometric_dimension() const
 {
     return 3;
 }
 
 #endif
 /// Return the number of dofs on each cell facet
-unsigned int bloch_torrey_notime3d_dofmap_0::num_facet_dofs() const
+unsigned int bloch_torrey3d_dofmap_0::num_facet_dofs() const
 {
     return 0;
 }
 
 /// Return the number of dofs associated with each cell entity of dimension d
-unsigned int bloch_torrey_notime3d_dofmap_0::num_entity_dofs(unsigned int d) const
+unsigned int bloch_torrey3d_dofmap_0::num_entity_dofs(unsigned int d) const
 {
     switch (d)
     {
@@ -5768,7 +5768,7 @@ unsigned int bloch_torrey_notime3d_dofmap_0::num_entity_dofs(unsigned int d) con
 }
 
 /// Tabulate the local-to-global mapping of dofs on a cell
-void bloch_torrey_notime3d_dofmap_0::tabulate_dofs(unsigned int* dofs,
+void bloch_torrey3d_dofmap_0::tabulate_dofs(unsigned int* dofs,
                                   const ufc::mesh& m,
                                   const ufc::cell& c) const
 {
@@ -5776,7 +5776,7 @@ void bloch_torrey_notime3d_dofmap_0::tabulate_dofs(unsigned int* dofs,
 }
 
 /// Tabulate the local-to-local mapping from facet dofs to cell dofs
-void bloch_torrey_notime3d_dofmap_0::tabulate_facet_dofs(unsigned int* dofs,
+void bloch_torrey3d_dofmap_0::tabulate_facet_dofs(unsigned int* dofs,
                                         unsigned int facet) const
 {
     switch (facet)
@@ -5806,7 +5806,7 @@ void bloch_torrey_notime3d_dofmap_0::tabulate_facet_dofs(unsigned int* dofs,
 }
 
 /// Tabulate the local-to-local mapping of dofs on entity (d, i)
-void bloch_torrey_notime3d_dofmap_0::tabulate_entity_dofs(unsigned int* dofs,
+void bloch_torrey3d_dofmap_0::tabulate_entity_dofs(unsigned int* dofs,
                                   unsigned int d, unsigned int i) const
 {
     if (d > 3)
@@ -5846,7 +5846,7 @@ void bloch_torrey_notime3d_dofmap_0::tabulate_entity_dofs(unsigned int* dofs,
 }
 
 /// Tabulate the coordinates of all dofs on a cell
-void bloch_torrey_notime3d_dofmap_0::tabulate_coordinates(double** coordinates,
+void bloch_torrey3d_dofmap_0::tabulate_coordinates(double** coordinates,
                                          const ufc::cell& c) const
 {
     const double * const * x = c.coordinates;
@@ -5858,32 +5858,32 @@ void bloch_torrey_notime3d_dofmap_0::tabulate_coordinates(double** coordinates,
 
 #ifndef UFC_BACKWARD_COMPATIBILITY
 /// Return the number of sub dofmaps (for a mixed element)
-unsigned int bloch_torrey_notime3d_dofmap_0::num_sub_dofmaps() const
+unsigned int bloch_torrey3d_dofmap_0::num_sub_dofmaps() const
 {
     return 0;
 }
 
 /// Create a new dofmap for sub dofmap i (for a mixed element)
-ufc::dofmap* bloch_torrey_notime3d_dofmap_0::create_sub_dofmap(unsigned int i) const
+ufc::dofmap* bloch_torrey3d_dofmap_0::create_sub_dofmap(unsigned int i) const
 {
     return 0;
 }
 
 /// Create a new class instance
-ufc::dofmap* bloch_torrey_notime3d_dofmap_0::create() const
+ufc::dofmap* bloch_torrey3d_dofmap_0::create() const
 {
-    return new bloch_torrey_notime3d_dofmap_0();
+    return new bloch_torrey3d_dofmap_0();
 }
 #else
 
 /// Return the number of sub dofmaps (for a mixed element)
-unsigned int bloch_torrey_notime3d_dofmap_0::num_sub_dof_maps() const
+unsigned int bloch_torrey3d_dofmap_0::num_sub_dof_maps() const
 {
     return 0;
 }
 
 /// Create a new dofmap for sub dofmap i (for a mixed element)
-ufc::dof_map* bloch_torrey_notime3d_dofmap_0::create_sub_dof_map(unsigned int i) const
+ufc::dof_map* bloch_torrey3d_dofmap_0::create_sub_dof_map(unsigned int i) const
 {
     return 0;
 }
@@ -5894,28 +5894,28 @@ ufc::dof_map* bloch_torrey_notime3d_dofmap_0::create_sub_dof_map(unsigned int i)
 
 
 #ifndef UFC_BACKWARD_COMPATIBILITY
-bloch_torrey_notime3d_dofmap_1::bloch_torrey_notime3d_dofmap_1() : ufc::dofmap()
+bloch_torrey3d_dofmap_1::bloch_torrey3d_dofmap_1() : ufc::dofmap()
 #else
-bloch_torrey_notime3d_dofmap_1::bloch_torrey_notime3d_dofmap_1() : ufc::dof_map()
+bloch_torrey3d_dofmap_1::bloch_torrey3d_dofmap_1() : ufc::dof_map()
 #endif
 {
     _global_dimension = 0;
 }
 
 /// Destructor
-bloch_torrey_notime3d_dofmap_1::~bloch_torrey_notime3d_dofmap_1()
+bloch_torrey3d_dofmap_1::~bloch_torrey3d_dofmap_1()
 {
     // Do nothing
 }
 
 /// Return a string identifying the dofmap
-const char* bloch_torrey_notime3d_dofmap_1::signature() const
+const char* bloch_torrey3d_dofmap_1::signature() const
 {
     return "FFC dofmap for FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None)";
 }
 
 /// Return true iff mesh entities of topological dimension d are needed
-bool bloch_torrey_notime3d_dofmap_1::needs_mesh_entities(unsigned int d) const
+bool bloch_torrey3d_dofmap_1::needs_mesh_entities(unsigned int d) const
 {
     switch (d)
     {
@@ -5945,79 +5945,79 @@ bool bloch_torrey_notime3d_dofmap_1::needs_mesh_entities(unsigned int d) const
 }
 
 /// Initialize dofmap for mesh (return true iff init_cell() is needed)
-bool bloch_torrey_notime3d_dofmap_1::init_mesh(const ufc::mesh& m)
+bool bloch_torrey3d_dofmap_1::init_mesh(const ufc::mesh& m)
 {
     _global_dimension = m.num_entities[0];
     return false;
 }
 
 /// Initialize dofmap for given cell
-void bloch_torrey_notime3d_dofmap_1::init_cell(const ufc::mesh& m,
+void bloch_torrey3d_dofmap_1::init_cell(const ufc::mesh& m,
                               const ufc::cell& c)
 {
     // Do nothing
 }
 
 /// Finish initialization of dofmap for cells
-void bloch_torrey_notime3d_dofmap_1::init_cell_finalize()
+void bloch_torrey3d_dofmap_1::init_cell_finalize()
 {
     // Do nothing
 }
 
 #ifndef UFC_BACKWARD_COMPATIBILITY
 /// Return the topological dimension of the associated cell shape
-unsigned int bloch_torrey_notime3d_dofmap_1::topological_dimension() const
+unsigned int bloch_torrey3d_dofmap_1::topological_dimension() const
 {
     return 3;
 }
 
 /// Return the geometric dimension of the associated cell shape
-unsigned int bloch_torrey_notime3d_dofmap_1::geometric_dimension() const
+unsigned int bloch_torrey3d_dofmap_1::geometric_dimension() const
 {
     return 3;
 }
 #endif
 /// Return the dimension of the global finite element function space
-unsigned int bloch_torrey_notime3d_dofmap_1::global_dimension() const
+unsigned int bloch_torrey3d_dofmap_1::global_dimension() const
 {
     return _global_dimension;
 }
 
 #ifndef UFC_BACKWARD_COMPATIBILITY
 /// Return the dimension of the local finite element function space for a cell
-unsigned int bloch_torrey_notime3d_dofmap_1::local_dimension(const ufc::cell& c) const
+unsigned int bloch_torrey3d_dofmap_1::local_dimension(const ufc::cell& c) const
 {
     return 4;
 }
 
 /// Return the maximum dimension of the local finite element function space
-unsigned int bloch_torrey_notime3d_dofmap_1::max_local_dimension() const
+unsigned int bloch_torrey3d_dofmap_1::max_local_dimension() const
 {
     return 4;
 }
 #else
 
 /// Return the dimension of the local finite element function space for a cell
-unsigned int bloch_torrey_notime3d_dofmap_1::local_dimension() const
+unsigned int bloch_torrey3d_dofmap_1::local_dimension() const
 {
     return 4;
 }
 
 /// Return the maximum dimension of the local finite element function space
-unsigned int bloch_torrey_notime3d_dofmap_1::geometric_dimension() const
+unsigned int bloch_torrey3d_dofmap_1::geometric_dimension() const
 {
     return 3;
 }
 
 #endif
 /// Return the number of dofs on each cell facet
-unsigned int bloch_torrey_notime3d_dofmap_1::num_facet_dofs() const
+unsigned int bloch_torrey3d_dofmap_1::num_facet_dofs() const
 {
     return 3;
 }
 
 /// Return the number of dofs associated with each cell entity of dimension d
-unsigned int bloch_torrey_notime3d_dofmap_1::num_entity_dofs(unsigned int d) const
+unsigned int bloch_torrey3d_dofmap_1::num_entity_dofs(unsigned int d) const
 {
     switch (d)
     {
@@ -6047,7 +6047,7 @@ unsigned int bloch_torrey_notime3d_dofmap_1::num_entity_dofs(unsigned int d) con
 }
 
 /// Tabulate the local-to-global mapping of dofs on a cell
-void bloch_torrey_notime3d_dofmap_1::tabulate_dofs(unsigned int* dofs,
+void bloch_torrey3d_dofmap_1::tabulate_dofs(unsigned int* dofs,
                                   const ufc::mesh& m,
                                   const ufc::cell& c) const
 {
@@ -6058,7 +6058,7 @@ void bloch_torrey_notime3d_dofmap_1::tabulate_dofs(unsigned int* dofs,
 }
 
 /// Tabulate the local-to-local mapping from facet dofs to cell dofs
-void bloch_torrey_notime3d_dofmap_1::tabulate_facet_dofs(unsigned int* dofs,
+void bloch_torrey3d_dofmap_1::tabulate_facet_dofs(unsigned int* dofs,
                                         unsigned int facet) const
 {
     switch (facet)
@@ -6096,7 +6096,7 @@ void bloch_torrey_notime3d_dofmap_1::tabulate_facet_dofs(unsigned int* dofs,
 }
 
 /// Tabulate the local-to-local mapping of dofs on entity (d, i)
-void bloch_torrey_notime3d_dofmap_1::tabulate_entity_dofs(unsigned int* dofs,
+void bloch_torrey3d_dofmap_1::tabulate_entity_dofs(unsigned int* dofs,
                                   unsigned int d, unsigned int i) const
 {
     if (d > 3)
@@ -6159,7 +6159,7 @@ void bloch_torrey_notime3d_dofmap_1::tabulate_entity_dofs(unsigned int* dofs,
 }
 
 /// Tabulate the coordinates of all dofs on a cell
-void bloch_torrey_notime3d_dofmap_1::tabulate_coordinates(double** coordinates,
+void bloch_torrey3d_dofmap_1::tabulate_coordinates(double** coordinates,
                                          const ufc::cell& c) const
 {
     const double * const * x = c.coordinates;
@@ -6180,32 +6180,32 @@ void bloch_torrey_notime3d_dofmap_1::tabulate_coordinates(double** coordinates,
 
 #ifndef UFC_BACKWARD_COMPATIBILITY
 /// Return the number of sub dofmaps (for a mixed element)
-unsigned int bloch_torrey_notime3d_dofmap_1::num_sub_dofmaps() const
+unsigned int bloch_torrey3d_dofmap_1::num_sub_dofmaps() const
 {
     return 0;
 }
 
 /// Create a new dofmap for sub dofmap i (for a mixed element)
-ufc::dofmap* bloch_torrey_notime3d_dofmap_1::create_sub_dofmap(unsigned int i) const
+ufc::dofmap* bloch_torrey3d_dofmap_1::create_sub_dofmap(unsigned int i) const
 {
     return 0;
 }
 
 /// Create a new class instance
-ufc::dofmap* bloch_torrey_notime3d_dofmap_1::create() const
+ufc::dofmap* bloch_torrey3d_dofmap_1::create() const
 {
-    return new bloch_torrey_notime3d_dofmap_1();
+    return new bloch_torrey3d_dofmap_1();
 }
 #else
 
 /// Return the number of sub dofmaps (for a mixed element)
-unsigned int bloch_torrey_notime3d_dofmap_1::num_sub_dof_maps() const
+unsigned int bloch_torrey3d_dofmap_1::num_sub_dof_maps() const
 {
     return 0;
 }
 
 /// Create a new dofmap for sub dofmap i (for a mixed element)
-ufc::dof_map* bloch_torrey_notime3d_dofmap_1::create_sub_dof_map(unsigned int i) const
+ufc::dof_map* bloch_torrey3d_dofmap_1::create_sub_dof_map(unsigned int i) const
 {
     return 0;
 }
@@ -6216,28 +6216,28 @@ ufc::dof_map* bloch_torrey_notime3d_dofmap_1::create_sub_dof_map(unsigned int i)
 
 
 #ifndef UFC_BACKWARD_COMPATIBILITY
-bloch_torrey_notime3d_dofmap_2::bloch_torrey_notime3d_dofmap_2() : ufc::dofmap()
+bloch_torrey3d_dofmap_2::bloch_torrey3d_dofmap_2() : ufc::dofmap()
 #else
-bloch_torrey_notime3d_dofmap_2::bloch_torrey_notime3d_dofmap_2() : ufc::dof_map()
+bloch_torrey3d_dofmap_2::bloch_torrey3d_dofmap_2() : ufc::dof_map()
 #endif
 {
     _global_dimension = 0;
 }
 
 /// Destructor
-bloch_torrey_notime3d_dofmap_2::~bloch_torrey_notime3d_dofmap_2()
+bloch_torrey3d_dofmap_2::~bloch_torrey3d_dofmap_2()
 {
     // Do nothing
 }
 
 /// Return a string identifying the dofmap
-const char* bloch_torrey_notime3d_dofmap_2::signature() const
+const char* bloch_torrey3d_dofmap_2::signature() const
 {
     return "FFC dofmap for MixedElement(*[FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None)], **{'value_shape': (4,) })";
 }
 
 /// Return true iff mesh entities of topological dimension d are needed
-bool bloch_torrey_notime3d_dofmap_2::needs_mesh_entities(unsigned int d) const
+bool bloch_torrey3d_dofmap_2::needs_mesh_entities(unsigned int d) const
 {
     switch (d)
     {
@@ -6267,79 +6267,79 @@ bool bloch_torrey_notime3d_dofmap_2::needs_mesh_entities(unsigned int d) const
 }
 
 /// Initialize dofmap for mesh (return true iff init_cell() is needed)
-bool bloch_torrey_notime3d_dofmap_2::init_mesh(const ufc::mesh& m)
+bool bloch_torrey3d_dofmap_2::init_mesh(const ufc::mesh& m)
 {
     _global_dimension = 4*m.num_entities[0];
     return false;
 }
 
 /// Initialize dofmap for given cell
-void bloch_torrey_notime3d_dofmap_2::init_cell(const ufc::mesh& m,
+void bloch_torrey3d_dofmap_2::init_cell(const ufc::mesh& m,
                               const ufc::cell& c)
 {
     // Do nothing
 }
 
 /// Finish initialization of dofmap for cells
-void bloch_torrey_notime3d_dofmap_2::init_cell_finalize()
+void bloch_torrey3d_dofmap_2::init_cell_finalize()
 {
     // Do nothing
 }
 
 #ifndef UFC_BACKWARD_COMPATIBILITY
 /// Return the topological dimension of the associated cell shape
-unsigned int bloch_torrey_notime3d_dofmap_2::topological_dimension() const
+unsigned int bloch_torrey3d_dofmap_2::topological_dimension() const
 {
     return 3;
 }
 
 /// Return the geometric dimension of the associated cell shape
-unsigned int bloch_torrey_notime3d_dofmap_2::geometric_dimension() const
+unsigned int bloch_torrey3d_dofmap_2::geometric_dimension() const
 {
     return 3;
 }
 #endif
 /// Return the dimension of the global finite element function space
-unsigned int bloch_torrey_notime3d_dofmap_2::global_dimension() const
+unsigned int bloch_torrey3d_dofmap_2::global_dimension() const
 {
     return _global_dimension;
 }
 
 #ifndef UFC_BACKWARD_COMPATIBILITY
 /// Return the dimension of the local finite element function space for a cell
-unsigned int bloch_torrey_notime3d_dofmap_2::local_dimension(const ufc::cell& c) const
+unsigned int bloch_torrey3d_dofmap_2::local_dimension(const ufc::cell& c) const
 {
     return 16;
 }
 
 /// Return the maximum dimension of the local finite element function space
-unsigned int bloch_torrey_notime3d_dofmap_2::max_local_dimension() const
+unsigned int bloch_torrey3d_dofmap_2::max_local_dimension() const
 {
     return 16;
 }
 #else
 
 /// Return the dimension of the local finite element function space for a cell
-unsigned int bloch_torrey_notime3d_dofmap_2::local_dimension() const
+unsigned int bloch_torrey3d_dofmap_2::local_dimension() const
 {
     return 16;
 }
 
 /// Return the maximum dimension of the local finite element function space
-unsigned int bloch_torrey_notime3d_dofmap_2::geometric_dimension() const
+unsigned int bloch_torrey3d_dofmap_2::geometric_dimension() const
 {
     return 3;
 }
 
 #endif
 /// Return the number of dofs on each cell facet
-unsigned int bloch_torrey_notime3d_dofmap_2::num_facet_dofs() const
+unsigned int bloch_torrey3d_dofmap_2::num_facet_dofs() const
 {
     return 12;
 }
 
 /// Return the number of dofs associated with each cell entity of dimension d
-unsigned int bloch_torrey_notime3d_dofmap_2::num_entity_dofs(unsigned int d) const
+unsigned int bloch_torrey3d_dofmap_2::num_entity_dofs(unsigned int d) const
 {
     switch (d)
     {
@@ -6369,7 +6369,7 @@ unsigned int bloch_torrey_notime3d_dofmap_2::num_entity_dofs(unsigned int d) con
 }
 
 /// Tabulate the local-to-global mapping of dofs on a cell
-void bloch_torrey_notime3d_dofmap_2::tabulate_dofs(unsigned int* dofs,
+void bloch_torrey3d_dofmap_2::tabulate_dofs(unsigned int* dofs,
                                   const ufc::mesh& m,
                                   const ufc::cell& c) const
 {
@@ -6397,7 +6397,7 @@ void bloch_torrey_notime3d_dofmap_2::tabulate_dofs(unsigned int* dofs,
 }
 
 /// Tabulate the local-to-local mapping from facet dofs to cell dofs
-void bloch_torrey_notime3d_dofmap_2::tabulate_facet_dofs(unsigned int* dofs,
+void bloch_torrey3d_dofmap_2::tabulate_facet_dofs(unsigned int* dofs,
                                         unsigned int facet) const
 {
     switch (facet)
@@ -6471,7 +6471,7 @@ void bloch_torrey_notime3d_dofmap_2::tabulate_facet_dofs(unsigned int* dofs,
 }
 
 /// Tabulate the local-to-local mapping of dofs on entity (d, i)
-void bloch_torrey_notime3d_dofmap_2::tabulate_entity_dofs(unsigned int* dofs,
+void bloch_torrey3d_dofmap_2::tabulate_entity_dofs(unsigned int* dofs,
                                   unsigned int d, unsigned int i) const
 {
     if (d > 3)
@@ -6546,7 +6546,7 @@ void bloch_torrey_notime3d_dofmap_2::tabulate_entity_dofs(unsigned int* dofs,
 }
 
 /// Tabulate the coordinates of all dofs on a cell
-void bloch_torrey_notime3d_dofmap_2::tabulate_coordinates(double** coordinates,
+void bloch_torrey3d_dofmap_2::tabulate_coordinates(double** coordinates,
                                          const ufc::cell& c) const
 {
     const double * const * x = c.coordinates;
@@ -6603,34 +6603,34 @@ void bloch_torrey_notime3d_dofmap_2::tabulate_coordinates(double** coordinates,
 
 #ifndef UFC_BACKWARD_COMPATIBILITY
 /// Return the number of sub dofmaps (for a mixed element)
-unsigned int bloch_torrey_notime3d_dofmap_2::num_sub_dofmaps() const
+unsigned int bloch_torrey3d_dofmap_2::num_sub_dofmaps() const
 {
     return 4;
 }
 
 /// Create a new dofmap for sub dofmap i (for a mixed element)
-ufc::dofmap* bloch_torrey_notime3d_dofmap_2::create_sub_dofmap(unsigned int i) const
+ufc::dofmap* bloch_torrey3d_dofmap_2::create_sub_dofmap(unsigned int i) const
 {
     switch (i)
     {
     case 0:
       {
-        return new bloch_torrey_notime3d_dofmap_1();
+        return new bloch_torrey3d_dofmap_1();
         break;
       }
     case 1:
       {
-        return new bloch_torrey_notime3d_dofmap_1();
+        return new bloch_torrey3d_dofmap_1();
         break;
       }
     case 2:
       {
-        return new bloch_torrey_notime3d_dofmap_1();
+        return new bloch_torrey3d_dofmap_1();
         break;
       }
     case 3:
       {
-        return new bloch_torrey_notime3d_dofmap_1();
+        return new bloch_torrey3d_dofmap_1();
         break;
       }
     }
@@ -6639,41 +6639,41 @@ ufc::dofmap* bloch_torrey_notime3d_dofmap_2::create_sub_dofmap(unsigned int i) c
 }
 
 /// Create a new class instance
-ufc::dofmap* bloch_torrey_notime3d_dofmap_2::create() const
+ufc::dofmap* bloch_torrey3d_dofmap_2::create() const
 {
-    return new bloch_torrey_notime3d_dofmap_2();
+    return new bloch_torrey3d_dofmap_2();
 }
 #else
 
 /// Return the number of sub dofmaps (for a mixed element)
-unsigned int bloch_torrey_notime3d_dofmap_2::num_sub_dof_maps() const
+unsigned int bloch_torrey3d_dofmap_2::num_sub_dof_maps() const
 {
     return 4;
 }
 
 /// Create a new dofmap for sub dofmap i (for a mixed element)
-ufc::dof_map* bloch_torrey_notime3d_dofmap_2::create_sub_dof_map(unsigned int i) const
+ufc::dof_map* bloch_torrey3d_dofmap_2::create_sub_dof_map(unsigned int i) const
 {
     switch (i)
     {
     case 0:
       {
-        return new bloch_torrey_notime3d_dofmap_1();
+        return new bloch_torrey3d_dofmap_1();
         break;
       }
     case 1:
       {
-        return new bloch_torrey_notime3d_dofmap_1();
+        return new bloch_torrey3d_dofmap_1();
         break;
       }
     case 2:
       {
-        return new bloch_torrey_notime3d_dofmap_1();
+        return new bloch_torrey3d_dofmap_1();
         break;
       }
     case 3:
       {
-        return new bloch_torrey_notime3d_dofmap_1();
+        return new bloch_torrey3d_dofmap_1();
         break;
       }
     }
@@ -6684,19 +6684,19 @@ ufc::dof_map* bloch_torrey_notime3d_dofmap_2::create_sub_dof_map(unsigned int i)
 #endif
 
 /// Constructor
-bloch_torrey_notime3d_cell_integral_0_0::bloch_torrey_notime3d_cell_integral_0_0() : ufc::cell_integral()
+bloch_torrey3d_cell_integral_0_0::bloch_torrey3d_cell_integral_0_0() : ufc::cell_integral()
 {
     // Do nothing
 }
 
 /// Destructor
-bloch_torrey_notime3d_cell_integral_0_0::~bloch_torrey_notime3d_cell_integral_0_0()
+bloch_torrey3d_cell_integral_0_0::~bloch_torrey3d_cell_integral_0_0()
 {
     // Do nothing
 }
 
 /// Tabulate the tensor for the contribution from a local cell
-void bloch_torrey_notime3d_cell_integral_0_0::tabulate_tensor(double* A,
+void bloch_torrey3d_cell_integral_0_0::tabulate_tensor(double* A,
                                     const double * const * w,
                                     const ufc::cell& c) const
 {
@@ -6750,25 +6750,35 @@ void bloch_torrey_notime3d_cell_integral_0_0::tabulate_tensor(double* A,
     // Facet Area (divide by two because 'det' is scaled by area of reference triangle).
     
     // Array of quadrature weights.
-    static const double W14[14] = {0.00317460317460317, 0.00317460317460317, 0.00317460317460317, 0.00317460317460317, 0.00317460317460317, 0.00317460317460317, 0.0147649707904968, 0.0147649707904968, 0.0147649707904968, 0.0147649707904968, 0.0221397911142651, 0.0221397911142651, 0.0221397911142651, 0.0221397911142651};
-    // Quadrature points on the UFC reference element: (0.0, 0.5, 0.5), (0.5, 0.0, 0.5), (0.5, 0.5, 0.0), (0.5, 0.0, 0.0), (0.0, 0.5, 0.0), (0.0, 0.0, 0.5), (0.698419704324387, 0.100526765225204, 0.100526765225204), (0.100526765225204, 0.100526765225204, 0.100526765225204), (0.100526765225204, 0.100526765225204, 0.698419704324387), (0.100526765225204, 0.698419704324387, 0.100526765225204), (0.0568813795204234, 0.314372873493192, 0.314372873493192), (0.314372873493192, 0.314372873493192, 0.314372873493192), (0.314372873493192, 0.314372873493192, 0.0568813795204234), (0.314372873493192, 0.0568813795204234, 0.314372873493192)
+    static const double W24[24] = {0.00665379170969465, 0.00665379170969465, 0.00665379170969465, 0.00665379170969465, 0.00167953517588678, 0.00167953517588678, 0.00167953517588678, 0.00167953517588678, 0.0092261969239424, 0.0092261969239424, 0.0092261969239424, 0.0092261969239424, 0.00803571428571428, 0.00803571428571428, 0.00803571428571428, 0.00803571428571428, 0.00803571428571428, 0.00803571428571428, 0.00803571428571428, 0.00803571428571428, 0.00803571428571428, 0.00803571428571428, 0.00803571428571428, 0.00803571428571428};
+    // Quadrature points on the UFC reference element: (0.356191386222545, 0.214602871259152, 0.214602871259152), (0.214602871259152, 0.214602871259152, 0.214602871259152), (0.214602871259152, 0.214602871259152, 0.356191386222545), (0.214602871259152, 0.356191386222545, 0.214602871259152), (0.877978124396166, 0.0406739585346113, 0.0406739585346113), (0.0406739585346113, 0.0406739585346113, 0.0406739585346113), (0.0406739585346113, 0.0406739585346113, 0.877978124396166), (0.0406739585346113, 0.877978124396166, 0.0406739585346113), (0.0329863295731731, 0.322337890142276, 0.322337890142276), (0.322337890142276, 0.322337890142276, 0.322337890142276), (0.322337890142276, 0.322337890142276, 0.0329863295731731), (0.322337890142276, 0.0329863295731731, 0.322337890142276), (0.269672331458316, 0.0636610018750175, 0.0636610018750175), (0.0636610018750175, 0.269672331458316, 0.0636610018750175), (0.0636610018750175, 0.0636610018750175, 0.269672331458316), (0.603005664791649, 0.0636610018750175, 0.0636610018750175), (0.0636610018750175, 0.603005664791649, 0.0636610018750175), (0.0636610018750175, 0.0636610018750175, 0.603005664791649), (0.0636610018750175, 0.269672331458316, 0.603005664791649), (0.269672331458316, 0.603005664791649, 0.0636610018750175), (0.603005664791649, 0.0636610018750175, 0.269672331458316), (0.0636610018750175, 0.603005664791649, 0.269672331458316), (0.269672331458316, 0.0636610018750175, 0.603005664791649), (0.603005664791649, 0.269672331458316, 0.0636610018750175)
     
     // Value of basis functions at quadrature points.
-    static const double FE0[14][4] = \
-    {{0.0, 0.0, 0.5, 0.5},
-    {0.0, 0.5, 0.0, 0.5},
-    {0.0, 0.5, 0.5, 0.0},
-    {0.5, 0.5, 0.0, 0.0},
-    {0.5, 0.0, 0.5, 0.0},
-    {0.5, 0.0, 0.0, 0.5},
-    {0.100526765225205, 0.698419704324386, 0.100526765225205, 0.100526765225205},
-    {0.698419704324387, 0.100526765225204, 0.100526765225205, 0.100526765225205},
-    {0.100526765225205, 0.100526765225204, 0.100526765225205, 0.698419704324386},
-    {0.100526765225205, 0.100526765225204, 0.698419704324386, 0.100526765225205},
-    {0.314372873493192, 0.0568813795204234, 0.314372873493192, 0.314372873493192},
-    {0.0568813795204235, 0.314372873493192, 0.314372873493192, 0.314372873493192},
-    {0.314372873493192, 0.314372873493192, 0.314372873493192, 0.0568813795204234},
-    {0.314372873493192, 0.314372873493192, 0.0568813795204235, 0.314372873493192}};
+    static const double FE0[24][4] = \
+    {{0.214602871259152, 0.356191386222545, 0.214602871259152, 0.214602871259152},
+    {0.356191386222545, 0.214602871259152, 0.214602871259152, 0.214602871259152},
+    {0.214602871259152, 0.214602871259152, 0.214602871259152, 0.356191386222545},
+    {0.214602871259152, 0.214602871259152, 0.356191386222545, 0.214602871259152},
+    {0.0406739585346115, 0.877978124396166, 0.0406739585346114, 0.0406739585346113},
+    {0.877978124396166, 0.0406739585346112, 0.0406739585346114, 0.0406739585346113},
+    {0.0406739585346115, 0.0406739585346113, 0.0406739585346113, 0.877978124396166},
+    {0.0406739585346115, 0.0406739585346113, 0.877978124396166, 0.0406739585346113},
+    {0.322337890142276, 0.0329863295731731, 0.322337890142276, 0.322337890142276},
+    {0.0329863295731729, 0.322337890142276, 0.322337890142276, 0.322337890142276},
+    {0.322337890142276, 0.322337890142276, 0.322337890142276, 0.0329863295731731},
+    {0.322337890142276, 0.322337890142276, 0.0329863295731731, 0.322337890142276},
+    {0.603005664791649, 0.269672331458316, 0.0636610018750175, 0.0636610018750175},
+    {0.603005664791649, 0.0636610018750174, 0.269672331458316, 0.0636610018750175},
+    {0.603005664791649, 0.0636610018750175, 0.0636610018750175, 0.269672331458316},
+    {0.269672331458316, 0.603005664791649, 0.0636610018750175, 0.0636610018750175},
+    {0.269672331458316, 0.0636610018750175, 0.603005664791649, 0.0636610018750175},
+    {0.269672331458316, 0.0636610018750175, 0.0636610018750175, 0.603005664791649},
+    {0.0636610018750176, 0.0636610018750175, 0.269672331458316, 0.603005664791649},
+    {0.0636610018750176, 0.269672331458316, 0.603005664791649, 0.0636610018750175},
+    {0.0636610018750177, 0.603005664791649, 0.0636610018750175, 0.269672331458316},
+    {0.0636610018750176, 0.0636610018750175, 0.603005664791649, 0.269672331458316},
+    {0.0636610018750177, 0.269672331458316, 0.0636610018750175, 0.603005664791649},
+    {0.0636610018750177, 0.603005664791649, 0.269672331458316, 0.0636610018750175}};
     
     // Array of non-zero columns
     static const unsigned int nzc4[4] = {4, 5, 6, 7};
@@ -6782,8 +6792,18 @@ void bloch_torrey_notime3d_cell_integral_0_0::tabulate_tensor(double* A,
     // Array of non-zero columns
     static const unsigned int nzc8[4] = {8, 9, 10, 11};
     
-    static const double FE2_C0_D001[14][2] = \
+    static const double FE2_C0_D001[24][2] = \
     {{-1.0, 1.0},
+    {-1.0, 1.0},
+    {-1.0, 1.0},
+    {-1.0, 1.0},
+    {-1.0, 1.0},
+    {-1.0, 1.0},
+    {-1.0, 1.0},
+    {-1.0, 1.0},
+    {-1.0, 1.0},
+    {-1.0, 1.0},
+    {-1.0, 1.0},
     {-1.0, 1.0},
     {-1.0, 1.0},
     {-1.0, 1.0},
@@ -6839,33 +6859,31 @@ void bloch_torrey_notime3d_cell_integral_0_0::tabulate_tensor(double* A,
     {
       A[r] = 0.0;
     }// end loop over 'r'
-    // Number of operations to compute geometry constants: 186.
-    double G[18];
-    G[0] = det*(0.999999*w[0][0]*(K_10*K_10 + K_11*K_11 + K_12*K_12) + 1e-06*(K_10*K_10 + K_11*K_11 + K_12*K_12));
-    G[1] = det*(0.999999*w[0][0]*(K_00*K_10 + K_01*K_11 + K_02*K_12) + 1e-06*(K_00*K_10 + K_01*K_11 + K_02*K_12));
-    G[2] = det*(0.999999*w[0][0]*(K_10*K_20 + K_11*K_21 + K_12*K_22) + 1e-06*(K_10*K_20 + K_11*K_21 + K_12*K_22));
-    G[3] = det*(0.999999*w[0][0]*(K_00*K_00 + K_01*K_01 + K_02*K_02) + 1e-06*(K_00*K_00 + K_01*K_01 + K_02*K_02));
-    G[4] = det*(0.999999*w[0][0]*(K_00*K_20 + K_01*K_21 + K_02*K_22) + 1e-06*(K_00*K_20 + K_01*K_21 + K_02*K_22));
-    G[5] = det*(0.999999*w[0][0]*(K_20*K_20 + K_21*K_21 + K_22*K_22) + 1e-06*(K_20*K_20 + K_21*K_21 + K_22*K_22));
-    G[6] = det*(K_20*K_20 + K_21*K_21 + K_22*K_22-0.999999*w[0][0]*(K_20*K_20 + K_21*K_21 + K_22*K_22));
-    G[7] = det*(K_10*K_20 + K_11*K_21 + K_12*K_22-0.999999*w[0][0]*(K_10*K_20 + K_11*K_21 + K_12*K_22));
-    G[8] = det*(K_00*K_20 + K_01*K_21 + K_02*K_22-0.999999*w[0][0]*(K_00*K_20 + K_01*K_21 + K_02*K_22));
-    G[9] = det*(K_10*K_10 + K_11*K_11 + K_12*K_12-0.999999*w[0][0]*(K_10*K_10 + K_11*K_11 + K_12*K_12));
-    G[10] = det*(K_00*K_10 + K_01*K_11 + K_02*K_12-0.999999*w[0][0]*(K_00*K_10 + K_01*K_11 + K_02*K_12));
-    G[11] = det*(K_00*K_00 + K_01*K_01 + K_02*K_02-0.999999*w[0][0]*(K_00*K_00 + K_01*K_01 + K_02*K_02));
-    G[12] = det*(1.0-0.999999*w[0][0]);
+    // Number of operations to compute geometry constants: 126.
+    double G[16];
+    G[0] = det*w[0][0]*(K_10*K_10 + K_11*K_11 + K_12*K_12);
+    G[1] = det*w[0][0]*(K_00*K_10 + K_01*K_11 + K_02*K_12);
+    G[2] = det*w[0][0]*(K_10*K_20 + K_11*K_21 + K_12*K_22);
+    G[3] = det*w[0][0]*(K_00*K_00 + K_01*K_01 + K_02*K_02);
+    G[4] = det*w[0][0]*(K_00*K_20 + K_01*K_21 + K_02*K_22);
+    G[5] = det*w[0][0]*(K_20*K_20 + K_21*K_21 + K_22*K_22);
+    G[6] = det*(K_20*K_20 + K_21*K_21 + K_22*K_22 - w[0][0]*(K_20*K_20 + K_21*K_21 + K_22*K_22));
+    G[7] = det*(K_10*K_20 + K_11*K_21 + K_12*K_22 - w[0][0]*(K_10*K_20 + K_11*K_21 + K_12*K_22));
+    G[8] = det*(K_00*K_20 + K_01*K_21 + K_02*K_22 - w[0][0]*(K_00*K_20 + K_01*K_21 + K_02*K_22));
+    G[9] = det*(K_10*K_10 + K_11*K_11 + K_12*K_12 - w[0][0]*(K_10*K_10 + K_11*K_11 + K_12*K_12));
+    G[10] = det*(K_00*K_10 + K_01*K_11 + K_02*K_12 - w[0][0]*(K_00*K_10 + K_01*K_11 + K_02*K_12));
+    G[11] = det*(K_00*K_00 + K_01*K_01 + K_02*K_02 - w[0][0]*(K_00*K_00 + K_01*K_01 + K_02*K_02));
+    G[12] = det*(1.0 - w[0][0]);
     G[13] = det*(w[0][0]-1.0);
-    G[14] = det*(1e-06 + 0.999999*w[0][0]);
-    G[15] = det*w[0][0];
-    G[16] = det*(1.0 - w[0][0]);
-    G[17] =  - det*w[0][0];
+    G[14] = det*w[0][0];
+    G[15] =  - det*w[0][0];
     
     // Compute element tensor using UFL quadrature representation
     // Optimisations: ('eliminate zeros', True), ('ignore ones', True), ('ignore zero tables', True), ('optimisation', 'simplify_expressions'), ('remove zero terms', True)
     
     // Loop quadrature points for integral.
-    // Number of operations to compute element tensor for following IP loop = 12712
-    for (unsigned int ip = 0; ip < 14; ip++)
+    // Number of operations to compute element tensor for following IP loop = 22176
+    for (unsigned int ip = 0; ip < 24; ip++)
     {
       
       // Coefficient declarations.
@@ -6874,72 +6892,74 @@ void bloch_torrey_notime3d_cell_integral_0_0::tabulate_tensor(double* A,
       double F2 = 0.0;
       double F3 = 0.0;
       double F4 = 0.0;
+      double F5 = 0.0;
       
-      // Total number of operations to compute function values = 40
+      // Total number of operations to compute function values = 48
       for (unsigned int r = 0; r < 4; r++)
       {
-        F0 += FE0[ip][r]*w[6][r];
+        F0 += FE0[ip][r]*w[5][r];
         F1 += FE0[ip][r]*w[1][r];
-        F2 += FE0[ip][r]*w[4][r];
-        F3 += FE0[ip][r]*w[5][r];
-        F4 += FE0[ip][r]*w[2][r];
+        F2 += FE0[ip][r]*w[3][r];
+        F3 += FE0[ip][r]*w[2][nzc0[r]];
+        F4 += FE0[ip][r]*w[4][r];
+        F5 += FE0[ip][r]*w[6][r];
       }// end loop over 'r'
       
-      // Number of operations to compute ip constants: 52
+      // Number of operations to compute ip constants: 60
       double I[18];
       // Number of operations: 3
-      I[0] = F3*F4*G[0]*W14[ip];
+      I[0] = F0*F4*G[0]*W24[ip];
       
       // Number of operations: 3
-      I[1] = F3*F4*G[1]*W14[ip];
+      I[1] = F0*F4*G[1]*W24[ip];
       
       // Number of operations: 3
-      I[2] = F3*F4*G[2]*W14[ip];
+      I[2] = F0*F4*G[2]*W24[ip];
       
       // Number of operations: 3
-      I[3] = F3*F4*G[3]*W14[ip];
+      I[3] = F0*F4*G[3]*W24[ip];
       
       // Number of operations: 3
-      I[4] = F3*F4*G[4]*W14[ip];
+      I[4] = F0*F4*G[4]*W24[ip];
       
       // Number of operations: 3
-      I[5] = F3*F4*G[5]*W14[ip];
+      I[5] = F0*F4*G[5]*W24[ip];
       
       // Number of operations: 3
-      I[6] = F3*F4*G[6]*W14[ip];
+      I[6] = F0*F4*G[6]*W24[ip];
       
       // Number of operations: 3
-      I[7] = F3*F4*G[7]*W14[ip];
+      I[7] = F0*F4*G[7]*W24[ip];
       
       // Number of operations: 3
-      I[8] = F3*F4*G[8]*W14[ip];
+      I[8] = F0*F4*G[8]*W24[ip];
       
       // Number of operations: 3
-      I[9] = F3*F4*G[9]*W14[ip];
+      I[9] = F0*F4*G[9]*W24[ip];
       
       // Number of operations: 3
-      I[10] = F3*F4*G[10]*W14[ip];
+      I[10] = F0*F4*G[10]*W24[ip];
       
       // Number of operations: 3
-      I[11] = F3*F4*G[11]*W14[ip];
+      I[11] = F0*F4*G[11]*W24[ip];
       
       // Number of operations: 2
-      I[12] = F2*G[12]*W14[ip];
+      I[12] = G[12]*W24[ip]/F5;
       
-      // Number of operations: 3
-      I[13] = F0*F1*G[13]*W14[ip];
+      // Number of operations: 5
+      I[13] = F0*F1*F2*F3*G[13]*W24[ip];
       
       // Number of operations: 2
-      I[14] = F2*G[14]*W14[ip];
+      I[14] = G[14]*W24[ip]/F5;
       
-      // Number of operations: 3
-      I[15] = F0*F1*G[15]*W14[ip];
+      // Number of operations: 5
+      I[15] = F0*F1*F2*F3*G[14]*W24[ip];
       
-      // Number of operations: 3
-      I[16] = F0*F1*G[16]*W14[ip];
+      // Number of operations: 5
+      I[16] = F0*F1*F2*F3*G[12]*W24[ip];
       
-      // Number of operations: 3
-      I[17] = F0*F1*G[17]*W14[ip];
+      // Number of operations: 5
+      I[17] = F0*F1*F2*F3*G[15]*W24[ip];
       
       
       // Number of operations for primary indices: 432
@@ -7051,7 +7071,7 @@ void bloch_torrey_notime3d_cell_integral_0_0::tabulate_tensor(double* A,
  #ifndef UFC_BACKWARD_COMPATIBILITY 
 /// Tabulate the tensor for the contribution from a local cell
 /// using the specified reference cell quadrature points/weights
-void bloch_torrey_notime3d_cell_integral_0_0::tabulate_tensor(double* A,
+void bloch_torrey3d_cell_integral_0_0::tabulate_tensor(double* A,
                      const double * const * w,
                      const ufc::cell& c,
                      unsigned int num_quadrature_points,
@@ -7063,19 +7083,19 @@ void bloch_torrey_notime3d_cell_integral_0_0::tabulate_tensor(double* A,
 #endif
 
 /// Constructor
-bloch_torrey_notime3d_interior_facet_integral_0_0::bloch_torrey_notime3d_interior_facet_integral_0_0() : ufc::interior_facet_integral()
+bloch_torrey3d_interior_facet_integral_0_0::bloch_torrey3d_interior_facet_integral_0_0() : ufc::interior_facet_integral()
 {
     // Do nothing
 }
 
 /// Destructor
-bloch_torrey_notime3d_interior_facet_integral_0_0::~bloch_torrey_notime3d_interior_facet_integral_0_0()
+bloch_torrey3d_interior_facet_integral_0_0::~bloch_torrey3d_interior_facet_integral_0_0()
 {
     // Do nothing
 }
 
 /// Tabulate the tensor for the contribution from a local interior facet
-void bloch_torrey_notime3d_interior_facet_integral_0_0::tabulate_tensor(double* A,
+void bloch_torrey3d_interior_facet_integral_0_0::tabulate_tensor(double* A,
                                     const double * const * w,
                                     const ufc::cell& c0,
                                     const ufc::cell& c1,
@@ -7207,8 +7227,8 @@ void bloch_torrey_notime3d_interior_facet_integral_0_0::tabulate_tensor(double* 
     }// end loop over 'r'
     // Number of operations to compute geometry constants: 8.
     double G[2];
-    G[0] = 0.25*std::abs((w[0][0] - w[0][1]))*det;
-    G[1] = -0.25*std::abs((w[0][0] - w[0][1]))*det;
+    G[0] = 0.5*std::abs((w[0][0] - w[0][1]))*det;
+    G[1] = -0.5*std::abs((w[0][0] - w[0][1]))*det;
     
     // Compute element tensor using UFL quadrature representation
     // Optimisations: ('eliminate zeros', True), ('ignore ones', True), ('ignore zero tables', True), ('optimisation', 'simplify_expressions'), ('remove zero terms', True)
@@ -7220,10 +7240,10 @@ void bloch_torrey_notime3d_interior_facet_integral_0_0::tabulate_tensor(double* 
       {
       case 0:
         {
-          // Total number of operations to compute element tensor (from this point): 2832
+          // Total number of operations to compute element tensor (from this point): 2808
         
         // Loop quadrature points for integral.
-        // Number of operations to compute element tensor for following IP loop = 2832
+        // Number of operations to compute element tensor for following IP loop = 2808
         for (unsigned int ip = 0; ip < 6; ip++)
         {
           
@@ -7236,25 +7256,25 @@ void bloch_torrey_notime3d_interior_facet_integral_0_0::tabulate_tensor(double* 
           // Total number of operations to compute function values = 24
           for (unsigned int r = 0; r < 3; r++)
           {
-            F0 += FE0_f0[ip][r]*w[7][nzc0[r] + 4];
-            F1 += FE0_f0[ip][r]*w[7][nzc0[r]];
-            F2 += FE0_f0[ip][r]*w[3][nzc0[r] + 4];
-            F3 += FE0_f0[ip][r]*w[3][nzc0[r]];
+            F0 += FE0_f0[ip][r]*w[5][nzc0[r] + 4];
+            F1 += FE0_f0[ip][r]*w[7][nzc0[r] + 4];
+            F2 += FE0_f0[ip][r]*w[5][nzc0[r]];
+            F3 += FE0_f0[ip][r]*w[7][nzc0[r]];
           }// end loop over 'r'
           
-          // Number of operations to compute ip constants: 16
+          // Number of operations to compute ip constants: 12
           double I[4];
-          // Number of operations: 4
-          I[0] = F2*G[0]*W6[ip]*(F0 + F1);
+          // Number of operations: 3
+          I[0] = F0*F1*G[0]*W6[ip];
           
-          // Number of operations: 4
-          I[1] = F2*G[1]*W6[ip]*(F0 + F1);
+          // Number of operations: 3
+          I[1] = F0*F1*G[1]*W6[ip];
           
-          // Number of operations: 4
-          I[2] = F3*G[0]*W6[ip]*(F0 + F1);
+          // Number of operations: 3
+          I[2] = F2*F3*G[0]*W6[ip];
           
-          // Number of operations: 4
-          I[3] = F3*G[1]*W6[ip]*(F0 + F1);
+          // Number of operations: 3
+          I[3] = F2*F3*G[1]*W6[ip];
           
           
           // Number of operations for primary indices: 432
@@ -7301,10 +7321,10 @@ void bloch_torrey_notime3d_interior_facet_integral_0_0::tabulate_tensor(double* 
         }
       case 1:
         {
-          // Total number of operations to compute element tensor (from this point): 2832
+          // Total number of operations to compute element tensor (from this point): 2808
         
         // Loop quadrature points for integral.
-        // Number of operations to compute element tensor for following IP loop = 2832
+        // Number of operations to compute element tensor for following IP loop = 2808
         for (unsigned int ip = 0; ip < 6; ip++)
         {
           
@@ -7317,25 +7337,25 @@ void bloch_torrey_notime3d_interior_facet_integral_0_0::tabulate_tensor(double* 
           // Total number of operations to compute function values = 24
           for (unsigned int r = 0; r < 3; r++)
           {
-            F0 += FE0_f0[ip][r]*w[7][nzc1[r] + 4];
-            F1 += FE0_f0[ip][r]*w[7][nzc0[r]];
-            F2 += FE0_f0[ip][r]*w[3][nzc1[r] + 4];
-            F3 += FE0_f0[ip][r]*w[3][nzc0[r]];
+            F0 += FE0_f0[ip][r]*w[5][nzc1[r] + 4];
+            F1 += FE0_f0[ip][r]*w[7][nzc1[r] + 4];
+            F2 += FE0_f0[ip][r]*w[5][nzc0[r]];
+            F3 += FE0_f0[ip][r]*w[7][nzc0[r]];
           }// end loop over 'r'
           
-          // Number of operations to compute ip constants: 16
+          // Number of operations to compute ip constants: 12
           double I[4];
-          // Number of operations: 4
-          I[0] = F2*G[0]*W6[ip]*(F0 + F1);
+          // Number of operations: 3
+          I[0] = F0*F1*G[0]*W6[ip];
           
-          // Number of operations: 4
-          I[1] = F2*G[1]*W6[ip]*(F0 + F1);
+          // Number of operations: 3
+          I[1] = F0*F1*G[1]*W6[ip];
           
-          // Number of operations: 4
-          I[2] = F3*G[0]*W6[ip]*(F0 + F1);
+          // Number of operations: 3
+          I[2] = F2*F3*G[0]*W6[ip];
           
-          // Number of operations: 4
-          I[3] = F3*G[1]*W6[ip]*(F0 + F1);
+          // Number of operations: 3
+          I[3] = F2*F3*G[1]*W6[ip];
           
           
           // Number of operations for primary indices: 432
@@ -7382,10 +7402,10 @@ void bloch_torrey_notime3d_interior_facet_integral_0_0::tabulate_tensor(double* 
         }
       case 2:
         {
-          // Total number of operations to compute element tensor (from this point): 2832
+          // Total number of operations to compute element tensor (from this point): 2808
         
         // Loop quadrature points for integral.
-        // Number of operations to compute element tensor for following IP loop = 2832
+        // Number of operations to compute element tensor for following IP loop = 2808
         for (unsigned int ip = 0; ip < 6; ip++)
         {
           
@@ -7398,25 +7418,25 @@ void bloch_torrey_notime3d_interior_facet_integral_0_0::tabulate_tensor(double* 
           // Total number of operations to compute function values = 24
           for (unsigned int r = 0; r < 3; r++)
           {
-            F0 += FE0_f0[ip][r]*w[7][nzc2[r] + 4];
-            F1 += FE0_f0[ip][r]*w[7][nzc0[r]];
-            F2 += FE0_f0[ip][r]*w[3][nzc2[r] + 4];
-            F3 += FE0_f0[ip][r]*w[3][nzc0[r]];
+            F0 += FE0_f0[ip][r]*w[5][nzc2[r] + 4];
+            F1 += FE0_f0[ip][r]*w[7][nzc2[r] + 4];
+            F2 += FE0_f0[ip][r]*w[5][nzc0[r]];
+            F3 += FE0_f0[ip][r]*w[7][nzc0[r]];
           }// end loop over 'r'
           
-          // Number of operations to compute ip constants: 16
+          // Number of operations to compute ip constants: 12
           double I[4];
-          // Number of operations: 4
-          I[0] = F2*G[0]*W6[ip]*(F0 + F1);
+          // Number of operations: 3
+          I[0] = F0*F1*G[0]*W6[ip];
           
-          // Number of operations: 4
-          I[1] = F2*G[1]*W6[ip]*(F0 + F1);
+          // Number of operations: 3
+          I[1] = F0*F1*G[1]*W6[ip];
           
-          // Number of operations: 4
-          I[2] = F3*G[0]*W6[ip]*(F0 + F1);
+          // Number of operations: 3
+          I[2] = F2*F3*G[0]*W6[ip];
           
-          // Number of operations: 4
-          I[3] = F3*G[1]*W6[ip]*(F0 + F1);
+          // Number of operations: 3
+          I[3] = F2*F3*G[1]*W6[ip];
           
           
           // Number of operations for primary indices: 432
@@ -7463,10 +7483,10 @@ void bloch_torrey_notime3d_interior_facet_integral_0_0::tabulate_tensor(double* 
         }
       case 3:
         {
-          // Total number of operations to compute element tensor (from this point): 2832
+          // Total number of operations to compute element tensor (from this point): 2808
         
         // Loop quadrature points for integral.
-        // Number of operations to compute element tensor for following IP loop = 2832
+        // Number of operations to compute element tensor for following IP loop = 2808
         for (unsigned int ip = 0; ip < 6; ip++)
         {
           
@@ -7479,25 +7499,25 @@ void bloch_torrey_notime3d_interior_facet_integral_0_0::tabulate_tensor(double* 
           // Total number of operations to compute function values = 24
           for (unsigned int r = 0; r < 3; r++)
           {
-            F0 += FE0_f0[ip][r]*w[7][nzc3[r] + 4];
-            F1 += FE0_f0[ip][r]*w[7][nzc0[r]];
-            F2 += FE0_f0[ip][r]*w[3][nzc3[r] + 4];
-            F3 += FE0_f0[ip][r]*w[3][nzc0[r]];
+            F0 += FE0_f0[ip][r]*w[5][nzc3[r] + 4];
+            F1 += FE0_f0[ip][r]*w[7][nzc3[r] + 4];
+            F2 += FE0_f0[ip][r]*w[5][nzc0[r]];
+            F3 += FE0_f0[ip][r]*w[7][nzc0[r]];
           }// end loop over 'r'
           
-          // Number of operations to compute ip constants: 16
+          // Number of operations to compute ip constants: 12
           double I[4];
-          // Number of operations: 4
-          I[0] = F2*G[0]*W6[ip]*(F0 + F1);
+          // Number of operations: 3
+          I[0] = F0*F1*G[0]*W6[ip];
           
-          // Number of operations: 4
-          I[1] = F2*G[1]*W6[ip]*(F0 + F1);
+          // Number of operations: 3
+          I[1] = F0*F1*G[1]*W6[ip];
           
-          // Number of operations: 4
-          I[2] = F3*G[0]*W6[ip]*(F0 + F1);
+          // Number of operations: 3
+          I[2] = F2*F3*G[0]*W6[ip];
           
-          // Number of operations: 4
-          I[3] = F3*G[1]*W6[ip]*(F0 + F1);
+          // Number of operations: 3
+          I[3] = F2*F3*G[1]*W6[ip];
           
           
           // Number of operations for primary indices: 432
@@ -7552,10 +7572,10 @@ void bloch_torrey_notime3d_interior_facet_integral_0_0::tabulate_tensor(double* 
       {
       case 0:
         {
-          // Total number of operations to compute element tensor (from this point): 2832
+          // Total number of operations to compute element tensor (from this point): 2808
         
         // Loop quadrature points for integral.
-        // Number of operations to compute element tensor for following IP loop = 2832
+        // Number of operations to compute element tensor for following IP loop = 2808
         for (unsigned int ip = 0; ip < 6; ip++)
         {
           
@@ -7568,25 +7588,25 @@ void bloch_torrey_notime3d_interior_facet_integral_0_0::tabulate_tensor(double* 
           // Total number of operations to compute function values = 24
           for (unsigned int r = 0; r < 3; r++)
           {
-            F0 += FE0_f0[ip][r]*w[7][nzc0[r] + 4];
-            F1 += FE0_f0[ip][r]*w[7][nzc1[r]];
-            F2 += FE0_f0[ip][r]*w[3][nzc0[r] + 4];
-            F3 += FE0_f0[ip][r]*w[3][nzc1[r]];
+            F0 += FE0_f0[ip][r]*w[5][nzc0[r] + 4];
+            F1 += FE0_f0[ip][r]*w[7][nzc0[r] + 4];
+            F2 += FE0_f0[ip][r]*w[5][nzc1[r]];
+            F3 += FE0_f0[ip][r]*w[7][nzc1[r]];
           }// end loop over 'r'
           
-          // Number of operations to compute ip constants: 16
+          // Number of operations to compute ip constants: 12
           double I[4];
-          // Number of operations: 4
-          I[0] = F2*G[0]*W6[ip]*(F0 + F1);
+          // Number of operations: 3
+          I[0] = F0*F1*G[0]*W6[ip];
           
-          // Number of operations: 4
-          I[1] = F2*G[1]*W6[ip]*(F0 + F1);
+          // Number of operations: 3
+          I[1] = F0*F1*G[1]*W6[ip];
           
-          // Number of operations: 4
-          I[2] = F3*G[0]*W6[ip]*(F0 + F1);
+          // Number of operations: 3
+          I[2] = F2*F3*G[0]*W6[ip];
           
-          // Number of operations: 4
-          I[3] = F3*G[1]*W6[ip]*(F0 + F1);
+          // Number of operations: 3
+          I[3] = F2*F3*G[1]*W6[ip];
           
           
           // Number of operations for primary indices: 432
@@ -7633,10 +7653,10 @@ void bloch_torrey_notime3d_interior_facet_integral_0_0::tabulate_tensor(double* 
         }
       case 1:
         {
-          // Total number of operations to compute element tensor (from this point): 2832
+          // Total number of operations to compute element tensor (from this point): 2808
         
         // Loop quadrature points for integral.
-        // Number of operations to compute element tensor for following IP loop = 2832
+        // Number of operations to compute element tensor for following IP loop = 2808
         for (unsigned int ip = 0; ip < 6; ip++)
         {
           
@@ -7649,25 +7669,25 @@ void bloch_torrey_notime3d_interior_facet_integral_0_0::tabulate_tensor(double* 
           // Total number of operations to compute function values = 24
           for (unsigned int r = 0; r < 3; r++)
           {
-            F0 += FE0_f0[ip][r]*w[7][nzc1[r] + 4];
-            F1 += FE0_f0[ip][r]*w[7][nzc1[r]];
-            F2 += FE0_f0[ip][r]*w[3][nzc1[r] + 4];
-            F3 += FE0_f0[ip][r]*w[3][nzc1[r]];
+            F0 += FE0_f0[ip][r]*w[5][nzc1[r] + 4];
+            F1 += FE0_f0[ip][r]*w[7][nzc1[r] + 4];
+            F2 += FE0_f0[ip][r]*w[5][nzc1[r]];
+            F3 += FE0_f0[ip][r]*w[7][nzc1[r]];
           }// end loop over 'r'
           
-          // Number of operations to compute ip constants: 16
+          // Number of operations to compute ip constants: 12
           double I[4];
-          // Number of operations: 4
-          I[0] = F2*G[0]*W6[ip]*(F0 + F1);
+          // Number of operations: 3
+          I[0] = F0*F1*G[0]*W6[ip];
           
-          // Number of operations: 4
-          I[1] = F2*G[1]*W6[ip]*(F0 + F1);
+          // Number of operations: 3
+          I[1] = F0*F1*G[1]*W6[ip];
           
-          // Number of operations: 4
-          I[2] = F3*G[0]*W6[ip]*(F0 + F1);
+          // Number of operations: 3
+          I[2] = F2*F3*G[0]*W6[ip];
           
-          // Number of operations: 4
-          I[3] = F3*G[1]*W6[ip]*(F0 + F1);
+          // Number of operations: 3
+          I[3] = F2*F3*G[1]*W6[ip];
           
           
           // Number of operations for primary indices: 432
@@ -7714,10 +7734,10 @@ void bloch_torrey_notime3d_interior_facet_integral_0_0::tabulate_tensor(double* 
         }
       case 2:
         {
-          // Total number of operations to compute element tensor (from this point): 2832
+          // Total number of operations to compute element tensor (from this point): 2808
         
         // Loop quadrature points for integral.
-        // Number of operations to compute element tensor for following IP loop = 2832
+        // Number of operations to compute element tensor for following IP loop = 2808
         for (unsigned int ip = 0; ip < 6; ip++)
         {
           
@@ -7730,25 +7750,25 @@ void bloch_torrey_notime3d_interior_facet_integral_0_0::tabulate_tensor(double* 
           // Total number of operations to compute function values = 24
           for (unsigned int r = 0; r < 3; r++)
           {
-            F0 += FE0_f0[ip][r]*w[7][nzc2[r] + 4];
-            F1 += FE0_f0[ip][r]*w[7][nzc1[r]];
-            F2 += FE0_f0[ip][r]*w[3][nzc2[r] + 4];
-            F3 += FE0_f0[ip][r]*w[3][nzc1[r]];
+            F0 += FE0_f0[ip][r]*w[5][nzc2[r] + 4];
+            F1 += FE0_f0[ip][r]*w[7][nzc2[r] + 4];
+            F2 += FE0_f0[ip][r]*w[5][nzc1[r]];
+            F3 += FE0_f0[ip][r]*w[7][nzc1[r]];
           }// end loop over 'r'
           
-          // Number of operations to compute ip constants: 16
+          // Number of operations to compute ip constants: 12
           double I[4];
-          // Number of operations: 4
-          I[0] = F2*G[0]*W6[ip]*(F0 + F1);
+          // Number of operations: 3
+          I[0] = F0*F1*G[0]*W6[ip];
           
-          // Number of operations: 4
-          I[1] = F2*G[1]*W6[ip]*(F0 + F1);
+          // Number of operations: 3
+          I[1] = F0*F1*G[1]*W6[ip];
           
-          // Number of operations: 4
-          I[2] = F3*G[0]*W6[ip]*(F0 + F1);
+          // Number of operations: 3
+          I[2] = F2*F3*G[0]*W6[ip];
           
-          // Number of operations: 4
-          I[3] = F3*G[1]*W6[ip]*(F0 + F1);
+          // Number of operations: 3
+          I[3] = F2*F3*G[1]*W6[ip];
           
           
           // Number of operations for primary indices: 432
@@ -7795,10 +7815,10 @@ void bloch_torrey_notime3d_interior_facet_integral_0_0::tabulate_tensor(double* 
         }
       case 3:
         {
-          // Total number of operations to compute element tensor (from this point): 2832
+          // Total number of operations to compute element tensor (from this point): 2808
         
         // Loop quadrature points for integral.
-        // Number of operations to compute element tensor for following IP loop = 2832
+        // Number of operations to compute element tensor for following IP loop = 2808
         for (unsigned int ip = 0; ip < 6; ip++)
         {
           
@@ -7811,25 +7831,25 @@ void bloch_torrey_notime3d_interior_facet_integral_0_0::tabulate_tensor(double* 
           // Total number of operations to compute function values = 24
           for (unsigned int r = 0; r < 3; r++)
           {
-            F0 += FE0_f0[ip][r]*w[7][nzc3[r] + 4];
-            F1 += FE0_f0[ip][r]*w[7][nzc1[r]];
-            F2 += FE0_f0[ip][r]*w[3][nzc3[r] + 4];
-            F3 += FE0_f0[ip][r]*w[3][nzc1[r]];
+            F0 += FE0_f0[ip][r]*w[5][nzc3[r] + 4];
+            F1 += FE0_f0[ip][r]*w[7][nzc3[r] + 4];
+            F2 += FE0_f0[ip][r]*w[5][nzc1[r]];
+            F3 += FE0_f0[ip][r]*w[7][nzc1[r]];
           }// end loop over 'r'
           
-          // Number of operations to compute ip constants: 16
+          // Number of operations to compute ip constants: 12
           double I[4];
-          // Number of operations: 4
-          I[0] = F2*G[0]*W6[ip]*(F0 + F1);
+          // Number of operations: 3
+          I[0] = F0*F1*G[0]*W6[ip];
           
-          // Number of operations: 4
-          I[1] = F2*G[1]*W6[ip]*(F0 + F1);
+          // Number of operations: 3
+          I[1] = F0*F1*G[1]*W6[ip];
           
-          // Number of operations: 4
-          I[2] = F3*G[0]*W6[ip]*(F0 + F1);
+          // Number of operations: 3
+          I[2] = F2*F3*G[0]*W6[ip];
           
-          // Number of operations: 4
-          I[3] = F3*G[1]*W6[ip]*(F0 + F1);
+          // Number of operations: 3
+          I[3] = F2*F3*G[1]*W6[ip];
           
           
           // Number of operations for primary indices: 432
@@ -7884,10 +7904,10 @@ void bloch_torrey_notime3d_interior_facet_integral_0_0::tabulate_tensor(double* 
       {
       case 0:
         {
-          // Total number of operations to compute element tensor (from this point): 2832
+          // Total number of operations to compute element tensor (from this point): 2808
         
         // Loop quadrature points for integral.
-        // Number of operations to compute element tensor for following IP loop = 2832
+        // Number of operations to compute element tensor for following IP loop = 2808
         for (unsigned int ip = 0; ip < 6; ip++)
         {
           
@@ -7900,25 +7920,25 @@ void bloch_torrey_notime3d_interior_facet_integral_0_0::tabulate_tensor(double* 
           // Total number of operations to compute function values = 24
           for (unsigned int r = 0; r < 3; r++)
           {
-            F0 += FE0_f0[ip][r]*w[7][nzc0[r] + 4];
-            F1 += FE0_f0[ip][r]*w[7][nzc2[r]];
-            F2 += FE0_f0[ip][r]*w[3][nzc0[r] + 4];
-            F3 += FE0_f0[ip][r]*w[3][nzc2[r]];
+            F0 += FE0_f0[ip][r]*w[5][nzc0[r] + 4];
+            F1 += FE0_f0[ip][r]*w[7][nzc0[r] + 4];
+            F2 += FE0_f0[ip][r]*w[5][nzc2[r]];
+            F3 += FE0_f0[ip][r]*w[7][nzc2[r]];
           }// end loop over 'r'
           
-          // Number of operations to compute ip constants: 16
+          // Number of operations to compute ip constants: 12
           double I[4];
-          // Number of operations: 4
-          I[0] = F2*G[0]*W6[ip]*(F0 + F1);
+          // Number of operations: 3
+          I[0] = F0*F1*G[0]*W6[ip];
           
-          // Number of operations: 4
-          I[1] = F2*G[1]*W6[ip]*(F0 + F1);
+          // Number of operations: 3
+          I[1] = F0*F1*G[1]*W6[ip];
           
-          // Number of operations: 4
-          I[2] = F3*G[0]*W6[ip]*(F0 + F1);
+          // Number of operations: 3
+          I[2] = F2*F3*G[0]*W6[ip];
           
-          // Number of operations: 4
-          I[3] = F3*G[1]*W6[ip]*(F0 + F1);
+          // Number of operations: 3
+          I[3] = F2*F3*G[1]*W6[ip];
           
           
           // Number of operations for primary indices: 432
@@ -7965,10 +7985,10 @@ void bloch_torrey_notime3d_interior_facet_integral_0_0::tabulate_tensor(double* 
         }
       case 1:
         {
-          // Total number of operations to compute element tensor (from this point): 2832
+          // Total number of operations to compute element tensor (from this point): 2808
         
         // Loop quadrature points for integral.
-        // Number of operations to compute element tensor for following IP loop = 2832
+        // Number of operations to compute element tensor for following IP loop = 2808
         for (unsigned int ip = 0; ip < 6; ip++)
         {
           
@@ -7981,25 +8001,25 @@ void bloch_torrey_notime3d_interior_facet_integral_0_0::tabulate_tensor(double* 
           // Total number of operations to compute function values = 24
           for (unsigned int r = 0; r < 3; r++)
           {
-            F0 += FE0_f0[ip][r]*w[7][nzc1[r] + 4];
-            F1 += FE0_f0[ip][r]*w[7][nzc2[r]];
-            F2 += FE0_f0[ip][r]*w[3][nzc1[r] + 4];
-            F3 += FE0_f0[ip][r]*w[3][nzc2[r]];
+            F0 += FE0_f0[ip][r]*w[5][nzc1[r] + 4];
+            F1 += FE0_f0[ip][r]*w[7][nzc1[r] + 4];
+            F2 += FE0_f0[ip][r]*w[5][nzc2[r]];
+            F3 += FE0_f0[ip][r]*w[7][nzc2[r]];
           }// end loop over 'r'
           
-          // Number of operations to compute ip constants: 16
+          // Number of operations to compute ip constants: 12
           double I[4];
-          // Number of operations: 4
-          I[0] = F2*G[0]*W6[ip]*(F0 + F1);
+          // Number of operations: 3
+          I[0] = F0*F1*G[0]*W6[ip];
           
-          // Number of operations: 4
-          I[1] = F2*G[1]*W6[ip]*(F0 + F1);
+          // Number of operations: 3
+          I[1] = F0*F1*G[1]*W6[ip];
           
-          // Number of operations: 4
-          I[2] = F3*G[0]*W6[ip]*(F0 + F1);
+          // Number of operations: 3
+          I[2] = F2*F3*G[0]*W6[ip];
           
-          // Number of operations: 4
-          I[3] = F3*G[1]*W6[ip]*(F0 + F1);
+          // Number of operations: 3
+          I[3] = F2*F3*G[1]*W6[ip];
           
           
           // Number of operations for primary indices: 432
@@ -8046,10 +8066,10 @@ void bloch_torrey_notime3d_interior_facet_integral_0_0::tabulate_tensor(double* 
         }
       case 2:
         {
-          // Total number of operations to compute element tensor (from this point): 2832
+          // Total number of operations to compute element tensor (from this point): 2808
         
         // Loop quadrature points for integral.
-        // Number of operations to compute element tensor for following IP loop = 2832
+        // Number of operations to compute element tensor for following IP loop = 2808
         for (unsigned int ip = 0; ip < 6; ip++)
         {
           
@@ -8062,25 +8082,25 @@ void bloch_torrey_notime3d_interior_facet_integral_0_0::tabulate_tensor(double* 
           // Total number of operations to compute function values = 24
           for (unsigned int r = 0; r < 3; r++)
           {
-            F0 += FE0_f0[ip][r]*w[7][nzc2[r] + 4];
-            F1 += FE0_f0[ip][r]*w[7][nzc2[r]];
-            F2 += FE0_f0[ip][r]*w[3][nzc2[r] + 4];
-            F3 += FE0_f0[ip][r]*w[3][nzc2[r]];
+            F0 += FE0_f0[ip][r]*w[5][nzc2[r] + 4];
+            F1 += FE0_f0[ip][r]*w[7][nzc2[r] + 4];
+            F2 += FE0_f0[ip][r]*w[5][nzc2[r]];
+            F3 += FE0_f0[ip][r]*w[7][nzc2[r]];
           }// end loop over 'r'
           
-          // Number of operations to compute ip constants: 16
+          // Number of operations to compute ip constants: 12
           double I[4];
-          // Number of operations: 4
-          I[0] = F2*G[0]*W6[ip]*(F0 + F1);
+          // Number of operations: 3
+          I[0] = F0*F1*G[0]*W6[ip];
           
-          // Number of operations: 4
-          I[1] = F2*G[1]*W6[ip]*(F0 + F1);
+          // Number of operations: 3
+          I[1] = F0*F1*G[1]*W6[ip];
           
-          // Number of operations: 4
-          I[2] = F3*G[0]*W6[ip]*(F0 + F1);
+          // Number of operations: 3
+          I[2] = F2*F3*G[0]*W6[ip];
           
-          // Number of operations: 4
-          I[3] = F3*G[1]*W6[ip]*(F0 + F1);
+          // Number of operations: 3
+          I[3] = F2*F3*G[1]*W6[ip];
           
           
           // Number of operations for primary indices: 432
@@ -8127,10 +8147,10 @@ void bloch_torrey_notime3d_interior_facet_integral_0_0::tabulate_tensor(double* 
         }
       case 3:
         {
-          // Total number of operations to compute element tensor (from this point): 2832
+          // Total number of operations to compute element tensor (from this point): 2808
         
         // Loop quadrature points for integral.
-        // Number of operations to compute element tensor for following IP loop = 2832
+        // Number of operations to compute element tensor for following IP loop = 2808
         for (unsigned int ip = 0; ip < 6; ip++)
         {
           
@@ -8143,25 +8163,25 @@ void bloch_torrey_notime3d_interior_facet_integral_0_0::tabulate_tensor(double* 
           // Total number of operations to compute function values = 24
           for (unsigned int r = 0; r < 3; r++)
           {
-            F0 += FE0_f0[ip][r]*w[7][nzc3[r] + 4];
-            F1 += FE0_f0[ip][r]*w[7][nzc2[r]];
-            F2 += FE0_f0[ip][r]*w[3][nzc3[r] + 4];
-            F3 += FE0_f0[ip][r]*w[3][nzc2[r]];
+            F0 += FE0_f0[ip][r]*w[5][nzc3[r] + 4];
+            F1 += FE0_f0[ip][r]*w[7][nzc3[r] + 4];
+            F2 += FE0_f0[ip][r]*w[5][nzc2[r]];
+            F3 += FE0_f0[ip][r]*w[7][nzc2[r]];
           }// end loop over 'r'
           
-          // Number of operations to compute ip constants: 16
+          // Number of operations to compute ip constants: 12
           double I[4];
-          // Number of operations: 4
-          I[0] = F2*G[0]*W6[ip]*(F0 + F1);
+          // Number of operations: 3
+          I[0] = F0*F1*G[0]*W6[ip];
           
-          // Number of operations: 4
-          I[1] = F2*G[1]*W6[ip]*(F0 + F1);
+          // Number of operations: 3
+          I[1] = F0*F1*G[1]*W6[ip];
           
-          // Number of operations: 4
-          I[2] = F3*G[0]*W6[ip]*(F0 + F1);
+          // Number of operations: 3
+          I[2] = F2*F3*G[0]*W6[ip];
           
-          // Number of operations: 4
-          I[3] = F3*G[1]*W6[ip]*(F0 + F1);
+          // Number of operations: 3
+          I[3] = F2*F3*G[1]*W6[ip];
           
           
           // Number of operations for primary indices: 432
@@ -8216,10 +8236,10 @@ void bloch_torrey_notime3d_interior_facet_integral_0_0::tabulate_tensor(double* 
       {
       case 0:
         {
-          // Total number of operations to compute element tensor (from this point): 2832
+          // Total number of operations to compute element tensor (from this point): 2808
         
         // Loop quadrature points for integral.
-        // Number of operations to compute element tensor for following IP loop = 2832
+        // Number of operations to compute element tensor for following IP loop = 2808
         for (unsigned int ip = 0; ip < 6; ip++)
         {
           
@@ -8232,25 +8252,25 @@ void bloch_torrey_notime3d_interior_facet_integral_0_0::tabulate_tensor(double* 
           // Total number of operations to compute function values = 24
           for (unsigned int r = 0; r < 3; r++)
           {
-            F0 += FE0_f0[ip][r]*w[7][nzc0[r] + 4];
-            F1 += FE0_f0[ip][r]*w[7][nzc3[r]];
-            F2 += FE0_f0[ip][r]*w[3][nzc0[r] + 4];
-            F3 += FE0_f0[ip][r]*w[3][nzc3[r]];
+            F0 += FE0_f0[ip][r]*w[5][nzc0[r] + 4];
+            F1 += FE0_f0[ip][r]*w[7][nzc0[r] + 4];
+            F2 += FE0_f0[ip][r]*w[5][nzc3[r]];
+            F3 += FE0_f0[ip][r]*w[7][nzc3[r]];
           }// end loop over 'r'
           
-          // Number of operations to compute ip constants: 16
+          // Number of operations to compute ip constants: 12
           double I[4];
-          // Number of operations: 4
-          I[0] = F2*G[0]*W6[ip]*(F0 + F1);
+          // Number of operations: 3
+          I[0] = F0*F1*G[0]*W6[ip];
           
-          // Number of operations: 4
-          I[1] = F2*G[1]*W6[ip]*(F0 + F1);
+          // Number of operations: 3
+          I[1] = F0*F1*G[1]*W6[ip];
           
-          // Number of operations: 4
-          I[2] = F3*G[0]*W6[ip]*(F0 + F1);
+          // Number of operations: 3
+          I[2] = F2*F3*G[0]*W6[ip];
           
-          // Number of operations: 4
-          I[3] = F3*G[1]*W6[ip]*(F0 + F1);
+          // Number of operations: 3
+          I[3] = F2*F3*G[1]*W6[ip];
           
           
           // Number of operations for primary indices: 432
@@ -8297,10 +8317,10 @@ void bloch_torrey_notime3d_interior_facet_integral_0_0::tabulate_tensor(double* 
         }
       case 1:
         {
-          // Total number of operations to compute element tensor (from this point): 2832
+          // Total number of operations to compute element tensor (from this point): 2808
         
         // Loop quadrature points for integral.
-        // Number of operations to compute element tensor for following IP loop = 2832
+        // Number of operations to compute element tensor for following IP loop = 2808
         for (unsigned int ip = 0; ip < 6; ip++)
         {
           
@@ -8313,25 +8333,25 @@ void bloch_torrey_notime3d_interior_facet_integral_0_0::tabulate_tensor(double* 
           // Total number of operations to compute function values = 24
           for (unsigned int r = 0; r < 3; r++)
           {
-            F0 += FE0_f0[ip][r]*w[7][nzc1[r] + 4];
-            F1 += FE0_f0[ip][r]*w[7][nzc3[r]];
-            F2 += FE0_f0[ip][r]*w[3][nzc1[r] + 4];
-            F3 += FE0_f0[ip][r]*w[3][nzc3[r]];
+            F0 += FE0_f0[ip][r]*w[5][nzc1[r] + 4];
+            F1 += FE0_f0[ip][r]*w[7][nzc1[r] + 4];
+            F2 += FE0_f0[ip][r]*w[5][nzc3[r]];
+            F3 += FE0_f0[ip][r]*w[7][nzc3[r]];
           }// end loop over 'r'
           
-          // Number of operations to compute ip constants: 16
+          // Number of operations to compute ip constants: 12
           double I[4];
-          // Number of operations: 4
-          I[0] = F2*G[0]*W6[ip]*(F0 + F1);
+          // Number of operations: 3
+          I[0] = F0*F1*G[0]*W6[ip];
           
-          // Number of operations: 4
-          I[1] = F2*G[1]*W6[ip]*(F0 + F1);
+          // Number of operations: 3
+          I[1] = F0*F1*G[1]*W6[ip];
           
-          // Number of operations: 4
-          I[2] = F3*G[0]*W6[ip]*(F0 + F1);
+          // Number of operations: 3
+          I[2] = F2*F3*G[0]*W6[ip];
           
-          // Number of operations: 4
-          I[3] = F3*G[1]*W6[ip]*(F0 + F1);
+          // Number of operations: 3
+          I[3] = F2*F3*G[1]*W6[ip];
           
           
           // Number of operations for primary indices: 432
@@ -8378,10 +8398,10 @@ void bloch_torrey_notime3d_interior_facet_integral_0_0::tabulate_tensor(double* 
         }
       case 2:
         {
-          // Total number of operations to compute element tensor (from this point): 2832
+          // Total number of operations to compute element tensor (from this point): 2808
         
         // Loop quadrature points for integral.
-        // Number of operations to compute element tensor for following IP loop = 2832
+        // Number of operations to compute element tensor for following IP loop = 2808
         for (unsigned int ip = 0; ip < 6; ip++)
         {
           
@@ -8394,25 +8414,25 @@ void bloch_torrey_notime3d_interior_facet_integral_0_0::tabulate_tensor(double* 
           // Total number of operations to compute function values = 24
           for (unsigned int r = 0; r < 3; r++)
           {
-            F0 += FE0_f0[ip][r]*w[7][nzc2[r] + 4];
-            F1 += FE0_f0[ip][r]*w[7][nzc3[r]];
-            F2 += FE0_f0[ip][r]*w[3][nzc2[r] + 4];
-            F3 += FE0_f0[ip][r]*w[3][nzc3[r]];
+            F0 += FE0_f0[ip][r]*w[5][nzc2[r] + 4];
+            F1 += FE0_f0[ip][r]*w[7][nzc2[r] + 4];
+            F2 += FE0_f0[ip][r]*w[5][nzc3[r]];
+            F3 += FE0_f0[ip][r]*w[7][nzc3[r]];
           }// end loop over 'r'
           
-          // Number of operations to compute ip constants: 16
+          // Number of operations to compute ip constants: 12
           double I[4];
-          // Number of operations: 4
-          I[0] = F2*G[0]*W6[ip]*(F0 + F1);
+          // Number of operations: 3
+          I[0] = F0*F1*G[0]*W6[ip];
           
-          // Number of operations: 4
-          I[1] = F2*G[1]*W6[ip]*(F0 + F1);
+          // Number of operations: 3
+          I[1] = F0*F1*G[1]*W6[ip];
           
-          // Number of operations: 4
-          I[2] = F3*G[0]*W6[ip]*(F0 + F1);
+          // Number of operations: 3
+          I[2] = F2*F3*G[0]*W6[ip];
           
-          // Number of operations: 4
-          I[3] = F3*G[1]*W6[ip]*(F0 + F1);
+          // Number of operations: 3
+          I[3] = F2*F3*G[1]*W6[ip];
           
           
           // Number of operations for primary indices: 432
@@ -8459,10 +8479,10 @@ void bloch_torrey_notime3d_interior_facet_integral_0_0::tabulate_tensor(double* 
         }
       case 3:
         {
-          // Total number of operations to compute element tensor (from this point): 2832
+          // Total number of operations to compute element tensor (from this point): 2808
         
         // Loop quadrature points for integral.
-        // Number of operations to compute element tensor for following IP loop = 2832
+        // Number of operations to compute element tensor for following IP loop = 2808
         for (unsigned int ip = 0; ip < 6; ip++)
         {
           
@@ -8475,25 +8495,25 @@ void bloch_torrey_notime3d_interior_facet_integral_0_0::tabulate_tensor(double* 
           // Total number of operations to compute function values = 24
           for (unsigned int r = 0; r < 3; r++)
           {
-            F0 += FE0_f0[ip][r]*w[7][nzc3[r] + 4];
-            F1 += FE0_f0[ip][r]*w[7][nzc3[r]];
-            F2 += FE0_f0[ip][r]*w[3][nzc3[r] + 4];
-            F3 += FE0_f0[ip][r]*w[3][nzc3[r]];
+            F0 += FE0_f0[ip][r]*w[5][nzc3[r] + 4];
+            F1 += FE0_f0[ip][r]*w[7][nzc3[r] + 4];
+            F2 += FE0_f0[ip][r]*w[5][nzc3[r]];
+            F3 += FE0_f0[ip][r]*w[7][nzc3[r]];
           }// end loop over 'r'
           
-          // Number of operations to compute ip constants: 16
+          // Number of operations to compute ip constants: 12
           double I[4];
-          // Number of operations: 4
-          I[0] = F2*G[0]*W6[ip]*(F0 + F1);
+          // Number of operations: 3
+          I[0] = F0*F1*G[0]*W6[ip];
           
-          // Number of operations: 4
-          I[1] = F2*G[1]*W6[ip]*(F0 + F1);
+          // Number of operations: 3
+          I[1] = F0*F1*G[1]*W6[ip];
           
-          // Number of operations: 4
-          I[2] = F3*G[0]*W6[ip]*(F0 + F1);
+          // Number of operations: 3
+          I[2] = F2*F3*G[0]*W6[ip];
           
-          // Number of operations: 4
-          I[3] = F3*G[1]*W6[ip]*(F0 + F1);
+          // Number of operations: 3
+          I[3] = F2*F3*G[1]*W6[ip];
           
           
           // Number of operations for primary indices: 432
@@ -8549,7 +8569,7 @@ void bloch_torrey_notime3d_interior_facet_integral_0_0::tabulate_tensor(double* 
  #ifndef UFC_BACKWARD_COMPATIBILITY 
 /// Tabulate the tensor for the contribution from a local interior facet
 /// using the specified reference cell quadrature points/weights
-void bloch_torrey_notime3d_interior_facet_integral_0_0::tabulate_tensor(double* A,
+void bloch_torrey3d_interior_facet_integral_0_0::tabulate_tensor(double* A,
                      const double * const * w,
                      const ufc::cell& c,
                      unsigned int num_quadrature_points,
@@ -8561,68 +8581,2090 @@ void bloch_torrey_notime3d_interior_facet_integral_0_0::tabulate_tensor(double* 
 #endif
 
 /// Constructor
-bloch_torrey_notime3d_form_0::bloch_torrey_notime3d_form_0() : ufc::form()
+bloch_torrey3d_cell_integral_1_0::bloch_torrey3d_cell_integral_1_0() : ufc::cell_integral()
 {
     // Do nothing
 }
 
 /// Destructor
-bloch_torrey_notime3d_form_0::~bloch_torrey_notime3d_form_0()
+bloch_torrey3d_cell_integral_1_0::~bloch_torrey3d_cell_integral_1_0()
+{
+    // Do nothing
+}
+
+/// Tabulate the tensor for the contribution from a local cell
+void bloch_torrey3d_cell_integral_1_0::tabulate_tensor(double* A,
+                                    const double * const * w,
+                                    const ufc::cell& c) const
+{
+    // Extract vertex coordinates
+    const double * const * x = c.coordinates;
+    
+    // Compute Jacobian of affine map from reference cell
+    const double J_00 = x[1][0] - x[0][0];
+    const double J_01 = x[2][0] - x[0][0];
+    const double J_02 = x[3][0] - x[0][0];
+    const double J_10 = x[1][1] - x[0][1];
+    const double J_11 = x[2][1] - x[0][1];
+    const double J_12 = x[3][1] - x[0][1];
+    const double J_20 = x[1][2] - x[0][2];
+    const double J_21 = x[2][2] - x[0][2];
+    const double J_22 = x[3][2] - x[0][2];
+    
+    // Compute sub determinants
+    const double d_00 = J_11*J_22 - J_12*J_21;
+    const double d_01 = J_12*J_20 - J_10*J_22;
+    const double d_02 = J_10*J_21 - J_11*J_20;
+    const double d_10 = J_02*J_21 - J_01*J_22;
+    const double d_11 = J_00*J_22 - J_02*J_20;
+    const double d_12 = J_01*J_20 - J_00*J_21;
+    const double d_20 = J_01*J_12 - J_02*J_11;
+    const double d_21 = J_02*J_10 - J_00*J_12;
+    const double d_22 = J_00*J_11 - J_01*J_10;
+    
+    // Compute determinant of Jacobian
+    double detJ = J_00*d_00 + J_10*d_10 + J_20*d_20;
+    
+    // Compute inverse of Jacobian
+    const double K_00 = d_00 / detJ;
+    const double K_01 = d_10 / detJ;
+    const double K_02 = d_20 / detJ;
+    const double K_10 = d_01 / detJ;
+    const double K_11 = d_11 / detJ;
+    const double K_12 = d_21 / detJ;
+    const double K_20 = d_02 / detJ;
+    const double K_21 = d_12 / detJ;
+    const double K_22 = d_22 / detJ;
+    
+    // Set scale factor
+    const double det = std::abs(detJ);
+    
+    // Cell Volume.
+    
+    // Compute circumradius.
+    
+    
+    // Facet Area (divide by two because 'det' is scaled by area of reference triangle).
+    
+    // Array of quadrature weights.
+    static const double W24[24] = {0.00665379170969465, 0.00665379170969465, 0.00665379170969465, 0.00665379170969465, 0.00167953517588678, 0.00167953517588678, 0.00167953517588678, 0.00167953517588678, 0.0092261969239424, 0.0092261969239424, 0.0092261969239424, 0.0092261969239424, 0.00803571428571428, 0.00803571428571428, 0.00803571428571428, 0.00803571428571428, 0.00803571428571428, 0.00803571428571428, 0.00803571428571428, 0.00803571428571428, 0.00803571428571428, 0.00803571428571428, 0.00803571428571428, 0.00803571428571428};
+    // Quadrature points on the UFC reference element: (0.356191386222545, 0.214602871259152, 0.214602871259152), (0.214602871259152, 0.214602871259152, 0.214602871259152), (0.214602871259152, 0.214602871259152, 0.356191386222545), (0.214602871259152, 0.356191386222545, 0.214602871259152), (0.877978124396166, 0.0406739585346113, 0.0406739585346113), (0.0406739585346113, 0.0406739585346113, 0.0406739585346113), (0.0406739585346113, 0.0406739585346113, 0.877978124396166), (0.0406739585346113, 0.877978124396166, 0.0406739585346113), (0.0329863295731731, 0.322337890142276, 0.322337890142276), (0.322337890142276, 0.322337890142276, 0.322337890142276), (0.322337890142276, 0.322337890142276, 0.0329863295731731), (0.322337890142276, 0.0329863295731731, 0.322337890142276), (0.269672331458316, 0.0636610018750175, 0.0636610018750175), (0.0636610018750175, 0.269672331458316, 0.0636610018750175), (0.0636610018750175, 0.0636610018750175, 0.269672331458316), (0.603005664791649, 0.0636610018750175, 0.0636610018750175), (0.0636610018750175, 0.603005664791649, 0.0636610018750175), (0.0636610018750175, 0.0636610018750175, 0.603005664791649), (0.0636610018750175, 0.269672331458316, 0.603005664791649), (0.269672331458316, 0.603005664791649, 0.0636610018750175), (0.603005664791649, 0.0636610018750175, 0.269672331458316), (0.0636610018750175, 0.603005664791649, 0.269672331458316), (0.269672331458316, 0.0636610018750175, 0.603005664791649), (0.603005664791649, 0.269672331458316, 0.0636610018750175)
+    
+    // Value of basis functions at quadrature points.
+    static const double FE0[24][4] = \
+    {{0.214602871259152, 0.356191386222545, 0.214602871259152, 0.214602871259152},
+    {0.356191386222545, 0.214602871259152, 0.214602871259152, 0.214602871259152},
+    {0.214602871259152, 0.214602871259152, 0.214602871259152, 0.356191386222545},
+    {0.214602871259152, 0.214602871259152, 0.356191386222545, 0.214602871259152},
+    {0.0406739585346115, 0.877978124396166, 0.0406739585346114, 0.0406739585346113},
+    {0.877978124396166, 0.0406739585346112, 0.0406739585346114, 0.0406739585346113},
+    {0.0406739585346115, 0.0406739585346113, 0.0406739585346113, 0.877978124396166},
+    {0.0406739585346115, 0.0406739585346113, 0.877978124396166, 0.0406739585346113},
+    {0.322337890142276, 0.0329863295731731, 0.322337890142276, 0.322337890142276},
+    {0.0329863295731729, 0.322337890142276, 0.322337890142276, 0.322337890142276},
+    {0.322337890142276, 0.322337890142276, 0.322337890142276, 0.0329863295731731},
+    {0.322337890142276, 0.322337890142276, 0.0329863295731731, 0.322337890142276},
+    {0.603005664791649, 0.269672331458316, 0.0636610018750175, 0.0636610018750175},
+    {0.603005664791649, 0.0636610018750174, 0.269672331458316, 0.0636610018750175},
+    {0.603005664791649, 0.0636610018750175, 0.0636610018750175, 0.269672331458316},
+    {0.269672331458316, 0.603005664791649, 0.0636610018750175, 0.0636610018750175},
+    {0.269672331458316, 0.0636610018750175, 0.603005664791649, 0.0636610018750175},
+    {0.269672331458316, 0.0636610018750175, 0.0636610018750175, 0.603005664791649},
+    {0.0636610018750176, 0.0636610018750175, 0.269672331458316, 0.603005664791649},
+    {0.0636610018750176, 0.269672331458316, 0.603005664791649, 0.0636610018750175},
+    {0.0636610018750177, 0.603005664791649, 0.0636610018750175, 0.269672331458316},
+    {0.0636610018750176, 0.0636610018750175, 0.603005664791649, 0.269672331458316},
+    {0.0636610018750177, 0.269672331458316, 0.0636610018750175, 0.603005664791649},
+    {0.0636610018750177, 0.603005664791649, 0.269672331458316, 0.0636610018750175}};
+    
+    // Array of non-zero columns
+    static const unsigned int nzc4[4] = {4, 5, 6, 7};
+    
+    // Array of non-zero columns
+    static const unsigned int nzc0[4] = {0, 1, 2, 3};
+    
+    // Array of non-zero columns
+    static const unsigned int nzc12[4] = {12, 13, 14, 15};
+    
+    // Array of non-zero columns
+    static const unsigned int nzc8[4] = {8, 9, 10, 11};
+    
+    static const double FE2_C0_D001[24][2] = \
+    {{-1.0, 1.0},
+    {-1.0, 1.0},
+    {-1.0, 1.0},
+    {-1.0, 1.0},
+    {-1.0, 1.0},
+    {-1.0, 1.0},
+    {-1.0, 1.0},
+    {-1.0, 1.0},
+    {-1.0, 1.0},
+    {-1.0, 1.0},
+    {-1.0, 1.0},
+    {-1.0, 1.0},
+    {-1.0, 1.0},
+    {-1.0, 1.0},
+    {-1.0, 1.0},
+    {-1.0, 1.0},
+    {-1.0, 1.0},
+    {-1.0, 1.0},
+    {-1.0, 1.0},
+    {-1.0, 1.0},
+    {-1.0, 1.0},
+    {-1.0, 1.0},
+    {-1.0, 1.0},
+    {-1.0, 1.0}};
+    
+    // Array of non-zero columns
+    static const unsigned int nzc7[2] = {4, 5};
+    
+    // Array of non-zero columns
+    static const unsigned int nzc6[2] = {4, 6};
+    
+    // Array of non-zero columns
+    static const unsigned int nzc14[2] = {12, 14};
+    
+    // Array of non-zero columns
+    static const unsigned int nzc2[2] = {0, 2};
+    
+    // Array of non-zero columns
+    static const unsigned int nzc3[2] = {0, 1};
+    
+    // Array of non-zero columns
+    static const unsigned int nzc15[2] = {12, 13};
+    
+    // Array of non-zero columns
+    static const unsigned int nzc11[2] = {8, 9};
+    
+    // Array of non-zero columns
+    static const unsigned int nzc1[2] = {0, 3};
+    
+    // Array of non-zero columns
+    static const unsigned int nzc9[2] = {8, 11};
+    
+    // Array of non-zero columns
+    static const unsigned int nzc10[2] = {8, 10};
+    
+    // Array of non-zero columns
+    static const unsigned int nzc5[2] = {4, 7};
+    
+    // Array of non-zero columns
+    static const unsigned int nzc13[2] = {12, 15};
+    
+    // Reset values in the element tensor.
+    for (unsigned int r = 0; r < 16; r++)
+    {
+      A[r] = 0.0;
+    }// end loop over 'r'
+    // Number of operations to compute geometry constants: 246.
+    double G[28];
+    G[0] = det*w[1][0]*(K_00*K_10 + K_01*K_11 + K_02*K_12);
+    G[1] = det*w[1][0]*(K_10*K_10 + K_11*K_11 + K_12*K_12);
+    G[2] = det*w[1][0]*(K_10*K_20 + K_11*K_21 + K_12*K_22);
+    G[3] =  - det*w[1][0]*(K_00*K_10 + K_01*K_11 + K_02*K_12);
+    G[4] =  - det*w[1][0]*(K_10*K_10 + K_11*K_11 + K_12*K_12);
+    G[5] =  - det*w[1][0]*(K_10*K_20 + K_11*K_21 + K_12*K_22);
+    G[6] = det*w[1][0]*(K_00*K_00 + K_01*K_01 + K_02*K_02);
+    G[7] = det*w[1][0]*(K_00*K_20 + K_01*K_21 + K_02*K_22);
+    G[8] =  - det*w[1][0]*(K_00*K_00 + K_01*K_01 + K_02*K_02);
+    G[9] =  - det*w[1][0]*(K_00*K_20 + K_01*K_21 + K_02*K_22);
+    G[10] = det*w[1][0]*(K_20*K_20 + K_21*K_21 + K_22*K_22);
+    G[11] =  - det*w[1][0]*(K_20*K_20 + K_21*K_21 + K_22*K_22);
+    G[12] = det*(K_00*K_20 + K_01*K_21 + K_02*K_22 - w[1][0]*(K_00*K_20 + K_01*K_21 + K_02*K_22));
+    G[13] = det*(K_10*K_20 + K_11*K_21 + K_12*K_22 - w[1][0]*(K_10*K_20 + K_11*K_21 + K_12*K_22));
+    G[14] = det*(K_20*K_20 + K_21*K_21 + K_22*K_22 - w[1][0]*(K_20*K_20 + K_21*K_21 + K_22*K_22));
+    G[15] = det*(w[1][0]*(K_00*K_20 + K_01*K_21 + K_02*K_22) - (K_00*K_20 + K_01*K_21 + K_02*K_22));
+    G[16] = det*(w[1][0]*(K_10*K_20 + K_11*K_21 + K_12*K_22) - (K_10*K_20 + K_11*K_21 + K_12*K_22));
+    G[17] = det*(w[1][0]*(K_20*K_20 + K_21*K_21 + K_22*K_22) - (K_20*K_20 + K_21*K_21 + K_22*K_22));
+    G[18] = det*(K_00*K_10 + K_01*K_11 + K_02*K_12 - w[1][0]*(K_00*K_10 + K_01*K_11 + K_02*K_12));
+    G[19] = det*(K_10*K_10 + K_11*K_11 + K_12*K_12 - w[1][0]*(K_10*K_10 + K_11*K_11 + K_12*K_12));
+    G[20] = det*(w[1][0]*(K_00*K_10 + K_01*K_11 + K_02*K_12) - (K_00*K_10 + K_01*K_11 + K_02*K_12));
+    G[21] = det*(w[1][0]*(K_10*K_10 + K_11*K_11 + K_12*K_12) - (K_10*K_10 + K_11*K_11 + K_12*K_12));
+    G[22] = det*(K_00*K_00 + K_01*K_01 + K_02*K_02 - w[1][0]*(K_00*K_00 + K_01*K_01 + K_02*K_02));
+    G[23] = det*(w[1][0]*(K_00*K_00 + K_01*K_01 + K_02*K_02) - (K_00*K_00 + K_01*K_01 + K_02*K_02));
+    G[24] = det*(w[1][0]-1.0);
+    G[25] = det*(1.0 - w[1][0]);
+    G[26] = det*w[1][0];
+    G[27] =  - det*w[1][0];
+    
+    // Compute element tensor using UFL quadrature representation
+    // Optimisations: ('eliminate zeros', True), ('ignore ones', True), ('ignore zero tables', True), ('optimisation', 'simplify_expressions'), ('remove zero terms', True)
+    
+    // Loop quadrature points for integral.
+    // Number of operations to compute element tensor for following IP loop = 10080
+    for (unsigned int ip = 0; ip < 24; ip++)
+    {
+      
+      // Coefficient declarations.
+      double F0 = 0.0;
+      double F1 = 0.0;
+      double F2 = 0.0;
+      double F3 = 0.0;
+      double F4 = 0.0;
+      double F5 = 0.0;
+      double F6 = 0.0;
+      double F7 = 0.0;
+      double F8 = 0.0;
+      double F9 = 0.0;
+      double F10 = 0.0;
+      double F11 = 0.0;
+      double F12 = 0.0;
+      double F13 = 0.0;
+      double F14 = 0.0;
+      double F15 = 0.0;
+      double F16 = 0.0;
+      double F17 = 0.0;
+      double F18 = 0.0;
+      double F19 = 0.0;
+      double F20 = 0.0;
+      double F21 = 0.0;
+      
+      // Total number of operations to compute function values = 48
+      for (unsigned int r = 0; r < 2; r++)
+      {
+        F6 += FE2_C0_D001[ip][r]*w[0][nzc11[r]];
+        F7 += FE2_C0_D001[ip][r]*w[0][nzc10[r]];
+        F8 += FE2_C0_D001[ip][r]*w[0][nzc9[r]];
+        F10 += FE2_C0_D001[ip][r]*w[0][nzc15[r]];
+        F11 += FE2_C0_D001[ip][r]*w[0][nzc14[r]];
+        F12 += FE2_C0_D001[ip][r]*w[0][nzc13[r]];
+        F15 += FE2_C0_D001[ip][r]*w[0][nzc3[r]];
+        F16 += FE2_C0_D001[ip][r]*w[0][nzc2[r]];
+        F17 += FE2_C0_D001[ip][r]*w[0][nzc1[r]];
+        F19 += FE2_C0_D001[ip][r]*w[0][nzc7[r]];
+        F20 += FE2_C0_D001[ip][r]*w[0][nzc6[r]];
+        F21 += FE2_C0_D001[ip][r]*w[0][nzc5[r]];
+      }// end loop over 'r'
+      
+      // Total number of operations to compute function values = 80
+      for (unsigned int r = 0; r < 4; r++)
+      {
+        F0 += FE0[ip][r]*w[6][r];
+        F1 += FE0[ip][r]*w[0][nzc12[r]];
+        F2 += FE0[ip][r]*w[2][r];
+        F3 += FE0[ip][r]*w[4][r];
+        F4 += FE0[ip][r]*w[3][nzc0[r]];
+        F5 += FE0[ip][r]*w[5][r];
+        F9 += FE0[ip][r]*w[0][nzc8[r]];
+        F13 += FE0[ip][r]*w[7][r];
+        F14 += FE0[ip][r]*w[0][nzc4[r]];
+        F18 += FE0[ip][r]*w[0][nzc0[r]];
+      }// end loop over 'r'
+      
+      // Number of operations to compute ip constants: 212
+      double I[16];
+      // Number of operations: 14
+      I[0] = F5*W24[ip]*(F0*(F6*G[0] + F7*G[1] + F8*G[2]) + F6*G[3] + F7*G[4] + F8*G[5]);
+      
+      // Number of operations: 14
+      I[1] = F5*W24[ip]*(F0*(F6*G[6] + F7*G[0] + F8*G[7]) + F6*G[8] + F7*G[3] + F8*G[9]);
+      
+      // Number of operations: 14
+      I[2] = F5*W24[ip]*(F0*(F10*G[7] + F11*G[2] + F12*G[10]) + F10*G[9] + F11*G[5] + F12*G[11]);
+      
+      // Number of operations: 14
+      I[3] = F5*W24[ip]*(F0*(F10*G[0] + F11*G[1] + F12*G[2]) + F10*G[3] + F11*G[4] + F12*G[5]);
+      
+      // Number of operations: 14
+      I[4] = F5*W24[ip]*(F0*(F10*G[6] + F11*G[0] + F12*G[7]) + F10*G[8] + F11*G[3] + F12*G[9]);
+      
+      // Number of operations: 14
+      I[5] = F5*W24[ip]*(F0*(F15*G[12] + F16*G[13] + F17*G[14]) + F15*G[15] + F16*G[16] + F17*G[17]);
+      
+      // Number of operations: 14
+      I[6] = F5*W24[ip]*(F0*(F15*G[18] + F16*G[19] + F17*G[13]) + F15*G[20] + F16*G[21] + F17*G[16]);
+      
+      // Number of operations: 14
+      I[7] = F5*W24[ip]*(F0*(F15*G[22] + F16*G[18] + F17*G[12]) + F15*G[23] + F16*G[20] + F17*G[15]);
+      
+      // Number of operations: 14
+      I[8] = F5*W24[ip]*(F0*(F19*G[12] + F20*G[13] + F21*G[14]) + F19*G[15] + F20*G[16] + F21*G[17]);
+      
+      // Number of operations: 14
+      I[9] = F5*W24[ip]*(F0*(F19*G[18] + F20*G[19] + F21*G[13]) + F19*G[20] + F20*G[21] + F21*G[16]);
+      
+      // Number of operations: 14
+      I[10] = F5*W24[ip]*(F0*(F19*G[22] + F20*G[18] + F21*G[12]) + F19*G[23] + F20*G[20] + F21*G[15]);
+      
+      // Number of operations: 14
+      I[11] = F5*W24[ip]*(F0*(F6*G[7] + F7*G[2] + F8*G[10]) + F6*G[9] + F7*G[5] + F8*G[11]);
+      
+      // Number of operations: 11
+      I[12] = (F14*F2*F3*F4*W24[ip]*(G[25] + F0*G[24]) + F18*G[25]*W24[ip]/F13);
+      
+      // Number of operations: 11
+      I[13] = (F2*F3*F4*F9*W24[ip]*(G[27] + F0*G[26]) + F1*G[26]*W24[ip]/F13);
+      
+      // Number of operations: 11
+      I[14] = (F18*F2*F3*F4*W24[ip]*(G[24] + F0*G[25]) + F14*G[25]*W24[ip]/F13);
+      
+      // Number of operations: 11
+      I[15] = (F1*F2*F3*F4*W24[ip]*(G[26] + F0*G[27]) + F9*G[26]*W24[ip]/F13);
+      
+      
+      // Number of operations for primary indices: 48
+      for (unsigned int j = 0; j < 2; j++)
+      {
+        // Number of operations to compute entry: 2
+        A[nzc10[j]] += FE2_C0_D001[ip][j]*I[0];
+        // Number of operations to compute entry: 2
+        A[nzc11[j]] += FE2_C0_D001[ip][j]*I[1];
+        // Number of operations to compute entry: 2
+        A[nzc13[j]] += FE2_C0_D001[ip][j]*I[2];
+        // Number of operations to compute entry: 2
+        A[nzc14[j]] += FE2_C0_D001[ip][j]*I[3];
+        // Number of operations to compute entry: 2
+        A[nzc15[j]] += FE2_C0_D001[ip][j]*I[4];
+        // Number of operations to compute entry: 2
+        A[nzc1[j]] += FE2_C0_D001[ip][j]*I[5];
+        // Number of operations to compute entry: 2
+        A[nzc2[j]] += FE2_C0_D001[ip][j]*I[6];
+        // Number of operations to compute entry: 2
+        A[nzc3[j]] += FE2_C0_D001[ip][j]*I[7];
+        // Number of operations to compute entry: 2
+        A[nzc5[j]] += FE2_C0_D001[ip][j]*I[8];
+        // Number of operations to compute entry: 2
+        A[nzc6[j]] += FE2_C0_D001[ip][j]*I[9];
+        // Number of operations to compute entry: 2
+        A[nzc7[j]] += FE2_C0_D001[ip][j]*I[10];
+        // Number of operations to compute entry: 2
+        A[nzc9[j]] += FE2_C0_D001[ip][j]*I[11];
+      }// end loop over 'j'
+      
+      // Number of operations for primary indices: 32
+      for (unsigned int j = 0; j < 4; j++)
+      {
+        // Number of operations to compute entry: 2
+        A[nzc0[j]] += FE0[ip][j]*I[12];
+        // Number of operations to compute entry: 2
+        A[nzc12[j]] += FE0[ip][j]*I[13];
+        // Number of operations to compute entry: 2
+        A[nzc4[j]] += FE0[ip][j]*I[14];
+        // Number of operations to compute entry: 2
+        A[nzc8[j]] += FE0[ip][j]*I[15];
+      }// end loop over 'j'
+    }// end loop over 'ip'
+}
+
+ #ifndef UFC_BACKWARD_COMPATIBILITY 
+/// Tabulate the tensor for the contribution from a local cell
+/// using the specified reference cell quadrature points/weights
+void bloch_torrey3d_cell_integral_1_0::tabulate_tensor(double* A,
+                     const double * const * w,
+                     const ufc::cell& c,
+                     unsigned int num_quadrature_points,
+                     const double * const * quadrature_points,
+                     const double* quadrature_weights) const
+{
+    throw std::runtime_error("Quadrature version of tabulate_tensor not yet implemented (introduced in UFC 2.0).");
+}
+#endif
+
+/// Constructor
+bloch_torrey3d_interior_facet_integral_1_0::bloch_torrey3d_interior_facet_integral_1_0() : ufc::interior_facet_integral()
+{
+    // Do nothing
+}
+
+/// Destructor
+bloch_torrey3d_interior_facet_integral_1_0::~bloch_torrey3d_interior_facet_integral_1_0()
+{
+    // Do nothing
+}
+
+/// Tabulate the tensor for the contribution from a local interior facet
+void bloch_torrey3d_interior_facet_integral_1_0::tabulate_tensor(double* A,
+                                    const double * const * w,
+                                    const ufc::cell& c0,
+                                    const ufc::cell& c1,
+                                    unsigned int facet0,
+                                    unsigned int facet1) const
+{
+    // Extract vertex coordinates
+    const double * const * x0 = c0.coordinates;
+    
+    // Compute Jacobian of affine map from reference cell
+    
+    // Compute sub determinants
+    
+    // Compute determinant of Jacobian
+    
+    // Compute inverse of Jacobian
+    
+    // Extract vertex coordinates
+    
+    // Compute Jacobian of affine map from reference cell
+    
+    // Compute sub determinants
+    
+    // Compute determinant of Jacobian
+    
+    // Compute inverse of Jacobian
+    
+    // Get vertices on face
+    static unsigned int face_vertices[4][3] = {{1, 2, 3}, {0, 2, 3}, {0, 1, 3}, {0, 1, 2}};
+    const unsigned int v0 = face_vertices[facet0][0];
+    const unsigned int v1 = face_vertices[facet0][1];
+    const unsigned int v2 = face_vertices[facet0][2];
+    
+    // Compute scale factor (area of face scaled by area of reference triangle)
+    const double a0 = (x0[v0][1]*x0[v1][2] + x0[v0][2]*x0[v2][1] + x0[v1][1]*x0[v2][2]) - (x0[v2][1]*x0[v1][2] + x0[v2][2]*x0[v0][1] + x0[v1][1]*x0[v0][2]);
+    
+    const double a1 = (x0[v0][2]*x0[v1][0] + x0[v0][0]*x0[v2][2] + x0[v1][2]*x0[v2][0]) - (x0[v2][2]*x0[v1][0] + x0[v2][0]*x0[v0][2] + x0[v1][2]*x0[v0][0]);
+    
+    const double a2 = (x0[v0][0]*x0[v1][1] + x0[v0][1]*x0[v2][0] + x0[v1][0]*x0[v2][1]) - (x0[v2][0]*x0[v1][1] + x0[v2][1]*x0[v0][0] + x0[v1][0]*x0[v0][1]);
+    
+    const double det = std::sqrt(a0*a0 + a1*a1 + a2*a2);
+    
+    
+    // Cell Volume.
+    
+    // Compute circumradius.
+    
+    
+    
+    // Facet Area (divide by two because 'det' is scaled by area of reference triangle).
+    
+    // Array of quadrature weights.
+    static const double W6[6] = {0.054975871827661, 0.054975871827661, 0.054975871827661, 0.111690794839005, 0.111690794839005, 0.111690794839005};
+    // Quadrature points on the UFC reference element: (0.816847572980459, 0.091576213509771), (0.091576213509771, 0.816847572980459), (0.091576213509771, 0.091576213509771), (0.10810301816807, 0.445948490915965), (0.445948490915965, 0.10810301816807), (0.445948490915965, 0.445948490915965)
+    
+    // Value of basis functions at quadrature points.
+    static const double FE0_f0[6][3] = \
+    {{0.09157621350977, 0.816847572980459, 0.091576213509771},
+    {0.0915762135097701, 0.091576213509771, 0.816847572980459},
+    {0.816847572980458, 0.091576213509771, 0.091576213509771},
+    {0.445948490915965, 0.10810301816807, 0.445948490915965},
+    {0.445948490915965, 0.445948490915965, 0.10810301816807},
+    {0.10810301816807, 0.445948490915965, 0.445948490915965}};
+    
+    // Array of non-zero columns
+    static const unsigned int nzc0[3] = {1, 2, 3};
+    
+    // Array of non-zero columns
+    static const unsigned int nzc1[3] = {0, 2, 3};
+    
+    // Array of non-zero columns
+    static const unsigned int nzc2[3] = {0, 1, 3};
+    
+    // Array of non-zero columns
+    static const unsigned int nzc3[3] = {0, 1, 2};
+    
+    // Array of non-zero columns
+    static const unsigned int nzc7[3] = {13, 14, 15};
+    
+    // Array of non-zero columns
+    static const unsigned int nzc6[3] = {9, 10, 11};
+    
+    // Array of non-zero columns
+    static const unsigned int nzc5[3] = {5, 6, 7};
+    
+    // Array of non-zero columns
+    static const unsigned int nzc4[3] = {1, 2, 3};
+    
+    // Array of non-zero columns
+    static const unsigned int nzc13[3] = {4, 5, 7};
+    
+    // Array of non-zero columns
+    static const unsigned int nzc12[3] = {0, 1, 3};
+    
+    // Array of non-zero columns
+    static const unsigned int nzc15[3] = {12, 13, 15};
+    
+    // Array of non-zero columns
+    static const unsigned int nzc14[3] = {8, 9, 11};
+    
+    // Array of non-zero columns
+    static const unsigned int nzc18[3] = {8, 9, 10};
+    
+    // Array of non-zero columns
+    static const unsigned int nzc19[3] = {12, 13, 14};
+    
+    // Array of non-zero columns
+    static const unsigned int nzc16[3] = {0, 1, 2};
+    
+    // Array of non-zero columns
+    static const unsigned int nzc17[3] = {4, 5, 6};
+    
+    // Array of non-zero columns
+    static const unsigned int nzc8[3] = {0, 2, 3};
+    
+    // Array of non-zero columns
+    static const unsigned int nzc9[3] = {4, 6, 7};
+    
+    // Array of non-zero columns
+    static const unsigned int nzc10[3] = {8, 10, 11};
+    
+    // Array of non-zero columns
+    static const unsigned int nzc11[3] = {12, 14, 15};
+    
+    // Reset values in the element tensor.
+    for (unsigned int r = 0; r < 32; r++)
+    {
+      A[r] = 0.0;
+    }// end loop over 'r'
+    // Number of operations to compute geometry constants: 8.
+    double G[2];
+    G[0] = 0.5*std::abs((w[1][0] - w[1][1]))*det;
+    G[1] = -0.5*std::abs((w[1][0] - w[1][1]))*det;
+    
+    // Compute element tensor using UFL quadrature representation
+    // Optimisations: ('eliminate zeros', True), ('ignore ones', True), ('ignore zero tables', True), ('optimisation', 'simplify_expressions'), ('remove zero terms', True)
+    switch (facet0)
+    {
+    case 0:
+      {
+        switch (facet1)
+      {
+      case 0:
+        {
+          // Total number of operations to compute element tensor (from this point): 1152
+        
+        // Loop quadrature points for integral.
+        // Number of operations to compute element tensor for following IP loop = 1152
+        for (unsigned int ip = 0; ip < 6; ip++)
+        {
+          
+          // Coefficient declarations.
+          double F0 = 0.0;
+          double F1 = 0.0;
+          double F2 = 0.0;
+          double F3 = 0.0;
+          double F4 = 0.0;
+          double F5 = 0.0;
+          double F6 = 0.0;
+          double F7 = 0.0;
+          double F8 = 0.0;
+          double F9 = 0.0;
+          double F10 = 0.0;
+          double F11 = 0.0;
+          
+          // Total number of operations to compute function values = 72
+          for (unsigned int r = 0; r < 3; r++)
+          {
+            F0 += FE0_f0[ip][r]*w[6][nzc0[r] + 4];
+            F1 += FE0_f0[ip][r]*w[8][nzc0[r] + 4];
+            F2 += FE0_f0[ip][r]*w[0][nzc4[r] + 16];
+            F3 += FE0_f0[ip][r]*w[0][nzc6[r] + 16];
+            F4 += FE0_f0[ip][r]*w[0][nzc5[r] + 16];
+            F5 += FE0_f0[ip][r]*w[0][nzc7[r] + 16];
+            F6 += FE0_f0[ip][r]*w[6][nzc0[r]];
+            F7 += FE0_f0[ip][r]*w[8][nzc0[r]];
+            F8 += FE0_f0[ip][r]*w[0][nzc4[r]];
+            F9 += FE0_f0[ip][r]*w[0][nzc6[r]];
+            F10 += FE0_f0[ip][r]*w[0][nzc5[r]];
+            F11 += FE0_f0[ip][r]*w[0][nzc7[r]];
+          }// end loop over 'r'
+          
+          // Number of operations to compute ip constants: 72
+          double I[8];
+          // Number of operations: 9
+          I[0] = F1*W6[ip]*(G[0]*(F3 + F0*F2) + G[1]*(F2 + F0*F3));
+          
+          // Number of operations: 9
+          I[1] = F1*W6[ip]*(G[0]*(F5 + F0*F4) + G[1]*(F4 + F0*F5));
+          
+          // Number of operations: 9
+          I[2] = F1*W6[ip]*(G[0]*(F2 + F0*F3) + G[1]*(F3 + F0*F2));
+          
+          // Number of operations: 9
+          I[3] = F1*W6[ip]*(G[0]*(F4 + F0*F5) + G[1]*(F5 + F0*F4));
+          
+          // Number of operations: 9
+          I[4] = F7*W6[ip]*(G[0]*(F9 + F6*F8) + G[1]*(F8 + F6*F9));
+          
+          // Number of operations: 9
+          I[5] = F7*W6[ip]*(G[0]*(F11 + F10*F6) + G[1]*(F10 + F11*F6));
+          
+          // Number of operations: 9
+          I[6] = F7*W6[ip]*(G[0]*(F8 + F6*F9) + G[1]*(F9 + F6*F8));
+          
+          // Number of operations: 9
+          I[7] = F7*W6[ip]*(G[0]*(F10 + F11*F6) + G[1]*(F11 + F10*F6));
+          
+          
+          // Number of operations for primary indices: 48
+          for (unsigned int j = 0; j < 3; j++)
+          {
+            // Number of operations to compute entry: 2
+            A[(nzc4[j] + 16)] += FE0_f0[ip][j]*I[0];
+            // Number of operations to compute entry: 2
+            A[(nzc5[j] + 16)] += FE0_f0[ip][j]*I[1];
+            // Number of operations to compute entry: 2
+            A[(nzc6[j] + 16)] += FE0_f0[ip][j]*I[2];
+            // Number of operations to compute entry: 2
+            A[(nzc7[j] + 16)] += FE0_f0[ip][j]*I[3];
+            // Number of operations to compute entry: 2
+            A[nzc4[j]] += FE0_f0[ip][j]*I[4];
+            // Number of operations to compute entry: 2
+            A[nzc5[j]] += FE0_f0[ip][j]*I[5];
+            // Number of operations to compute entry: 2
+            A[nzc6[j]] += FE0_f0[ip][j]*I[6];
+            // Number of operations to compute entry: 2
+            A[nzc7[j]] += FE0_f0[ip][j]*I[7];
+          }// end loop over 'j'
+        }// end loop over 'ip'
+          break;
+        }
+      case 1:
+        {
+          // Total number of operations to compute element tensor (from this point): 1152
+        
+        // Loop quadrature points for integral.
+        // Number of operations to compute element tensor for following IP loop = 1152
+        for (unsigned int ip = 0; ip < 6; ip++)
+        {
+          
+          // Coefficient declarations.
+          double F0 = 0.0;
+          double F1 = 0.0;
+          double F2 = 0.0;
+          double F3 = 0.0;
+          double F4 = 0.0;
+          double F5 = 0.0;
+          double F6 = 0.0;
+          double F7 = 0.0;
+          double F8 = 0.0;
+          double F9 = 0.0;
+          double F10 = 0.0;
+          double F11 = 0.0;
+          
+          // Total number of operations to compute function values = 72
+          for (unsigned int r = 0; r < 3; r++)
+          {
+            F0 += FE0_f0[ip][r]*w[6][nzc1[r] + 4];
+            F1 += FE0_f0[ip][r]*w[8][nzc1[r] + 4];
+            F2 += FE0_f0[ip][r]*w[0][nzc8[r] + 16];
+            F3 += FE0_f0[ip][r]*w[0][nzc10[r] + 16];
+            F4 += FE0_f0[ip][r]*w[0][nzc9[r] + 16];
+            F5 += FE0_f0[ip][r]*w[0][nzc11[r] + 16];
+            F6 += FE0_f0[ip][r]*w[6][nzc0[r]];
+            F7 += FE0_f0[ip][r]*w[8][nzc0[r]];
+            F8 += FE0_f0[ip][r]*w[0][nzc4[r]];
+            F9 += FE0_f0[ip][r]*w[0][nzc6[r]];
+            F10 += FE0_f0[ip][r]*w[0][nzc5[r]];
+            F11 += FE0_f0[ip][r]*w[0][nzc7[r]];
+          }// end loop over 'r'
+          
+          // Number of operations to compute ip constants: 72
+          double I[8];
+          // Number of operations: 9
+          I[0] = F1*W6[ip]*(G[0]*(F2 + F0*F3) + G[1]*(F3 + F0*F2));
+          
+          // Number of operations: 9
+          I[1] = F1*W6[ip]*(G[0]*(F4 + F0*F5) + G[1]*(F5 + F0*F4));
+          
+          // Number of operations: 9
+          I[2] = F1*W6[ip]*(G[0]*(F3 + F0*F2) + G[1]*(F2 + F0*F3));
+          
+          // Number of operations: 9
+          I[3] = F1*W6[ip]*(G[0]*(F5 + F0*F4) + G[1]*(F4 + F0*F5));
+          
+          // Number of operations: 9
+          I[4] = F7*W6[ip]*(G[0]*(F9 + F6*F8) + G[1]*(F8 + F6*F9));
+          
+          // Number of operations: 9
+          I[5] = F7*W6[ip]*(G[0]*(F11 + F10*F6) + G[1]*(F10 + F11*F6));
+          
+          // Number of operations: 9
+          I[6] = F7*W6[ip]*(G[0]*(F8 + F6*F9) + G[1]*(F9 + F6*F8));
+          
+          // Number of operations: 9
+          I[7] = F7*W6[ip]*(G[0]*(F10 + F11*F6) + G[1]*(F11 + F10*F6));
+          
+          
+          // Number of operations for primary indices: 48
+          for (unsigned int j = 0; j < 3; j++)
+          {
+            // Number of operations to compute entry: 2
+            A[(nzc10[j] + 16)] += FE0_f0[ip][j]*I[0];
+            // Number of operations to compute entry: 2
+            A[(nzc11[j] + 16)] += FE0_f0[ip][j]*I[1];
+            // Number of operations to compute entry: 2
+            A[(nzc8[j] + 16)] += FE0_f0[ip][j]*I[2];
+            // Number of operations to compute entry: 2
+            A[(nzc9[j] + 16)] += FE0_f0[ip][j]*I[3];
+            // Number of operations to compute entry: 2
+            A[nzc4[j]] += FE0_f0[ip][j]*I[4];
+            // Number of operations to compute entry: 2
+            A[nzc5[j]] += FE0_f0[ip][j]*I[5];
+            // Number of operations to compute entry: 2
+            A[nzc6[j]] += FE0_f0[ip][j]*I[6];
+            // Number of operations to compute entry: 2
+            A[nzc7[j]] += FE0_f0[ip][j]*I[7];
+          }// end loop over 'j'
+        }// end loop over 'ip'
+          break;
+        }
+      case 2:
+        {
+          // Total number of operations to compute element tensor (from this point): 1152
+        
+        // Loop quadrature points for integral.
+        // Number of operations to compute element tensor for following IP loop = 1152
+        for (unsigned int ip = 0; ip < 6; ip++)
+        {
+          
+          // Coefficient declarations.
+          double F0 = 0.0;
+          double F1 = 0.0;
+          double F2 = 0.0;
+          double F3 = 0.0;
+          double F4 = 0.0;
+          double F5 = 0.0;
+          double F6 = 0.0;
+          double F7 = 0.0;
+          double F8 = 0.0;
+          double F9 = 0.0;
+          double F10 = 0.0;
+          double F11 = 0.0;
+          
+          // Total number of operations to compute function values = 72
+          for (unsigned int r = 0; r < 3; r++)
+          {
+            F0 += FE0_f0[ip][r]*w[6][nzc2[r] + 4];
+            F1 += FE0_f0[ip][r]*w[8][nzc2[r] + 4];
+            F2 += FE0_f0[ip][r]*w[0][nzc12[r] + 16];
+            F3 += FE0_f0[ip][r]*w[0][nzc14[r] + 16];
+            F4 += FE0_f0[ip][r]*w[0][nzc13[r] + 16];
+            F5 += FE0_f0[ip][r]*w[0][nzc15[r] + 16];
+            F6 += FE0_f0[ip][r]*w[6][nzc0[r]];
+            F7 += FE0_f0[ip][r]*w[8][nzc0[r]];
+            F8 += FE0_f0[ip][r]*w[0][nzc4[r]];
+            F9 += FE0_f0[ip][r]*w[0][nzc6[r]];
+            F10 += FE0_f0[ip][r]*w[0][nzc5[r]];
+            F11 += FE0_f0[ip][r]*w[0][nzc7[r]];
+          }// end loop over 'r'
+          
+          // Number of operations to compute ip constants: 72
+          double I[8];
+          // Number of operations: 9
+          I[0] = F1*W6[ip]*(G[0]*(F3 + F0*F2) + G[1]*(F2 + F0*F3));
+          
+          // Number of operations: 9
+          I[1] = F1*W6[ip]*(G[0]*(F5 + F0*F4) + G[1]*(F4 + F0*F5));
+          
+          // Number of operations: 9
+          I[2] = F1*W6[ip]*(G[0]*(F2 + F0*F3) + G[1]*(F3 + F0*F2));
+          
+          // Number of operations: 9
+          I[3] = F1*W6[ip]*(G[0]*(F4 + F0*F5) + G[1]*(F5 + F0*F4));
+          
+          // Number of operations: 9
+          I[4] = F7*W6[ip]*(G[0]*(F9 + F6*F8) + G[1]*(F8 + F6*F9));
+          
+          // Number of operations: 9
+          I[5] = F7*W6[ip]*(G[0]*(F11 + F10*F6) + G[1]*(F10 + F11*F6));
+          
+          // Number of operations: 9
+          I[6] = F7*W6[ip]*(G[0]*(F8 + F6*F9) + G[1]*(F9 + F6*F8));
+          
+          // Number of operations: 9
+          I[7] = F7*W6[ip]*(G[0]*(F10 + F11*F6) + G[1]*(F11 + F10*F6));
+          
+          
+          // Number of operations for primary indices: 48
+          for (unsigned int j = 0; j < 3; j++)
+          {
+            // Number of operations to compute entry: 2
+            A[(nzc12[j] + 16)] += FE0_f0[ip][j]*I[0];
+            // Number of operations to compute entry: 2
+            A[(nzc13[j] + 16)] += FE0_f0[ip][j]*I[1];
+            // Number of operations to compute entry: 2
+            A[(nzc14[j] + 16)] += FE0_f0[ip][j]*I[2];
+            // Number of operations to compute entry: 2
+            A[(nzc15[j] + 16)] += FE0_f0[ip][j]*I[3];
+            // Number of operations to compute entry: 2
+            A[nzc4[j]] += FE0_f0[ip][j]*I[4];
+            // Number of operations to compute entry: 2
+            A[nzc5[j]] += FE0_f0[ip][j]*I[5];
+            // Number of operations to compute entry: 2
+            A[nzc6[j]] += FE0_f0[ip][j]*I[6];
+            // Number of operations to compute entry: 2
+            A[nzc7[j]] += FE0_f0[ip][j]*I[7];
+          }// end loop over 'j'
+        }// end loop over 'ip'
+          break;
+        }
+      case 3:
+        {
+          // Total number of operations to compute element tensor (from this point): 1152
+        
+        // Loop quadrature points for integral.
+        // Number of operations to compute element tensor for following IP loop = 1152
+        for (unsigned int ip = 0; ip < 6; ip++)
+        {
+          
+          // Coefficient declarations.
+          double F0 = 0.0;
+          double F1 = 0.0;
+          double F2 = 0.0;
+          double F3 = 0.0;
+          double F4 = 0.0;
+          double F5 = 0.0;
+          double F6 = 0.0;
+          double F7 = 0.0;
+          double F8 = 0.0;
+          double F9 = 0.0;
+          double F10 = 0.0;
+          double F11 = 0.0;
+          
+          // Total number of operations to compute function values = 72
+          for (unsigned int r = 0; r < 3; r++)
+          {
+            F0 += FE0_f0[ip][r]*w[6][nzc3[r] + 4];
+            F1 += FE0_f0[ip][r]*w[8][nzc3[r] + 4];
+            F2 += FE0_f0[ip][r]*w[0][nzc16[r] + 16];
+            F3 += FE0_f0[ip][r]*w[0][nzc18[r] + 16];
+            F4 += FE0_f0[ip][r]*w[0][nzc17[r] + 16];
+            F5 += FE0_f0[ip][r]*w[0][nzc19[r] + 16];
+            F6 += FE0_f0[ip][r]*w[6][nzc0[r]];
+            F7 += FE0_f0[ip][r]*w[8][nzc0[r]];
+            F8 += FE0_f0[ip][r]*w[0][nzc4[r]];
+            F9 += FE0_f0[ip][r]*w[0][nzc6[r]];
+            F10 += FE0_f0[ip][r]*w[0][nzc5[r]];
+            F11 += FE0_f0[ip][r]*w[0][nzc7[r]];
+          }// end loop over 'r'
+          
+          // Number of operations to compute ip constants: 72
+          double I[8];
+          // Number of operations: 9
+          I[0] = F1*W6[ip]*(G[0]*(F3 + F0*F2) + G[1]*(F2 + F0*F3));
+          
+          // Number of operations: 9
+          I[1] = F1*W6[ip]*(G[0]*(F5 + F0*F4) + G[1]*(F4 + F0*F5));
+          
+          // Number of operations: 9
+          I[2] = F1*W6[ip]*(G[0]*(F2 + F0*F3) + G[1]*(F3 + F0*F2));
+          
+          // Number of operations: 9
+          I[3] = F1*W6[ip]*(G[0]*(F4 + F0*F5) + G[1]*(F5 + F0*F4));
+          
+          // Number of operations: 9
+          I[4] = F7*W6[ip]*(G[0]*(F9 + F6*F8) + G[1]*(F8 + F6*F9));
+          
+          // Number of operations: 9
+          I[5] = F7*W6[ip]*(G[0]*(F11 + F10*F6) + G[1]*(F10 + F11*F6));
+          
+          // Number of operations: 9
+          I[6] = F7*W6[ip]*(G[0]*(F8 + F6*F9) + G[1]*(F9 + F6*F8));
+          
+          // Number of operations: 9
+          I[7] = F7*W6[ip]*(G[0]*(F10 + F11*F6) + G[1]*(F11 + F10*F6));
+          
+          
+          // Number of operations for primary indices: 48
+          for (unsigned int j = 0; j < 3; j++)
+          {
+            // Number of operations to compute entry: 2
+            A[(nzc16[j] + 16)] += FE0_f0[ip][j]*I[0];
+            // Number of operations to compute entry: 2
+            A[(nzc17[j] + 16)] += FE0_f0[ip][j]*I[1];
+            // Number of operations to compute entry: 2
+            A[(nzc18[j] + 16)] += FE0_f0[ip][j]*I[2];
+            // Number of operations to compute entry: 2
+            A[(nzc19[j] + 16)] += FE0_f0[ip][j]*I[3];
+            // Number of operations to compute entry: 2
+            A[nzc4[j]] += FE0_f0[ip][j]*I[4];
+            // Number of operations to compute entry: 2
+            A[nzc5[j]] += FE0_f0[ip][j]*I[5];
+            // Number of operations to compute entry: 2
+            A[nzc6[j]] += FE0_f0[ip][j]*I[6];
+            // Number of operations to compute entry: 2
+            A[nzc7[j]] += FE0_f0[ip][j]*I[7];
+          }// end loop over 'j'
+        }// end loop over 'ip'
+          break;
+        }
+      }
+      
+        break;
+      }
+    case 1:
+      {
+        switch (facet1)
+      {
+      case 0:
+        {
+          // Total number of operations to compute element tensor (from this point): 1152
+        
+        // Loop quadrature points for integral.
+        // Number of operations to compute element tensor for following IP loop = 1152
+        for (unsigned int ip = 0; ip < 6; ip++)
+        {
+          
+          // Coefficient declarations.
+          double F0 = 0.0;
+          double F1 = 0.0;
+          double F2 = 0.0;
+          double F3 = 0.0;
+          double F4 = 0.0;
+          double F5 = 0.0;
+          double F6 = 0.0;
+          double F7 = 0.0;
+          double F8 = 0.0;
+          double F9 = 0.0;
+          double F10 = 0.0;
+          double F11 = 0.0;
+          
+          // Total number of operations to compute function values = 72
+          for (unsigned int r = 0; r < 3; r++)
+          {
+            F0 += FE0_f0[ip][r]*w[6][nzc0[r] + 4];
+            F1 += FE0_f0[ip][r]*w[8][nzc0[r] + 4];
+            F2 += FE0_f0[ip][r]*w[0][nzc4[r] + 16];
+            F3 += FE0_f0[ip][r]*w[0][nzc6[r] + 16];
+            F4 += FE0_f0[ip][r]*w[0][nzc5[r] + 16];
+            F5 += FE0_f0[ip][r]*w[0][nzc7[r] + 16];
+            F6 += FE0_f0[ip][r]*w[6][nzc1[r]];
+            F7 += FE0_f0[ip][r]*w[8][nzc1[r]];
+            F8 += FE0_f0[ip][r]*w[0][nzc8[r]];
+            F9 += FE0_f0[ip][r]*w[0][nzc10[r]];
+            F10 += FE0_f0[ip][r]*w[0][nzc9[r]];
+            F11 += FE0_f0[ip][r]*w[0][nzc11[r]];
+          }// end loop over 'r'
+          
+          // Number of operations to compute ip constants: 72
+          double I[8];
+          // Number of operations: 9
+          I[0] = F1*W6[ip]*(G[0]*(F3 + F0*F2) + G[1]*(F2 + F0*F3));
+          
+          // Number of operations: 9
+          I[1] = F1*W6[ip]*(G[0]*(F5 + F0*F4) + G[1]*(F4 + F0*F5));
+          
+          // Number of operations: 9
+          I[2] = F1*W6[ip]*(G[0]*(F2 + F0*F3) + G[1]*(F3 + F0*F2));
+          
+          // Number of operations: 9
+          I[3] = F1*W6[ip]*(G[0]*(F4 + F0*F5) + G[1]*(F5 + F0*F4));
+          
+          // Number of operations: 9
+          I[4] = F7*W6[ip]*(G[0]*(F8 + F6*F9) + G[1]*(F9 + F6*F8));
+          
+          // Number of operations: 9
+          I[5] = F7*W6[ip]*(G[0]*(F10 + F11*F6) + G[1]*(F11 + F10*F6));
+          
+          // Number of operations: 9
+          I[6] = F7*W6[ip]*(G[0]*(F9 + F6*F8) + G[1]*(F8 + F6*F9));
+          
+          // Number of operations: 9
+          I[7] = F7*W6[ip]*(G[0]*(F11 + F10*F6) + G[1]*(F10 + F11*F6));
+          
+          
+          // Number of operations for primary indices: 48
+          for (unsigned int j = 0; j < 3; j++)
+          {
+            // Number of operations to compute entry: 2
+            A[(nzc4[j] + 16)] += FE0_f0[ip][j]*I[0];
+            // Number of operations to compute entry: 2
+            A[(nzc5[j] + 16)] += FE0_f0[ip][j]*I[1];
+            // Number of operations to compute entry: 2
+            A[(nzc6[j] + 16)] += FE0_f0[ip][j]*I[2];
+            // Number of operations to compute entry: 2
+            A[(nzc7[j] + 16)] += FE0_f0[ip][j]*I[3];
+            // Number of operations to compute entry: 2
+            A[nzc10[j]] += FE0_f0[ip][j]*I[4];
+            // Number of operations to compute entry: 2
+            A[nzc11[j]] += FE0_f0[ip][j]*I[5];
+            // Number of operations to compute entry: 2
+            A[nzc8[j]] += FE0_f0[ip][j]*I[6];
+            // Number of operations to compute entry: 2
+            A[nzc9[j]] += FE0_f0[ip][j]*I[7];
+          }// end loop over 'j'
+        }// end loop over 'ip'
+          break;
+        }
+      case 1:
+        {
+          // Total number of operations to compute element tensor (from this point): 1152
+        
+        // Loop quadrature points for integral.
+        // Number of operations to compute element tensor for following IP loop = 1152
+        for (unsigned int ip = 0; ip < 6; ip++)
+        {
+          
+          // Coefficient declarations.
+          double F0 = 0.0;
+          double F1 = 0.0;
+          double F2 = 0.0;
+          double F3 = 0.0;
+          double F4 = 0.0;
+          double F5 = 0.0;
+          double F6 = 0.0;
+          double F7 = 0.0;
+          double F8 = 0.0;
+          double F9 = 0.0;
+          double F10 = 0.0;
+          double F11 = 0.0;
+          
+          // Total number of operations to compute function values = 72
+          for (unsigned int r = 0; r < 3; r++)
+          {
+            F0 += FE0_f0[ip][r]*w[6][nzc1[r] + 4];
+            F1 += FE0_f0[ip][r]*w[8][nzc1[r] + 4];
+            F2 += FE0_f0[ip][r]*w[0][nzc8[r] + 16];
+            F3 += FE0_f0[ip][r]*w[0][nzc10[r] + 16];
+            F4 += FE0_f0[ip][r]*w[0][nzc9[r] + 16];
+            F5 += FE0_f0[ip][r]*w[0][nzc11[r] + 16];
+            F6 += FE0_f0[ip][r]*w[6][nzc1[r]];
+            F7 += FE0_f0[ip][r]*w[8][nzc1[r]];
+            F8 += FE0_f0[ip][r]*w[0][nzc8[r]];
+            F9 += FE0_f0[ip][r]*w[0][nzc10[r]];
+            F10 += FE0_f0[ip][r]*w[0][nzc9[r]];
+            F11 += FE0_f0[ip][r]*w[0][nzc11[r]];
+          }// end loop over 'r'
+          
+          // Number of operations to compute ip constants: 72
+          double I[8];
+          // Number of operations: 9
+          I[0] = F1*W6[ip]*(G[0]*(F2 + F0*F3) + G[1]*(F3 + F0*F2));
+          
+          // Number of operations: 9
+          I[1] = F1*W6[ip]*(G[0]*(F4 + F0*F5) + G[1]*(F5 + F0*F4));
+          
+          // Number of operations: 9
+          I[2] = F1*W6[ip]*(G[0]*(F3 + F0*F2) + G[1]*(F2 + F0*F3));
+          
+          // Number of operations: 9
+          I[3] = F1*W6[ip]*(G[0]*(F5 + F0*F4) + G[1]*(F4 + F0*F5));
+          
+          // Number of operations: 9
+          I[4] = F7*W6[ip]*(G[0]*(F8 + F6*F9) + G[1]*(F9 + F6*F8));
+          
+          // Number of operations: 9
+          I[5] = F7*W6[ip]*(G[0]*(F10 + F11*F6) + G[1]*(F11 + F10*F6));
+          
+          // Number of operations: 9
+          I[6] = F7*W6[ip]*(G[0]*(F9 + F6*F8) + G[1]*(F8 + F6*F9));
+          
+          // Number of operations: 9
+          I[7] = F7*W6[ip]*(G[0]*(F11 + F10*F6) + G[1]*(F10 + F11*F6));
+          
+          
+          // Number of operations for primary indices: 48
+          for (unsigned int j = 0; j < 3; j++)
+          {
+            // Number of operations to compute entry: 2
+            A[(nzc10[j] + 16)] += FE0_f0[ip][j]*I[0];
+            // Number of operations to compute entry: 2
+            A[(nzc11[j] + 16)] += FE0_f0[ip][j]*I[1];
+            // Number of operations to compute entry: 2
+            A[(nzc8[j] + 16)] += FE0_f0[ip][j]*I[2];
+            // Number of operations to compute entry: 2
+            A[(nzc9[j] + 16)] += FE0_f0[ip][j]*I[3];
+            // Number of operations to compute entry: 2
+            A[nzc10[j]] += FE0_f0[ip][j]*I[4];
+            // Number of operations to compute entry: 2
+            A[nzc11[j]] += FE0_f0[ip][j]*I[5];
+            // Number of operations to compute entry: 2
+            A[nzc8[j]] += FE0_f0[ip][j]*I[6];
+            // Number of operations to compute entry: 2
+            A[nzc9[j]] += FE0_f0[ip][j]*I[7];
+          }// end loop over 'j'
+        }// end loop over 'ip'
+          break;
+        }
+      case 2:
+        {
+          // Total number of operations to compute element tensor (from this point): 1152
+        
+        // Loop quadrature points for integral.
+        // Number of operations to compute element tensor for following IP loop = 1152
+        for (unsigned int ip = 0; ip < 6; ip++)
+        {
+          
+          // Coefficient declarations.
+          double F0 = 0.0;
+          double F1 = 0.0;
+          double F2 = 0.0;
+          double F3 = 0.0;
+          double F4 = 0.0;
+          double F5 = 0.0;
+          double F6 = 0.0;
+          double F7 = 0.0;
+          double F8 = 0.0;
+          double F9 = 0.0;
+          double F10 = 0.0;
+          double F11 = 0.0;
+          
+          // Total number of operations to compute function values = 72
+          for (unsigned int r = 0; r < 3; r++)
+          {
+            F0 += FE0_f0[ip][r]*w[6][nzc2[r] + 4];
+            F1 += FE0_f0[ip][r]*w[8][nzc2[r] + 4];
+            F2 += FE0_f0[ip][r]*w[0][nzc12[r] + 16];
+            F3 += FE0_f0[ip][r]*w[0][nzc14[r] + 16];
+            F4 += FE0_f0[ip][r]*w[0][nzc13[r] + 16];
+            F5 += FE0_f0[ip][r]*w[0][nzc15[r] + 16];
+            F6 += FE0_f0[ip][r]*w[6][nzc1[r]];
+            F7 += FE0_f0[ip][r]*w[8][nzc1[r]];
+            F8 += FE0_f0[ip][r]*w[0][nzc8[r]];
+            F9 += FE0_f0[ip][r]*w[0][nzc10[r]];
+            F10 += FE0_f0[ip][r]*w[0][nzc9[r]];
+            F11 += FE0_f0[ip][r]*w[0][nzc11[r]];
+          }// end loop over 'r'
+          
+          // Number of operations to compute ip constants: 72
+          double I[8];
+          // Number of operations: 9
+          I[0] = F1*W6[ip]*(G[0]*(F3 + F0*F2) + G[1]*(F2 + F0*F3));
+          
+          // Number of operations: 9
+          I[1] = F1*W6[ip]*(G[0]*(F5 + F0*F4) + G[1]*(F4 + F0*F5));
+          
+          // Number of operations: 9
+          I[2] = F1*W6[ip]*(G[0]*(F2 + F0*F3) + G[1]*(F3 + F0*F2));
+          
+          // Number of operations: 9
+          I[3] = F1*W6[ip]*(G[0]*(F4 + F0*F5) + G[1]*(F5 + F0*F4));
+          
+          // Number of operations: 9
+          I[4] = F7*W6[ip]*(G[0]*(F8 + F6*F9) + G[1]*(F9 + F6*F8));
+          
+          // Number of operations: 9
+          I[5] = F7*W6[ip]*(G[0]*(F10 + F11*F6) + G[1]*(F11 + F10*F6));
+          
+          // Number of operations: 9
+          I[6] = F7*W6[ip]*(G[0]*(F9 + F6*F8) + G[1]*(F8 + F6*F9));
+          
+          // Number of operations: 9
+          I[7] = F7*W6[ip]*(G[0]*(F11 + F10*F6) + G[1]*(F10 + F11*F6));
+          
+          
+          // Number of operations for primary indices: 48
+          for (unsigned int j = 0; j < 3; j++)
+          {
+            // Number of operations to compute entry: 2
+            A[(nzc12[j] + 16)] += FE0_f0[ip][j]*I[0];
+            // Number of operations to compute entry: 2
+            A[(nzc13[j] + 16)] += FE0_f0[ip][j]*I[1];
+            // Number of operations to compute entry: 2
+            A[(nzc14[j] + 16)] += FE0_f0[ip][j]*I[2];
+            // Number of operations to compute entry: 2
+            A[(nzc15[j] + 16)] += FE0_f0[ip][j]*I[3];
+            // Number of operations to compute entry: 2
+            A[nzc10[j]] += FE0_f0[ip][j]*I[4];
+            // Number of operations to compute entry: 2
+            A[nzc11[j]] += FE0_f0[ip][j]*I[5];
+            // Number of operations to compute entry: 2
+            A[nzc8[j]] += FE0_f0[ip][j]*I[6];
+            // Number of operations to compute entry: 2
+            A[nzc9[j]] += FE0_f0[ip][j]*I[7];
+          }// end loop over 'j'
+        }// end loop over 'ip'
+          break;
+        }
+      case 3:
+        {
+          // Total number of operations to compute element tensor (from this point): 1152
+        
+        // Loop quadrature points for integral.
+        // Number of operations to compute element tensor for following IP loop = 1152
+        for (unsigned int ip = 0; ip < 6; ip++)
+        {
+          
+          // Coefficient declarations.
+          double F0 = 0.0;
+          double F1 = 0.0;
+          double F2 = 0.0;
+          double F3 = 0.0;
+          double F4 = 0.0;
+          double F5 = 0.0;
+          double F6 = 0.0;
+          double F7 = 0.0;
+          double F8 = 0.0;
+          double F9 = 0.0;
+          double F10 = 0.0;
+          double F11 = 0.0;
+          
+          // Total number of operations to compute function values = 72
+          for (unsigned int r = 0; r < 3; r++)
+          {
+            F0 += FE0_f0[ip][r]*w[6][nzc3[r] + 4];
+            F1 += FE0_f0[ip][r]*w[8][nzc3[r] + 4];
+            F2 += FE0_f0[ip][r]*w[0][nzc16[r] + 16];
+            F3 += FE0_f0[ip][r]*w[0][nzc18[r] + 16];
+            F4 += FE0_f0[ip][r]*w[0][nzc17[r] + 16];
+            F5 += FE0_f0[ip][r]*w[0][nzc19[r] + 16];
+            F6 += FE0_f0[ip][r]*w[6][nzc1[r]];
+            F7 += FE0_f0[ip][r]*w[8][nzc1[r]];
+            F8 += FE0_f0[ip][r]*w[0][nzc8[r]];
+            F9 += FE0_f0[ip][r]*w[0][nzc10[r]];
+            F10 += FE0_f0[ip][r]*w[0][nzc9[r]];
+            F11 += FE0_f0[ip][r]*w[0][nzc11[r]];
+          }// end loop over 'r'
+          
+          // Number of operations to compute ip constants: 72
+          double I[8];
+          // Number of operations: 9
+          I[0] = F1*W6[ip]*(G[0]*(F3 + F0*F2) + G[1]*(F2 + F0*F3));
+          
+          // Number of operations: 9
+          I[1] = F1*W6[ip]*(G[0]*(F5 + F0*F4) + G[1]*(F4 + F0*F5));
+          
+          // Number of operations: 9
+          I[2] = F1*W6[ip]*(G[0]*(F2 + F0*F3) + G[1]*(F3 + F0*F2));
+          
+          // Number of operations: 9
+          I[3] = F1*W6[ip]*(G[0]*(F4 + F0*F5) + G[1]*(F5 + F0*F4));
+          
+          // Number of operations: 9
+          I[4] = F7*W6[ip]*(G[0]*(F8 + F6*F9) + G[1]*(F9 + F6*F8));
+          
+          // Number of operations: 9
+          I[5] = F7*W6[ip]*(G[0]*(F10 + F11*F6) + G[1]*(F11 + F10*F6));
+          
+          // Number of operations: 9
+          I[6] = F7*W6[ip]*(G[0]*(F9 + F6*F8) + G[1]*(F8 + F6*F9));
+          
+          // Number of operations: 9
+          I[7] = F7*W6[ip]*(G[0]*(F11 + F10*F6) + G[1]*(F10 + F11*F6));
+          
+          
+          // Number of operations for primary indices: 48
+          for (unsigned int j = 0; j < 3; j++)
+          {
+            // Number of operations to compute entry: 2
+            A[(nzc16[j] + 16)] += FE0_f0[ip][j]*I[0];
+            // Number of operations to compute entry: 2
+            A[(nzc17[j] + 16)] += FE0_f0[ip][j]*I[1];
+            // Number of operations to compute entry: 2
+            A[(nzc18[j] + 16)] += FE0_f0[ip][j]*I[2];
+            // Number of operations to compute entry: 2
+            A[(nzc19[j] + 16)] += FE0_f0[ip][j]*I[3];
+            // Number of operations to compute entry: 2
+            A[nzc10[j]] += FE0_f0[ip][j]*I[4];
+            // Number of operations to compute entry: 2
+            A[nzc11[j]] += FE0_f0[ip][j]*I[5];
+            // Number of operations to compute entry: 2
+            A[nzc8[j]] += FE0_f0[ip][j]*I[6];
+            // Number of operations to compute entry: 2
+            A[nzc9[j]] += FE0_f0[ip][j]*I[7];
+          }// end loop over 'j'
+        }// end loop over 'ip'
+          break;
+        }
+      }
+      
+        break;
+      }
+    case 2:
+      {
+        switch (facet1)
+      {
+      case 0:
+        {
+          // Total number of operations to compute element tensor (from this point): 1152
+        
+        // Loop quadrature points for integral.
+        // Number of operations to compute element tensor for following IP loop = 1152
+        for (unsigned int ip = 0; ip < 6; ip++)
+        {
+          
+          // Coefficient declarations.
+          double F0 = 0.0;
+          double F1 = 0.0;
+          double F2 = 0.0;
+          double F3 = 0.0;
+          double F4 = 0.0;
+          double F5 = 0.0;
+          double F6 = 0.0;
+          double F7 = 0.0;
+          double F8 = 0.0;
+          double F9 = 0.0;
+          double F10 = 0.0;
+          double F11 = 0.0;
+          
+          // Total number of operations to compute function values = 72
+          for (unsigned int r = 0; r < 3; r++)
+          {
+            F0 += FE0_f0[ip][r]*w[6][nzc0[r] + 4];
+            F1 += FE0_f0[ip][r]*w[8][nzc0[r] + 4];
+            F2 += FE0_f0[ip][r]*w[0][nzc4[r] + 16];
+            F3 += FE0_f0[ip][r]*w[0][nzc6[r] + 16];
+            F4 += FE0_f0[ip][r]*w[0][nzc5[r] + 16];
+            F5 += FE0_f0[ip][r]*w[0][nzc7[r] + 16];
+            F6 += FE0_f0[ip][r]*w[6][nzc2[r]];
+            F7 += FE0_f0[ip][r]*w[8][nzc2[r]];
+            F8 += FE0_f0[ip][r]*w[0][nzc12[r]];
+            F9 += FE0_f0[ip][r]*w[0][nzc14[r]];
+            F10 += FE0_f0[ip][r]*w[0][nzc13[r]];
+            F11 += FE0_f0[ip][r]*w[0][nzc15[r]];
+          }// end loop over 'r'
+          
+          // Number of operations to compute ip constants: 72
+          double I[8];
+          // Number of operations: 9
+          I[0] = F1*W6[ip]*(G[0]*(F3 + F0*F2) + G[1]*(F2 + F0*F3));
+          
+          // Number of operations: 9
+          I[1] = F1*W6[ip]*(G[0]*(F5 + F0*F4) + G[1]*(F4 + F0*F5));
+          
+          // Number of operations: 9
+          I[2] = F1*W6[ip]*(G[0]*(F2 + F0*F3) + G[1]*(F3 + F0*F2));
+          
+          // Number of operations: 9
+          I[3] = F1*W6[ip]*(G[0]*(F4 + F0*F5) + G[1]*(F5 + F0*F4));
+          
+          // Number of operations: 9
+          I[4] = F7*W6[ip]*(G[0]*(F9 + F6*F8) + G[1]*(F8 + F6*F9));
+          
+          // Number of operations: 9
+          I[5] = F7*W6[ip]*(G[0]*(F11 + F10*F6) + G[1]*(F10 + F11*F6));
+          
+          // Number of operations: 9
+          I[6] = F7*W6[ip]*(G[0]*(F8 + F6*F9) + G[1]*(F9 + F6*F8));
+          
+          // Number of operations: 9
+          I[7] = F7*W6[ip]*(G[0]*(F10 + F11*F6) + G[1]*(F11 + F10*F6));
+          
+          
+          // Number of operations for primary indices: 48
+          for (unsigned int j = 0; j < 3; j++)
+          {
+            // Number of operations to compute entry: 2
+            A[(nzc4[j] + 16)] += FE0_f0[ip][j]*I[0];
+            // Number of operations to compute entry: 2
+            A[(nzc5[j] + 16)] += FE0_f0[ip][j]*I[1];
+            // Number of operations to compute entry: 2
+            A[(nzc6[j] + 16)] += FE0_f0[ip][j]*I[2];
+            // Number of operations to compute entry: 2
+            A[(nzc7[j] + 16)] += FE0_f0[ip][j]*I[3];
+            // Number of operations to compute entry: 2
+            A[nzc12[j]] += FE0_f0[ip][j]*I[4];
+            // Number of operations to compute entry: 2
+            A[nzc13[j]] += FE0_f0[ip][j]*I[5];
+            // Number of operations to compute entry: 2
+            A[nzc14[j]] += FE0_f0[ip][j]*I[6];
+            // Number of operations to compute entry: 2
+            A[nzc15[j]] += FE0_f0[ip][j]*I[7];
+          }// end loop over 'j'
+        }// end loop over 'ip'
+          break;
+        }
+      case 1:
+        {
+          // Total number of operations to compute element tensor (from this point): 1152
+        
+        // Loop quadrature points for integral.
+        // Number of operations to compute element tensor for following IP loop = 1152
+        for (unsigned int ip = 0; ip < 6; ip++)
+        {
+          
+          // Coefficient declarations.
+          double F0 = 0.0;
+          double F1 = 0.0;
+          double F2 = 0.0;
+          double F3 = 0.0;
+          double F4 = 0.0;
+          double F5 = 0.0;
+          double F6 = 0.0;
+          double F7 = 0.0;
+          double F8 = 0.0;
+          double F9 = 0.0;
+          double F10 = 0.0;
+          double F11 = 0.0;
+          
+          // Total number of operations to compute function values = 72
+          for (unsigned int r = 0; r < 3; r++)
+          {
+            F0 += FE0_f0[ip][r]*w[6][nzc1[r] + 4];
+            F1 += FE0_f0[ip][r]*w[8][nzc1[r] + 4];
+            F2 += FE0_f0[ip][r]*w[0][nzc8[r] + 16];
+            F3 += FE0_f0[ip][r]*w[0][nzc10[r] + 16];
+            F4 += FE0_f0[ip][r]*w[0][nzc9[r] + 16];
+            F5 += FE0_f0[ip][r]*w[0][nzc11[r] + 16];
+            F6 += FE0_f0[ip][r]*w[6][nzc2[r]];
+            F7 += FE0_f0[ip][r]*w[8][nzc2[r]];
+            F8 += FE0_f0[ip][r]*w[0][nzc12[r]];
+            F9 += FE0_f0[ip][r]*w[0][nzc14[r]];
+            F10 += FE0_f0[ip][r]*w[0][nzc13[r]];
+            F11 += FE0_f0[ip][r]*w[0][nzc15[r]];
+          }// end loop over 'r'
+          
+          // Number of operations to compute ip constants: 72
+          double I[8];
+          // Number of operations: 9
+          I[0] = F1*W6[ip]*(G[0]*(F2 + F0*F3) + G[1]*(F3 + F0*F2));
+          
+          // Number of operations: 9
+          I[1] = F1*W6[ip]*(G[0]*(F4 + F0*F5) + G[1]*(F5 + F0*F4));
+          
+          // Number of operations: 9
+          I[2] = F1*W6[ip]*(G[0]*(F3 + F0*F2) + G[1]*(F2 + F0*F3));
+          
+          // Number of operations: 9
+          I[3] = F1*W6[ip]*(G[0]*(F5 + F0*F4) + G[1]*(F4 + F0*F5));
+          
+          // Number of operations: 9
+          I[4] = F7*W6[ip]*(G[0]*(F9 + F6*F8) + G[1]*(F8 + F6*F9));
+          
+          // Number of operations: 9
+          I[5] = F7*W6[ip]*(G[0]*(F11 + F10*F6) + G[1]*(F10 + F11*F6));
+          
+          // Number of operations: 9
+          I[6] = F7*W6[ip]*(G[0]*(F8 + F6*F9) + G[1]*(F9 + F6*F8));
+          
+          // Number of operations: 9
+          I[7] = F7*W6[ip]*(G[0]*(F10 + F11*F6) + G[1]*(F11 + F10*F6));
+          
+          
+          // Number of operations for primary indices: 48
+          for (unsigned int j = 0; j < 3; j++)
+          {
+            // Number of operations to compute entry: 2
+            A[(nzc10[j] + 16)] += FE0_f0[ip][j]*I[0];
+            // Number of operations to compute entry: 2
+            A[(nzc11[j] + 16)] += FE0_f0[ip][j]*I[1];
+            // Number of operations to compute entry: 2
+            A[(nzc8[j] + 16)] += FE0_f0[ip][j]*I[2];
+            // Number of operations to compute entry: 2
+            A[(nzc9[j] + 16)] += FE0_f0[ip][j]*I[3];
+            // Number of operations to compute entry: 2
+            A[nzc12[j]] += FE0_f0[ip][j]*I[4];
+            // Number of operations to compute entry: 2
+            A[nzc13[j]] += FE0_f0[ip][j]*I[5];
+            // Number of operations to compute entry: 2
+            A[nzc14[j]] += FE0_f0[ip][j]*I[6];
+            // Number of operations to compute entry: 2
+            A[nzc15[j]] += FE0_f0[ip][j]*I[7];
+          }// end loop over 'j'
+        }// end loop over 'ip'
+          break;
+        }
+      case 2:
+        {
+          // Total number of operations to compute element tensor (from this point): 1152
+        
+        // Loop quadrature points for integral.
+        // Number of operations to compute element tensor for following IP loop = 1152
+        for (unsigned int ip = 0; ip < 6; ip++)
+        {
+          
+          // Coefficient declarations.
+          double F0 = 0.0;
+          double F1 = 0.0;
+          double F2 = 0.0;
+          double F3 = 0.0;
+          double F4 = 0.0;
+          double F5 = 0.0;
+          double F6 = 0.0;
+          double F7 = 0.0;
+          double F8 = 0.0;
+          double F9 = 0.0;
+          double F10 = 0.0;
+          double F11 = 0.0;
+          
+          // Total number of operations to compute function values = 72
+          for (unsigned int r = 0; r < 3; r++)
+          {
+            F0 += FE0_f0[ip][r]*w[6][nzc2[r] + 4];
+            F1 += FE0_f0[ip][r]*w[8][nzc2[r] + 4];
+            F2 += FE0_f0[ip][r]*w[0][nzc12[r] + 16];
+            F3 += FE0_f0[ip][r]*w[0][nzc14[r] + 16];
+            F4 += FE0_f0[ip][r]*w[0][nzc13[r] + 16];
+            F5 += FE0_f0[ip][r]*w[0][nzc15[r] + 16];
+            F6 += FE0_f0[ip][r]*w[6][nzc2[r]];
+            F7 += FE0_f0[ip][r]*w[8][nzc2[r]];
+            F8 += FE0_f0[ip][r]*w[0][nzc12[r]];
+            F9 += FE0_f0[ip][r]*w[0][nzc14[r]];
+            F10 += FE0_f0[ip][r]*w[0][nzc13[r]];
+            F11 += FE0_f0[ip][r]*w[0][nzc15[r]];
+          }// end loop over 'r'
+          
+          // Number of operations to compute ip constants: 72
+          double I[8];
+          // Number of operations: 9
+          I[0] = F1*W6[ip]*(G[0]*(F3 + F0*F2) + G[1]*(F2 + F0*F3));
+          
+          // Number of operations: 9
+          I[1] = F1*W6[ip]*(G[0]*(F5 + F0*F4) + G[1]*(F4 + F0*F5));
+          
+          // Number of operations: 9
+          I[2] = F1*W6[ip]*(G[0]*(F2 + F0*F3) + G[1]*(F3 + F0*F2));
+          
+          // Number of operations: 9
+          I[3] = F1*W6[ip]*(G[0]*(F4 + F0*F5) + G[1]*(F5 + F0*F4));
+          
+          // Number of operations: 9
+          I[4] = F7*W6[ip]*(G[0]*(F9 + F6*F8) + G[1]*(F8 + F6*F9));
+          
+          // Number of operations: 9
+          I[5] = F7*W6[ip]*(G[0]*(F11 + F10*F6) + G[1]*(F10 + F11*F6));
+          
+          // Number of operations: 9
+          I[6] = F7*W6[ip]*(G[0]*(F8 + F6*F9) + G[1]*(F9 + F6*F8));
+          
+          // Number of operations: 9
+          I[7] = F7*W6[ip]*(G[0]*(F10 + F11*F6) + G[1]*(F11 + F10*F6));
+          
+          
+          // Number of operations for primary indices: 48
+          for (unsigned int j = 0; j < 3; j++)
+          {
+            // Number of operations to compute entry: 2
+            A[(nzc12[j] + 16)] += FE0_f0[ip][j]*I[0];
+            // Number of operations to compute entry: 2
+            A[(nzc13[j] + 16)] += FE0_f0[ip][j]*I[1];
+            // Number of operations to compute entry: 2
+            A[(nzc14[j] + 16)] += FE0_f0[ip][j]*I[2];
+            // Number of operations to compute entry: 2
+            A[(nzc15[j] + 16)] += FE0_f0[ip][j]*I[3];
+            // Number of operations to compute entry: 2
+            A[nzc12[j]] += FE0_f0[ip][j]*I[4];
+            // Number of operations to compute entry: 2
+            A[nzc13[j]] += FE0_f0[ip][j]*I[5];
+            // Number of operations to compute entry: 2
+            A[nzc14[j]] += FE0_f0[ip][j]*I[6];
+            // Number of operations to compute entry: 2
+            A[nzc15[j]] += FE0_f0[ip][j]*I[7];
+          }// end loop over 'j'
+        }// end loop over 'ip'
+          break;
+        }
+      case 3:
+        {
+          // Total number of operations to compute element tensor (from this point): 1152
+        
+        // Loop quadrature points for integral.
+        // Number of operations to compute element tensor for following IP loop = 1152
+        for (unsigned int ip = 0; ip < 6; ip++)
+        {
+          
+          // Coefficient declarations.
+          double F0 = 0.0;
+          double F1 = 0.0;
+          double F2 = 0.0;
+          double F3 = 0.0;
+          double F4 = 0.0;
+          double F5 = 0.0;
+          double F6 = 0.0;
+          double F7 = 0.0;
+          double F8 = 0.0;
+          double F9 = 0.0;
+          double F10 = 0.0;
+          double F11 = 0.0;
+          
+          // Total number of operations to compute function values = 72
+          for (unsigned int r = 0; r < 3; r++)
+          {
+            F0 += FE0_f0[ip][r]*w[6][nzc3[r] + 4];
+            F1 += FE0_f0[ip][r]*w[8][nzc3[r] + 4];
+            F2 += FE0_f0[ip][r]*w[0][nzc16[r] + 16];
+            F3 += FE0_f0[ip][r]*w[0][nzc18[r] + 16];
+            F4 += FE0_f0[ip][r]*w[0][nzc17[r] + 16];
+            F5 += FE0_f0[ip][r]*w[0][nzc19[r] + 16];
+            F6 += FE0_f0[ip][r]*w[6][nzc2[r]];
+            F7 += FE0_f0[ip][r]*w[8][nzc2[r]];
+            F8 += FE0_f0[ip][r]*w[0][nzc12[r]];
+            F9 += FE0_f0[ip][r]*w[0][nzc14[r]];
+            F10 += FE0_f0[ip][r]*w[0][nzc13[r]];
+            F11 += FE0_f0[ip][r]*w[0][nzc15[r]];
+          }// end loop over 'r'
+          
+          // Number of operations to compute ip constants: 72
+          double I[8];
+          // Number of operations: 9
+          I[0] = F1*W6[ip]*(G[0]*(F3 + F0*F2) + G[1]*(F2 + F0*F3));
+          
+          // Number of operations: 9
+          I[1] = F1*W6[ip]*(G[0]*(F5 + F0*F4) + G[1]*(F4 + F0*F5));
+          
+          // Number of operations: 9
+          I[2] = F1*W6[ip]*(G[0]*(F2 + F0*F3) + G[1]*(F3 + F0*F2));
+          
+          // Number of operations: 9
+          I[3] = F1*W6[ip]*(G[0]*(F4 + F0*F5) + G[1]*(F5 + F0*F4));
+          
+          // Number of operations: 9
+          I[4] = F7*W6[ip]*(G[0]*(F9 + F6*F8) + G[1]*(F8 + F6*F9));
+          
+          // Number of operations: 9
+          I[5] = F7*W6[ip]*(G[0]*(F11 + F10*F6) + G[1]*(F10 + F11*F6));
+          
+          // Number of operations: 9
+          I[6] = F7*W6[ip]*(G[0]*(F8 + F6*F9) + G[1]*(F9 + F6*F8));
+          
+          // Number of operations: 9
+          I[7] = F7*W6[ip]*(G[0]*(F10 + F11*F6) + G[1]*(F11 + F10*F6));
+          
+          
+          // Number of operations for primary indices: 48
+          for (unsigned int j = 0; j < 3; j++)
+          {
+            // Number of operations to compute entry: 2
+            A[(nzc16[j] + 16)] += FE0_f0[ip][j]*I[0];
+            // Number of operations to compute entry: 2
+            A[(nzc17[j] + 16)] += FE0_f0[ip][j]*I[1];
+            // Number of operations to compute entry: 2
+            A[(nzc18[j] + 16)] += FE0_f0[ip][j]*I[2];
+            // Number of operations to compute entry: 2
+            A[(nzc19[j] + 16)] += FE0_f0[ip][j]*I[3];
+            // Number of operations to compute entry: 2
+            A[nzc12[j]] += FE0_f0[ip][j]*I[4];
+            // Number of operations to compute entry: 2
+            A[nzc13[j]] += FE0_f0[ip][j]*I[5];
+            // Number of operations to compute entry: 2
+            A[nzc14[j]] += FE0_f0[ip][j]*I[6];
+            // Number of operations to compute entry: 2
+            A[nzc15[j]] += FE0_f0[ip][j]*I[7];
+          }// end loop over 'j'
+        }// end loop over 'ip'
+          break;
+        }
+      }
+      
+        break;
+      }
+    case 3:
+      {
+        switch (facet1)
+      {
+      case 0:
+        {
+          // Total number of operations to compute element tensor (from this point): 1152
+        
+        // Loop quadrature points for integral.
+        // Number of operations to compute element tensor for following IP loop = 1152
+        for (unsigned int ip = 0; ip < 6; ip++)
+        {
+          
+          // Coefficient declarations.
+          double F0 = 0.0;
+          double F1 = 0.0;
+          double F2 = 0.0;
+          double F3 = 0.0;
+          double F4 = 0.0;
+          double F5 = 0.0;
+          double F6 = 0.0;
+          double F7 = 0.0;
+          double F8 = 0.0;
+          double F9 = 0.0;
+          double F10 = 0.0;
+          double F11 = 0.0;
+          
+          // Total number of operations to compute function values = 72
+          for (unsigned int r = 0; r < 3; r++)
+          {
+            F0 += FE0_f0[ip][r]*w[6][nzc0[r] + 4];
+            F1 += FE0_f0[ip][r]*w[8][nzc0[r] + 4];
+            F2 += FE0_f0[ip][r]*w[0][nzc4[r] + 16];
+            F3 += FE0_f0[ip][r]*w[0][nzc6[r] + 16];
+            F4 += FE0_f0[ip][r]*w[0][nzc5[r] + 16];
+            F5 += FE0_f0[ip][r]*w[0][nzc7[r] + 16];
+            F6 += FE0_f0[ip][r]*w[6][nzc3[r]];
+            F7 += FE0_f0[ip][r]*w[8][nzc3[r]];
+            F8 += FE0_f0[ip][r]*w[0][nzc16[r]];
+            F9 += FE0_f0[ip][r]*w[0][nzc18[r]];
+            F10 += FE0_f0[ip][r]*w[0][nzc17[r]];
+            F11 += FE0_f0[ip][r]*w[0][nzc19[r]];
+          }// end loop over 'r'
+          
+          // Number of operations to compute ip constants: 72
+          double I[8];
+          // Number of operations: 9
+          I[0] = F1*W6[ip]*(G[0]*(F3 + F0*F2) + G[1]*(F2 + F0*F3));
+          
+          // Number of operations: 9
+          I[1] = F1*W6[ip]*(G[0]*(F5 + F0*F4) + G[1]*(F4 + F0*F5));
+          
+          // Number of operations: 9
+          I[2] = F1*W6[ip]*(G[0]*(F2 + F0*F3) + G[1]*(F3 + F0*F2));
+          
+          // Number of operations: 9
+          I[3] = F1*W6[ip]*(G[0]*(F4 + F0*F5) + G[1]*(F5 + F0*F4));
+          
+          // Number of operations: 9
+          I[4] = F7*W6[ip]*(G[0]*(F9 + F6*F8) + G[1]*(F8 + F6*F9));
+          
+          // Number of operations: 9
+          I[5] = F7*W6[ip]*(G[0]*(F11 + F10*F6) + G[1]*(F10 + F11*F6));
+          
+          // Number of operations: 9
+          I[6] = F7*W6[ip]*(G[0]*(F8 + F6*F9) + G[1]*(F9 + F6*F8));
+          
+          // Number of operations: 9
+          I[7] = F7*W6[ip]*(G[0]*(F10 + F11*F6) + G[1]*(F11 + F10*F6));
+          
+          
+          // Number of operations for primary indices: 48
+          for (unsigned int j = 0; j < 3; j++)
+          {
+            // Number of operations to compute entry: 2
+            A[(nzc4[j] + 16)] += FE0_f0[ip][j]*I[0];
+            // Number of operations to compute entry: 2
+            A[(nzc5[j] + 16)] += FE0_f0[ip][j]*I[1];
+            // Number of operations to compute entry: 2
+            A[(nzc6[j] + 16)] += FE0_f0[ip][j]*I[2];
+            // Number of operations to compute entry: 2
+            A[(nzc7[j] + 16)] += FE0_f0[ip][j]*I[3];
+            // Number of operations to compute entry: 2
+            A[nzc16[j]] += FE0_f0[ip][j]*I[4];
+            // Number of operations to compute entry: 2
+            A[nzc17[j]] += FE0_f0[ip][j]*I[5];
+            // Number of operations to compute entry: 2
+            A[nzc18[j]] += FE0_f0[ip][j]*I[6];
+            // Number of operations to compute entry: 2
+            A[nzc19[j]] += FE0_f0[ip][j]*I[7];
+          }// end loop over 'j'
+        }// end loop over 'ip'
+          break;
+        }
+      case 1:
+        {
+          // Total number of operations to compute element tensor (from this point): 1152
+        
+        // Loop quadrature points for integral.
+        // Number of operations to compute element tensor for following IP loop = 1152
+        for (unsigned int ip = 0; ip < 6; ip++)
+        {
+          
+          // Coefficient declarations.
+          double F0 = 0.0;
+          double F1 = 0.0;
+          double F2 = 0.0;
+          double F3 = 0.0;
+          double F4 = 0.0;
+          double F5 = 0.0;
+          double F6 = 0.0;
+          double F7 = 0.0;
+          double F8 = 0.0;
+          double F9 = 0.0;
+          double F10 = 0.0;
+          double F11 = 0.0;
+          
+          // Total number of operations to compute function values = 72
+          for (unsigned int r = 0; r < 3; r++)
+          {
+            F0 += FE0_f0[ip][r]*w[6][nzc1[r] + 4];
+            F1 += FE0_f0[ip][r]*w[8][nzc1[r] + 4];
+            F2 += FE0_f0[ip][r]*w[0][nzc8[r] + 16];
+            F3 += FE0_f0[ip][r]*w[0][nzc10[r] + 16];
+            F4 += FE0_f0[ip][r]*w[0][nzc9[r] + 16];
+            F5 += FE0_f0[ip][r]*w[0][nzc11[r] + 16];
+            F6 += FE0_f0[ip][r]*w[6][nzc3[r]];
+            F7 += FE0_f0[ip][r]*w[8][nzc3[r]];
+            F8 += FE0_f0[ip][r]*w[0][nzc16[r]];
+            F9 += FE0_f0[ip][r]*w[0][nzc18[r]];
+            F10 += FE0_f0[ip][r]*w[0][nzc17[r]];
+            F11 += FE0_f0[ip][r]*w[0][nzc19[r]];
+          }// end loop over 'r'
+          
+          // Number of operations to compute ip constants: 72
+          double I[8];
+          // Number of operations: 9
+          I[0] = F1*W6[ip]*(G[0]*(F2 + F0*F3) + G[1]*(F3 + F0*F2));
+          
+          // Number of operations: 9
+          I[1] = F1*W6[ip]*(G[0]*(F4 + F0*F5) + G[1]*(F5 + F0*F4));
+          
+          // Number of operations: 9
+          I[2] = F1*W6[ip]*(G[0]*(F3 + F0*F2) + G[1]*(F2 + F0*F3));
+          
+          // Number of operations: 9
+          I[3] = F1*W6[ip]*(G[0]*(F5 + F0*F4) + G[1]*(F4 + F0*F5));
+          
+          // Number of operations: 9
+          I[4] = F7*W6[ip]*(G[0]*(F9 + F6*F8) + G[1]*(F8 + F6*F9));
+          
+          // Number of operations: 9
+          I[5] = F7*W6[ip]*(G[0]*(F11 + F10*F6) + G[1]*(F10 + F11*F6));
+          
+          // Number of operations: 9
+          I[6] = F7*W6[ip]*(G[0]*(F8 + F6*F9) + G[1]*(F9 + F6*F8));
+          
+          // Number of operations: 9
+          I[7] = F7*W6[ip]*(G[0]*(F10 + F11*F6) + G[1]*(F11 + F10*F6));
+          
+          
+          // Number of operations for primary indices: 48
+          for (unsigned int j = 0; j < 3; j++)
+          {
+            // Number of operations to compute entry: 2
+            A[(nzc10[j] + 16)] += FE0_f0[ip][j]*I[0];
+            // Number of operations to compute entry: 2
+            A[(nzc11[j] + 16)] += FE0_f0[ip][j]*I[1];
+            // Number of operations to compute entry: 2
+            A[(nzc8[j] + 16)] += FE0_f0[ip][j]*I[2];
+            // Number of operations to compute entry: 2
+            A[(nzc9[j] + 16)] += FE0_f0[ip][j]*I[3];
+            // Number of operations to compute entry: 2
+            A[nzc16[j]] += FE0_f0[ip][j]*I[4];
+            // Number of operations to compute entry: 2
+            A[nzc17[j]] += FE0_f0[ip][j]*I[5];
+            // Number of operations to compute entry: 2
+            A[nzc18[j]] += FE0_f0[ip][j]*I[6];
+            // Number of operations to compute entry: 2
+            A[nzc19[j]] += FE0_f0[ip][j]*I[7];
+          }// end loop over 'j'
+        }// end loop over 'ip'
+          break;
+        }
+      case 2:
+        {
+          // Total number of operations to compute element tensor (from this point): 1152
+        
+        // Loop quadrature points for integral.
+        // Number of operations to compute element tensor for following IP loop = 1152
+        for (unsigned int ip = 0; ip < 6; ip++)
+        {
+          
+          // Coefficient declarations.
+          double F0 = 0.0;
+          double F1 = 0.0;
+          double F2 = 0.0;
+          double F3 = 0.0;
+          double F4 = 0.0;
+          double F5 = 0.0;
+          double F6 = 0.0;
+          double F7 = 0.0;
+          double F8 = 0.0;
+          double F9 = 0.0;
+          double F10 = 0.0;
+          double F11 = 0.0;
+          
+          // Total number of operations to compute function values = 72
+          for (unsigned int r = 0; r < 3; r++)
+          {
+            F0 += FE0_f0[ip][r]*w[6][nzc2[r] + 4];
+            F1 += FE0_f0[ip][r]*w[8][nzc2[r] + 4];
+            F2 += FE0_f0[ip][r]*w[0][nzc12[r] + 16];
+            F3 += FE0_f0[ip][r]*w[0][nzc14[r] + 16];
+            F4 += FE0_f0[ip][r]*w[0][nzc13[r] + 16];
+            F5 += FE0_f0[ip][r]*w[0][nzc15[r] + 16];
+            F6 += FE0_f0[ip][r]*w[6][nzc3[r]];
+            F7 += FE0_f0[ip][r]*w[8][nzc3[r]];
+            F8 += FE0_f0[ip][r]*w[0][nzc16[r]];
+            F9 += FE0_f0[ip][r]*w[0][nzc18[r]];
+            F10 += FE0_f0[ip][r]*w[0][nzc17[r]];
+            F11 += FE0_f0[ip][r]*w[0][nzc19[r]];
+          }// end loop over 'r'
+          
+          // Number of operations to compute ip constants: 72
+          double I[8];
+          // Number of operations: 9
+          I[0] = F1*W6[ip]*(G[0]*(F3 + F0*F2) + G[1]*(F2 + F0*F3));
+          
+          // Number of operations: 9
+          I[1] = F1*W6[ip]*(G[0]*(F5 + F0*F4) + G[1]*(F4 + F0*F5));
+          
+          // Number of operations: 9
+          I[2] = F1*W6[ip]*(G[0]*(F2 + F0*F3) + G[1]*(F3 + F0*F2));
+          
+          // Number of operations: 9
+          I[3] = F1*W6[ip]*(G[0]*(F4 + F0*F5) + G[1]*(F5 + F0*F4));
+          
+          // Number of operations: 9
+          I[4] = F7*W6[ip]*(G[0]*(F9 + F6*F8) + G[1]*(F8 + F6*F9));
+          
+          // Number of operations: 9
+          I[5] = F7*W6[ip]*(G[0]*(F11 + F10*F6) + G[1]*(F10 + F11*F6));
+          
+          // Number of operations: 9
+          I[6] = F7*W6[ip]*(G[0]*(F8 + F6*F9) + G[1]*(F9 + F6*F8));
+          
+          // Number of operations: 9
+          I[7] = F7*W6[ip]*(G[0]*(F10 + F11*F6) + G[1]*(F11 + F10*F6));
+          
+          
+          // Number of operations for primary indices: 48
+          for (unsigned int j = 0; j < 3; j++)
+          {
+            // Number of operations to compute entry: 2
+            A[(nzc12[j] + 16)] += FE0_f0[ip][j]*I[0];
+            // Number of operations to compute entry: 2
+            A[(nzc13[j] + 16)] += FE0_f0[ip][j]*I[1];
+            // Number of operations to compute entry: 2
+            A[(nzc14[j] + 16)] += FE0_f0[ip][j]*I[2];
+            // Number of operations to compute entry: 2
+            A[(nzc15[j] + 16)] += FE0_f0[ip][j]*I[3];
+            // Number of operations to compute entry: 2
+            A[nzc16[j]] += FE0_f0[ip][j]*I[4];
+            // Number of operations to compute entry: 2
+            A[nzc17[j]] += FE0_f0[ip][j]*I[5];
+            // Number of operations to compute entry: 2
+            A[nzc18[j]] += FE0_f0[ip][j]*I[6];
+            // Number of operations to compute entry: 2
+            A[nzc19[j]] += FE0_f0[ip][j]*I[7];
+          }// end loop over 'j'
+        }// end loop over 'ip'
+          break;
+        }
+      case 3:
+        {
+          // Total number of operations to compute element tensor (from this point): 1152
+        
+        // Loop quadrature points for integral.
+        // Number of operations to compute element tensor for following IP loop = 1152
+        for (unsigned int ip = 0; ip < 6; ip++)
+        {
+          
+          // Coefficient declarations.
+          double F0 = 0.0;
+          double F1 = 0.0;
+          double F2 = 0.0;
+          double F3 = 0.0;
+          double F4 = 0.0;
+          double F5 = 0.0;
+          double F6 = 0.0;
+          double F7 = 0.0;
+          double F8 = 0.0;
+          double F9 = 0.0;
+          double F10 = 0.0;
+          double F11 = 0.0;
+          
+          // Total number of operations to compute function values = 72
+          for (unsigned int r = 0; r < 3; r++)
+          {
+            F0 += FE0_f0[ip][r]*w[6][nzc3[r] + 4];
+            F1 += FE0_f0[ip][r]*w[8][nzc3[r] + 4];
+            F2 += FE0_f0[ip][r]*w[0][nzc16[r] + 16];
+            F3 += FE0_f0[ip][r]*w[0][nzc18[r] + 16];
+            F4 += FE0_f0[ip][r]*w[0][nzc17[r] + 16];
+            F5 += FE0_f0[ip][r]*w[0][nzc19[r] + 16];
+            F6 += FE0_f0[ip][r]*w[6][nzc3[r]];
+            F7 += FE0_f0[ip][r]*w[8][nzc3[r]];
+            F8 += FE0_f0[ip][r]*w[0][nzc16[r]];
+            F9 += FE0_f0[ip][r]*w[0][nzc18[r]];
+            F10 += FE0_f0[ip][r]*w[0][nzc17[r]];
+            F11 += FE0_f0[ip][r]*w[0][nzc19[r]];
+          }// end loop over 'r'
+          
+          // Number of operations to compute ip constants: 72
+          double I[8];
+          // Number of operations: 9
+          I[0] = F1*W6[ip]*(G[0]*(F3 + F0*F2) + G[1]*(F2 + F0*F3));
+          
+          // Number of operations: 9
+          I[1] = F1*W6[ip]*(G[0]*(F5 + F0*F4) + G[1]*(F4 + F0*F5));
+          
+          // Number of operations: 9
+          I[2] = F1*W6[ip]*(G[0]*(F2 + F0*F3) + G[1]*(F3 + F0*F2));
+          
+          // Number of operations: 9
+          I[3] = F1*W6[ip]*(G[0]*(F4 + F0*F5) + G[1]*(F5 + F0*F4));
+          
+          // Number of operations: 9
+          I[4] = F7*W6[ip]*(G[0]*(F9 + F6*F8) + G[1]*(F8 + F6*F9));
+          
+          // Number of operations: 9
+          I[5] = F7*W6[ip]*(G[0]*(F11 + F10*F6) + G[1]*(F10 + F11*F6));
+          
+          // Number of operations: 9
+          I[6] = F7*W6[ip]*(G[0]*(F8 + F6*F9) + G[1]*(F9 + F6*F8));
+          
+          // Number of operations: 9
+          I[7] = F7*W6[ip]*(G[0]*(F10 + F11*F6) + G[1]*(F11 + F10*F6));
+          
+          
+          // Number of operations for primary indices: 48
+          for (unsigned int j = 0; j < 3; j++)
+          {
+            // Number of operations to compute entry: 2
+            A[(nzc16[j] + 16)] += FE0_f0[ip][j]*I[0];
+            // Number of operations to compute entry: 2
+            A[(nzc17[j] + 16)] += FE0_f0[ip][j]*I[1];
+            // Number of operations to compute entry: 2
+            A[(nzc18[j] + 16)] += FE0_f0[ip][j]*I[2];
+            // Number of operations to compute entry: 2
+            A[(nzc19[j] + 16)] += FE0_f0[ip][j]*I[3];
+            // Number of operations to compute entry: 2
+            A[nzc16[j]] += FE0_f0[ip][j]*I[4];
+            // Number of operations to compute entry: 2
+            A[nzc17[j]] += FE0_f0[ip][j]*I[5];
+            // Number of operations to compute entry: 2
+            A[nzc18[j]] += FE0_f0[ip][j]*I[6];
+            // Number of operations to compute entry: 2
+            A[nzc19[j]] += FE0_f0[ip][j]*I[7];
+          }// end loop over 'j'
+        }// end loop over 'ip'
+          break;
+        }
+      }
+      
+        break;
+      }
+    }
+    
+}
+
+ #ifndef UFC_BACKWARD_COMPATIBILITY 
+/// Tabulate the tensor for the contribution from a local interior facet
+/// using the specified reference cell quadrature points/weights
+void bloch_torrey3d_interior_facet_integral_1_0::tabulate_tensor(double* A,
+                     const double * const * w,
+                     const ufc::cell& c,
+                     unsigned int num_quadrature_points,
+                     const double * const * quadrature_points,
+                     const double* quadrature_weights) const
+{
+    throw std::runtime_error("Quadrature version of tabulate_tensor not yet implemented (introduced in UFC 2.0).");
+}
+#endif
+
+/// Constructor
+bloch_torrey3d_form_0::bloch_torrey3d_form_0() : ufc::form()
+{
+    // Do nothing
+}
+
+/// Destructor
+bloch_torrey3d_form_0::~bloch_torrey3d_form_0()
 {
     // Do nothing
 }
 
 /// Return a string identifying the form
-const char* bloch_torrey_notime3d_form_0::signature() const
+const char* bloch_torrey3d_form_0::signature() const
 {
-    return "Form([Integral(Sum(Sum(Product(Coefficient(FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), 6), Product(Coefficient(FiniteElement('Discontinuous Lagrange', Cell('tetrahedron', Space(3)), 0, None), 0), Product(Product(IntValue(-1, (), (), {}), Coefficient(FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), 1)), Sum(Product(Indexed(Argument(MixedElement(*[FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None)], **{'value_shape': (4,) }), 0), MultiIndex((FixedIndex(2),), {})), Indexed(Argument(MixedElement(*[FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None)], **{'value_shape': (4,) }), 1), MultiIndex((FixedIndex(3),), {}))), Product(IntValue(-1, (), (), {}), Product(Indexed(Argument(MixedElement(*[FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None)], **{'value_shape': (4,) }), 0), MultiIndex((FixedIndex(3),), {})), Indexed(Argument(MixedElement(*[FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None)], **{'value_shape': (4,) }), 1), MultiIndex((FixedIndex(2),), {})))))))), Product(Coefficient(FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), 6), Product(Product(Product(IntValue(-1, (), (), {}), Coefficient(FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), 1)), Sum(Product(Indexed(Argument(MixedElement(*[FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None)], **{'value_shape': (4,) }), 0), MultiIndex((FixedIndex(0),), {})), Indexed(Argument(MixedElement(*[FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None)], **{'value_shape': (4,) }), 1), MultiIndex((FixedIndex(1),), {}))), Product(IntValue(-1, (), (), {}), Product(Indexed(Argument(MixedElement(*[FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None)], **{'value_shape': (4,) }), 0), MultiIndex((FixedIndex(1),), {})), Indexed(Argument(MixedElement(*[FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None)], **{'value_shape': (4,) }), 1), MultiIndex((FixedIndex(0),), {})))))), Sum(IntValue(1, (), (), {}), Product(IntValue(-1, (), (), {}), Coefficient(FiniteElement('Discontinuous Lagrange', Cell('tetrahedron', Space(3)), 0, None), 0)))))), Sum(Sum(Product(Coefficient(FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), 4), Product(Product(FloatValue(1e-06, (), (), {}), Sum(Product(Indexed(Argument(MixedElement(*[FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None)], **{'value_shape': (4,) }), 0), MultiIndex((FixedIndex(2),), {})), Indexed(Argument(MixedElement(*[FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None)], **{'value_shape': (4,) }), 1), MultiIndex((FixedIndex(2),), {}))), Product(Indexed(Argument(MixedElement(*[FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None)], **{'value_shape': (4,) }), 0), MultiIndex((FixedIndex(3),), {})), Indexed(Argument(MixedElement(*[FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None)], **{'value_shape': (4,) }), 1), MultiIndex((FixedIndex(3),), {}))))), Sum(IntValue(1, (), (), {}), Product(IntValue(-1, (), (), {}), Coefficient(FiniteElement('Discontinuous Lagrange', Cell('tetrahedron', Space(3)), 0, None), 0))))), Sum(Product(Coefficient(FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), 4), Product(Coefficient(FiniteElement('Discontinuous Lagrange', Cell('tetrahedron', Space(3)), 0, None), 0), Product(FloatValue(1e-06, (), (), {}), Sum(Product(Indexed(Argument(MixedElement(*[FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None)], **{'value_shape': (4,) }), 0), MultiIndex((FixedIndex(0),), {})), Indexed(Argument(MixedElement(*[FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None)], **{'value_shape': (4,) }), 1), MultiIndex((FixedIndex(0),), {}))), Product(Indexed(Argument(MixedElement(*[FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None)], **{'value_shape': (4,) }), 0), MultiIndex((FixedIndex(1),), {})), Indexed(Argument(MixedElement(*[FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None)], **{'value_shape': (4,) }), 1), MultiIndex((FixedIndex(1),), {}))))))), Sum(Product(Coefficient(FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), 4), Product(Coefficient(FiniteElement('Discontinuous Lagrange', Cell('tetrahedron', Space(3)), 0, None), 0), Sum(Product(Indexed(Argument(MixedElement(*[FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None)], **{'value_shape': (4,) }), 0), MultiIndex((FixedIndex(2),), {})), Indexed(Argument(MixedElement(*[FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None)], **{'value_shape': (4,) }), 1), MultiIndex((FixedIndex(2),), {}))), Product(Indexed(Argument(MixedElement(*[FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None)], **{'value_shape': (4,) }), 0), MultiIndex((FixedIndex(3),), {})), Indexed(Argument(MixedElement(*[FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None)], **{'value_shape': (4,) }), 1), MultiIndex((FixedIndex(3),), {})))))), Product(Coefficient(FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), 4), Product(Sum(IntValue(1, (), (), {}), Product(IntValue(-1, (), (), {}), Coefficient(FiniteElement('Discontinuous Lagrange', Cell('tetrahedron', Space(3)), 0, None), 0))), Sum(Product(Indexed(Argument(MixedElement(*[FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None)], **{'value_shape': (4,) }), 0), MultiIndex((FixedIndex(0),), {})), Indexed(Argument(MixedElement(*[FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None)], **{'value_shape': (4,) }), 1), MultiIndex((FixedIndex(0),), {}))), Product(Indexed(Argument(MixedElement(*[FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None)], **{'value_shape': (4,) }), 0), MultiIndex((FixedIndex(1),), {})), Indexed(Argument(MixedElement(*[FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None)], **{'value_shape': (4,) }), 1), MultiIndex((FixedIndex(1),), {}))))))))), Sum(Product(Coefficient(FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), 5), Product(Product(Product(FloatValue(1e-06, (), (), {}), Coefficient(FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), 2)), Sum(IndexSum(Product(Indexed(ComponentTensor(Indexed(SpatialDerivative(Argument(MixedElement(*[FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None)], **{'value_shape': (4,) }), 0), MultiIndex((Index(0),), {Index(0): 3})), MultiIndex((FixedIndex(2),), {})), MultiIndex((Index(0),), {Index(0): 3})), MultiIndex((Index(1),), {Index(1): 3})), Indexed(ComponentTensor(Indexed(SpatialDerivative(Argument(MixedElement(*[FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None)], **{'value_shape': (4,) }), 1), MultiIndex((Index(2),), {Index(2): 3})), MultiIndex((FixedIndex(2),), {})), MultiIndex((Index(2),), {Index(2): 3})), MultiIndex((Index(1),), {Index(1): 3}))), MultiIndex((Index(1),), {Index(1): 3})), IndexSum(Product(Indexed(ComponentTensor(Indexed(SpatialDerivative(Argument(MixedElement(*[FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None)], **{'value_shape': (4,) }), 0), MultiIndex((Index(3),), {Index(3): 3})), MultiIndex((FixedIndex(3),), {})), MultiIndex((Index(3),), {Index(3): 3})), MultiIndex((Index(4),), {Index(4): 3})), Indexed(ComponentTensor(Indexed(SpatialDerivative(Argument(MixedElement(*[FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None)], **{'value_shape': (4,) }), 1), MultiIndex((Index(5),), {Index(5): 3})), MultiIndex((FixedIndex(3),), {})), MultiIndex((Index(5),), {Index(5): 3})), MultiIndex((Index(4),), {Index(4): 3}))), MultiIndex((Index(4),), {Index(4): 3})))), Sum(IntValue(1, (), (), {}), Product(IntValue(-1, (), (), {}), Coefficient(FiniteElement('Discontinuous Lagrange', Cell('tetrahedron', Space(3)), 0, None), 0))))), Sum(Product(Coefficient(FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), 5), Product(Coefficient(FiniteElement('Discontinuous Lagrange', Cell('tetrahedron', Space(3)), 0, None), 0), Product(Product(FloatValue(1e-06, (), (), {}), Coefficient(FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), 2)), Sum(IndexSum(Product(Indexed(ComponentTensor(Indexed(SpatialDerivative(Argument(MixedElement(*[FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None)], **{'value_shape': (4,) }), 0), MultiIndex((Index(6),), {Index(6): 3})), MultiIndex((FixedIndex(0),), {})), MultiIndex((Index(6),), {Index(6): 3})), MultiIndex((Index(7),), {Index(7): 3})), Indexed(ComponentTensor(Indexed(SpatialDerivative(Argument(MixedElement(*[FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None)], **{'value_shape': (4,) }), 1), MultiIndex((Index(8),), {Index(8): 3})), MultiIndex((FixedIndex(0),), {})), MultiIndex((Index(8),), {Index(8): 3})), MultiIndex((Index(7),), {Index(7): 3}))), MultiIndex((Index(7),), {Index(7): 3})), IndexSum(Product(Indexed(ComponentTensor(Indexed(SpatialDerivative(Argument(MixedElement(*[FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None)], **{'value_shape': (4,) }), 0), MultiIndex((Index(9),), {Index(9): 3})), MultiIndex((FixedIndex(1),), {})), MultiIndex((Index(9),), {Index(9): 3})), MultiIndex((Index(10),), {Index(10): 3})), Indexed(ComponentTensor(Indexed(SpatialDerivative(Argument(MixedElement(*[FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None)], **{'value_shape': (4,) }), 1), MultiIndex((Index(11),), {Index(11): 3})), MultiIndex((FixedIndex(1),), {})), MultiIndex((Index(11),), {Index(11): 3})), MultiIndex((Index(10),), {Index(10): 3}))), MultiIndex((Index(10),), {Index(10): 3})))))), Sum(Product(Coefficient(FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), 5), Product(Coefficient(FiniteElement('Discontinuous Lagrange', Cell('tetrahedron', Space(3)), 0, None), 0), Product(Coefficient(FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), 2), Sum(IndexSum(Product(Indexed(ComponentTensor(Indexed(SpatialDerivative(Argument(MixedElement(*[FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None)], **{'value_shape': (4,) }), 0), MultiIndex((Index(12),), {Index(12): 3})), MultiIndex((FixedIndex(2),), {})), MultiIndex((Index(12),), {Index(12): 3})), MultiIndex((Index(13),), {Index(13): 3})), Indexed(ComponentTensor(Indexed(SpatialDerivative(Argument(MixedElement(*[FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None)], **{'value_shape': (4,) }), 1), MultiIndex((Index(14),), {Index(14): 3})), MultiIndex((FixedIndex(2),), {})), MultiIndex((Index(14),), {Index(14): 3})), MultiIndex((Index(13),), {Index(13): 3}))), MultiIndex((Index(13),), {Index(13): 3})), IndexSum(Product(Indexed(ComponentTensor(Indexed(SpatialDerivative(Argument(MixedElement(*[FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None)], **{'value_shape': (4,) }), 0), MultiIndex((Index(15),), {Index(15): 3})), MultiIndex((FixedIndex(3),), {})), MultiIndex((Index(15),), {Index(15): 3})), MultiIndex((Index(16),), {Index(16): 3})), Indexed(ComponentTensor(Indexed(SpatialDerivative(Argument(MixedElement(*[FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None)], **{'value_shape': (4,) }), 1), MultiIndex((Index(17),), {Index(17): 3})), MultiIndex((FixedIndex(3),), {})), MultiIndex((Index(17),), {Index(17): 3})), MultiIndex((Index(16),), {Index(16): 3}))), MultiIndex((Index(16),), {Index(16): 3})))))), Product(Coefficient(FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), 5), Product(Product(Coefficient(FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), 2), Sum(IndexSum(Product(Indexed(ComponentTensor(Indexed(SpatialDerivative(Argument(MixedElement(*[FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None)], **{'value_shape': (4,) }), 0), MultiIndex((Index(18),), {Index(18): 3})), MultiIndex((FixedIndex(0),), {})), MultiIndex((Index(18),), {Index(18): 3})), MultiIndex((Index(19),), {Index(19): 3})), Indexed(ComponentTensor(Indexed(SpatialDerivative(Argument(MixedElement(*[FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None)], **{'value_shape': (4,) }), 1), MultiIndex((Index(20),), {Index(20): 3})), MultiIndex((FixedIndex(0),), {})), MultiIndex((Index(20),), {Index(20): 3})), MultiIndex((Index(19),), {Index(19): 3}))), MultiIndex((Index(19),), {Index(19): 3})), IndexSum(Product(Indexed(ComponentTensor(Indexed(SpatialDerivative(Argument(MixedElement(*[FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None)], **{'value_shape': (4,) }), 0), MultiIndex((Index(21),), {Index(21): 3})), MultiIndex((FixedIndex(1),), {})), MultiIndex((Index(21),), {Index(21): 3})), MultiIndex((Index(22),), {Index(22): 3})), Indexed(ComponentTensor(Indexed(SpatialDerivative(Argument(MixedElement(*[FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None)], **{'value_shape': (4,) }), 1), MultiIndex((Index(23),), {Index(23): 3})), MultiIndex((FixedIndex(1),), {})), MultiIndex((Index(23),), {Index(23): 3})), MultiIndex((Index(22),), {Index(22): 3}))), MultiIndex((Index(22),), {Index(22): 3})))), Sum(IntValue(1, (), (), {}), Product(IntValue(-1, (), (), {}), Coefficient(FiniteElement('Discontinuous Lagrange', Cell('tetrahedron', Space(3)), 0, None), 0)))))))))), Measure('cell', 0, None)), Integral(Product(Abs(Sum(PositiveRestricted(Coefficient(FiniteElement('Discontinuous Lagrange', Cell('tetrahedron', Space(3)), 0, None), 0)), Product(IntValue(-1, (), (), {}), NegativeRestricted(Coefficient(FiniteElement('Discontinuous Lagrange', Cell('tetrahedron', Space(3)), 0, None), 0))))), Product(Product(FloatValue(0.5, (), (), {}), Sum(NegativeRestricted(Coefficient(FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), 7)), PositiveRestricted(Coefficient(FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), 7)))), Product(FloatValue(0.5, (), (), {}), Sum(NegativeRestricted(Sum(Product(Product(Coefficient(FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), 3), Sum(Indexed(Argument(MixedElement(*[FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None)], **{'value_shape': (4,) }), 1), MultiIndex((FixedIndex(0),), {})), Product(IntValue(-1, (), (), {}), Indexed(Argument(MixedElement(*[FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None)], **{'value_shape': (4,) }), 1), MultiIndex((FixedIndex(2),), {}))))), Sum(Indexed(Argument(MixedElement(*[FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None)], **{'value_shape': (4,) }), 0), MultiIndex((FixedIndex(0),), {})), Product(IntValue(-1, (), (), {}), Indexed(Argument(MixedElement(*[FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None)], **{'value_shape': (4,) }), 0), MultiIndex((FixedIndex(2),), {}))))), Product(Product(Coefficient(FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), 3), Sum(Indexed(Argument(MixedElement(*[FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None)], **{'value_shape': (4,) }), 1), MultiIndex((FixedIndex(1),), {})), Product(IntValue(-1, (), (), {}), Indexed(Argument(MixedElement(*[FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None)], **{'value_shape': (4,) }), 1), MultiIndex((FixedIndex(3),), {}))))), Sum(Indexed(Argument(MixedElement(*[FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None)], **{'value_shape': (4,) }), 0), MultiIndex((FixedIndex(1),), {})), Product(IntValue(-1, (), (), {}), Indexed(Argument(MixedElement(*[FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None)], **{'value_shape': (4,) }), 0), MultiIndex((FixedIndex(3),), {}))))))), PositiveRestricted(Sum(Product(Product(Coefficient(FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), 3), Sum(Indexed(Argument(MixedElement(*[FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None)], **{'value_shape': (4,) }), 1), MultiIndex((FixedIndex(0),), {})), Product(IntValue(-1, (), (), {}), Indexed(Argument(MixedElement(*[FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None)], **{'value_shape': (4,) }), 1), MultiIndex((FixedIndex(2),), {}))))), Sum(Indexed(Argument(MixedElement(*[FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None)], **{'value_shape': (4,) }), 0), MultiIndex((FixedIndex(0),), {})), Product(IntValue(-1, (), (), {}), Indexed(Argument(MixedElement(*[FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None)], **{'value_shape': (4,) }), 0), MultiIndex((FixedIndex(2),), {}))))), Product(Product(Coefficient(FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), 3), Sum(Indexed(Argument(MixedElement(*[FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None)], **{'value_shape': (4,) }), 1), MultiIndex((FixedIndex(1),), {})), Product(IntValue(-1, (), (), {}), Indexed(Argument(MixedElement(*[FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None)], **{'value_shape': (4,) }), 1), MultiIndex((FixedIndex(3),), {}))))), Sum(Indexed(Argument(MixedElement(*[FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None)], **{'value_shape': (4,) }), 0), MultiIndex((FixedIndex(1),), {})), Product(IntValue(-1, (), (), {}), Indexed(Argument(MixedElement(*[FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None)], **{'value_shape': (4,) }), 0), MultiIndex((FixedIndex(3),), {}))))))))))), Measure('interior_facet', 0, None))])";
+    return "Form([Integral(Sum(Product(Coefficient(FiniteElement('Discontinuous Lagrange', Cell('tetrahedron', Space(3)), 0, None), 0), Sum(Product(IntValue(-1, (), (), {}), Product(Coefficient(FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), 5), Sum(Sum(Product(Indexed(Argument(MixedElement(*[FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None)], **{'value_shape': (4,) }), 0), MultiIndex((FixedIndex(2),), {})), Product(Indexed(Argument(MixedElement(*[FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None)], **{'value_shape': (4,) }), 1), MultiIndex((FixedIndex(3),), {})), Product(Coefficient(FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), 1), Product(Coefficient(FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), 3), Indexed(Coefficient(MixedElement(*[FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None)], **{'value_shape': (4,) }), 2), MultiIndex((FixedIndex(0),), {})))))), Product(IntValue(-1, (), (), {}), Product(Coefficient(FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), 4), IndexSum(Product(Indexed(ComponentTensor(Indexed(SpatialDerivative(Argument(MixedElement(*[FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None)], **{'value_shape': (4,) }), 0), MultiIndex((Index(0),), {Index(0): 3})), MultiIndex((FixedIndex(2),), {})), MultiIndex((Index(0),), {Index(0): 3})), MultiIndex((Index(1),), {Index(1): 3})), Indexed(ComponentTensor(Indexed(SpatialDerivative(Argument(MixedElement(*[FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None)], **{'value_shape': (4,) }), 1), MultiIndex((Index(2),), {Index(2): 3})), MultiIndex((FixedIndex(2),), {})), MultiIndex((Index(2),), {Index(2): 3})), MultiIndex((Index(1),), {Index(1): 3}))), MultiIndex((Index(1),), {Index(1): 3}))))), Sum(Product(Indexed(Argument(MixedElement(*[FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None)], **{'value_shape': (4,) }), 0), MultiIndex((FixedIndex(3),), {})), Product(Indexed(Argument(MixedElement(*[FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None)], **{'value_shape': (4,) }), 1), MultiIndex((FixedIndex(2),), {})), Product(Coefficient(FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), 1), Product(Coefficient(FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), 3), Product(IntValue(-1, (), (), {}), Indexed(Coefficient(MixedElement(*[FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None)], **{'value_shape': (4,) }), 2), MultiIndex((FixedIndex(0),), {}))))))), Product(IntValue(-1, (), (), {}), Product(Coefficient(FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), 4), IndexSum(Product(Indexed(ComponentTensor(Indexed(SpatialDerivative(Argument(MixedElement(*[FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None)], **{'value_shape': (4,) }), 0), MultiIndex((Index(3),), {Index(3): 3})), MultiIndex((FixedIndex(3),), {})), MultiIndex((Index(3),), {Index(3): 3})), MultiIndex((Index(4),), {Index(4): 3})), Indexed(ComponentTensor(Indexed(SpatialDerivative(Argument(MixedElement(*[FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None)], **{'value_shape': (4,) }), 1), MultiIndex((Index(5),), {Index(5): 3})), MultiIndex((FixedIndex(3),), {})), MultiIndex((Index(5),), {Index(5): 3})), MultiIndex((Index(4),), {Index(4): 3}))), MultiIndex((Index(4),), {Index(4): 3})))))))), Sum(Product(Division(Indexed(Argument(MixedElement(*[FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None)], **{'value_shape': (4,) }), 1), MultiIndex((FixedIndex(2),), {})), Coefficient(FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), 6)), Indexed(Argument(MixedElement(*[FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None)], **{'value_shape': (4,) }), 0), MultiIndex((FixedIndex(2),), {}))), Product(Division(Indexed(Argument(MixedElement(*[FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None)], **{'value_shape': (4,) }), 1), MultiIndex((FixedIndex(3),), {})), Coefficient(FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), 6)), Indexed(Argument(MixedElement(*[FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None)], **{'value_shape': (4,) }), 0), MultiIndex((FixedIndex(3),), {})))))), Product(Sum(IntValue(1, (), (), {}), Product(IntValue(-1, (), (), {}), Coefficient(FiniteElement('Discontinuous Lagrange', Cell('tetrahedron', Space(3)), 0, None), 0))), Sum(Product(IntValue(-1, (), (), {}), Product(Coefficient(FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), 5), Sum(Sum(Product(Indexed(Argument(MixedElement(*[FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None)], **{'value_shape': (4,) }), 0), MultiIndex((FixedIndex(0),), {})), Product(Indexed(Argument(MixedElement(*[FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None)], **{'value_shape': (4,) }), 1), MultiIndex((FixedIndex(1),), {})), Product(Coefficient(FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), 1), Product(Coefficient(FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), 3), Indexed(Coefficient(MixedElement(*[FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None)], **{'value_shape': (4,) }), 2), MultiIndex((FixedIndex(0),), {})))))), Product(IntValue(-1, (), (), {}), Product(Coefficient(FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), 4), IndexSum(Product(Indexed(ComponentTensor(Indexed(SpatialDerivative(Argument(MixedElement(*[FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None)], **{'value_shape': (4,) }), 0), MultiIndex((Index(6),), {Index(6): 3})), MultiIndex((FixedIndex(0),), {})), MultiIndex((Index(6),), {Index(6): 3})), MultiIndex((Index(7),), {Index(7): 3})), Indexed(ComponentTensor(Indexed(SpatialDerivative(Argument(MixedElement(*[FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None)], **{'value_shape': (4,) }), 1), MultiIndex((Index(8),), {Index(8): 3})), MultiIndex((FixedIndex(0),), {})), MultiIndex((Index(8),), {Index(8): 3})), MultiIndex((Index(7),), {Index(7): 3}))), MultiIndex((Index(7),), {Index(7): 3}))))), Sum(Product(Indexed(Argument(MixedElement(*[FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None)], **{'value_shape': (4,) }), 0), MultiIndex((FixedIndex(1),), {})), Product(Indexed(Argument(MixedElement(*[FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None)], **{'value_shape': (4,) }), 1), MultiIndex((FixedIndex(0),), {})), Product(Coefficient(FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), 1), Product(Coefficient(FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), 3), Product(IntValue(-1, (), (), {}), Indexed(Coefficient(MixedElement(*[FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None)], **{'value_shape': (4,) }), 2), MultiIndex((FixedIndex(0),), {}))))))), Product(IntValue(-1, (), (), {}), Product(Coefficient(FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), 4), IndexSum(Product(Indexed(ComponentTensor(Indexed(SpatialDerivative(Argument(MixedElement(*[FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None)], **{'value_shape': (4,) }), 0), MultiIndex((Index(9),), {Index(9): 3})), MultiIndex((FixedIndex(1),), {})), MultiIndex((Index(9),), {Index(9): 3})), MultiIndex((Index(10),), {Index(10): 3})), Indexed(ComponentTensor(Indexed(SpatialDerivative(Argument(MixedElement(*[FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None)], **{'value_shape': (4,) }), 1), MultiIndex((Index(11),), {Index(11): 3})), MultiIndex((FixedIndex(1),), {})), MultiIndex((Index(11),), {Index(11): 3})), MultiIndex((Index(10),), {Index(10): 3}))), MultiIndex((Index(10),), {Index(10): 3})))))))), Sum(Product(Division(Indexed(Argument(MixedElement(*[FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None)], **{'value_shape': (4,) }), 1), MultiIndex((FixedIndex(0),), {})), Coefficient(FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), 6)), Indexed(Argument(MixedElement(*[FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None)], **{'value_shape': (4,) }), 0), MultiIndex((FixedIndex(0),), {}))), Product(Division(Indexed(Argument(MixedElement(*[FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None)], **{'value_shape': (4,) }), 1), MultiIndex((FixedIndex(1),), {})), Coefficient(FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), 6)), Indexed(Argument(MixedElement(*[FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None)], **{'value_shape': (4,) }), 0), MultiIndex((FixedIndex(1),), {}))))))), Measure('cell', 0, None)), Integral(Product(Abs(Sum(PositiveRestricted(Coefficient(FiniteElement('Discontinuous Lagrange', Cell('tetrahedron', Space(3)), 0, None), 0)), Product(IntValue(-1, (), (), {}), NegativeRestricted(Coefficient(FiniteElement('Discontinuous Lagrange', Cell('tetrahedron', Space(3)), 0, None), 0))))), Product(FloatValue(0.5, (), (), {}), Sum(NegativeRestricted(Product(Coefficient(FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), 5), Sum(Product(Product(Coefficient(FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), 7), Sum(Indexed(Argument(MixedElement(*[FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None)], **{'value_shape': (4,) }), 1), MultiIndex((FixedIndex(0),), {})), Product(IntValue(-1, (), (), {}), Indexed(Argument(MixedElement(*[FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None)], **{'value_shape': (4,) }), 1), MultiIndex((FixedIndex(2),), {}))))), Sum(Indexed(Argument(MixedElement(*[FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None)], **{'value_shape': (4,) }), 0), MultiIndex((FixedIndex(0),), {})), Product(IntValue(-1, (), (), {}), Indexed(Argument(MixedElement(*[FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None)], **{'value_shape': (4,) }), 0), MultiIndex((FixedIndex(2),), {}))))), Product(Product(Coefficient(FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), 7), Sum(Indexed(Argument(MixedElement(*[FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None)], **{'value_shape': (4,) }), 1), MultiIndex((FixedIndex(1),), {})), Product(IntValue(-1, (), (), {}), Indexed(Argument(MixedElement(*[FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None)], **{'value_shape': (4,) }), 1), MultiIndex((FixedIndex(3),), {}))))), Sum(Indexed(Argument(MixedElement(*[FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None)], **{'value_shape': (4,) }), 0), MultiIndex((FixedIndex(1),), {})), Product(IntValue(-1, (), (), {}), Indexed(Argument(MixedElement(*[FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None)], **{'value_shape': (4,) }), 0), MultiIndex((FixedIndex(3),), {})))))))), PositiveRestricted(Product(Coefficient(FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), 5), Sum(Product(Product(Coefficient(FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), 7), Sum(Indexed(Argument(MixedElement(*[FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None)], **{'value_shape': (4,) }), 1), MultiIndex((FixedIndex(0),), {})), Product(IntValue(-1, (), (), {}), Indexed(Argument(MixedElement(*[FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None)], **{'value_shape': (4,) }), 1), MultiIndex((FixedIndex(2),), {}))))), Sum(Indexed(Argument(MixedElement(*[FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None)], **{'value_shape': (4,) }), 0), MultiIndex((FixedIndex(0),), {})), Product(IntValue(-1, (), (), {}), Indexed(Argument(MixedElement(*[FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None)], **{'value_shape': (4,) }), 0), MultiIndex((FixedIndex(2),), {}))))), Product(Product(Coefficient(FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), 7), Sum(Indexed(Argument(MixedElement(*[FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None)], **{'value_shape': (4,) }), 1), MultiIndex((FixedIndex(1),), {})), Product(IntValue(-1, (), (), {}), Indexed(Argument(MixedElement(*[FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None)], **{'value_shape': (4,) }), 1), MultiIndex((FixedIndex(3),), {}))))), Sum(Indexed(Argument(MixedElement(*[FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None)], **{'value_shape': (4,) }), 0), MultiIndex((FixedIndex(1),), {})), Product(IntValue(-1, (), (), {}), Indexed(Argument(MixedElement(*[FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None)], **{'value_shape': (4,) }), 0), MultiIndex((FixedIndex(3),), {}))))))))))), Measure('interior_facet', 0, None))])";
 }
 
 /// Return the rank of the global tensor (r)
-unsigned int bloch_torrey_notime3d_form_0::rank() const
+unsigned int bloch_torrey3d_form_0::rank() const
 {
     return 2;
 }
 
 /// Return the number of coefficients (n)
-unsigned int bloch_torrey_notime3d_form_0::num_coefficients() const
+unsigned int bloch_torrey3d_form_0::num_coefficients() const
 {
     return 8;
 }
  #ifndef UFC_BACKWARD_COMPATIBILITY 
 /// Return the number of cell domains
-unsigned int bloch_torrey_notime3d_form_0::num_cell_domains() const
+unsigned int bloch_torrey3d_form_0::num_cell_domains() const
 {
     return 1;
 }
 
 /// Return the number of exterior facet domains
-unsigned int bloch_torrey_notime3d_form_0::num_exterior_facet_domains() const
+unsigned int bloch_torrey3d_form_0::num_exterior_facet_domains() const
 {
     return 0;
 }
 
 /// Return the number of interior facet domains
-unsigned int bloch_torrey_notime3d_form_0::num_interior_facet_domains() const
+unsigned int bloch_torrey3d_form_0::num_interior_facet_domains() const
 {
     return 1;
 }
 #else
 
 /// Return the number of cell domains
-unsigned int bloch_torrey_notime3d_form_0::num_cell_integrals() const
+unsigned int bloch_torrey3d_form_0::num_cell_integrals() const
 {
     return 1;
 }
 
 /// Return the number of exterior facet domains
-unsigned int bloch_torrey_notime3d_form_0::num_exterior_facet_integrals() const
+unsigned int bloch_torrey3d_form_0::num_exterior_facet_integrals() const
 {
     return 0;
 }
 
 /// Return the number of interior facet domains
-unsigned int bloch_torrey_notime3d_form_0::num_interior_facet_integrals() const
+unsigned int bloch_torrey3d_form_0::num_interior_facet_integrals() const
 {
     return 1;
 }
@@ -8630,58 +10672,58 @@ unsigned int bloch_torrey_notime3d_form_0::num_interior_facet_integrals() const
 #endif
 
 /// Create a new finite element for argument function i
-ufc::finite_element* bloch_torrey_notime3d_form_0::create_finite_element(unsigned int i) const
+ufc::finite_element* bloch_torrey3d_form_0::create_finite_element(unsigned int i) const
 {
     switch (i)
     {
     case 0:
       {
-        return new bloch_torrey_notime3d_finite_element_2();
+        return new bloch_torrey3d_finite_element_2();
         break;
       }
     case 1:
       {
-        return new bloch_torrey_notime3d_finite_element_2();
+        return new bloch_torrey3d_finite_element_2();
         break;
       }
     case 2:
       {
-        return new bloch_torrey_notime3d_finite_element_0();
+        return new bloch_torrey3d_finite_element_0();
         break;
       }
     case 3:
       {
-        return new bloch_torrey_notime3d_finite_element_1();
+        return new bloch_torrey3d_finite_element_1();
         break;
       }
     case 4:
       {
-        return new bloch_torrey_notime3d_finite_element_1();
+        return new bloch_torrey3d_finite_element_2();
         break;
       }
     case 5:
       {
-        return new bloch_torrey_notime3d_finite_element_1();
+        return new bloch_torrey3d_finite_element_1();
         break;
       }
     case 6:
       {
-        return new bloch_torrey_notime3d_finite_element_1();
+        return new bloch_torrey3d_finite_element_1();
         break;
       }
     case 7:
       {
-        return new bloch_torrey_notime3d_finite_element_1();
+        return new bloch_torrey3d_finite_element_1();
         break;
       }
     case 8:
       {
-        return new bloch_torrey_notime3d_finite_element_1();
+        return new bloch_torrey3d_finite_element_1();
         break;
       }
     case 9:
       {
-        return new bloch_torrey_notime3d_finite_element_1();
+        return new bloch_torrey3d_finite_element_1();
         break;
       }
     }
@@ -8691,58 +10733,58 @@ ufc::finite_element* bloch_torrey_notime3d_form_0::create_finite_element(unsigne
 
  #ifndef UFC_BACKWARD_COMPATIBILITY 
 /// Create a new dofmap for argument function i
-ufc::dofmap* bloch_torrey_notime3d_form_0::create_dofmap(unsigned int i) const
+ufc::dofmap* bloch_torrey3d_form_0::create_dofmap(unsigned int i) const
 {
     switch (i)
     {
     case 0:
       {
-        return new bloch_torrey_notime3d_dofmap_2();
+        return new bloch_torrey3d_dofmap_2();
         break;
       }
     case 1:
       {
-        return new bloch_torrey_notime3d_dofmap_2();
+        return new bloch_torrey3d_dofmap_2();
         break;
       }
     case 2:
       {
-        return new bloch_torrey_notime3d_dofmap_0();
+        return new bloch_torrey3d_dofmap_0();
         break;
       }
     case 3:
       {
-        return new bloch_torrey_notime3d_dofmap_1();
+        return new bloch_torrey3d_dofmap_1();
         break;
       }
     case 4:
       {
-        return new bloch_torrey_notime3d_dofmap_1();
+        return new bloch_torrey3d_dofmap_2();
         break;
       }
     case 5:
       {
-        return new bloch_torrey_notime3d_dofmap_1();
+        return new bloch_torrey3d_dofmap_1();
         break;
       }
     case 6:
       {
-        return new bloch_torrey_notime3d_dofmap_1();
+        return new bloch_torrey3d_dofmap_1();
         break;
       }
     case 7:
       {
-        return new bloch_torrey_notime3d_dofmap_1();
+        return new bloch_torrey3d_dofmap_1();
         break;
       }
     case 8:
       {
-        return new bloch_torrey_notime3d_dofmap_1();
+        return new bloch_torrey3d_dofmap_1();
         break;
       }
     case 9:
       {
-        return new bloch_torrey_notime3d_dofmap_1();
+        return new bloch_torrey3d_dofmap_1();
         break;
       }
     }
@@ -8752,58 +10794,58 @@ ufc::dofmap* bloch_torrey_notime3d_form_0::create_dofmap(unsigned int i) const
 #else
 
 /// Create a new dofmap for argument function i
-ufc::dof_map* bloch_torrey_notime3d_form_0::create_dof_map(unsigned int i) const
+ufc::dof_map* bloch_torrey3d_form_0::create_dof_map(unsigned int i) const
 {
     switch (i)
     {
     case 0:
       {
-        return new bloch_torrey_notime3d_dofmap_2();
+        return new bloch_torrey3d_dofmap_2();
         break;
       }
     case 1:
       {
-        return new bloch_torrey_notime3d_dofmap_2();
+        return new bloch_torrey3d_dofmap_2();
         break;
       }
     case 2:
       {
-        return new bloch_torrey_notime3d_dofmap_0();
+        return new bloch_torrey3d_dofmap_0();
         break;
       }
     case 3:
       {
-        return new bloch_torrey_notime3d_dofmap_1();
+        return new bloch_torrey3d_dofmap_1();
         break;
       }
     case 4:
       {
-        return new bloch_torrey_notime3d_dofmap_1();
+        return new bloch_torrey3d_dofmap_2();
         break;
       }
     case 5:
       {
-        return new bloch_torrey_notime3d_dofmap_1();
+        return new bloch_torrey3d_dofmap_1();
         break;
       }
     case 6:
       {
-        return new bloch_torrey_notime3d_dofmap_1();
+        return new bloch_torrey3d_dofmap_1();
         break;
       }
     case 7:
       {
-        return new bloch_torrey_notime3d_dofmap_1();
+        return new bloch_torrey3d_dofmap_1();
         break;
       }
     case 8:
       {
-        return new bloch_torrey_notime3d_dofmap_1();
+        return new bloch_torrey3d_dofmap_1();
         break;
       }
     case 9:
       {
-        return new bloch_torrey_notime3d_dofmap_1();
+        return new bloch_torrey3d_dofmap_1();
         break;
       }
     }
@@ -8812,13 +10854,13 @@ ufc::dof_map* bloch_torrey_notime3d_form_0::create_dof_map(unsigned int i) const
 }
 #endif
 /// Create a new cell integral on sub domain i
-ufc::cell_integral* bloch_torrey_notime3d_form_0::create_cell_integral(unsigned int i) const
+ufc::cell_integral* bloch_torrey3d_form_0::create_cell_integral(unsigned int i) const
 {
     switch (i)
     {
     case 0:
       {
-        return new bloch_torrey_notime3d_cell_integral_0_0();
+        return new bloch_torrey3d_cell_integral_0_0();
         break;
       }
     }
@@ -8827,19 +10869,306 @@ ufc::cell_integral* bloch_torrey_notime3d_form_0::create_cell_integral(unsigned 
 }
 
 /// Create a new exterior facet integral on sub domain i
-ufc::exterior_facet_integral* bloch_torrey_notime3d_form_0::create_exterior_facet_integral(unsigned int i) const
+ufc::exterior_facet_integral* bloch_torrey3d_form_0::create_exterior_facet_integral(unsigned int i) const
 {
     return 0;
 }
 
 /// Create a new interior facet integral on sub domain i
-ufc::interior_facet_integral* bloch_torrey_notime3d_form_0::create_interior_facet_integral(unsigned int i) const
+ufc::interior_facet_integral* bloch_torrey3d_form_0::create_interior_facet_integral(unsigned int i) const
 {
     switch (i)
     {
     case 0:
       {
-        return new bloch_torrey_notime3d_interior_facet_integral_0_0();
+        return new bloch_torrey3d_interior_facet_integral_0_0();
+        break;
+      }
+    }
+    
+    return 0;
+}
+
+/// Constructor
+bloch_torrey3d_form_1::bloch_torrey3d_form_1() : ufc::form()
+{
+    // Do nothing
+}
+
+/// Destructor
+bloch_torrey3d_form_1::~bloch_torrey3d_form_1()
+{
+    // Do nothing
+}
+
+/// Return a string identifying the form
+const char* bloch_torrey3d_form_1::signature() const
+{
+    return "Form([Integral(Sum(Product(Coefficient(FiniteElement('Discontinuous Lagrange', Cell('tetrahedron', Space(3)), 0, None), 1), Sum(Product(Sum(IntValue(1, (), (), {}), Product(IntValue(-1, (), (), {}), Coefficient(FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), 6))), Sum(Sum(Product(Indexed(Argument(MixedElement(*[FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None)], **{'value_shape': (4,) }), 0), MultiIndex((FixedIndex(2),), {})), Product(Indexed(Coefficient(MixedElement(*[FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None)], **{'value_shape': (4,) }), 0), MultiIndex((FixedIndex(3),), {})), Product(Coefficient(FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), 2), Product(Coefficient(FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), 4), Indexed(Coefficient(MixedElement(*[FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None)], **{'value_shape': (4,) }), 3), MultiIndex((FixedIndex(0),), {})))))), Product(IntValue(-1, (), (), {}), Product(Coefficient(FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), 5), IndexSum(Product(Indexed(ComponentTensor(Indexed(SpatialDerivative(Argument(MixedElement(*[FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None)], **{'value_shape': (4,) }), 0), MultiIndex((Index(0),), {Index(0): 3})), MultiIndex((FixedIndex(2),), {})), MultiIndex((Index(0),), {Index(0): 3})), MultiIndex((Index(1),), {Index(1): 3})), Indexed(ComponentTensor(Indexed(SpatialDerivative(Coefficient(MixedElement(*[FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None)], **{'value_shape': (4,) }), 0), MultiIndex((Index(2),), {Index(2): 3})), MultiIndex((FixedIndex(2),), {})), MultiIndex((Index(2),), {Index(2): 3})), MultiIndex((Index(1),), {Index(1): 3}))), MultiIndex((Index(1),), {Index(1): 3}))))), Sum(Product(Indexed(Argument(MixedElement(*[FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None)], **{'value_shape': (4,) }), 0), MultiIndex((FixedIndex(3),), {})), Product(Indexed(Coefficient(MixedElement(*[FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None)], **{'value_shape': (4,) }), 0), MultiIndex((FixedIndex(2),), {})), Product(Coefficient(FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), 2), Product(Coefficient(FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), 4), Product(IntValue(-1, (), (), {}), Indexed(Coefficient(MixedElement(*[FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None)], **{'value_shape': (4,) }), 3), MultiIndex((FixedIndex(0),), {}))))))), Product(IntValue(-1, (), (), {}), Product(Coefficient(FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), 5), IndexSum(Product(Indexed(ComponentTensor(Indexed(SpatialDerivative(Argument(MixedElement(*[FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None)], **{'value_shape': (4,) }), 0), MultiIndex((Index(3),), {Index(3): 3})), MultiIndex((FixedIndex(3),), {})), MultiIndex((Index(3),), {Index(3): 3})), MultiIndex((Index(4),), {Index(4): 3})), Indexed(ComponentTensor(Indexed(SpatialDerivative(Coefficient(MixedElement(*[FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None)], **{'value_shape': (4,) }), 0), MultiIndex((Index(5),), {Index(5): 3})), MultiIndex((FixedIndex(3),), {})), MultiIndex((Index(5),), {Index(5): 3})), MultiIndex((Index(4),), {Index(4): 3}))), MultiIndex((Index(4),), {Index(4): 3}))))))), Sum(Product(Division(Indexed(Coefficient(MixedElement(*[FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None)], **{'value_shape': (4,) }), 0), MultiIndex((FixedIndex(2),), {})), Coefficient(FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), 7)), Indexed(Argument(MixedElement(*[FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None)], **{'value_shape': (4,) }), 0), MultiIndex((FixedIndex(2),), {}))), Product(Division(Indexed(Coefficient(MixedElement(*[FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None)], **{'value_shape': (4,) }), 0), MultiIndex((FixedIndex(3),), {})), Coefficient(FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), 7)), Indexed(Argument(MixedElement(*[FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None)], **{'value_shape': (4,) }), 0), MultiIndex((FixedIndex(3),), {})))))), Product(Sum(IntValue(1, (), (), {}), Product(IntValue(-1, (), (), {}), Coefficient(FiniteElement('Discontinuous Lagrange', Cell('tetrahedron', Space(3)), 0, None), 1))), Sum(Product(Sum(IntValue(1, (), (), {}), Product(IntValue(-1, (), (), {}), Coefficient(FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), 6))), Sum(Sum(Product(Indexed(Argument(MixedElement(*[FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None)], **{'value_shape': (4,) }), 0), MultiIndex((FixedIndex(0),), {})), Product(Indexed(Coefficient(MixedElement(*[FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None)], **{'value_shape': (4,) }), 0), MultiIndex((FixedIndex(1),), {})), Product(Coefficient(FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), 2), Product(Coefficient(FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), 4), Indexed(Coefficient(MixedElement(*[FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None)], **{'value_shape': (4,) }), 3), MultiIndex((FixedIndex(0),), {})))))), Product(IntValue(-1, (), (), {}), Product(Coefficient(FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), 5), IndexSum(Product(Indexed(ComponentTensor(Indexed(SpatialDerivative(Argument(MixedElement(*[FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None)], **{'value_shape': (4,) }), 0), MultiIndex((Index(6),), {Index(6): 3})), MultiIndex((FixedIndex(0),), {})), MultiIndex((Index(6),), {Index(6): 3})), MultiIndex((Index(7),), {Index(7): 3})), Indexed(ComponentTensor(Indexed(SpatialDerivative(Coefficient(MixedElement(*[FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None)], **{'value_shape': (4,) }), 0), MultiIndex((Index(8),), {Index(8): 3})), MultiIndex((FixedIndex(0),), {})), MultiIndex((Index(8),), {Index(8): 3})), MultiIndex((Index(7),), {Index(7): 3}))), MultiIndex((Index(7),), {Index(7): 3}))))), Sum(Product(Indexed(Argument(MixedElement(*[FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None)], **{'value_shape': (4,) }), 0), MultiIndex((FixedIndex(1),), {})), Product(Indexed(Coefficient(MixedElement(*[FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None)], **{'value_shape': (4,) }), 0), MultiIndex((FixedIndex(0),), {})), Product(Coefficient(FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), 2), Product(Coefficient(FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), 4), Product(IntValue(-1, (), (), {}), Indexed(Coefficient(MixedElement(*[FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None)], **{'value_shape': (4,) }), 3), MultiIndex((FixedIndex(0),), {}))))))), Product(IntValue(-1, (), (), {}), Product(Coefficient(FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), 5), IndexSum(Product(Indexed(ComponentTensor(Indexed(SpatialDerivative(Argument(MixedElement(*[FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None)], **{'value_shape': (4,) }), 0), MultiIndex((Index(9),), {Index(9): 3})), MultiIndex((FixedIndex(1),), {})), MultiIndex((Index(9),), {Index(9): 3})), MultiIndex((Index(10),), {Index(10): 3})), Indexed(ComponentTensor(Indexed(SpatialDerivative(Coefficient(MixedElement(*[FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None)], **{'value_shape': (4,) }), 0), MultiIndex((Index(11),), {Index(11): 3})), MultiIndex((FixedIndex(1),), {})), MultiIndex((Index(11),), {Index(11): 3})), MultiIndex((Index(10),), {Index(10): 3}))), MultiIndex((Index(10),), {Index(10): 3}))))))), Sum(Product(Division(Indexed(Coefficient(MixedElement(*[FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None)], **{'value_shape': (4,) }), 0), MultiIndex((FixedIndex(0),), {})), Coefficient(FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), 7)), Indexed(Argument(MixedElement(*[FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None)], **{'value_shape': (4,) }), 0), MultiIndex((FixedIndex(0),), {}))), Product(Division(Indexed(Coefficient(MixedElement(*[FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None)], **{'value_shape': (4,) }), 0), MultiIndex((FixedIndex(1),), {})), Coefficient(FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), 7)), Indexed(Argument(MixedElement(*[FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None)], **{'value_shape': (4,) }), 0), MultiIndex((FixedIndex(1),), {}))))))), Measure('cell', 0, None)), Integral(Product(IntValue(-1, (), (), {}), Product(Abs(Sum(PositiveRestricted(Coefficient(FiniteElement('Discontinuous Lagrange', Cell('tetrahedron', Space(3)), 0, None), 1)), Product(IntValue(-1, (), (), {}), NegativeRestricted(Coefficient(FiniteElement('Discontinuous Lagrange', Cell('tetrahedron', Space(3)), 0, None), 1))))), Product(FloatValue(0.5, (), (), {}), Sum(NegativeRestricted(Product(Sum(IntValue(1, (), (), {}), Product(IntValue(-1, (), (), {}), Coefficient(FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), 6))), Sum(Product(Product(Coefficient(FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), 8), Sum(Indexed(Coefficient(MixedElement(*[FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None)], **{'value_shape': (4,) }), 0), MultiIndex((FixedIndex(0),), {})), Product(IntValue(-1, (), (), {}), Indexed(Coefficient(MixedElement(*[FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None)], **{'value_shape': (4,) }), 0), MultiIndex((FixedIndex(2),), {}))))), Sum(Indexed(Argument(MixedElement(*[FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None)], **{'value_shape': (4,) }), 0), MultiIndex((FixedIndex(0),), {})), Product(IntValue(-1, (), (), {}), Indexed(Argument(MixedElement(*[FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None)], **{'value_shape': (4,) }), 0), MultiIndex((FixedIndex(2),), {}))))), Product(Product(Coefficient(FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), 8), Sum(Indexed(Coefficient(MixedElement(*[FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None)], **{'value_shape': (4,) }), 0), MultiIndex((FixedIndex(1),), {})), Product(IntValue(-1, (), (), {}), Indexed(Coefficient(MixedElement(*[FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None)], **{'value_shape': (4,) }), 0), MultiIndex((FixedIndex(3),), {}))))), Sum(Indexed(Argument(MixedElement(*[FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None)], **{'value_shape': (4,) }), 0), MultiIndex((FixedIndex(1),), {})), Product(IntValue(-1, (), (), {}), Indexed(Argument(MixedElement(*[FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None)], **{'value_shape': (4,) }), 0), MultiIndex((FixedIndex(3),), {})))))))), PositiveRestricted(Product(Sum(IntValue(1, (), (), {}), Product(IntValue(-1, (), (), {}), Coefficient(FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), 6))), Sum(Product(Product(Coefficient(FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), 8), Sum(Indexed(Coefficient(MixedElement(*[FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None)], **{'value_shape': (4,) }), 0), MultiIndex((FixedIndex(0),), {})), Product(IntValue(-1, (), (), {}), Indexed(Coefficient(MixedElement(*[FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None)], **{'value_shape': (4,) }), 0), MultiIndex((FixedIndex(2),), {}))))), Sum(Indexed(Argument(MixedElement(*[FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None)], **{'value_shape': (4,) }), 0), MultiIndex((FixedIndex(0),), {})), Product(IntValue(-1, (), (), {}), Indexed(Argument(MixedElement(*[FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None)], **{'value_shape': (4,) }), 0), MultiIndex((FixedIndex(2),), {}))))), Product(Product(Coefficient(FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), 8), Sum(Indexed(Coefficient(MixedElement(*[FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None)], **{'value_shape': (4,) }), 0), MultiIndex((FixedIndex(1),), {})), Product(IntValue(-1, (), (), {}), Indexed(Coefficient(MixedElement(*[FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None)], **{'value_shape': (4,) }), 0), MultiIndex((FixedIndex(3),), {}))))), Sum(Indexed(Argument(MixedElement(*[FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None)], **{'value_shape': (4,) }), 0), MultiIndex((FixedIndex(1),), {})), Product(IntValue(-1, (), (), {}), Indexed(Argument(MixedElement(*[FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None), FiniteElement('Lagrange', Cell('tetrahedron', Space(3)), 1, None)], **{'value_shape': (4,) }), 0), MultiIndex((FixedIndex(3),), {})))))))))))), Measure('interior_facet', 0, None))])";
+}
+
+/// Return the rank of the global tensor (r)
+unsigned int bloch_torrey3d_form_1::rank() const
+{
+    return 1;
+}
+
+/// Return the number of coefficients (n)
+unsigned int bloch_torrey3d_form_1::num_coefficients() const
+{
+    return 9;
+}
+ #ifndef UFC_BACKWARD_COMPATIBILITY 
+/// Return the number of cell domains
+unsigned int bloch_torrey3d_form_1::num_cell_domains() const
+{
+    return 1;
+}
+
+/// Return the number of exterior facet domains
+unsigned int bloch_torrey3d_form_1::num_exterior_facet_domains() const
+{
+    return 0;
+}
+
+/// Return the number of interior facet domains
+unsigned int bloch_torrey3d_form_1::num_interior_facet_domains() const
+{
+    return 1;
+}
+#else
+
+/// Return the number of cell domains
+unsigned int bloch_torrey3d_form_1::num_cell_integrals() const
+{
+    return 1;
+}
+
+/// Return the number of exterior facet domains
+unsigned int bloch_torrey3d_form_1::num_exterior_facet_integrals() const
+{
+    return 0;
+}
+
+/// Return the number of interior facet domains
+unsigned int bloch_torrey3d_form_1::num_interior_facet_integrals() const
+{
+    return 1;
+}
+
+#endif
+
+/// Create a new finite element for argument function i
+ufc::finite_element* bloch_torrey3d_form_1::create_finite_element(unsigned int i) const
+{
+    switch (i)
+    {
+    case 0:
+      {
+        return new bloch_torrey3d_finite_element_2();
+        break;
+      }
+    case 1:
+      {
+        return new bloch_torrey3d_finite_element_2();
+        break;
+      }
+    case 2:
+      {
+        return new bloch_torrey3d_finite_element_0();
+        break;
+      }
+    case 3:
+      {
+        return new bloch_torrey3d_finite_element_1();
+        break;
+      }
+    case 4:
+      {
+        return new bloch_torrey3d_finite_element_2();
+        break;
+      }
+    case 5:
+      {
+        return new bloch_torrey3d_finite_element_1();
+        break;
+      }
+    case 6:
+      {
+        return new bloch_torrey3d_finite_element_1();
+        break;
+      }
+    case 7:
+      {
+        return new bloch_torrey3d_finite_element_1();
+        break;
+      }
+    case 8:
+      {
+        return new bloch_torrey3d_finite_element_1();
+        break;
+      }
+    case 9:
+      {
+        return new bloch_torrey3d_finite_element_1();
+        break;
+      }
+    }
+    
+    return 0;
+}
+
+ #ifndef UFC_BACKWARD_COMPATIBILITY 
+/// Create a new dofmap for argument function i
+ufc::dofmap* bloch_torrey3d_form_1::create_dofmap(unsigned int i) const
+{
+    switch (i)
+    {
+    case 0:
+      {
+        return new bloch_torrey3d_dofmap_2();
+        break;
+      }
+    case 1:
+      {
+        return new bloch_torrey3d_dofmap_2();
+        break;
+      }
+    case 2:
+      {
+        return new bloch_torrey3d_dofmap_0();
+        break;
+      }
+    case 3:
+      {
+        return new bloch_torrey3d_dofmap_1();
+        break;
+      }
+    case 4:
+      {
+        return new bloch_torrey3d_dofmap_2();
+        break;
+      }
+    case 5:
+      {
+        return new bloch_torrey3d_dofmap_1();
+        break;
+      }
+    case 6:
+      {
+        return new bloch_torrey3d_dofmap_1();
+        break;
+      }
+    case 7:
+      {
+        return new bloch_torrey3d_dofmap_1();
+        break;
+      }
+    case 8:
+      {
+        return new bloch_torrey3d_dofmap_1();
+        break;
+      }
+    case 9:
+      {
+        return new bloch_torrey3d_dofmap_1();
+        break;
+      }
+    }
+    
+    return 0;
+}
+#else
+
+/// Create a new dofmap for argument function i
+ufc::dof_map* bloch_torrey3d_form_1::create_dof_map(unsigned int i) const
+{
+    switch (i)
+    {
+    case 0:
+      {
+        return new bloch_torrey3d_dofmap_2();
+        break;
+      }
+    case 1:
+      {
+        return new bloch_torrey3d_dofmap_2();
+        break;
+      }
+    case 2:
+      {
+        return new bloch_torrey3d_dofmap_0();
+        break;
+      }
+    case 3:
+      {
+        return new bloch_torrey3d_dofmap_1();
+        break;
+      }
+    case 4:
+      {
+        return new bloch_torrey3d_dofmap_2();
+        break;
+      }
+    case 5:
+      {
+        return new bloch_torrey3d_dofmap_1();
+        break;
+      }
+    case 6:
+      {
+        return new bloch_torrey3d_dofmap_1();
+        break;
+      }
+    case 7:
+      {
+        return new bloch_torrey3d_dofmap_1();
+        break;
+      }
+    case 8:
+      {
+        return new bloch_torrey3d_dofmap_1();
+        break;
+      }
+    case 9:
+      {
+        return new bloch_torrey3d_dofmap_1();
+        break;
+      }
+    }
+    
+    return 0;
+}
+#endif
+/// Create a new cell integral on sub domain i
+ufc::cell_integral* bloch_torrey3d_form_1::create_cell_integral(unsigned int i) const
+{
+    switch (i)
+    {
+    case 0:
+      {
+        return new bloch_torrey3d_cell_integral_1_0();
+        break;
+      }
+    }
+    
+    return 0;
+}
+
+/// Create a new exterior facet integral on sub domain i
+ufc::exterior_facet_integral* bloch_torrey3d_form_1::create_exterior_facet_integral(unsigned int i) const
+{
+    return 0;
+}
+
+/// Create a new interior facet integral on sub domain i
+ufc::interior_facet_integral* bloch_torrey3d_form_1::create_interior_facet_integral(unsigned int i) const
+{
+    switch (i)
+    {
+    case 0:
+      {
+        return new bloch_torrey3d_interior_facet_integral_1_0();
         break;
       }
     }

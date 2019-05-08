@@ -5,9 +5,6 @@
 //   (2) pure homogeneous Neumann on boundaries
 //   (3) Allow marking the phase function from a give submesh (mesh for cell).
 //   (4) Allow water exchange at the external boundaries
-// Run on beskow:
-//   aprun -n 32 ./demo -m 27o_spindle19aFI_withbox.xml -c 27o_spindle19aFI.xml -d 10000 -D 10000 -N 1000 -b 1000 
-//   aprun -n 16 ./demo -m multi_layer_torus.xml -d 10000 -D 10000 -N 1000 -b 1000 -r 1
 
 // Copyright (C) 2017 Van-Dang Nguyen
 
@@ -225,65 +222,10 @@ Form *L, *a_DG;
 
 bool is_input_b = 0, is_input_q = 0;
 
-double tol = 1e-6;
-
 Mesh *mesh, *cell_mesh;
 bool existRegionFile = false;
 
 std::string fmesh="mesh.xml", fcell="cell.xml";
-
-int ncomps = 3;
-// double R0 = 5.0;
-double R0 = 1.0;
-double r[] = {R0, 1.5*R0,2*R0};
-double R = 20;
-
-
-void MarkPhase(Mesh*mesh, Vector*ei, MeshFunction<double>& meshfun )
-{
-  meshfun.init(*mesh, mesh->topology().dim());
-
-  for (CellIterator cell(*mesh); !cell.end(); ++cell)
-    {
-      int id = (*cell).index();
-      uint ci = id;
-      dolfin::Point p = cell->midpoint();
-      if(dolfin::MPI::numProcesses() > 1)
-        ci = mesh->distdata().get_cell_global(ci);
-
-      if (1==2) // torus
-	{
-	  double d = pow(R-sqrt(p.x()*p.x()+p.y()*p.y()),2)+p.z()*p.z();
-	  for (int i=0; i<ncomps; i++)
-	    {
-	      if (d<r[i]*r[i])
-		{
-		  double value = i%2;
-		  uint number = 1;
-		  ei->set(&value, number,&ci);
-		  meshfun.set(*cell,value);
-		  break;
-		}
-	    }
-	}
-      else
-	{
-          double d = sqrt(p.x()*p.x()+p.y()*p.y()+p.z()*p.z());
-	  for (int i=0; i<ncomps-1; i++)
-            {
-              if (d<r[i])
-                {
-                  double value = i%2;
-                  uint number = 1;
-                  ei->set(&value, number,&ci);
-                  meshfun.set(*cell,value);
-                  break;
-                }
-            }
-
-	}
-    }
-}
 
 void MarkPhase(Mesh*mesh, Mesh*cell_mesh, Vector*ei, MeshFunction<double>& meshfun)
 {
@@ -333,172 +275,8 @@ void MarkPhase(Mesh*mesh, Mesh*cell_mesh, Vector*ei, MeshFunction<double>& meshf
   else
   {
     std::cout << "Region file doesn't exist" << std::endl;
+    exit(0);
   }
-}
-
-void Interpolation(Function*u, std::vector<double> &xcoors,std::vector<double> &ycoors,std::vector<double> &zcoors, std::vector<double>& val0, std::vector<double>& val1,std::vector<double>& val2, std::vector<double>& val3, double gnorm, double ift)
-{
-  std::vector<double> val0_local, val1_local, val2_local  ,val3_local;
-  val0_local.resize(xcoors.size());
-  val1_local.resize(xcoors.size());
-  val2_local.resize(xcoors.size());
-  val3_local.resize(xcoors.size());
-  val0.resize(xcoors.size());
-  val1.resize(xcoors.size());
-  val2.resize(xcoors.size());
-  val3.resize(xcoors.size());
-
-  for (uint id=0; id<xcoors.size(); id++)
-    {
-      double point[3]={xcoors[id],ycoors[id],zcoors[id]};
-      double vals[4] = {0, 0, 0, 0};
-      double xln[3] = {0, 0, 0};
-
-      if (fabs(ycoors[id]-ymin) <= tol)
-	{
-	  point[1]=ymax;
-	  u->eval(vals, point);
-	}
-      if (fabs(ycoors[id]-ymax) <= tol)
-        {
-          point[1]=ymin;
-          u->eval(vals, point);
-        }
-      val0_local[id] = vals[0];
-      val1_local[id] = vals[1];
-      val2_local[id] = vals[2];
-      val3_local[id] = vals[3];
-    }
-  MPI_Allreduce(&val0_local[0], &val0[0],xcoors.size(),MPI_DOUBLE, MPI_MIN, dolfin::MPI::DOLFIN_COMM);
-  MPI_Allreduce(&val1_local[0], &val1[0],xcoors.size(),MPI_DOUBLE, MPI_MIN, dolfin::MPI::DOLFIN_COMM);
-  MPI_Allreduce(&val2_local[0], &val2[0],xcoors.size(),MPI_DOUBLE, MPI_MIN, dolfin::MPI::DOLFIN_COMM);
-  MPI_Allreduce(&val3_local[0], &val3[0],xcoors.size(),MPI_DOUBLE, MPI_MIN, dolfin::MPI::DOLFIN_COMM);
-
-  
-  for (uint id=0; id<xcoors.size(); id++)
-    {
-
-      if (val0[id]>1e5)
-        val0[id] = 0;
-
-      if (val1[id]>1e5)
-        val1[id] = 0;
-
-      if (val2[id]>1e5)
-        val2[id] = 0;
-
-      if (val3[id]>1e5)
-        val3[id] = 0;
-
-
-      double xln[3] = {0, 0, 0};
-
-      if (fabs(ycoors[id]-ymin) <= tol)
-        {
-          xln[1] = ymax-ycoors[id];
-        }
-      if (fabs(ycoors[id]-ymax) <= tol)
-        {
-          xln[1] = ymin-ycoors[id];
-        }
-
-      double theta_ln = gnorm*(gdir.x()*xln[0] + gdir.y()*xln[1]+gdir.z()*xln[2])*ift;
-      double val0_tmp = val0[id]; double val1_tmp=val1[id];
-      double val2_tmp = val2[id]; double val3_tmp=val3[id];
-      val0[id] = val0_tmp*cos(theta_ln)-val1_tmp*sin(theta_ln);
-      val1[id] = val0_tmp*sin(theta_ln)+val1_tmp*cos(theta_ln);
-      val2[id] = val2_tmp*cos(theta_ln)-val3_tmp*sin(theta_ln);
-      val3[id] = val2_tmp*sin(theta_ln)+val3_tmp*cos(theta_ln);
-
-
-      /*      if (val0[id]>1e5)
-	val0[id] = 0;
-
-      if (val1[id]>1e5)
-	val1[id] = 0;
-
-      if (val2[id]>1e5)
-	val2[id] = 0;
-
-      if (val3[id]>1e5)
-      val3[id] = 0; */
-    } 
-
-}
-
-void AssignInterpolation(std::vector<int>&bdispl,Mesh*mesh, Function& u, Function& XX, Form* aM, double*val0, double*val1, double*val2, double*val3)
-{
-  XX.vector() = 0;
-
-  MeshFunction<bool> used_vertex;
-  used_vertex.init(*mesh,0);
-  used_vertex = false;
-
-  BoundaryMesh boundarymesh(*mesh);
-  MeshFunction<uint>* cell_map = boundarymesh.data().meshFunction("cell map");
-
-  int d = 4;
-  UFC ufc(aM->form(), *mesh, aM->dofMaps());
-  Cell c(*mesh, 0);
-  uint local_dim = c.numEntities(0);
-  uint *idx  = new uint[d * local_dim];
-  double *XX_block = new double[d * local_dim];  
-
-  int iii = 0;
-  for(CellIterator bf(boundarymesh); !bf.end(); ++bf)
-    {
-      Facet f(*mesh, cell_map->get(*bf)); 
-
-      for (CellIterator cell(f); !cell.end(); ++cell) 
-      //for (CellIterator cell(*mesh); !cell.end(); ++cell)                                                                                                                                                                                                                                                                                                           
-	{
-	  ufc.update(*cell, mesh->distdata());
-	  (aM->dofMaps())[0].tabulate_dofs(idx, ufc.cell, cell->index());
-	  
-	  // u.vector().get(XX_block, d * local_dim, idx);
-
-	  uint j = 0;
-	  for (VertexIterator v(*cell); !v.end(); ++v, j++)
-	    {
-	      // if (!mesh->distdata().is_ghost(v->index(), 0) && !used_vertex.get(*v))
-              //if (!mesh->distdata().is_ghost(v->index(), 0))
-		{
-		  /* 
-		  if (val0[iii+bdispl[mpi_rank]]>2.0)
-		    val0[iii+bdispl[mpi_rank]] = 0;
-                  if (val1[iii+bdispl[mpi_rank]]>2.0)
-                    val1[iii+bdispl[mpi_rank]] = 0;                  
-                  if (val2[iii+bdispl[mpi_rank]]>2.0)
-                    val2[iii+bdispl[mpi_rank]] = 0;
-                  if (val3[iii+bdispl[mpi_rank]]>2.0)
-		    val3[iii+bdispl[mpi_rank]] = 0; */
-		  
-                  XX_block[0 * local_dim + j] = val0[iii+bdispl[mpi_rank]];
-                  XX_block[1 * local_dim + j] = val1[iii+bdispl[mpi_rank]];
-                  XX_block[2 * local_dim + j] = val2[iii+bdispl[mpi_rank]];
-                  XX_block[3 * local_dim + j] = val3[iii+bdispl[mpi_rank]];
- 
-		  // j++;
-		  iii++;
-		  used_vertex.set(*v, true);   
-		}
-		//else
-		{
-                  /*XX_block[0 * local_dim + j] = 0;
-		  XX_block[1 * local_dim + j] = 0;
-                  XX_block[2 * local_dim + j] = 0;
-                  XX_block[3 * local_dim + j] = 0; */ 
-		}
-	    }
-	  XX.vector().set(XX_block, d * local_dim, idx);
-	}
-    }
-
-  delete[] XX_block;
-  delete[] idx;
-
-  XX.vector().apply();  
-  XX.sync_ghosts();
 }
 
 class InitialVals: public Function
@@ -534,29 +312,6 @@ uint NumVertices(Mesh*mesh)
   MPI_Allreduce(&numvertices_local, &numvertices, 1, MPI_UNSIGNED, MPI_SUM, dolfin::MPI::DOLFIN_COMM);
   return(numvertices);
 }
-
-class Bmarker : public Function
-{
-public:
-
-  Bmarker(Mesh& mesh) : Function(mesh) {}
-
-  void eval(double * value, const double* x) const
-  {
-    value[0] = 0*(fabs(x[1]-ymin)<tol || fabs(x[1]-ymax)<tol);
-  }
-
-  uint rank() const
-  {
-    return 0;
-  }
-
-  uint dim(uint i) const
-  {
-    return 1;
-  }
-
-};
 
 int main(int argc, char *argv[])
 {
@@ -702,10 +457,6 @@ int main(int argc, char *argv[])
     {
       MarkPhase(mesh, cell_mesh, &Phi_vec, meshfun);
     }
-  else
-    {
-      MarkPhase(mesh, &Phi_vec, meshfun);
-    }
 
   File file_phi((dir+"/Phi.bin").c_str());
   file_phi << Phi;
@@ -735,8 +486,6 @@ int main(int argc, char *argv[])
   message("kcoeff: %e, perm: %e, Nsteps: %d, dt: %f, delta: %f, Delta: %f, gnorm: %e\n",kcoeff,kappa, Nsteps, dt, delta, Delta, gnorm);
   message("Gradient direction: %f %f %f",gdir.x(), gdir.y(), gdir.z());
 
-  // gnorm = sqrt(bvalue)/sqrt(delta*delta*(Delta-delta/3.0));
-  // #####################################################
   Function ft_f; PETScVector ft_fx;
   Function gnorm_f(*mesh, gnorm), kcoeff_f(*mesh, kcoeff), dt_f(*mesh, dt), theta_f(*mesh, theta), kappa_f(*mesh, kappa);
     
@@ -753,11 +502,9 @@ int main(int argc, char *argv[])
   get_diameter(mesh, hmax, hmin);
   message("hmax: %e, hmin: %e\n", hmax, hmin);
 
-  // Function kappa_ef(*mesh, kappa);
-  Bmarker kappa_ef(*mesh);
   MeshSize hf(*mesh);
 
-  L = new Bloch_Torrey3DLinearForm(u, Phi, GX, ft_f, gnorm_f, kcoeff_f, theta_f, dt_f, kappa_f, kappa_ef, up, hf);
+  L = new Bloch_Torrey3DLinearForm(u, Phi, GX, ft_f, gnorm_f, kcoeff_f, theta_f, dt_f, kappa_f);
 
   // Initial conditions
   up.init(*mesh, upx, *L, 0);
@@ -769,9 +516,7 @@ int main(int argc, char *argv[])
   InitialVals initialvals(*mesh);
 
   InitialCondition3DBilinearForm ai(Phi);
-  // InitialCondition3DBilinearForm ai;
   InitialCondition3DLinearForm Li(Phi, initialvals);
-  // InitialCondition3DLinearForm Li(initialvals);
 
   PETScVector bi; PETScMatrix Ai;
   message("Assembling matrices ...");
@@ -782,43 +527,7 @@ int main(int argc, char *argv[])
 
   File ui_file((dir+"/initial.bin").c_str());
   ui_file<<u;
-
-
-  ///////////////////////////////////
-  // Function up;   Vector upx;
-  // up.init(*mesh, upx, *L, 0);
-
-
-  // double hmax, hmin;
-  
-  // get_diameter(mesh, hmax, hmin);
-  // printf("hmax: %e, hmin: %e\n", hmax, hmin);
-  
-  message("Changing geometrical tolerance ...");
-  dolfin_set("Geometrical Tolerance Triangle", tol);
-  dolfin_set("Geometrical Tolerance Tetrahedron", tol);
-  message("done\n");
-      
-  //printf("Start interpolating ...");
-  
-  std::vector<int>bdispl, boundarymeshsizes;
-  std::vector<double> xcoors, ycoors, zcoors;
-
-  // Generate facet - cell connectivity if not generated                                                                                                                                                   
-  mesh->init(mesh->topology().dim() - 1, mesh->topology().dim());
-  GatherBoundaryVertices(bdispl, mesh, xcoors, ycoors, zcoors, boundarymeshsizes, L);
-  std::vector<double> val0, val1, val2, val3;
-  Interpolation(&u, xcoors,ycoors, zcoors, val0, val1, val2, val3, gnorm, ift);
-  AssignInterpolation(bdispl,mesh, u, up, L, &val0[0], &val1[0], &val2[0], &val3[0]); 
-
-  //printf("done\n");
-  
-  File up_file((dir+"/interpolation.bin").c_str());
-  up_file<<up;  
-  /////////////////////////////////////////////
-
-  //exit(0);
-
+    
   Comp_Sig3DFunctional S0(Phi,u);
   s0 = assembler.assemble(S0);
   message("s0=%f\n",s0);
@@ -826,7 +535,7 @@ int main(int argc, char *argv[])
   message("Preparing no-time matrices ...");
   // Construct time-indepent matrices
     
-  PETScMatrix M, SI, J, MSI, II;
+  PETScMatrix M, SI, J, MSI;
     
   Function mmk0(*mesh,1./dt),smk0(*mesh, 0.0),imk0(*mesh, 0.0),jmk0(*mesh, 0.0), zero(*mesh, 0.0);
   Bloch_Torrey_NoTime3DBilinearForm a_notime3D0(Phi, GX, kcoeff_f, kappa_f, mmk0, smk0, jmk0, imk0, zero, hf);
@@ -843,11 +552,7 @@ int main(int argc, char *argv[])
   Function mmk2(*mesh,0.0),smk2(*mesh, 0.0),imk2(*mesh, 0.0),jmk2(*mesh, theta);                                                                                
   Bloch_Torrey_NoTime3DBilinearForm a_notime3D2(Phi, GX, kcoeff_f, kappa_f, mmk2, smk2, jmk2, imk2, zero, hf);
   assembler.assemble(J, a_notime3D2, true); // return theta*J
-    
-  Function mmk3(*mesh,0.0),smk3(*mesh, 0.0),imk3(*mesh, 0.0),jmk3(*mesh, 0.0); 
-  Bloch_Torrey_NoTime3DBilinearForm a_notime3D3(Phi, GX, kcoeff_f, kappa_f, mmk3, smk3, jmk3, imk3, kappa_ef, hf);
-  assembler.assemble(II, a_notime3D3, true); // return kappa_e*II 
-  
+     
   File u_file((dir+"/u.bin").c_str());
   
   int step_counter = 0;
@@ -866,13 +571,7 @@ int main(int argc, char *argv[])
       Jt.apply();
       
       A += Jt;
-
-      /*
-      A += II;
-      Interpolation(&u, xcoors,ycoors, zcoors, val0, val1, val2, val3, gnorm, ift);
-      AssignInterpolation(bdispl,mesh, u, up, L, &val0[0], &val1[0], &val2[0], &val3[0]);
-      */ 
-
+      
       A.apply();
 
       if (up.vector().norm()>1e5)

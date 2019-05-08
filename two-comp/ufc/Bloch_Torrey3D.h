@@ -1063,43 +1063,43 @@ public:
 
 };
 
-class CoefficientSpace_ft: public dolfin::FunctionSpace
+class CoefficientSpace_ft_a: public dolfin::FunctionSpace
 {
 public:
 
-  CoefficientSpace_ft(const dolfin::Mesh& mesh):
+  CoefficientSpace_ft_a(const dolfin::Mesh& mesh):
     dolfin::FunctionSpace(dolfin::reference_to_no_delete_pointer(mesh),
-                          const dolfin::FiniteElement* (new dolfin::FiniteElement(ufc::finite_element* (new bloch_torrey3d_finite_element_1()))),
-                          const dolfin::DofMap *(new dolfin::DofMap(ufc::dofmap* (new bloch_torrey3d_dofmap_1()), mesh)))
+                          const dolfin::FiniteElement* (new dolfin::FiniteElement(ufc::finite_element* (new bloch_torrey3d_finite_element_2()))),
+                          const dolfin::DofMap *(new dolfin::DofMap(ufc::dofmap* (new bloch_torrey3d_dofmap_2()), mesh)))
   {
     // Do nothing
   }
 
-  CoefficientSpace_ft(dolfin::Mesh& mesh):
+  CoefficientSpace_ft_a(dolfin::Mesh& mesh):
     dolfin::FunctionSpace(dolfin::reference_to_no_delete_pointer(mesh),
-                          const dolfin::FiniteElement* (new dolfin::FiniteElement(ufc::finite_element* (new bloch_torrey3d_finite_element_1()))),
-                          const dolfin::DofMap* (new dolfin::DofMap(ufc::dofmap *(new bloch_torrey3d_dofmap_1()), mesh)))
+                          const dolfin::FiniteElement* (new dolfin::FiniteElement(ufc::finite_element* (new bloch_torrey3d_finite_element_2()))),
+                          const dolfin::DofMap* (new dolfin::DofMap(ufc::dofmap *(new bloch_torrey3d_dofmap_2()), mesh)))
   {
     // Do nothing
   }
 
-  CoefficientSpace_ft(dolfin::Mesh*  mesh):
+  CoefficientSpace_ft_a(dolfin::Mesh*  mesh):
     dolfin::FunctionSpace(mesh,
-                          const dolfin::FiniteElement *(new dolfin::FiniteElement(ufc::finite_element* (new bloch_torrey3d_finite_element_1()))),
-                          const dolfin::DofMap* (new dolfin::DofMap(ufc::dofmap*(new bloch_torrey3d_dofmap_1()), *mesh)))
+                          const dolfin::FiniteElement *(new dolfin::FiniteElement(ufc::finite_element* (new bloch_torrey3d_finite_element_2()))),
+                          const dolfin::DofMap* (new dolfin::DofMap(ufc::dofmap*(new bloch_torrey3d_dofmap_2()), *mesh)))
   {
       // Do nothing
   }
 
-  CoefficientSpace_ft(const dolfin::Mesh* mesh):
+  CoefficientSpace_ft_a(const dolfin::Mesh* mesh):
     dolfin::FunctionSpace(mesh,
-                          const dolfin::FiniteElement *(new dolfin::FiniteElement(ufc::finite_element*(new bloch_torrey3d_finite_element_1()))),
-                          const dolfin::DofMap*(new dolfin::DofMap(ufc::dofmap*(new bloch_torrey3d_dofmap_1()), *mesh)))
+                          const dolfin::FiniteElement *(new dolfin::FiniteElement(ufc::finite_element*(new bloch_torrey3d_finite_element_2()))),
+                          const dolfin::DofMap*(new dolfin::DofMap(ufc::dofmap*(new bloch_torrey3d_dofmap_2()), *mesh)))
   {
       // Do nothing
   }
 
-  ~CoefficientSpace_ft()
+  ~CoefficientSpace_ft_a()
   {
   }
 
@@ -1403,17 +1403,17 @@ typedef CoefficientSpace_phase Form_0_FunctionSpace_2;
 
 typedef CoefficientSpace_GX Form_0_FunctionSpace_3;
 
-typedef CoefficientSpace_ft Form_0_FunctionSpace_4;
+typedef CoefficientSpace_ft_a Form_0_FunctionSpace_4;
 
 typedef CoefficientSpace_gnorm Form_0_FunctionSpace_5;
 
 typedef CoefficientSpace_K Form_0_FunctionSpace_6;
 
-typedef CoefficientSpace_kappa Form_0_FunctionSpace_7;
+typedef CoefficientSpace_theta Form_0_FunctionSpace_7;
 
-typedef CoefficientSpace_theta Form_0_FunctionSpace_8;
+typedef CoefficientSpace_dt Form_0_FunctionSpace_8;
 
-typedef CoefficientSpace_dt Form_0_FunctionSpace_9;
+typedef CoefficientSpace_kappa Form_0_FunctionSpace_9;
 
 class Form_0: public dolfin::Form
 {
@@ -1421,7 +1421,7 @@ public:
 
   // Constructor
   Form_0(const dolfin::FunctionSpace& V1, const dolfin::FunctionSpace& V0):
-    dolfin::Form(2, 8), phase(*this, 0), GX(*this, 1), ft(*this, 2), gnorm(*this, 3), K(*this, 4), kappa(*this, 5), theta(*this, 6), dt(*this, 7)
+    dolfin::Form(2, 8), phase(*this, 0), GX(*this, 1), ft_a(*this, 2), gnorm(*this, 3), K(*this, 4), theta(*this, 5), dt(*this, 6), kappa(*this, 7)
   {
     _function_spaces[0] = reference_to_no_delete_pointer(V0);
     _function_spaces[1] = reference_to_no_delete_pointer(V1);
@@ -1430,46 +1430,46 @@ public:
   }
 
   // Constructor
-  Form_0(const dolfin::FunctionSpace& V1, const dolfin::FunctionSpace& V0, const dolfin::GenericFunction& phase, const dolfin::GenericFunction& GX, const dolfin::GenericFunction& ft, const dolfin::GenericFunction& gnorm, const dolfin::GenericFunction& K, const dolfin::GenericFunction& kappa, const dolfin::GenericFunction& theta, const dolfin::GenericFunction& dt):
-    dolfin::Form(2, 8), phase(*this, 0), GX(*this, 1), ft(*this, 2), gnorm(*this, 3), K(*this, 4), kappa(*this, 5), theta(*this, 6), dt(*this, 7)
+  Form_0(const dolfin::FunctionSpace& V1, const dolfin::FunctionSpace& V0, const dolfin::GenericFunction& phase, const dolfin::GenericFunction& GX, const dolfin::GenericFunction& ft_a, const dolfin::GenericFunction& gnorm, const dolfin::GenericFunction& K, const dolfin::GenericFunction& theta, const dolfin::GenericFunction& dt, const dolfin::GenericFunction& kappa):
+    dolfin::Form(2, 8), phase(*this, 0), GX(*this, 1), ft_a(*this, 2), gnorm(*this, 3), K(*this, 4), theta(*this, 5), dt(*this, 6), kappa(*this, 7)
   {
     _function_spaces[0] = reference_to_no_delete_pointer(V0);
     _function_spaces[1] = reference_to_no_delete_pointer(V1);
 
     this->phase = phase;
     this->GX = GX;
-    this->ft = ft;
+    this->ft_a = ft_a;
     this->gnorm = gnorm;
     this->K = K;
-    this->kappa = kappa;
     this->theta = theta;
     this->dt = dt;
+    this->kappa = kappa;
 
     _ufc_form = const ufc::form* (new bloch_torrey3d_form_0());
   }
 
   // Constructor
-  Form_0(const dolfin::FunctionSpace& V1, const dolfin::FunctionSpace& V0, boost::shared_ptr<const dolfin::GenericFunction> phase, boost::shared_ptr<const dolfin::GenericFunction> GX, boost::shared_ptr<const dolfin::GenericFunction> ft, boost::shared_ptr<const dolfin::GenericFunction> gnorm, boost::shared_ptr<const dolfin::GenericFunction> K, boost::shared_ptr<const dolfin::GenericFunction> kappa, boost::shared_ptr<const dolfin::GenericFunction> theta, boost::shared_ptr<const dolfin::GenericFunction> dt):
-    dolfin::Form(2, 8), phase(*this, 0), GX(*this, 1), ft(*this, 2), gnorm(*this, 3), K(*this, 4), kappa(*this, 5), theta(*this, 6), dt(*this, 7)
+  Form_0(const dolfin::FunctionSpace& V1, const dolfin::FunctionSpace& V0, boost::shared_ptr<const dolfin::GenericFunction> phase, boost::shared_ptr<const dolfin::GenericFunction> GX, boost::shared_ptr<const dolfin::GenericFunction> ft_a, boost::shared_ptr<const dolfin::GenericFunction> gnorm, boost::shared_ptr<const dolfin::GenericFunction> K, boost::shared_ptr<const dolfin::GenericFunction> theta, boost::shared_ptr<const dolfin::GenericFunction> dt, boost::shared_ptr<const dolfin::GenericFunction> kappa):
+    dolfin::Form(2, 8), phase(*this, 0), GX(*this, 1), ft_a(*this, 2), gnorm(*this, 3), K(*this, 4), theta(*this, 5), dt(*this, 6), kappa(*this, 7)
   {
     _function_spaces[0] = reference_to_no_delete_pointer(V0);
     _function_spaces[1] = reference_to_no_delete_pointer(V1);
 
     this->phase = *phase;
     this->GX = *GX;
-    this->ft = *ft;
+    this->ft_a = *ft_a;
     this->gnorm = *gnorm;
     this->K = *K;
-    this->kappa = *kappa;
     this->theta = *theta;
     this->dt = *dt;
+    this->kappa = *kappa;
 
     _ufc_form = const ufc::form* (new bloch_torrey3d_form_0());
   }
 
   // Constructor
   Form_0(boost::shared_ptr<const dolfin::FunctionSpace> V1, boost::shared_ptr<const dolfin::FunctionSpace> V0):
-    dolfin::Form(2, 8), phase(*this, 0), GX(*this, 1), ft(*this, 2), gnorm(*this, 3), K(*this, 4), kappa(*this, 5), theta(*this, 6), dt(*this, 7)
+    dolfin::Form(2, 8), phase(*this, 0), GX(*this, 1), ft_a(*this, 2), gnorm(*this, 3), K(*this, 4), theta(*this, 5), dt(*this, 6), kappa(*this, 7)
   {
     _function_spaces[0] = V0;
     _function_spaces[1] = V1;
@@ -1478,39 +1478,39 @@ public:
   }
 
   // Constructor
-  Form_0(boost::shared_ptr<const dolfin::FunctionSpace> V1, boost::shared_ptr<const dolfin::FunctionSpace> V0, const dolfin::GenericFunction& phase, const dolfin::GenericFunction& GX, const dolfin::GenericFunction& ft, const dolfin::GenericFunction& gnorm, const dolfin::GenericFunction& K, const dolfin::GenericFunction& kappa, const dolfin::GenericFunction& theta, const dolfin::GenericFunction& dt):
-    dolfin::Form(2, 8), phase(*this, 0), GX(*this, 1), ft(*this, 2), gnorm(*this, 3), K(*this, 4), kappa(*this, 5), theta(*this, 6), dt(*this, 7)
+  Form_0(boost::shared_ptr<const dolfin::FunctionSpace> V1, boost::shared_ptr<const dolfin::FunctionSpace> V0, const dolfin::GenericFunction& phase, const dolfin::GenericFunction& GX, const dolfin::GenericFunction& ft_a, const dolfin::GenericFunction& gnorm, const dolfin::GenericFunction& K, const dolfin::GenericFunction& theta, const dolfin::GenericFunction& dt, const dolfin::GenericFunction& kappa):
+    dolfin::Form(2, 8), phase(*this, 0), GX(*this, 1), ft_a(*this, 2), gnorm(*this, 3), K(*this, 4), theta(*this, 5), dt(*this, 6), kappa(*this, 7)
   {
     _function_spaces[0] = V0;
     _function_spaces[1] = V1;
 
     this->phase = phase;
     this->GX = GX;
-    this->ft = ft;
+    this->ft_a = ft_a;
     this->gnorm = gnorm;
     this->K = K;
-    this->kappa = kappa;
     this->theta = theta;
     this->dt = dt;
+    this->kappa = kappa;
 
     _ufc_form = const ufc::form* (new bloch_torrey3d_form_0());
   }
 
   // Constructor
-  Form_0(boost::shared_ptr<const dolfin::FunctionSpace> V1, boost::shared_ptr<const dolfin::FunctionSpace> V0, boost::shared_ptr<const dolfin::GenericFunction> phase, boost::shared_ptr<const dolfin::GenericFunction> GX, boost::shared_ptr<const dolfin::GenericFunction> ft, boost::shared_ptr<const dolfin::GenericFunction> gnorm, boost::shared_ptr<const dolfin::GenericFunction> K, boost::shared_ptr<const dolfin::GenericFunction> kappa, boost::shared_ptr<const dolfin::GenericFunction> theta, boost::shared_ptr<const dolfin::GenericFunction> dt):
-    dolfin::Form(2, 8), phase(*this, 0), GX(*this, 1), ft(*this, 2), gnorm(*this, 3), K(*this, 4), kappa(*this, 5), theta(*this, 6), dt(*this, 7)
+  Form_0(boost::shared_ptr<const dolfin::FunctionSpace> V1, boost::shared_ptr<const dolfin::FunctionSpace> V0, boost::shared_ptr<const dolfin::GenericFunction> phase, boost::shared_ptr<const dolfin::GenericFunction> GX, boost::shared_ptr<const dolfin::GenericFunction> ft_a, boost::shared_ptr<const dolfin::GenericFunction> gnorm, boost::shared_ptr<const dolfin::GenericFunction> K, boost::shared_ptr<const dolfin::GenericFunction> theta, boost::shared_ptr<const dolfin::GenericFunction> dt, boost::shared_ptr<const dolfin::GenericFunction> kappa):
+    dolfin::Form(2, 8), phase(*this, 0), GX(*this, 1), ft_a(*this, 2), gnorm(*this, 3), K(*this, 4), theta(*this, 5), dt(*this, 6), kappa(*this, 7)
   {
     _function_spaces[0] = V0;
     _function_spaces[1] = V1;
 
     this->phase = *phase;
     this->GX = *GX;
-    this->ft = *ft;
+    this->ft_a = *ft_a;
     this->gnorm = *gnorm;
     this->K = *K;
-    this->kappa = *kappa;
     this->theta = *theta;
     this->dt = *dt;
+    this->kappa = *kappa;
 
     _ufc_form = const ufc::form* (new bloch_torrey3d_form_0());
   }
@@ -1526,17 +1526,17 @@ public:
       return 0;
     else if (name == "GX")
       return 1;
-    else if (name == "ft")
+    else if (name == "ft_a")
       return 2;
     else if (name == "gnorm")
       return 3;
     else if (name == "K")
       return 4;
-    else if (name == "kappa")
-      return 5;
     else if (name == "theta")
-      return 6;
+      return 5;
     else if (name == "dt")
+      return 6;
+    else if (name == "kappa")
       return 7;
 
     dolfin::dolfin_error("generated code for class Form",
@@ -1555,17 +1555,17 @@ public:
     case 1:
       return "GX";
     case 2:
-      return "ft";
+      return "ft_a";
     case 3:
       return "gnorm";
     case 4:
       return "K";
     case 5:
-      return "kappa";
-    case 6:
       return "theta";
-    case 7:
+    case 6:
       return "dt";
+    case 7:
+      return "kappa";
     }
 
     dolfin::dolfin_error("generated code for class Form",
@@ -1579,22 +1579,22 @@ public:
   typedef Form_0_FunctionSpace_1 TrialSpace;
   typedef Form_0_FunctionSpace_2 CoefficientSpace_phase;
   typedef Form_0_FunctionSpace_3 CoefficientSpace_GX;
-  typedef Form_0_FunctionSpace_4 CoefficientSpace_ft;
+  typedef Form_0_FunctionSpace_4 CoefficientSpace_ft_a;
   typedef Form_0_FunctionSpace_5 CoefficientSpace_gnorm;
   typedef Form_0_FunctionSpace_6 CoefficientSpace_K;
-  typedef Form_0_FunctionSpace_7 CoefficientSpace_kappa;
-  typedef Form_0_FunctionSpace_8 CoefficientSpace_theta;
-  typedef Form_0_FunctionSpace_9 CoefficientSpace_dt;
+  typedef Form_0_FunctionSpace_7 CoefficientSpace_theta;
+  typedef Form_0_FunctionSpace_8 CoefficientSpace_dt;
+  typedef Form_0_FunctionSpace_9 CoefficientSpace_kappa;
 
   // Coefficients
   dolfin::CoefficientAssigner phase;
   dolfin::CoefficientAssigner GX;
-  dolfin::CoefficientAssigner ft;
+  dolfin::CoefficientAssigner ft_a;
   dolfin::CoefficientAssigner gnorm;
   dolfin::CoefficientAssigner K;
-  dolfin::CoefficientAssigner kappa;
   dolfin::CoefficientAssigner theta;
   dolfin::CoefficientAssigner dt;
+  dolfin::CoefficientAssigner kappa;
 };
 
 class Form_1_FunctionSpace_0: public dolfin::FunctionSpace
@@ -1639,23 +1639,23 @@ public:
 
 };
 
-typedef CoefficientSpace_phase Form_1_FunctionSpace_1;
+typedef CoefficientSpace_u_0 Form_1_FunctionSpace_1;
 
-typedef CoefficientSpace_u_0 Form_1_FunctionSpace_2;
+typedef CoefficientSpace_phase Form_1_FunctionSpace_2;
 
 typedef CoefficientSpace_GX Form_1_FunctionSpace_3;
 
-typedef CoefficientSpace_ft Form_1_FunctionSpace_4;
+typedef CoefficientSpace_ft_a Form_1_FunctionSpace_4;
 
 typedef CoefficientSpace_gnorm Form_1_FunctionSpace_5;
 
 typedef CoefficientSpace_K Form_1_FunctionSpace_6;
 
-typedef CoefficientSpace_kappa Form_1_FunctionSpace_7;
+typedef CoefficientSpace_theta Form_1_FunctionSpace_7;
 
-typedef CoefficientSpace_theta Form_1_FunctionSpace_8;
+typedef CoefficientSpace_dt Form_1_FunctionSpace_8;
 
-typedef CoefficientSpace_dt Form_1_FunctionSpace_9;
+typedef CoefficientSpace_kappa Form_1_FunctionSpace_9;
 
 class Form_1: public dolfin::Form
 {
@@ -1663,7 +1663,7 @@ public:
 
   // Constructor
   Form_1(const dolfin::FunctionSpace& V0):
-    dolfin::Form(1, 9), phase(*this, 0), u_0(*this, 1), GX(*this, 2), ft(*this, 3), gnorm(*this, 4), K(*this, 5), kappa(*this, 6), theta(*this, 7), dt(*this, 8)
+    dolfin::Form(1, 9), u_0(*this, 0), phase(*this, 1), GX(*this, 2), ft_a(*this, 3), gnorm(*this, 4), K(*this, 5), theta(*this, 6), dt(*this, 7), kappa(*this, 8)
   {
     _function_spaces[0] = reference_to_no_delete_pointer(V0);
 
@@ -1671,46 +1671,46 @@ public:
   }
 
   // Constructor
-  Form_1(const dolfin::FunctionSpace& V0, const dolfin::GenericFunction& phase, const dolfin::GenericFunction& u_0, const dolfin::GenericFunction& GX, const dolfin::GenericFunction& ft, const dolfin::GenericFunction& gnorm, const dolfin::GenericFunction& K, const dolfin::GenericFunction& kappa, const dolfin::GenericFunction& theta, const dolfin::GenericFunction& dt):
-    dolfin::Form(1, 9), phase(*this, 0), u_0(*this, 1), GX(*this, 2), ft(*this, 3), gnorm(*this, 4), K(*this, 5), kappa(*this, 6), theta(*this, 7), dt(*this, 8)
+  Form_1(const dolfin::FunctionSpace& V0, const dolfin::GenericFunction& u_0, const dolfin::GenericFunction& phase, const dolfin::GenericFunction& GX, const dolfin::GenericFunction& ft_a, const dolfin::GenericFunction& gnorm, const dolfin::GenericFunction& K, const dolfin::GenericFunction& theta, const dolfin::GenericFunction& dt, const dolfin::GenericFunction& kappa):
+    dolfin::Form(1, 9), u_0(*this, 0), phase(*this, 1), GX(*this, 2), ft_a(*this, 3), gnorm(*this, 4), K(*this, 5), theta(*this, 6), dt(*this, 7), kappa(*this, 8)
   {
     _function_spaces[0] = reference_to_no_delete_pointer(V0);
 
-    this->phase = phase;
     this->u_0 = u_0;
+    this->phase = phase;
     this->GX = GX;
-    this->ft = ft;
+    this->ft_a = ft_a;
     this->gnorm = gnorm;
     this->K = K;
-    this->kappa = kappa;
     this->theta = theta;
     this->dt = dt;
+    this->kappa = kappa;
 
     _ufc_form = const ufc::form* (new bloch_torrey3d_form_1());
   }
 
   // Constructor
-  Form_1(const dolfin::FunctionSpace& V0, boost::shared_ptr<const dolfin::GenericFunction> phase, boost::shared_ptr<const dolfin::GenericFunction> u_0, boost::shared_ptr<const dolfin::GenericFunction> GX, boost::shared_ptr<const dolfin::GenericFunction> ft, boost::shared_ptr<const dolfin::GenericFunction> gnorm, boost::shared_ptr<const dolfin::GenericFunction> K, boost::shared_ptr<const dolfin::GenericFunction> kappa, boost::shared_ptr<const dolfin::GenericFunction> theta, boost::shared_ptr<const dolfin::GenericFunction> dt):
-    dolfin::Form(1, 9), phase(*this, 0), u_0(*this, 1), GX(*this, 2), ft(*this, 3), gnorm(*this, 4), K(*this, 5), kappa(*this, 6), theta(*this, 7), dt(*this, 8)
+  Form_1(const dolfin::FunctionSpace& V0, boost::shared_ptr<const dolfin::GenericFunction> u_0, boost::shared_ptr<const dolfin::GenericFunction> phase, boost::shared_ptr<const dolfin::GenericFunction> GX, boost::shared_ptr<const dolfin::GenericFunction> ft_a, boost::shared_ptr<const dolfin::GenericFunction> gnorm, boost::shared_ptr<const dolfin::GenericFunction> K, boost::shared_ptr<const dolfin::GenericFunction> theta, boost::shared_ptr<const dolfin::GenericFunction> dt, boost::shared_ptr<const dolfin::GenericFunction> kappa):
+    dolfin::Form(1, 9), u_0(*this, 0), phase(*this, 1), GX(*this, 2), ft_a(*this, 3), gnorm(*this, 4), K(*this, 5), theta(*this, 6), dt(*this, 7), kappa(*this, 8)
   {
     _function_spaces[0] = reference_to_no_delete_pointer(V0);
 
-    this->phase = *phase;
     this->u_0 = *u_0;
+    this->phase = *phase;
     this->GX = *GX;
-    this->ft = *ft;
+    this->ft_a = *ft_a;
     this->gnorm = *gnorm;
     this->K = *K;
-    this->kappa = *kappa;
     this->theta = *theta;
     this->dt = *dt;
+    this->kappa = *kappa;
 
     _ufc_form = const ufc::form* (new bloch_torrey3d_form_1());
   }
 
   // Constructor
   Form_1(boost::shared_ptr<const dolfin::FunctionSpace> V0):
-    dolfin::Form(1, 9), phase(*this, 0), u_0(*this, 1), GX(*this, 2), ft(*this, 3), gnorm(*this, 4), K(*this, 5), kappa(*this, 6), theta(*this, 7), dt(*this, 8)
+    dolfin::Form(1, 9), u_0(*this, 0), phase(*this, 1), GX(*this, 2), ft_a(*this, 3), gnorm(*this, 4), K(*this, 5), theta(*this, 6), dt(*this, 7), kappa(*this, 8)
   {
     _function_spaces[0] = V0;
 
@@ -1718,39 +1718,39 @@ public:
   }
 
   // Constructor
-  Form_1(boost::shared_ptr<const dolfin::FunctionSpace> V0, const dolfin::GenericFunction& phase, const dolfin::GenericFunction& u_0, const dolfin::GenericFunction& GX, const dolfin::GenericFunction& ft, const dolfin::GenericFunction& gnorm, const dolfin::GenericFunction& K, const dolfin::GenericFunction& kappa, const dolfin::GenericFunction& theta, const dolfin::GenericFunction& dt):
-    dolfin::Form(1, 9), phase(*this, 0), u_0(*this, 1), GX(*this, 2), ft(*this, 3), gnorm(*this, 4), K(*this, 5), kappa(*this, 6), theta(*this, 7), dt(*this, 8)
+  Form_1(boost::shared_ptr<const dolfin::FunctionSpace> V0, const dolfin::GenericFunction& u_0, const dolfin::GenericFunction& phase, const dolfin::GenericFunction& GX, const dolfin::GenericFunction& ft_a, const dolfin::GenericFunction& gnorm, const dolfin::GenericFunction& K, const dolfin::GenericFunction& theta, const dolfin::GenericFunction& dt, const dolfin::GenericFunction& kappa):
+    dolfin::Form(1, 9), u_0(*this, 0), phase(*this, 1), GX(*this, 2), ft_a(*this, 3), gnorm(*this, 4), K(*this, 5), theta(*this, 6), dt(*this, 7), kappa(*this, 8)
   {
     _function_spaces[0] = V0;
 
-    this->phase = phase;
     this->u_0 = u_0;
+    this->phase = phase;
     this->GX = GX;
-    this->ft = ft;
+    this->ft_a = ft_a;
     this->gnorm = gnorm;
     this->K = K;
-    this->kappa = kappa;
     this->theta = theta;
     this->dt = dt;
+    this->kappa = kappa;
 
     _ufc_form = const ufc::form* (new bloch_torrey3d_form_1());
   }
 
   // Constructor
-  Form_1(boost::shared_ptr<const dolfin::FunctionSpace> V0, boost::shared_ptr<const dolfin::GenericFunction> phase, boost::shared_ptr<const dolfin::GenericFunction> u_0, boost::shared_ptr<const dolfin::GenericFunction> GX, boost::shared_ptr<const dolfin::GenericFunction> ft, boost::shared_ptr<const dolfin::GenericFunction> gnorm, boost::shared_ptr<const dolfin::GenericFunction> K, boost::shared_ptr<const dolfin::GenericFunction> kappa, boost::shared_ptr<const dolfin::GenericFunction> theta, boost::shared_ptr<const dolfin::GenericFunction> dt):
-    dolfin::Form(1, 9), phase(*this, 0), u_0(*this, 1), GX(*this, 2), ft(*this, 3), gnorm(*this, 4), K(*this, 5), kappa(*this, 6), theta(*this, 7), dt(*this, 8)
+  Form_1(boost::shared_ptr<const dolfin::FunctionSpace> V0, boost::shared_ptr<const dolfin::GenericFunction> u_0, boost::shared_ptr<const dolfin::GenericFunction> phase, boost::shared_ptr<const dolfin::GenericFunction> GX, boost::shared_ptr<const dolfin::GenericFunction> ft_a, boost::shared_ptr<const dolfin::GenericFunction> gnorm, boost::shared_ptr<const dolfin::GenericFunction> K, boost::shared_ptr<const dolfin::GenericFunction> theta, boost::shared_ptr<const dolfin::GenericFunction> dt, boost::shared_ptr<const dolfin::GenericFunction> kappa):
+    dolfin::Form(1, 9), u_0(*this, 0), phase(*this, 1), GX(*this, 2), ft_a(*this, 3), gnorm(*this, 4), K(*this, 5), theta(*this, 6), dt(*this, 7), kappa(*this, 8)
   {
     _function_spaces[0] = V0;
 
-    this->phase = *phase;
     this->u_0 = *u_0;
+    this->phase = *phase;
     this->GX = *GX;
-    this->ft = *ft;
+    this->ft_a = *ft_a;
     this->gnorm = *gnorm;
     this->K = *K;
-    this->kappa = *kappa;
     this->theta = *theta;
     this->dt = *dt;
+    this->kappa = *kappa;
 
     _ufc_form = const ufc::form* (new bloch_torrey3d_form_1());
   }
@@ -1762,23 +1762,23 @@ public:
   /// Return the number of the coefficient with this name
   virtual dolfin::uint coefficient_number(const std::string& name) const
   {
-    if (name == "phase")
+    if (name == "u_0")
       return 0;
-    else if (name == "u_0")
+    else if (name == "phase")
       return 1;
     else if (name == "GX")
       return 2;
-    else if (name == "ft")
+    else if (name == "ft_a")
       return 3;
     else if (name == "gnorm")
       return 4;
     else if (name == "K")
       return 5;
-    else if (name == "kappa")
-      return 6;
     else if (name == "theta")
-      return 7;
+      return 6;
     else if (name == "dt")
+      return 7;
+    else if (name == "kappa")
       return 8;
 
     dolfin::dolfin_error("generated code for class Form",
@@ -1793,23 +1793,23 @@ public:
     switch (i)
     {
     case 0:
-      return "phase";
-    case 1:
       return "u_0";
+    case 1:
+      return "phase";
     case 2:
       return "GX";
     case 3:
-      return "ft";
+      return "ft_a";
     case 4:
       return "gnorm";
     case 5:
       return "K";
     case 6:
-      return "kappa";
-    case 7:
       return "theta";
-    case 8:
+    case 7:
       return "dt";
+    case 8:
+      return "kappa";
     }
 
     dolfin::dolfin_error("generated code for class Form",
@@ -1820,26 +1820,26 @@ public:
 
   // Typedefs
   typedef Form_1_FunctionSpace_0 TestSpace;
-  typedef Form_1_FunctionSpace_1 CoefficientSpace_phase;
-  typedef Form_1_FunctionSpace_2 CoefficientSpace_u_0;
+  typedef Form_1_FunctionSpace_1 CoefficientSpace_u_0;
+  typedef Form_1_FunctionSpace_2 CoefficientSpace_phase;
   typedef Form_1_FunctionSpace_3 CoefficientSpace_GX;
-  typedef Form_1_FunctionSpace_4 CoefficientSpace_ft;
+  typedef Form_1_FunctionSpace_4 CoefficientSpace_ft_a;
   typedef Form_1_FunctionSpace_5 CoefficientSpace_gnorm;
   typedef Form_1_FunctionSpace_6 CoefficientSpace_K;
-  typedef Form_1_FunctionSpace_7 CoefficientSpace_kappa;
-  typedef Form_1_FunctionSpace_8 CoefficientSpace_theta;
-  typedef Form_1_FunctionSpace_9 CoefficientSpace_dt;
+  typedef Form_1_FunctionSpace_7 CoefficientSpace_theta;
+  typedef Form_1_FunctionSpace_8 CoefficientSpace_dt;
+  typedef Form_1_FunctionSpace_9 CoefficientSpace_kappa;
 
   // Coefficients
-  dolfin::CoefficientAssigner phase;
   dolfin::CoefficientAssigner u_0;
+  dolfin::CoefficientAssigner phase;
   dolfin::CoefficientAssigner GX;
-  dolfin::CoefficientAssigner ft;
+  dolfin::CoefficientAssigner ft_a;
   dolfin::CoefficientAssigner gnorm;
   dolfin::CoefficientAssigner K;
-  dolfin::CoefficientAssigner kappa;
   dolfin::CoefficientAssigner theta;
   dolfin::CoefficientAssigner dt;
+  dolfin::CoefficientAssigner kappa;
 };
 
 // Class typedefs

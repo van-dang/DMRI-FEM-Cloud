@@ -61,12 +61,3 @@ def ThetaMethod_a(ft, gnorm, GX, u0r, u0i, v0r, v0i, u1r, u1i, v1r, v1i, dt, K, 
 
 a = ThetaMethod_a(ft, gnorm, GX, u0r, u0i, v0r, v0i, u1r, u1i, v1r, v1i, dt, K, theta)
 L = ThetaMethod_L(ft, gnorm, GX, u0r, u0i, v0r, v0i, u1r, u1i, v1r, v1i, dt, K, theta, u0r_0, u0i_0, u1r_0, u1i_0)
-
-
-kappa_e = Coefficient(Ve)
-u_bc= Coefficient(TH)
-u0r_bc, u0i_bc, u1r_bc, u1i_bc  = u_bc[0], u_bc[1], u_bc[2], u_bc[3]
-h = Coefficient(Ve)
-L_bc =  kappa_e/h*(u1r_bc*v1r   + u1i_bc*v1i)*    phase*ds; # u1r_0, u1i_0                                                                                                          
-L_bc += kappa_e/h*(u0r_bc*v0r   + u0i_bc*v0i)*(1-phase)*ds; # u0r_0, u0i_0 
-L += L_bc;

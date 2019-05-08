@@ -22,7 +22,7 @@
 // along with DOLFIN. If not, see <http://www.gnu.org/licenses/>.
 //
 // First added:  2017-10-10
-// Last changed: 2017-11-19
+// Last changed: 2019-05-08
 
 #include <dolfin/config/dolfin_config.h>
 #include <dolfin/mesh/RivaraRefinement.h>
@@ -230,7 +230,6 @@ int main(int argc, char *argv[])
   GdotX GX(mesh);
 
   KrylovSolver sol(bicgstab, jacobi);
-  // KrylovSolver sol(gmres, jacobi);
 
   Function u;
   Vector ux;
@@ -240,7 +239,6 @@ int main(int argc, char *argv[])
   
   // Initial conditions
   u.init(mesh, ux, *L, 0);
-
   
   ft_f.init(mesh, ft_fx, *L, 0);
   ft_fx = ft;
@@ -309,11 +307,8 @@ int main(int argc, char *argv[])
       A += Jt;
       A.apply();
       
-      // message("u.vector().norm(l2): %f\n", u.vector().norm());
-      // message("Reassembling ...");
       Vector b;
       assembler.assemble(b, *L, true);
-      // message("done.\n");
       
       sol.solve(A, ux, b);
       if (step_counter%nskip==0 && is_save)
@@ -339,6 +334,5 @@ int main(int argc, char *argv[])
     message("Runtime = %f\n", end-start);
   }
 
-  // MPI_Barrier(MPI_COMM_WORLD); 
   return 0; 
 }
