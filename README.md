@@ -1,6 +1,6 @@
 # Install dependencies
 ```bash
-sudo apt-get singulariy-container unzip mpich
+sudo apt-get install singulariy-container unzip mpich
 ```
 
 # Download existing images
