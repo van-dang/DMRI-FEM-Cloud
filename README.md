@@ -1,3 +1,7 @@
+# Download the solvers
+```bash
+wget https://github.com/van-dang/MRI-Cloud/archive/fenics-hpc-solvers.zip
+```
 # Compile
 ```bash
 singularity exec -B $PWD ../../../writable_fenics-hpc-dmri.simg make -j 8
