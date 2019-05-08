@@ -11,7 +11,7 @@ unzip 05a_pyramidal8aACC.msh.zip
 # Convert .gmsh to .xml
 ```bash
 wget https://people.sc.fsu.edu/~jburkardt/py_src/dolfin-convert/dolfin-convert.py
-python python dolfin-convert.py 05a_pyramidal8aACC.msh 05a_pyramidal8aACC.xml
+python dolfin-convert.py 05a_pyramidal8aACC.msh 05a_pyramidal8aACC.xml
 ```
 
 # Execute the demo
