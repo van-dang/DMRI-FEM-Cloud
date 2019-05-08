@@ -42,7 +42,7 @@ Nivigation menu / Compute Engine / VM instances / Create Instances / SSH connect
 
 ```bash
 sudo apt-get update 
-sudo apt-get install mpich singularity-container
+sudo apt-get install singularity-container
 ```
 
 ## Working with FEniCS Singularity Image
@@ -74,11 +74,11 @@ wget https://raw.githubusercontent.com/van-dang/MRI-Cloud/master/GCloudDmriSolve
 ##### For multi-compartment domains
 ```bash
 singularity exec -B $PWD writable_fenics_stable.simg python3 PreprocessingMultiCompt.py -o multcompt_files.h5
-mpirun -n 6 singularity exec -B $PWD writable_fenics_stable.simg python3 GCloudDmriSolver.py -f multcompt_files.h5 -M 1 -b 1000 -p 1e-5 -d 10600 -D 43100 -k 200 -gdir 0 1 0
+singularity exec -B $PWD writable_fenics_stable.simg mpirun -n 6 python3 GCloudDmriSolver.py -f multcompt_files.h5 -M 1 -b 1000 -p 1e-5 -d 10600 -D 43100 -k 200 -gdir 0 1 0
  ```
 ##### For single-compartment domains
 ```bash
 singularity exec -B $PWD writable_fenics_stable.simg python3 PreprocessingOneCompt.py -o onecompt_files.h5
-mpirun -np 6 singularity exec -B $PWD writable_fenics_stable.simg python3 GCloudDmriSolver.py -f onecompt_files.h5 -M 0 -b 1000 -d 10600 -D 43100 -k 200 -gdir 1 0 0 
+singularity exec -B $PWD writable_fenics_stable.simg mpirun -np 6 python3 GCloudDmriSolver.py -f onecompt_files.h5 -M 0 -b 1000 -d 10600 -D 43100 -k 200 -gdir 1 0 0 
 ```
 ## Working with FEniCS-HPC Singularity Image
