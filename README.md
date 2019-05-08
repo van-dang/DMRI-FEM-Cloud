@@ -46,17 +46,17 @@ sudo apt-get install mpich singularity-container
 ```
 
 ## Working with FEniCS Singularity Image
-### Create or Download the exisiting FEniCS Image in the writable mode
+### Create a FEniCS Image in the writable mode
 
 ```bash
 sudo singularity build --writable writable_fenics_stable.simg docker://fenicsproject/stable
 ```
-or
+### Or download the exisiting FEniCS Image and change it to the writable mode
 ```bash
 wget https://github.com/van-dang/MRI-Cloud/raw/singularity_images/fenics_stable.simg
 sudo singularity build --writable writable_fenics_stable.simg fenics_stable.simg
 ```
-### Install some packages
+### Install some dependencies
 ```bash
 sudo singularity exec --writable writable_fenics_stable.simg sudo apt-get update
 sudo singularity exec --writable writable_fenics_stable.simg sudo apt-get install zip unzip gmsh
