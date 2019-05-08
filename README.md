@@ -29,19 +29,19 @@ singularity exec -B $PWD ../../../writable_fenics-hpc-dmri.simg make -j 8
 ```
 # Download the existing meshes
 ```bash
-wget https://github.com/van-dang/NeuronVolumeMeshes/raw/master/pyramidals/05a_pyramidal8aACC.msh.zip
+wget https://github.com/van-dang/NeuronVolumeMeshes/raw/master/pyramidals/04b_pyramidal7aACC.msh.zip
 unzip 05a_pyramidal8aACC.msh.zip
 ```
 
 # Convert .gmsh to .xml
 ```bash
 wget https://people.sc.fsu.edu/~jburkardt/py_src/dolfin-convert/dolfin-convert.py
-python dolfin-convert.py 05a_pyramidal8aACC.msh 05a_pyramidal8aACC.xml
+python dolfin-convert.py 04b_pyramidal7aACC.msh 04b_pyramidal7aACC.xml
 ```
 
 # Execute the demo
 ```bash
-mpirun -n 8 singularity exec -B $PWD ../../../writable_fenics-hpc-dmri.simg ./demo -m 05a_pyramidal8aACC.xml 
+singularity exec -B $PWD ../../../writable_fenics-hpc-dmri.simg mpirun -n 8 ./demo -m 04b_pyramidal7aACC.xml 
 ```
 
 ```bash
