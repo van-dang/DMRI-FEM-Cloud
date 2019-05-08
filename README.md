@@ -1,9 +1,9 @@
 # Re-build images if neccessary
-### FEniCS
+#### FEniCS
 ```bash
 sudo singularity build fenics_stable.simg docker://fenicsproject/stable
 ```
-### FEniCS-HPC
+#### FEniCS-HPC
 ```bash
 wget https://raw.githubusercontent.com/van-dang/MRI-Cloud/singularity_images/build_fenics_hpc_image
 sudo singularity build fenics-hpc-dmri.simg build_image_source_dmri
