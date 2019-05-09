@@ -90,7 +90,7 @@ mpirun -n 8 singularity exec -B $PWD writable_fenics_stable.simg python3 GCloudD
 ##### For single-compartment domains
 ```bash
 singularity exec -B $PWD writable_fenics_stable.simg python3 PreprocessingOneCompt.py -o onecompt_files.h5
-mpirun -n 8 singularity exec -B $PWD writable_fenics_stable.simg python3 GCloudDmriSolver.py -f onecompt_files.h5 -M 0 -b 1000 -d 10600 -D 43100 -k 200 -gdir 1 0 0 
+mpirun -n 8 singularity exec -B $PWD writable_fenics_stable.simg python3 GCloudDmriSolver.py -f onecompt_files.h5 -M 0 -b 1000 -d 10600 -D 43100 -k 200 -K 3e-3 -gdir 1 0 0 
 ```
 ## Working with FEniCS-HPC Singularity Image
 ### Download existing images
