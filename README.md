@@ -62,7 +62,7 @@ sudo singularity build --writable writable_fenics_stable.simg fenics_stable.simg
 sudo singularity exec --writable writable_fenics_stable.simg sudo apt-get update
 sudo singularity exec --writable writable_fenics_stable.simg sudo apt-get install zip unzip gmsh
 ```
-### Test mpi4py of the image
+### Test if mpi4py works correctly
 ```bash
 wget https://raw.githubusercontent.com/van-dang/MRI-Cloud/master/test_mpi4py.py
 mpirun -n 3 singularity exec -B $PWD writable_fenics_stable.simg python3 test_mpi4py.py
@@ -95,7 +95,7 @@ mpirun -n 8 singularity exec -B $PWD writable_fenics_stable.simg python3 GCloudD
 ```
 ## Working with FEniCS-HPC Singularity Image
 
-### Test mpi of the image
+### Test if mpi works correctly
 ```bash
 wget https://raw.githubusercontent.com/wesleykendall/mpitutorial/gh-pages/tutorials/mpi-hello
 -world/code/mpi_hello_world.c
