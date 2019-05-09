@@ -56,7 +56,7 @@ sudo singularity build --writable writable_fenics_stable.simg docker://fenicspro
 wget https://github.com/van-dang/MRI-Cloud/raw/singularity_images/fenics_stable.simg
 sudo singularity build --writable writable_fenics_stable.simg fenics_stable.simg
 ```
-### Test the image
+### Test mpi4py the image
 ```bash
 wget https://raw.githubusercontent.com/van-dang/MRI-Cloud/master/test_mpi4py.py
 mpirun -n 3 singularity exec -B $PWD writable_fenics_stable.simg python3 test.py
