@@ -64,7 +64,7 @@ if geo_choice == 2:
                       '22o_pyramidal16aFI','24o_pyramidal17aFI','25o_pyramidal18aFI','31o_pyramidal19aFI',
       ];
 
-      neuron_id = 13;
+      neuron_id = 14;
       neuron_type = 'pyramidals';
 
       if neuron_type == 'spindles':
