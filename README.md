@@ -1,6 +1,7 @@
 # Install dependencies
 ```bash
-sudo apt-get install singularity-container unzip mpich
+sudo apt-get update
+sudo apt-get install singularity-container unzip emacs
 ```
 
 # Download existing images
