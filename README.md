@@ -41,7 +41,6 @@ Go to console
 Nivigation menu / Compute Engine / VM instances / Create Instances / SSH connect
 
 ```bash
-sudo apt-get update 
 sudo apt-get install singularity-container
 ```
 
