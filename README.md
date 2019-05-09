@@ -111,6 +111,7 @@ sudo singularity exec --writable writable_fenics-hpc-dmri.simg apt-get install z
 ### Test if mpi works correctly
 ```bash
 wget https://raw.githubusercontent.com/wesleykendall/mpitutorial/gh-pages/tutorials/mpi-hello-world/code/mpi_hello_world.c
+singularity exec -B $PWD writable_fenics-hpc-dmri.simg mpicc mpi_hello_world.c -o mpi_hello_world
 singularity exec -B $PWD writable_fenics-hpc-dmri.simg mpirun -n 3  mpi_hello_world
 ```
 The results would be
