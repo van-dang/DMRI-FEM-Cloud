@@ -56,6 +56,18 @@ sudo singularity build --writable writable_fenics_stable.simg docker://fenicspro
 wget https://github.com/van-dang/MRI-Cloud/raw/singularity_images/fenics_stable.simg
 sudo singularity build --writable writable_fenics_stable.simg fenics_stable.simg
 ```
+### Test the image
+```bash
+wget https://raw.githubusercontent.com/van-dang/MRI-Cloud/master/test_mpi4py.py
+mpirun -n 3 singularity exec -B $PWD writable_fenics_stable.simg python3 test.py
+```
+The results would be
+```bash
+My rank is  1
+My rank is  2
+My rank is  0
+```
+
 ### Install some dependencies
 ```bash
 sudo singularity exec --writable writable_fenics_stable.simg sudo apt-get update
