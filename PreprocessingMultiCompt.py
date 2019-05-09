@@ -20,7 +20,7 @@ from DmriFemBuitInFunc import *
 
 """# Working on the mesh"""
 
-geo_choice = 2
+geo_choice = 4
 ################################################################################
 ############## Create two-layered disk using mshr in FEniCS ####################
 if geo_choice == 1:
@@ -83,9 +83,25 @@ if geo_choice == 3:
     mymesh = Mesh("multi_layer_torus.xml");  
     cmpt_mesh = Mesh('multi_layer_torus_compt1.xml')
     cellmarker, phase, partition_marker, partion_list = Create_phase_func(mymesh, cmpt_mesh, None)    
+
     
+if geo_choice == 4:
+    print("Working with volume_box_N_18_7_3_5L_fine.xml")
+    is_file_exist = os.path.isfile("volume_box_N_18_7_3_5L_fine.xml")
+    if is_file_exist==False:
+        os.system('wget --quiet https://github.com/van-dang/MRI-Cloud/raw/mesh/volume_box_N_18_7_3_5L_fine.xml.zip')
+        os.system('wget --quiet https://github.com/van-dang/MRI-Cloud/raw/mesh/volume_N_18_7_3_5L_fine.xml.zip')
+        os.system('unzip -q volume_box_N_18_7_3_5L_fine.xml.zip')
+        os.system('unzip -q volume_N_18_7_3_5L_fine.xml.zip')
+    mymesh = Mesh("volume_box_N_18_7_3_5L_fine.xml");
+    cmpt_mesh = Mesh('volume_N_18_7_3_5L_fine.xml')
+    cellmarker, phase, partition_marker, partion_list = Create_phase_func(mymesh, cmpt_mesh, None)
+
 ################################################################################
 ############## Save, Plot phase functions and submeshes to verify ##############
+print("Save phase function")
+File("phase.pvd")<<phase    
+
 print("Partition markers:", partion_list)
 mesh0 = SubMesh(mymesh, cellmarker, 0)
 mesh1 = SubMesh(mymesh, cellmarker, 1)
@@ -93,9 +109,9 @@ mesh1 = SubMesh(mymesh, cellmarker, 1)
 V_DG = FunctionSpace(mymesh, 'DG', 0)
 
 D0 = 3e-3
-D0_array = [D0, D0/3, D0]
-IC_array = [1, 1, 1]
-T2_array = [1e6, 1e6, 1e6]
+D0_array = [D0, D0]
+IC_array = [1, 1]
+T2_array = [1e6, 1e6]
 
 # Variable tensor
 dofmap_DG = V_DG.dofmap()
