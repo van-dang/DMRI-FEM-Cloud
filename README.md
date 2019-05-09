@@ -105,8 +105,7 @@ sudo singularity build --writable writable_fenics-hpc-dmri.simg fenics-hpc-dmri.
 
 ### Install packages to the existing image
 ```bash
-sudo singularity exec --writable writable_fenics-hpc-dmri.simg sudo apt-get update
-sudo singularity exec --writable writable_fenics-hpc-dmri.simg sudo apt-get install zip unzip gmsh
+sudo singularity exec --writable writable_fenics-hpc-dmri.simg apt-get install zip unzip gmsh
 ```
 
 ### Test if mpi works correctly
