@@ -25,8 +25,7 @@ sudo singularity build --writable writable_fenics-hpc-dmri.simg fenics-hpc-dmri.
 sudo singularity build --writable writable_fenics_stable.simg fenics_stable.simg
 ```
 
-# Install packages to the existing image
+# Install neccessary packages to the existing image
 ```bash
-sudo singularity exec --writable writable_fenics_stable.simg sudo apt-get update
 sudo singularity exec --writable writable_fenics_stable.simg sudo apt-get install zip unzip gmsh
 ```
