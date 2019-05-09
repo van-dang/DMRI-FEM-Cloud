@@ -41,7 +41,7 @@ Go to console
 Nivigation menu / Compute Engine / VM instances / Create Instances / SSH connect
 
 ```bash
-sudo apt-get install singularity-container
+sudo apt-get install singularity-container unzip
 ```
 
 ## Working with FEniCS Singularity Image
@@ -124,10 +124,12 @@ Hello world from processor dmri, rank 2 out of 3 processors
 ### Download the solvers
 ```bash
 wget https://github.com/van-dang/MRI-Cloud/archive/fenics-hpc-solvers.zip
+unzip fenics-hpc-solvers.zip
+cd MRI-Cloud-fenics-hpc-solvers/one-comp/
 ```
 ### Compile
 ```bash
-singularity exec -B $PWD ../../../writable_fenics-hpc-dmri.simg make -j 8
+singularity exec -B $PWD ../../writable_fenics-hpc-dmri.simg make -j 8
 ```
 ### Download the existing meshes
 ```bash
@@ -143,11 +145,5 @@ python dolfin-convert.py 04b_pyramidal7aACC.msh 04b_pyramidal7aACC.xml
 
 ### Execute the demo
 ```bash
-singularity exec -B $PWD ../../../writable_fenics-hpc-dmri.simg mpirun -n 8 ./demo -m 04b_pyramidal7aACC.xml 
-```
-
-```bash
-wget https://raw.githubusercontent.com/van-dang/MRI-Cloud/fenics-hpc-solvers/build_image_source_dmri
-sudo singularity build fenics-hpc-dmri.simg build_image_source_dmri
-wget https://github.com/van-dang/MRI-Cloud/raw/fenics-hpc-solvers/fenics-hpc-dmri.simg
+singularity exec -B $PWD ../../writable_fenics-hpc-dmri.simg mpirun -n 8 ./demo -m 04b_pyramidal7aACC.xml 
 ```
