@@ -65,7 +65,7 @@ sudo singularity exec --writable writable_fenics_stable.simg sudo apt-get instal
 ### Test mpi4py the image
 ```bash
 wget https://raw.githubusercontent.com/van-dang/MRI-Cloud/master/test_mpi4py.py
-mpirun -n 3 singularity exec -B $PWD writable_fenics_stable.simg python3 test_mpi4py.py
+singularity exec -B $PWD writable_fenics_stable.simg mpirun -n 3 python3 test_mpi4py.py
 ```
 The results would be
 ```bash
