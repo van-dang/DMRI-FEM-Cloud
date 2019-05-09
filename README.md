@@ -62,7 +62,7 @@ sudo singularity build --writable writable_fenics_stable.simg fenics_stable.simg
 sudo singularity exec --writable writable_fenics_stable.simg sudo apt-get update
 sudo singularity exec --writable writable_fenics_stable.simg sudo apt-get install zip unzip gmsh
 ```
-### Test mpi4py the image
+### Test mpi4py of the image
 ```bash
 wget https://raw.githubusercontent.com/van-dang/MRI-Cloud/master/test_mpi4py.py
 mpirun -n 3 singularity exec -B $PWD writable_fenics_stable.simg python3 test_mpi4py.py
@@ -94,3 +94,17 @@ singularity exec -B $PWD writable_fenics_stable.simg python3 PreprocessingOneCom
 mpirun -n 8 singularity exec -B $PWD writable_fenics_stable.simg python3 GCloudDmriSolver.py -f onecompt_files.h5 -M 0 -b 1000 -d 10600 -D 43100 -k 200 -gdir 1 0 0 
 ```
 ## Working with FEniCS-HPC Singularity Image
+
+### Test mpi of the image
+```bash
+wget https://raw.githubusercontent.com/wesleykendall/mpitutorial/gh-pages/tutorials/mpi-hello
+-world/code/mpi_hello_world.c
+singularity exec -B $PWD writable_fenics-hpc-dmri.simg mpirun -n 8  mpi_hello_world
+singularity exec -B $PWD writable_fenics-hpc-dmri.simg mpirun -n 3  mpi_hello_world
+```
+The results would be
+```bash
+Hello world from processor dmri, rank 0 out of 3 processors
+Hello world from processor dmri, rank 1 out of 3 processors
+Hello world from processor dmri, rank 2 out of 3 processors
+```
