@@ -84,7 +84,6 @@ def ThetaMethodF_wBC1c(ft, ift, mri_para, w , v, sp, mydomain):
     gnorm = mri_para.gnorm
     gdir = mri_para.gdir
     T2 = mri_para.T2
-    kappa = mydomain.kappa
     v0r, v0i = v[0], v[1]
     u0r, u0i = w[0], w[1]
     a0 = (  -theta*FuncF_wBC(ft, gnorm, gdir, u0r, u0i, v0r, v0i, D, mymesh, T2))*dx
@@ -174,7 +173,6 @@ def ThetaMethodF_sBC1c(ft, ift, mri_para, w, v, sp, mydomain):
     gnorm = mri_para.gnorm
     g = mri_para.g
     fn = mydomain.fn
-    kappa = mydomain.kappa
     v0r, v0i = v[0], v[1]
     u0r, u0i = w[0], w[1]
     a0 = (  -theta*FuncF_sBC(ift, gnorm, g, u0r  , u0i  , v0r, v0i, D, T2))*dx
