@@ -74,7 +74,7 @@ if geo_choice == 2:
 
       mesh_file = neuron_list[neuron_id];
       
-      neuron_dir='https://raw.githubusercontent.com/van-dang/NeuronVolumeMeshes/master/'+neuron_type+'/'+mesh_file+'.msh.zip'
+      neuron_dir='https://raw.githubusercontent.com/van-dang/RealNeuronMeshes/master/'+neuron_type+'/'+mesh_file+'.msh.zip'
 
       zip_exists = os.path.isfile(mesh_file+".msh.zip")
       mesh_file_exists = os.path.isfile(mesh_file+".xml")
