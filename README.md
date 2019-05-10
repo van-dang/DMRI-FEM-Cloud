@@ -16,6 +16,8 @@ https://github.com/van-dang/MRI-Cloud/blob/master/ExtracellularSpace.ipynb
 
 https://github.com/van-dang/MRI-Cloud/blob/master/RealNeurons.ipynb
 
+https://github.com/van-dang/MRI-Cloud/blob/master/Manifolds.ipynb
+
 https://github.com/van-dang/MRI-Cloud/blob/master/DiscontinuousInitialCondition.ipynb
 
 https://github.com/van-dang/MRI-Cloud/blob/master/MultilayeredStructures.ipynb
