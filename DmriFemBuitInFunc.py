@@ -500,7 +500,8 @@ class MyDomain():
         self.gdir = mri_para.gdir        
         self.gnorm = mri_para.gnorm 
         self.D0 = 3e-3
-            
+        self.kappa_e = None
+
     def WeakPseudoPeridicMarker(self):        
         if self.gdim==2:
             pmk = 3e-3/self.hmin*Expression("(x[0]<xmin+eps || x[0]>xmax-eps)*p0 || (x[1]<ymin+eps || x[1]>ymax-eps)*p1", 
@@ -524,8 +525,9 @@ class MyDomain():
         
         if self.IsDomainMultiple == True: 
               self.fn0 = ieval(self.fn, 0, self.phase);
-            
-        self.kappa_e = self.WeakPseudoPeridicMarker()
+        
+        if self.kappa_e == None:
+              self.kappa_e = self.WeakPseudoPeridicMarker()
         
         if (sum(self.PeriodicDir)>0):
                 periodicBD = PeriodicBD(self) 
