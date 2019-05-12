@@ -500,15 +500,15 @@ class MyDomain():
         self.gdir = mri_para.gdir        
         self.gnorm = mri_para.gnorm 
         self.D0 = 3e-3
-        self.kappa_e = None
+        self.kappa_e_scalar = 3e-3/self.tol
 
     def WeakPseudoPeridicMarker(self):        
         if self.gdim==2:
-            pmk = 3e-3/self.hmin*Expression("(x[0]<xmin+eps || x[0]>xmax-eps)*p0 || (x[1]<ymin+eps || x[1]>ymax-eps)*p1", 
+            pmk = self.kappa_e_scalar*Expression("(x[0]<xmin+eps || x[0]>xmax-eps)*p0 || (x[1]<ymin+eps || x[1]>ymax-eps)*p1", 
                              xmin=self.xmin, xmax=self.xmax, ymin=self.ymin, ymax=self.ymax, 
                              eps=self.tol, p0 = self.PeriodicDir[0], p1 = self.PeriodicDir[1], domain=self.mymesh, degree=1);
         if self.gdim==3:
-            pmk = 3e-3/self.hmin*Expression("(x[0]<xmin+eps || x[0]>xmax-eps)*p0 || (x[1]<ymin+eps || x[1]>ymax-eps)*p1 || (x[2]<zmin+eps || x[2]>zmax-eps)*p2", 
+            pmk = self.kappa_e_scalar*Expression("(x[0]<xmin+eps || x[0]>xmax-eps)*p0 || (x[1]<ymin+eps || x[1]>ymax-eps)*p1 || (x[2]<zmin+eps || x[2]>zmax-eps)*p2", 
                              xmin=self.xmin, xmax=self.xmax, ymin=self.ymin, ymax=self.ymax, zmin=self.zmin, zmax=self.zmax, 
                              eps=self.tol, p0 = self.PeriodicDir[0], p1 = self.PeriodicDir[1], p2 = self.PeriodicDir[2], domain=self.mymesh, degree=1);
         return pmk
@@ -526,8 +526,7 @@ class MyDomain():
         if self.IsDomainMultiple == True: 
               self.fn0 = ieval(self.fn, 0, self.phase);
         
-        if self.kappa_e == None:
-              self.kappa_e = self.WeakPseudoPeridicMarker()
+        self.kappa_e = self.WeakPseudoPeridicMarker()
         
         if (sum(self.PeriodicDir)>0):
                 periodicBD = PeriodicBD(self) 
