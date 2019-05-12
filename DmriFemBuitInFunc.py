@@ -500,7 +500,7 @@ class MyDomain():
         self.gdir = mri_para.gdir        
         self.gnorm = mri_para.gnorm 
         self.D0 = 3e-3
-        self.kappa_e_scalar = 3e-3/self.tol
+        self.kappa_e_scalar = 3e-3/self.hmin
 
     def WeakPseudoPeridicMarker(self):        
         if self.gdim==2:
