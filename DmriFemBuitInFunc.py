@@ -484,7 +484,7 @@ class MyDomain():
     def __init__(self, mymesh, mri_para):
         self.mymesh = mymesh;
         self.porder = 1                                  # order of basis functions of FEM
-        self.tol = 1e-6*mymesh.hmin()
+        self.tol = 1e-2*mymesh.hmin()
         self.gdim = mymesh.geometry().dim()
         self.tdim = mymesh.topology().dim()
         self.hmin = mymesh.hmin()
