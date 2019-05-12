@@ -500,17 +500,17 @@ class MyDomain():
         self.gdir = mri_para.gdir        
         self.gnorm = mri_para.gnorm 
         self.D0 = 3e-3
-        self.kappa_e_scalar = 3e-3/self.hmin
+        self.kappa_e = None
 
     def WeakPseudoPeridicMarker(self):        
         if self.gdim==2:
-            pmk = Expression("ke*((x[0]<xmin+eps || x[0]>xmax-eps)*p0 || (x[1]<ymin+eps || x[1]>ymax-eps)*p1)", 
+            pmk = 3e-3/self.hmin*Expression("(x[0]<xmin+eps || x[0]>xmax-eps)*p0 || (x[1]<ymin+eps || x[1]>ymax-eps)*p1", 
                              xmin=self.xmin, xmax=self.xmax, ymin=self.ymin, ymax=self.ymax, 
-                             eps=1e-10, p0 = self.PeriodicDir[0], p1 = self.PeriodicDir[1], ke=self.kappa_e_scalar, domain=self.mymesh, degree=1);
+                             eps=1e-10, p0 = self.PeriodicDir[0], p1 = self.PeriodicDir[1], domain=self.mymesh, degree=1);
         if self.gdim==3:
-            pmk = Expression("ke*((x[0]<xmin+eps || x[0]>xmax-eps)*p0 || (x[1]<ymin+eps || x[1]>ymax-eps)*p1 || (x[2]<zmin+eps || x[2]>zmax-eps)*p2)", 
+            pmk = 3e-3/self.hmin*Expression("(x[0]<xmin+eps || x[0]>xmax-eps)*p0 || (x[1]<ymin+eps || x[1]>ymax-eps)*p1 || (x[2]<zmin+eps || x[2]>zmax-eps)*p2", 
                              xmin=self.xmin, xmax=self.xmax, ymin=self.ymin, ymax=self.ymax, zmin=self.zmin, zmax=self.zmax, 
-                             eps=1e-10, p0 = self.PeriodicDir[0], p1 = self.PeriodicDir[1], p2 = self.PeriodicDir[2], ke=self.kappa_e_scalar, domain=self.mymesh, degree=1);
+                             eps=1e-10, p0 = self.PeriodicDir[0], p1 = self.PeriodicDir[1], p2 = self.PeriodicDir[2], domain=self.mymesh, degree=1);
         return pmk
     def ImposeDiffusionTensor(self, k00, k01, k02, k10, k11, k12, k20, k21, k22):
         print("Impose Diffusion Tensor")
@@ -526,7 +526,8 @@ class MyDomain():
         if self.IsDomainMultiple == True: 
               self.fn0 = ieval(self.fn, 0, self.phase);
         
-        self.kappa_e = self.WeakPseudoPeridicMarker()
+        if self.kappa_e == None:
+              self.kappa_e = self.WeakPseudoPeridicMarker()
         
         if (sum(self.PeriodicDir)>0):
                 periodicBD = PeriodicBD(self) 
@@ -782,4 +783,4 @@ def Post_processing(mydomain, mri_para, mri_simu, plt, ms=''):
                 outfile.write('%'+ms+'\n')
             outfile.write(out_text)
     outfile.close()  
-    
+   
