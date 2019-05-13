@@ -745,7 +745,7 @@ def Post_processing(mydomain, mri_para, mri_simu, plt, ms=''):
         print('Signal on each compartment')
         print('Sum initial0: %.3e, Signal0: %.3e'%(initial0, signal0))
         print('Sum initial1: %.3e, Signal1: %.3e'%(initial1, signal1))
-        out_text = 'b: %.3f, g: %.3f, Signal: %.3e, Normalized signal: %.3e, kappa: %.3e, dt: %.3f, hmin: %.3f, whole_vol: %.3f, vol_of_interest: %.3f, Free signal: %.3e, elasped time %.3f (s)\n'%(mri_para.bvalue, mri_para.gvalue, signal, signal/voi, mydomain.kappa, mri_simu.k, mydomain.hmin, whole_vol, voi, exp(-mri_para.bvalue*mydomain.D0), mri_simu.elapsed_time)
+        out_text = 'b: %.3f, g: %.3f, q: %.3e, Signal: %.3e, Normalized signal: %.3e, kappa: %.3e, dt: %.3f, hmin: %.3f, whole_vol: %.3f, vol_of_interest: %.3f, Free signal: %.3e, elasped time %.3f (s)\n'%(mri_para.bvalue, mri_para.gvalue, mri_para.qvalue, signal, signal/voi, mydomain.kappa, mri_simu.k, mydomain.hmin, whole_vol, voi, exp(-mri_para.bvalue*mydomain.D0), mri_simu.elapsed_time)
         print(out_text)
         V0 = FunctionSpace(mydomain.mesh0, mydomain.Ve);
         V1 = FunctionSpace(mydomain.mesh1, mydomain.Ve);
@@ -761,7 +761,7 @@ def Post_processing(mydomain, mri_para, mri_simu, plt, ms=''):
     else:
         ur, ui = split(mri_simu.u_0)
         signal = assemble(ur*dx);
-        out_text = 'b: %.3f, g: %.3f, Signal: %.3e, Normalized signal: %.3e, dt: %.3f, hmin: %.3e, whole_vol: %.3f, vol_of_interest: %.3f, Free signal: %.3e, elasped time %.3f (s)\n'%(mri_para.bvalue, mri_para.gvalue, signal, signal/voi, mri_simu.k, mydomain.hmin, whole_vol, voi, exp(-mri_para.bvalue*mydomain.D0), mri_simu.elapsed_time)
+        out_text = 'b: %.3f, g: %.3f, q: %.3e, Signal: %.3e, Normalized signal: %.3e, dt: %.3f, hmin: %.3e, whole_vol: %.3f, vol_of_interest: %.3f, Free signal: %.3e, elasped time %.3f (s)\n'%(mri_para.bvalue, mri_para.gvalue, mri_para.qvalue, signal, signal/voi, mri_simu.k, mydomain.hmin, whole_vol, voi, exp(-mri_para.bvalue*mydomain.D0), mri_simu.elapsed_time)
         print(out_text)
         V = FunctionSpace(mydomain.mymesh,mydomain.Ve);
         ur_p = project(ur,V)
