@@ -38,10 +38,10 @@ def GdotX(gdir, mymesh):
     GX=Expression("x[0]*g0+x[1]*g1+x[2]*g2", g0=gdir.x(), g1=gdir.y(), g2=gdir.z(), domain=mymesh, degree=3);
   return GX;
 
-def FuncF_wBC(ft, gnorm, gdir, ur, ui, vr, vi, D, mymesh, T2):
+def FuncF_wBC(ft, qvalue, gdir, ur, ui, vr, vi, D, mymesh, T2):
     GX=GdotX(gdir, mymesh)
-    Fr =   ft*gnorm*GX*ui*vr - 1./T2*ur*vr - inner(D*grad(ur), grad(vr))
-    Fi = - ft*gnorm*GX*ur*vi - 1./T2*ui*vi - inner(D*grad(ui), grad(vi))
+    Fr =   ft*qvalue*GX*ui*vr - 1./T2*ur*vr - inner(D*grad(ur), grad(vr))
+    Fi = - ft*qvalue*GX*ur*vi - 1./T2*ui*vi - inner(D*grad(ui), grad(vi))
     return Fr + Fi
   
 def icondition_wBC(kappa, u0rm, u1rm, v0r, v1r, u0im, u1im, v0i, v1i):
@@ -61,12 +61,12 @@ def ThetaMethodL_wBC1c(ft, ift, mri_para , w , v, u_0, sp, mydomain, wpperiodic)
     mymesh = mydomain.mymesh
     k = sp.k
     theta = sp.theta
-    gnorm = mri_para.gnorm
+    qvalue = mri_para.qvalue
     gdir = mri_para.gdir
     u0r_0, u0i_0 = split(u_0)
     v0r, v0i = v[0], v[1]
     u0r, u0i = w[0], w[1]
-    L0 = (u0r_0/k*v0r + u0i_0/k*v0i+(1-theta)*FuncF_wBC(ft, gnorm, gdir, u0r_0, u0i_0, v0r, v0i, D, mymesh, T2))*dx
+    L0 = (u0r_0/k*v0r + u0i_0/k*v0i+(1-theta)*FuncF_wBC(ft, qvalue, gdir, u0r_0, u0i_0, v0r, v0i, D, mymesh, T2))*dx
     L_pbc = 0;
     if sum(mydomain.PeriodicDir)>0:
       # Start applying the weak pseudo-periodic BC
@@ -81,12 +81,12 @@ def ThetaMethodF_wBC1c(ft, ift, mri_para, w , v, sp, mydomain):
     mymesh = mydomain.mymesh
     k = sp.k
     theta = sp.theta
-    gnorm = mri_para.gnorm
+    qvalue = mri_para.qvalue
     gdir = mri_para.gdir
     T2 = mri_para.T2
     v0r, v0i = v[0], v[1]
     u0r, u0i = w[0], w[1]
-    a0 = (  -theta*FuncF_wBC(ft, gnorm, gdir, u0r, u0i, v0r, v0i, D, mymesh, T2))*dx
+    a0 = (  -theta*FuncF_wBC(ft, qvalue, gdir, u0r, u0i, v0r, v0i, D, mymesh, T2))*dx
     a_pbc = 0;
     if sum(mydomain.PeriodicDir)>0:
       a_pbc = theta*mydomain.kappa_e*(u0r*v0r   + u0i*v0i)*ds;
@@ -98,7 +98,7 @@ def ThetaMethodL_wBC2c(ft, ift, mri_para , w , v, u_0, sp, mydomain, wpperiodic)
     mymesh = mydomain.mymesh
     k = sp.k
     theta = sp.theta
-    gnorm = mri_para.gnorm
+    qvalue = mri_para.qvalue
     gdir = mri_para.gdir
     T2 = mri_para.T2
     kappa = mydomain.kappa
@@ -107,8 +107,8 @@ def ThetaMethodL_wBC2c(ft, ift, mri_para , w , v, u_0, sp, mydomain, wpperiodic)
     v0r, v0i, v1r, v1i = v[0], v[1], v[2], v[3]
     u0r, u0i, u1r, u1i = w[0], w[1], w[2], w[3]
 
-    L0 = (u0r_0/k*v0r + u0i_0/k*v0i+(1-theta)*FuncF_wBC(ft, gnorm, gdir, u0r_0, u0i_0, v0r, v0i, D, mymesh, T2))*(1-phase)*dx
-    L1 = (u1r_0/k*v1r +u1i_0/k*v1i+(1-theta)*FuncF_wBC(ft, gnorm, gdir, u1r_0, u1i_0, v1r, v1i, D, mymesh, T2))*phase*dx
+    L0 = (u0r_0/k*v0r + u0i_0/k*v0i+(1-theta)*FuncF_wBC(ft, qvalue, gdir, u0r_0, u0i_0, v0r, v0i, D, mymesh, T2))*(1-phase)*dx
+    L1 = (u1r_0/k*v1r +u1i_0/k*v1i+(1-theta)*FuncF_wBC(ft, qvalue, gdir, u1r_0, u1i_0, v1r, v1i, D, mymesh, T2))*phase*dx
     L_bc = avg((1-theta)*icondition_wBC(kappa, u0r_0, u1r_0, v0r, v1r, u0i_0, u1i_0, v0i, v1i))*abs(jump(phase))*dS;
     
     L_pbc = 0;
@@ -127,15 +127,15 @@ def ThetaMethodF_wBC2c(ft, ift, mri_para, w , v, sp, mydomain):
     mymesh = mydomain.mymesh
     k = sp.k
     theta = sp.theta  
-    gnorm = mri_para.gnorm
+    qvalue = mri_para.qvalue
     gdir = mri_para.gdir
     kappa = mydomain.kappa
     phase = mydomain.phase
     T2 = mri_para.T2
     v0r, v0i, v1r, v1i = v[0], v[1], v[2], v[3]
     u0r, u0i, u1r, u1i = w[0], w[1], w[2], w[3]
-    a0 = (  -theta*FuncF_wBC(ft, gnorm, gdir, u0r  , u0i  , v0r, v0i, D, mymesh, T2))*(1-phase)*dx
-    a1 = (  -theta*FuncF_wBC(ft, gnorm, gdir, u1r  , u1i  , v1r, v1i, D, mymesh, T2))*phase*dx
+    a0 = (  -theta*FuncF_wBC(ft, qvalue, gdir, u0r  , u0i  , v0r, v0i, D, mymesh, T2))*(1-phase)*dx
+    a1 = (  -theta*FuncF_wBC(ft, qvalue, gdir, u1r  , u1i  , v1r, v1i, D, mymesh, T2))*phase*dx
     a_bc = avg(  (theta*icondition_wBC(kappa, u0r  , u1r  , v0r, v1r, u0i  , u1i  , v0i, v1i)))*abs(jump(phase))*dS;
     
     a_pbc = 0;
@@ -146,22 +146,22 @@ def ThetaMethodF_wBC2c(ft, ift, mri_para, w , v, sp, mydomain):
 
 
 # Strong periodic boundary conditions  
-def inner_interface(ift, kappa, gnorm, u0rm, u1rm, v0r, v1r, u0im, u1im, v0i, v1i, fn, g, D0, D1):
-    F_bcr  = (-kappa*avg(u0rm-u1rm)-0.5*gnorm*ift*(avg(u0im)*inner(avg(D0)*avg(g),fn)+avg(u1im)*inner(avg(D1)*avg(g),fn)))*avg(v0r-v1r)                      
-    F_bcr += -gnorm*ift*( avg(u0im)*inner(avg(D0)*avg(g),fn)-avg(u1im)*inner(avg(D1)*avg(g),fn) )*0.5*avg(v0r+v1r)                                                                                                                                                                                         
-    F_bci  = (-kappa*avg(u0im-u1im)+0.5*gnorm*ift*(avg(u0rm)*inner(avg(D0)*avg(g),fn)+avg(u1rm)*inner(avg(D0)*avg(g),fn)))*avg(v0i-v1i)                      
-    F_bci += gnorm*ift*(  avg(u0rm)*inner(avg(D0)*avg(g),fn)-avg(u1rm)*inner(avg(D1)*avg(g),fn) )*0.5*avg(v0i+v1i)                                         
+def inner_interface(ift, kappa, qvalue, u0rm, u1rm, v0r, v1r, u0im, u1im, v0i, v1i, fn, g, D0, D1):
+    F_bcr  = (-kappa*avg(u0rm-u1rm)-0.5*qvalue*ift*(avg(u0im)*inner(avg(D0)*avg(g),fn)+avg(u1im)*inner(avg(D1)*avg(g),fn)))*avg(v0r-v1r)                      
+    F_bcr += -qvalue*ift*( avg(u0im)*inner(avg(D0)*avg(g),fn)-avg(u1im)*inner(avg(D1)*avg(g),fn) )*0.5*avg(v0r+v1r)                                                                                                                                                                                         
+    F_bci  = (-kappa*avg(u0im-u1im)+0.5*qvalue*ift*(avg(u0rm)*inner(avg(D0)*avg(g),fn)+avg(u1rm)*inner(avg(D0)*avg(g),fn)))*avg(v0i-v1i)                      
+    F_bci += qvalue*ift*(  avg(u0rm)*inner(avg(D0)*avg(g),fn)-avg(u1rm)*inner(avg(D1)*avg(g),fn) )*0.5*avg(v0i+v1i)                                         
     return -F_bcr - F_bci
 
-def outer_interface(ift, gnorm, D, fn, ur, ui, vr, vi, g):
-    F_bcr =  (ift*gnorm+1e-16)*inner(D*g, fn)*ui*vr
-    F_bci = -(ift*gnorm+1e-16)*inner(D*g, fn)*ur*vi
+def outer_interface(ift, qvalue, D, fn, ur, ui, vr, vi, g):
+    F_bcr =  (ift*qvalue+1e-16)*inner(D*g, fn)*ui*vr
+    F_bci = -(ift*qvalue+1e-16)*inner(D*g, fn)*ur*vi
     return F_bcr + F_bci
 
   
-def FuncF_sBC(ift, gnorm, g, ur, ui, vr, vi, D, T2):
-    Fr =   ift*gnorm*(inner(g,D*grad(ui))+inner(grad(ui),D*g))*vr - inner(g,D*g)*gnorm*gnorm*ift*ift*ur*vr-1./T2*ur*vr-inner(D*grad(ur), grad(vr))
-    Fi = - ift*gnorm*(inner(g,D*grad(ur))+inner(grad(ur),D*g))*vi - inner(g,D*g)*gnorm*gnorm*ift*ift*ui*vi-1./T2*ui*vi-inner(D*grad(ui), grad(vi))
+def FuncF_sBC(ift, qvalue, g, ur, ui, vr, vi, D, T2):
+    Fr =   ift*qvalue*(inner(g,D*grad(ui))+inner(grad(ui),D*g))*vr - inner(g,D*g)*qvalue*qvalue*ift*ift*ur*vr-1./T2*ur*vr-inner(D*grad(ur), grad(vr))
+    Fi = - ift*qvalue*(inner(g,D*grad(ur))+inner(grad(ur),D*g))*vi - inner(g,D*g)*qvalue*qvalue*ift*ift*ui*vi-1./T2*ui*vi-inner(D*grad(ui), grad(vi))
     return Fr + Fi
 
 
@@ -170,13 +170,13 @@ def ThetaMethodF_sBC1c(ft, ift, mri_para, w, v, sp, mydomain):
     T2 = mri_para.T2  
     k = sp.k
     theta = sp.theta  
-    gnorm = mri_para.gnorm
+    qvalue = mri_para.qvalue
     g = mri_para.g
     fn = mydomain.fn
     v0r, v0i = v[0], v[1]
     u0r, u0i = w[0], w[1]
-    a0 = (  -theta*FuncF_sBC(ift, gnorm, g, u0r  , u0i  , v0r, v0i, D, T2))*dx
-    a0_outer_bc = theta*outer_interface(ift, gnorm , D, fn, u0r, u0i, v0r, v0i, g)*ds
+    a0 = (  -theta*FuncF_sBC(ift, qvalue, g, u0r  , u0i  , v0r, v0i, D, T2))*dx
+    a0_outer_bc = theta*outer_interface(ift, qvalue , D, fn, u0r, u0i, v0r, v0i, g)*ds
     return a0 + a0_outer_bc 
 
 def ThetaMethodL_sBC1c(ft, ift, mri_para, w, v, u_0, sp, mydomain):
@@ -184,14 +184,14 @@ def ThetaMethodL_sBC1c(ft, ift, mri_para, w, v, u_0, sp, mydomain):
     T2 = mri_para.T2      
     k = sp.k
     theta = sp.theta  
-    gnorm = mri_para.gnorm
+    qvalue = mri_para.qvalue
     g = mri_para.g
     fn = mydomain.fn
     v0r, v0i = v[0], v[1]
     u0r, u0i = w[0], w[1]
     u0r_0, u0i_0 = split(u_0)
-    L0 = (u0r_0/k*v0r + u0i_0/k*v0i +theta*FuncF_sBC(ift, gnorm, g, u0r_0, u0i_0, v0r, v0i, D, T2))*dx
-    L0_outer_bc = -theta*outer_interface(ift, gnorm, D, fn, u0r_0, u0i_0, v0r, v0i, g)*ds
+    L0 = (u0r_0/k*v0r + u0i_0/k*v0i +theta*FuncF_sBC(ift, qvalue, g, u0r_0, u0i_0, v0r, v0i, D, T2))*dx
+    L0_outer_bc = -theta*outer_interface(ift, qvalue, D, fn, u0r_0, u0i_0, v0r, v0i, g)*ds
     return L0 + L0_outer_bc
 
   
@@ -200,7 +200,7 @@ def ThetaMethodF_sBC2c(ft, ift, mri_para, w, v, sp, mydomain):
     T2 = mri_para.T2      
     k = sp.k
     theta = sp.theta  
-    gnorm = mri_para.gnorm
+    qvalue = mri_para.qvalue
     g = mri_para.g
     fn = mydomain.fn
     fn0 = mydomain.fn0
@@ -208,11 +208,11 @@ def ThetaMethodF_sBC2c(ft, ift, mri_para, w, v, sp, mydomain):
     phase = mydomain.phase
     v0r, v0i, v1r, v1i = v[0], v[1], v[2], v[3]
     u0r, u0i, u1r, u1i = w[0], w[1], w[2], w[3]
-    a0 = (  -theta*FuncF_sBC(ift, gnorm, g, u0r  , u0i  , v0r, v0i, D, T2))*(1-phase)*dx
-    a1 = (  -theta*FuncF_sBC(ift, gnorm, g, u1r  , u1i  , v1r, v1i, D, T2))*phase*dx
-    a_inner_bc  = (  (theta*inner_interface(ift, kappa, gnorm, u0r  , u1r  , v0r, v1r, u0i  , u1i  , v0i, v1i, fn0, g, D, D)))*abs(jump(phase))*dS;
-    a0_outer_bc = theta*outer_interface(ift, gnorm , D, fn, u0r, u0i, v0r, v0i, g)*ds
-    a1_outer_bc = theta*outer_interface(ift, gnorm , D, fn, u1r, u1i, v1r, v1i, g)*ds
+    a0 = (  -theta*FuncF_sBC(ift, qvalue, g, u0r  , u0i  , v0r, v0i, D, T2))*(1-phase)*dx
+    a1 = (  -theta*FuncF_sBC(ift, qvalue, g, u1r  , u1i  , v1r, v1i, D, T2))*phase*dx
+    a_inner_bc  = (  (theta*inner_interface(ift, kappa, qvalue, u0r  , u1r  , v0r, v1r, u0i  , u1i  , v0i, v1i, fn0, g, D, D)))*abs(jump(phase))*dS;
+    a0_outer_bc = theta*outer_interface(ift, qvalue , D, fn, u0r, u0i, v0r, v0i, g)*ds
+    a1_outer_bc = theta*outer_interface(ift, qvalue , D, fn, u1r, u1i, v1r, v1i, g)*ds
     return a0+a1 +a_inner_bc + a0_outer_bc + a1_outer_bc
 
   
@@ -221,7 +221,7 @@ def ThetaMethodL_sBC2c(ft, ift, mri_para, w, v, u_0, sp, mydomain):
     T2 = mri_para.T2      
     k = sp.k
     theta = sp.theta  
-    gnorm = mri_para.gnorm
+    qvalue = mri_para.qvalue
     g = mri_para.g
     fn = mydomain.fn
     fn0 = mydomain.fn0
@@ -231,11 +231,11 @@ def ThetaMethodL_sBC2c(ft, ift, mri_para, w, v, u_0, sp, mydomain):
     u0r, u0i, u1r, u1i = w[0], w[1], w[2], w[3]
     u0r_0, u0i_0, u1r_0, u1i_0 = split(u_0)
 
-    L0 = (u0r_0/k*v0r + u0i_0/k*v0i +theta*FuncF_sBC(ift, gnorm, g, u0r_0, u0i_0, v0r, v0i, D, T2))*(1-phase)*dx
-    L1 = (u1r_0/k*v1r + u1i_0/k*v1i +theta*FuncF_sBC(ift, gnorm, g, u1r_0, u1i_0, v1r, v1i, D, T2))*phase*dx
-    L_inner_bc  = -(theta*inner_interface(ift, kappa, gnorm, u0r_0, u1r_0, v0r, v1r, u0i_0, u1i_0, v0i, v1i, fn0, g, D, D))*abs(jump(phase))*dS;
-    L0_outer_bc = -theta*outer_interface(ift, gnorm, D, fn, u0r_0, u0i_0, v0r, v0i, g)*ds
-    L1_outer_bc = -theta*outer_interface(ift, gnorm, D, fn, u1r_0, u1i_0, v1r, v1i, g)*ds
+    L0 = (u0r_0/k*v0r + u0i_0/k*v0i +theta*FuncF_sBC(ift, qvalue, g, u0r_0, u0i_0, v0r, v0i, D, T2))*(1-phase)*dx
+    L1 = (u1r_0/k*v1r + u1i_0/k*v1i +theta*FuncF_sBC(ift, qvalue, g, u1r_0, u1i_0, v1r, v1i, D, T2))*phase*dx
+    L_inner_bc  = -(theta*inner_interface(ift, kappa, qvalue, u0r_0, u1r_0, v0r, v1r, u0i_0, u1i_0, v0i, v1i, fn0, g, D, D))*abs(jump(phase))*dS;
+    L0_outer_bc = -theta*outer_interface(ift, qvalue, D, fn, u0r_0, u0i_0, v0r, v0i, g)*ds
+    L1_outer_bc = -theta*outer_interface(ift, qvalue, D, fn, u1r_0, u1i_0, v1r, v1i, g)*ds
     return L0+L1+L_inner_bc + L0_outer_bc+L1_outer_bc
     
 def MassMatrix2c(w, v, phase):
@@ -260,7 +260,7 @@ class WeakPseudoPeriodic_2c(UserExpression):
         self.pdir = mydomain.PeriodicDir
         self.gdim = mydomain.gdim
         self.gdir = mydomain.gdir        
-        self.gnorm = mydomain.gnorm        
+        self.qvalue = mydomain.qvalue        
         super().__init__(**kwargs)
         
 
@@ -314,7 +314,7 @@ class WeakPseudoPeriodic_2c(UserExpression):
                 temp_u0r, temp_u0i, temp_u1r, temp_u1i = self.u([x[0], x[1], self.zmin]);
 
         # exp(i*theta)= cos(theta)+i*sin(theta); 
-        theta_ln = self.gnorm*(self.gdir.x()*xln + self.gdir.y()*yln + self.gdir.z()*zln)*self.ift;
+        theta_ln = self.qvalue*(self.gdir.x()*xln + self.gdir.y()*yln + self.gdir.z()*zln)*self.ift;
         value[0] = temp_u0r*cos(theta_ln)-temp_u0i*sin(theta_ln); # for Real part
         value[1] = temp_u0r*sin(theta_ln)+temp_u0i*cos(theta_ln); # for Imag part
 
@@ -390,7 +390,7 @@ class WeakPseudoPeriodic_1c(UserExpression):
         self.pdir = mydomain.PeriodicDir
         self.gdim = mydomain.gdim
         self.gdir = mydomain.gdir
-        self.gnorm = mydomain.gnorm       
+        self.qvalue = mydomain.qvalue       
         super().__init__(**kwargs)
         
 
@@ -444,7 +444,7 @@ class WeakPseudoPeriodic_1c(UserExpression):
                 temp_u0r, temp_u0i = self.u([x[0], x[1], self.zmin]);
 
         # exp(i*theta)= cos(theta)+i*sin(theta); 
-        theta_ln = self.gnorm*(self.gdir.x()*xln + self.gdir.y()*yln + self.gdir.z()*zln)*self.ift;
+        theta_ln = self.qvalue*(self.gdir.x()*xln + self.gdir.y()*yln + self.gdir.z()*zln)*self.ift;
         value[0] = temp_u0r*cos(theta_ln)-temp_u0i*sin(theta_ln); # for Real part
         value[1] = temp_u0r*sin(theta_ln)+temp_u0i*cos(theta_ln); # for Imag part
     def value_shape(self):
@@ -498,7 +498,7 @@ class MyDomain():
             self.zmin = mymesh.coordinates()[:, 2].min()
             self.zmax = mymesh.coordinates()[:, 2].max()        
         self.gdir = mri_para.gdir        
-        self.gnorm = mri_para.gnorm 
+        self.qvalue = mri_para.qvalue 
         self.D0 = 3e-3
         self.kappa_e_scalar = 3e-3/self.hmin
 
@@ -586,9 +586,9 @@ def convert_q2g(gvalue):
     g_ratio = 2.675e8;
     return gvalue*g_ratio*1e-12
   
-def convert_g2q(gnorm):
+def convert_g2q(qvalue):
     g_ratio = 2.675e8;
-    return gnorm/g_ratio*1e12
+    return qvalue/g_ratio*1e12
 
 def Create_phase_func(mymesh, cmpt_mesh , pmk):
     V_DG = FunctionSpace(mymesh, 'DG', 0)
@@ -656,21 +656,20 @@ class MRI_parameters():
         return (float(self.ifs_sym.subs(self.s, t)))
 
     def convert_b2g(self):
-        self.gnorm = 0;
-        self.gnorm = sqrt(self.bvalue)/sqrt(self.int4gb);
-        return self.gnorm
+        self.qvalue = sqrt(self.bvalue)/sqrt(self.int4gb);
+        return self.qvalue
     def convert_g2b(self):
-        self.bvalue = self.gnorm*self.gnorm*self.int4gb;
+        self.bvalue = self.qvalue*self.qvalue*self.int4gb;
         return self.bvalue
       
     def Apply(self):
         self.itime_profile_sym(); 
         self.integral_term_for_gb();
         if not(self.bvalue==None):
-            self.gnorm = self.convert_b2g();
-            self.gvalue = convert_g2q(self.gnorm);
+            self.qvalue = self.convert_b2g();
+            self.gvalue = convert_g2q(self.qvalue);
         elif not(self.gvalue==None):
-            self.gnorm = convert_q2g(self.gvalue);
+            self.qvalue = convert_q2g(self.gvalue);
             self.bvalue = self.convert_g2b();
         elif (self.bvalue==None and self.bvalue==None):
             print("bvalue or gvalue need to be specified.")
@@ -710,7 +709,7 @@ class MRI_simulation():
           
           while self.t < mri_para.T + self.k: # Time-stepping loop
               if stepcounter % self.nskip == 0:
-                  print('t: %6.2f '%self.t, 'T: %6.2f'%mri_para.T, 'dt: %.1f'%self.k,'gnorm: %e'%mri_para.gnorm,'Completed %3.2f%%'%(float(self.t)/float(mri_para.T+self.k)*100.0));
+                  print('t: %6.2f '%self.t, 'T: %6.2f'%mri_para.T, 'dt: %.1f'%self.k,'qvalue: %e'%mri_para.qvalue,'Completed %3.2f%%'%(float(self.t)/float(mri_para.T+self.k)*100.0));
 
               ft = mri_para.time_profile(self.t);
               ift = mri_para.itime_profile(self.t);
