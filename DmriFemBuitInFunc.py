@@ -582,11 +582,11 @@ def ComputeWeakBC(mydomain):
           wpperiodic = WeakPseudoPeriodic_1c(mydomain, degree=1)
       return wpperiodic
     
-def convert_q2g(gvalue):
+def convert_g2q(gvalue):
     g_ratio = 2.675e8;
     return gvalue*g_ratio*1e-12
   
-def convert_g2q(qvalue):
+def convert_q2g(qvalue):
     g_ratio = 2.675e8;
     return qvalue/g_ratio*1e12
 
@@ -667,9 +667,9 @@ class MRI_parameters():
         self.integral_term_for_gb();
         if not(self.bvalue==None):
             self.qvalue = self.convert_b2q();
-            self.gvalue = convert_g2q(self.qvalue);
+            self.gvalue = convert_q2g(self.qvalue);
         elif not(self.gvalue==None):
-            self.qvalue = convert_q2g(self.gvalue);
+            self.qvalue = convert_g2q(self.gvalue);
             self.bvalue = self.convert_q2b();
         elif (self.bvalue==None and self.bvalue==None):
             print("bvalue or gvalue need to be specified.")
