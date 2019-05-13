@@ -655,10 +655,10 @@ class MRI_parameters():
     def itime_profile(self, t): 
         return (float(self.ifs_sym.subs(self.s, t)))
 
-    def convert_b2g(self):
+    def convert_b2q(self):
         self.qvalue = sqrt(self.bvalue)/sqrt(self.int4gb);
         return self.qvalue
-    def convert_g2b(self):
+    def convert_q2b(self):
         self.bvalue = self.qvalue*self.qvalue*self.int4gb;
         return self.bvalue
       
@@ -666,11 +666,11 @@ class MRI_parameters():
         self.itime_profile_sym(); 
         self.integral_term_for_gb();
         if not(self.bvalue==None):
-            self.qvalue = self.convert_b2g();
+            self.qvalue = self.convert_b2q();
             self.gvalue = convert_g2q(self.qvalue);
         elif not(self.gvalue==None):
             self.qvalue = convert_q2g(self.gvalue);
-            self.bvalue = self.convert_g2b();
+            self.bvalue = self.convert_q2b();
         elif (self.bvalue==None and self.bvalue==None):
             print("bvalue or gvalue need to be specified.")
             sys.exit()      
