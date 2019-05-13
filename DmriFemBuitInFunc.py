@@ -582,9 +582,9 @@ def ComputeWeakBC(mydomain):
           wpperiodic = WeakPseudoPeriodic_1c(mydomain, degree=1)
       return wpperiodic
     
-def convert_q2g(qvalue):
+def convert_q2g(gvalue):
     g_ratio = 2.675e8;
-    return qvalue*g_ratio*1e-12
+    return gvalue*g_ratio*1e-12
   
 def convert_g2q(gnorm):
     g_ratio = 2.675e8;
@@ -619,7 +619,7 @@ class MRI_parameters():
     def __init__(self):
         # Initialize default parameters
         self.bvalue = None
-        self.qvalue = None        
+        self.gvalue = None        
         self.gdir = [1, 0, 0];
         self.nperiod = 0; # number of period for OGSE sequences
         self.T2 = 1e16    # T2 relaxation time
@@ -668,12 +668,12 @@ class MRI_parameters():
         self.integral_term_for_gb();
         if not(self.bvalue==None):
             self.gnorm = self.convert_b2g();
-            self.qvalue = convert_g2q(self.gnorm);
-        elif not(self.qvalue==None):
-            self.gnorm = convert_q2g(self.qvalue);
+            self.gvalue = convert_g2q(self.gnorm);
+        elif not(self.gvalue==None):
+            self.gnorm = convert_q2g(self.gvalue);
             self.bvalue = self.convert_g2b();
         elif (self.bvalue==None and self.bvalue==None):
-            print("bvalue or qvalue need to be specified.")
+            print("bvalue or gvalue need to be specified.")
             sys.exit()      
           
 class MRI_simulation():
@@ -746,7 +746,7 @@ def Post_processing(mydomain, mri_para, mri_simu, plt, ms=''):
         print('Signal on each compartment')
         print('Sum initial0: %.3e, Signal0: %.3e'%(initial0, signal0))
         print('Sum initial1: %.3e, Signal1: %.3e'%(initial1, signal1))
-        out_text = 'b: %.3f, q: %.3f, Signal: %.3e, Normalized signal: %.3e, kappa: %.3e, dt: %.3f, hmin: %.3f, whole_vol: %.3f, vol_of_interest: %.3f, Free signal: %.3e, elasped time %.3f (s)\n'%(mri_para.bvalue, mri_para.qvalue, signal, signal/voi, mydomain.kappa, mri_simu.k, mydomain.hmin, whole_vol, voi, exp(-mri_para.bvalue*mydomain.D0), mri_simu.elapsed_time)
+        out_text = 'b: %.3f, g: %.3f, Signal: %.3e, Normalized signal: %.3e, kappa: %.3e, dt: %.3f, hmin: %.3f, whole_vol: %.3f, vol_of_interest: %.3f, Free signal: %.3e, elasped time %.3f (s)\n'%(mri_para.bvalue, mri_para.gvalue, signal, signal/voi, mydomain.kappa, mri_simu.k, mydomain.hmin, whole_vol, voi, exp(-mri_para.bvalue*mydomain.D0), mri_simu.elapsed_time)
         print(out_text)
         V0 = FunctionSpace(mydomain.mesh0, mydomain.Ve);
         V1 = FunctionSpace(mydomain.mesh1, mydomain.Ve);
@@ -762,7 +762,7 @@ def Post_processing(mydomain, mri_para, mri_simu, plt, ms=''):
     else:
         ur, ui = split(mri_simu.u_0)
         signal = assemble(ur*dx);
-        out_text = 'b: %.3f, q: %.3f, Signal: %.3e, Normalized signal: %.3e, dt: %.3f, hmin: %.3e, whole_vol: %.3f, vol_of_interest: %.3f, Free signal: %.3e, elasped time %.3f (s)\n'%(mri_para.bvalue, mri_para.qvalue, signal, signal/voi, mri_simu.k, mydomain.hmin, whole_vol, voi, exp(-mri_para.bvalue*mydomain.D0), mri_simu.elapsed_time)
+        out_text = 'b: %.3f, g: %.3f, Signal: %.3e, Normalized signal: %.3e, dt: %.3f, hmin: %.3e, whole_vol: %.3f, vol_of_interest: %.3f, Free signal: %.3e, elasped time %.3f (s)\n'%(mri_para.bvalue, mri_para.gvalue, signal, signal/voi, mri_simu.k, mydomain.hmin, whole_vol, voi, exp(-mri_para.bvalue*mydomain.D0), mri_simu.elapsed_time)
         print(out_text)
         V = FunctionSpace(mydomain.mymesh,mydomain.Ve);
         ur_p = project(ur,V)
