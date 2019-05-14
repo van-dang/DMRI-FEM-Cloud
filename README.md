@@ -10,19 +10,19 @@ Copyright (C) 2019 Van-Dang Nguyen
 
 We designed some examples that illustrate how the diffusion MRI simulations can be performed on Google Colab. Users can open the files in Github and execute it directly with Google Colab.
 
-https://github.com/van-dang/MRI-Cloud/blob/master/ArbitraryTimeSequence.ipynb
+https://colab.research.google.com/github/van-dang/MRI-Cloud/blob/master/ArbitraryTimeSequence.ipynb
 
-https://github.com/van-dang/MRI-Cloud/blob/master/ExtracellularSpace.ipynb
+https://colab.research.google.com/github/van-dang/MRI-Cloud/blob/master/ExtracellularSpace.ipynb
 
-https://github.com/van-dang/MRI-Cloud/blob/master/RealNeurons.ipynb
+https://colab.research.google.com/github/van-dang/MRI-Cloud/blob/master/RealNeurons.ipynb
 
-https://github.com/van-dang/MRI-Cloud/blob/master/Manifolds.ipynb
+https://colab.research.google.com/github/van-dang/MRI-Cloud/blob/master/Manifolds.ipynb
 
-https://github.com/van-dang/MRI-Cloud/blob/master/DiscontinuousInitialCondition.ipynb
+https://colab.research.google.com/github/van-dang/MRI-Cloud/blob/master/DiscontinuousInitialCondition.ipynb
 
-https://github.com/van-dang/MRI-Cloud/blob/master/MultilayeredStructures.ipynb
+https://colab.research.google.com/github/van-dang/MRI-Cloud/blob/master/MultilayeredStructures.ipynb
 
-https://github.com/van-dang/MRI-Cloud/blob/master/T2_Relaxation.ipynb
+https://colab.research.google.com/github/van-dang/MRI-Cloud/blob/master/T2_Relaxation.ipynb
 
 However, if there is any problem with the Github visualization, users can follow two steps:
 
