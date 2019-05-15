@@ -18,7 +18,7 @@ From: ubuntu:bionic
     echo "deb mirror://mirrors.ubuntu.com/mirrors.txt bionic-proposed main restricted universe multiverse" >> /etc/apt/sources.list
     echo "deb mirror://mirrors.ubuntu.com/mirrors.txt bionic-backports main restricted universe multiverse" >>  /etc/apt/sources.list
     apt-get -y update
-    apt-get -y  --allow-unauthenticated install autoconf automake autotools-dev build-essential cmake dapl2-utils g++ gcc gettext gfortran git libboost-program-options-dev libcxgb3-1 libdapl-dev libdapl2 libglib2.0-dev libgts-dev libibverbs1 libipathverbs1 libmlx4-1 libmlx5-1 libmthca1 libnes1 libopenmpi-dev libparmetis-dev librdmacm1 libxml2-dev m4 openmpi-bin openmpi-common petsc-dev pkgconf python python-scipy python-sympy slepc-dev unzip vim wget 
+    apt-get -y  --allow-unauthenticated install autoconf automake autotools-dev build-essential cmake dapl2-utils g++ gcc gettext gfortran git gmsh libboost-program-options-dev libcxgb3-1 libdapl-dev libdapl2 libglib2.0-dev libgts-dev libibverbs1 libipathverbs1 libmlx4-1 libmlx5-1 libmthca1 libnes1 libopenmpi-dev libparmetis-dev librdmacm1 libxml2-dev m4 openmpi-bin openmpi-common petsc-dev pkgconf python python-scipy python-sympy slepc-dev unzip vim wget zip
     cd $PREFIX/source
     
     git clone https://bitbucket.org/fenics-project/fiat.git
