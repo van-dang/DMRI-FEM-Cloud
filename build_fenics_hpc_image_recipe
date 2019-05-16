@@ -25,8 +25,8 @@ From: ubuntu:bionic
     apt-get -y  --allow-unauthenticated install autoconf automake autotools-dev build-essential cmake dapl2-utils g++ gcc gettext gfortran git gmsh libboost-program-options-dev libcxgb3-1 libdapl-dev libdapl2 libfl-dev libglib2.0-dev libgts-dev libibverbs1 libipathverbs1 libmlx4-1 libmlx5-1 libmthca1 libnes1 libopenmpi-dev libparmetis-dev librdmacm1 libxml2-dev m4 openmpi-bin openmpi-common pkgconf python python-scipy python-sympy valgrind unzip vim wget zip
     cd $PREFIX/source
 
-    git clone -b $OPENMPIVERSION https://github.com/open-mpi/ompi.git
-    git clone -b maint https://bitbucket.org/petsc/petsc
+    git clone --depth=1 -b $OPENMPIVERSION https://github.com/open-mpi/ompi.git
+    git clone --depth=1 -b maint https://bitbucket.org/petsc/petsc
     
     git clone https://bitbucket.org/fenics-project/fiat.git
     git clone https://bitbucket.org/fenics-project/instant.git
