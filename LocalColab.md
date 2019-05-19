@@ -10,7 +10,9 @@
   ## Useful commands:
   
   #### Check the status of notebook-local
+  ```bash
   docker logs notebook-local
+  ```
   If everything is correct, you should see something like below and it is ready to connect
   [W 15:26:49.150 NotebookApp] All authentication is disabled.  Anyone who can connect to this server will be able to run code. 
   jupyter_http_over_ws extension initialized. Listening on /http_over_websocket
@@ -23,11 +25,11 @@
   [W 15:26:49.195 NotebookApp] No web browser found: could not locate runnable browser.
 
  #### List Docker containers
-```bash
+  ```bash
   docker ps
-```
+  ```
  #### Stop and remove an existing containers
   ```bash
   docker stop <CONTAINER ID>
   docker rm <CONTAINER ID>
-```
+  ```
