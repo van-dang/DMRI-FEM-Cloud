@@ -30,7 +30,7 @@
   [I 15:26:49.190 NotebookApp] Use Control-C to stop this server and shut down all kernels (twice to skip confirmation).
   [W 15:26:49.195 NotebookApp] No web browser found: could not locate runnable browser.
   ```
- It is ready to connect
+ It is ready to connect: Google Colab > CONNECT > Connect to local runtime...> Backend port 8888 > CONNECT.
  
  ##### List Docker containers
   ```bash
