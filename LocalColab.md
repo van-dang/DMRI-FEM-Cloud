@@ -18,7 +18,8 @@
   ```bash
   docker logs notebook-local
   ```
-  If everything is correct, you should see something like below and it is ready to connect
+  If everything is correct, you should see something like below
+  ```bash
   [W 15:26:49.150 NotebookApp] All authentication is disabled.  Anyone who can connect to this server will be able to run code. 
   jupyter_http_over_ws extension initialized. Listening on /http_over_websocket
   [I 15:26:49.188 NotebookApp] JupyterLab extension loaded from /usr/local/lib/python3.6/dist-packages/jupyterlab
@@ -28,7 +29,9 @@
   [I 15:26:49.190 NotebookApp] http://(6d58312f59e0 or 127.0.0.1):8888/
   [I 15:26:49.190 NotebookApp] Use Control-C to stop this server and shut down all kernels (twice to skip confirmation).
   [W 15:26:49.195 NotebookApp] No web browser found: could not locate runnable browser.
-
+  ```
+ It is ready to connect
+ 
  ##### List Docker containers
   ```bash
   docker ps
