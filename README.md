@@ -24,13 +24,7 @@ https://colab.research.google.com/github/van-dang/MRI-Cloud/blob/master/Multilay
 
 https://colab.research.google.com/github/van-dang/MRI-Cloud/blob/master/T2_Relaxation.ipynb
 
-However, if there is any problem with the Github visualization, users can follow two steps:
-
-1. Download the files into local computer: Users can clone the whole repository using 'git clone git@github.com:van-dang/MRI-Cloud.git'. However, it is possible to download the files individually in the raw mode for instance:
-'wget https://raw.githubusercontent.com/van-dang/MRI-Cloud/master/T2_Relaxation.ipynb'
-
-2. Open a new Colab notebook by clicking on https://colab.research.google.com and upload the downloaded notebook 'File/Upload notebook ...'
-
+Google Colab notebooks can be connected to either a hosted runtime provided by Google Cloud or a local runtime. The hosted runtime allows us to access free resources for up to 12 hours at a time. For longer excecutions, it is more convenient to connect to the local runtimes. The instructions are available at https://github.com/van-dang/MRI-Cloud/blob/master/LocalColab.md
 
 # Simulations on Google Cloud
 
