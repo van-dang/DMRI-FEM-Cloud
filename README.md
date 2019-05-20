@@ -26,7 +26,7 @@ https://colab.research.google.com/github/van-dang/MRI-Cloud/blob/master/T2_Relax
 
 These notebooks can be connected to either a hosted runtime provided by Google Cloud or a local runtime. The hosted runtime allows us to access free resources for up to 12 hours at a time. For longer excecutions, it is more convenient to connect to the local runtimes. The instructions are available at [LocalColab](https://github.com/van-dang/MRI-Cloud/blob/master/LocalColab.md)
 
-<a href="link/html-text-link.htm" target="_blank">Open page in new window</a>
+<a href="https://github.com/van-dang/MRI-Cloud/blob/master/LocalColab.md" target="_blank">Open page in new window</a>
 
 # Simulations on Google Cloud
 
