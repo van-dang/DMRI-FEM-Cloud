@@ -1,0 +1,89 @@
+Bootstrap: docker
+From: ubuntu:bionic
+
+%post
+    export PREFIX=/opt/fenics-hpc
+    export PATH=$PREFIX/install/bin:$PATH
+    export PYTHONPATH=$PREFIX/install/lib/python2.7/site-packages/:$PYTHONPATH
+    export PKG_CONFIG_PATH=$PREFIX/install/lib/pkgconfig/:$PKG_CONFIG_PATH
+    export LDFLAGS=-L$PREFIX/install/lib:$LDFLAGS
+
+    export OPENMPIVERSION=v4.0.0  # This has to match a tag in the git repo of openmpi
+    export N_BUILD_PROCS=12  # Adapt to your machine. Recommended is 1.5 times the
+                             # number of available cores
+
+    mkdir $PREFIX
+    mkdir $PREFIX/source
+    mkdir $PREFIX/install
+    
+    echo "deb mirror://mirrors.ubuntu.com/mirrors.txt bionic main restricted universe multiverse" > /etc/apt/sources.list
+    echo "deb mirror://mirrors.ubuntu.com/mirrors.txt bionic-security main restricted universe multiverse" >>  /etc/apt/sources.list
+    echo "deb mirror://mirrors.ubuntu.com/mirrors.txt bionic-updates main restricted universe multiverse" >> /etc/apt/sources.list
+    echo "deb mirror://mirrors.ubuntu.com/mirrors.txt bionic-proposed main restricted universe multiverse" >> /etc/apt/sources.list
+    echo "deb mirror://mirrors.ubuntu.com/mirrors.txt bionic-backports main restricted universe multiverse" >>  /etc/apt/sources.list
+    apt-get -y update
+    apt-get -y  --allow-unauthenticated install autoconf automake autotools-dev build-essential cmake dapl2-utils g++ gcc gettext gfortran git gmsh libboost-program-options-dev libcxgb3-1 libdapl-dev libdapl2 libfl-dev libglib2.0-dev libgts-dev libibverbs1 libipathverbs1 libmlx4-1 libmlx5-1 libmthca1 libnes1 libopenmpi-dev libparmetis-dev librdmacm1 libxml2-dev m4 openmpi-bin openmpi-common pkgconf python python-scipy python-sympy valgrind unzip vim wget zip
+    cd $PREFIX/source
+
+    git clone -b $OPENMPIVERSION https://github.com/open-mpi/ompi.git
+    git clone -b maint https://bitbucket.org/petsc/petsc
+    
+    git clone https://bitbucket.org/fenics-project/fiat.git
+    git clone https://bitbucket.org/fenics-project/instant.git
+    git clone --depth=1 https://bitbucket.org/fenics-hpc/ufl-hpc.git
+    git clone --depth=1 https://bitbucket.org/fenics-hpc/ffc-hpc.git
+    git clone https://bitbucket.org/fenics-hpc/ufc2-hpc.git
+    
+    git clone --depth=1 -b P2elements https://bitbucket.org/fenics-hpc/dolfin-hpc.git
+
+    cd $PREFIX/source/ompi
+    ./autogen.pl
+    ./configure --prefix=$PREFIX/install
+    make -j $N_BUILD_PROCS all
+    make install
+
+    cd $PREFIX/source/petsc
+    ./configure COPTFLAGS="-O3" CXXOPTFLAGS="-O3" FOPTFLAGS="-O3" LDFLAGS=$LDFLAGS --with-mpi --with-x=0 --with-clanguage=c --with-debugging=0 --with-cc=mpicc --with-fc=mpif90 --prefix=$PREFIX/install/ --with-cxx=mpic++ --with-metis --with-parmetis --download-fblaslapack
+    make PETSC_DIR=$PREFIX/source/petsc PETSC_ARCH=arch-linux2-c-opt all
+    make PETSC_DIR=$PREFIX/source/petsc PETSC_ARCH=arch-linux2-c-opt install
+    
+    cd $PREFIX/source/fiat
+    git checkout 50e6d19
+    python setup.py install --prefix=$PREFIX/install/
+
+    cd $PREFIX/source/instant
+    git checkout d6c7181
+    python setup.py install --prefix=$PREFIX/install/
+    
+    cd $PREFIX/source/ufl-hpc
+    python setup.py install --prefix=$PREFIX/install/
+    
+    cd $PREFIX/source/ffc-hpc
+    python setup.py install --prefix=$PREFIX/install/
+    
+    cd $PREFIX/source/ufc2-hpc
+    git checkout 9f134679f674863a5098a896301a900592f7b634
+    mkdir build
+    cd build
+    cmake -DCMAKE_INSTALL_PREFIX=$PREFIX/install/ ..
+    make install
+
+    export PATH=$PREFIX/install/bin:$PATH
+    export PYTHONPATH=$PREFIX/install/lib/python2.7/site-packages/:$PYTHONPATH
+    export PKG_CONFIG_PATH=$PREFIX/install/lib/pkgconfig/:$PKG_CONFIG_PATH
+    export LDFLAGS=-L$PREFIX/install/lib:$LDFLAGS
+    cd $PREFIX/source/dolfin-hpc
+    bash regen.sh
+    ./configure C=mpicc CXX=mpic++ CFLAGS=-O3 CXXFLAGS=-O3 --prefix=$PREFIX/install/ --with-pic --enable-optimize-p1 --enable-function-cache --disable-boost-tr1 --with-parmetis=/usr/ --with-parmetis-libdir=/usr/lib/ --with-petsc=$PREFIX/install/ --with-gts --enable-mpi --enable-mpi-io --disable-progress-bar --disable-xmltest --enable-ufl --enable-python
+    make -j $N_BUILD_PROCS
+    make install
+    cp -r site-packages/dolfin_utils $PREFIX/install/lib/python2.7/site-packages/
+
+    rm -rf $PREFIX/source
+
+%environment
+    export PREFIX=/opt/fenics-hpc
+    export PATH=$PREFIX/install/bin:$PATH
+    export PYTHONPATH=$PREFIX/install/lib/python2.7/site-packages/:$PYTHONPATH
+    export PKG_CONFIG_PATH=$PREFIX/install/lib/pkgconfig/:$PKG_CONFIG_PATH
+    export LDFLAGS=-L$PREFIX/install/lib:$LDFLAGS
