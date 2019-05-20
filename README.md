@@ -9,8 +9,8 @@ sudo singularity build fenics_stable.simg docker://fenicsproject/stable
 ```
 #### FEniCS-HPC
 ```bash
-wget https://raw.githubusercontent.com/van-dang/MRI-Cloud/singularity_images/build_fenics_hpc_image
-sudo singularity build fenics-hpc-dmri.simg build_image_source_dmri
+wget https://raw.githubusercontent.com/van-dang/MRI-Cloud/singularity_images/Singularity_DMRI_recipe
+sudo singularity build fenics-hpc-dmri.simg Singularity_DMRI_recipe
 ```
 
 # Download existing images
