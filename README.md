@@ -8,21 +8,21 @@ The scope of usage:
 
 Copyright (C) 2019 Van-Dang Nguyen
 
-We designed some examples that illustrate how the diffusion MRI simulations can be performed on Google Colab. Users can open the files in Github and execute it directly with Google Colab.
+We designed some benchmark problems that illustrate how the diffusion MRI simulations can be performed on Google Colab. Users can open the files in Github and execute it directly with Google Colab.
 
-https://colab.research.google.com/github/van-dang/MRI-Cloud/blob/master/ArbitraryTimeSequence.ipynb
+[Arbitrary time profile](https://colab.research.google.com/github/van-dang/MRI-Cloud/blob/master/ArbitraryTimeSequence.ipynb)
 
-https://colab.research.google.com/github/van-dang/MRI-Cloud/blob/master/ExtracellularSpace.ipynb
+[Extracellular Space](https://colab.research.google.com/github/van-dang/MRI-Cloud/blob/master/ExtracellularSpace.ipynb)
 
-https://colab.research.google.com/github/van-dang/MRI-Cloud/blob/master/RealNeurons.ipynb
+[Realistic neurons](https://colab.research.google.com/github/van-dang/MRI-Cloud/blob/master/RealNeurons.ipynb)
 
-https://colab.research.google.com/github/van-dang/MRI-Cloud/blob/master/Manifolds.ipynb
+[Manifolds](https://colab.research.google.com/github/van-dang/MRI-Cloud/blob/master/Manifolds.ipynb)
 
-https://colab.research.google.com/github/van-dang/MRI-Cloud/blob/master/DiscontinuousInitialCondition.ipynb
+[Discontinuous Initial Conditions](https://colab.research.google.com/github/van-dang/MRI-Cloud/blob/master/DiscontinuousInitialCondition.ipynb)
 
-https://colab.research.google.com/github/van-dang/MRI-Cloud/blob/master/MultilayeredStructures.ipynb
+[Multilayered Structures](https://colab.research.google.com/github/van-dang/MRI-Cloud/blob/master/MultilayeredStructures.ipynb)
 
-https://colab.research.google.com/github/van-dang/MRI-Cloud/blob/master/T2_Relaxation.ipynb
+[T2-relaxation](https://colab.research.google.com/github/van-dang/MRI-Cloud/blob/master/T2_Relaxation.ipynb)
 
 These notebooks can be connected to either a hosted runtime provided by Google Cloud or a local runtime. The hosted runtime allows us to access free resources for up to 12 hours at a time. For longer excecutions, it is more convenient to connect to the local runtimes. The instructions are available at [this link](https://github.com/van-dang/MRI-Cloud/blob/master/LocalColab.md).
 
