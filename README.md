@@ -125,6 +125,8 @@ wget https://github.com/van-dang/MRI-Cloud/archive/fenics-hpc-solvers.zip
 unzip fenics-hpc-solvers.zip
 cd MRI-Cloud-fenics-hpc-solvers/one-comp/
 ```
+
+### Execute the code with Singularity Image
 ##### For single-compartment domains
 
 ```bash
@@ -140,3 +142,8 @@ python dolfin-convert.py 04b_pyramidal7aACC.msh 04b_pyramidal7aACC.xml
 # Execute the demo
 singularity exec -B $PWD ../../fenics-hpc-dmri.simg mpirun -n 8 ./demo -m 04b_pyramidal7aACC.xml -b 1000 -d 10600 -D 43100 -k 200 -K 3e-3 -v 1 0 0  > my_output_file
 ```
+
+##### For two-compartment domains
+
+Will appear soon ...
+
