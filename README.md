@@ -125,23 +125,18 @@ wget https://github.com/van-dang/MRI-Cloud/archive/fenics-hpc-solvers.zip
 unzip fenics-hpc-solvers.zip
 cd MRI-Cloud-fenics-hpc-solvers/one-comp/
 ```
-### Compile
-```bash
-singularity exec -B $PWD ../../writable_fenics-hpc-dmri.simg make -j 8
-```
-### Download the existing meshes
-```bash
-https://github.com/van-dang/RealNeuronMeshes/raw/master/volume_meshes/pyramidals/04b_pyramidal7aACC.msh.zip
-unzip 04b_pyramidal7aACC.msh.zip
-```
+##### For single-compartment domains
 
-### Convert .gmsh to .xml
 ```bash
+# Compile
+cd MRI-Cloud-fenics-hpc-solvers/one-comp/
+singularity exec -B $PWD ../../writable_fenics-hpc-dmri.simg make -j 8
+# Download the mesh
+wget https://github.com/van-dang/RealNeuronMeshes/raw/master/volume_meshes/pyramidals/04b_pyramidal7aACC.msh.zip
+unzip 04b_pyramidal7aACC.msh.zip
+# Convert .msh to .xml
 wget https://people.sc.fsu.edu/~jburkardt/py_src/dolfin-convert/dolfin-convert.py
 python dolfin-convert.py 04b_pyramidal7aACC.msh 04b_pyramidal7aACC.xml
-```
-
-### Execute the demo
-```bash
+# Execute the demo
 singularity exec -B $PWD ../../fenics-hpc-dmri.simg mpirun -n 8 ./demo -m 04b_pyramidal7aACC.xml -b 1000 -d 10600 -D 43100 -k 200 -K 3e-3 -v 1 0 0  > my_output_file
 ```
