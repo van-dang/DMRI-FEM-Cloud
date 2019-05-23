@@ -96,9 +96,9 @@ double bvalue = 1000;
 double delta = 40000;
 double Delta = 40000;
 double dt = 100;
-double gnorm = sqrt(bvalue)/sqrt(delta*delta*(Delta-delta/3.0));
+double qvalue = sqrt(bvalue)/sqrt(delta*delta*(Delta-delta/3.0));
 double g_ratio = 2.675e8;
-double qvalue = gnorm/g_ratio*1e12;
+double gvalue = qvalue/g_ratio*1e12;
 int nskip = 5;
 std::string dir="results";
 int nrefine = 0;
@@ -141,7 +141,7 @@ int main(int argc, char *argv[])
 		break;
 	      case 'q':
 		is_input_q = 1;
-		qvalue = atof(argv[optind+1]);
+		gvalue = atof(argv[optind+1]);
 		break;
 	      case 'd':
 		delta = atof(argv[optind+1]);
@@ -186,13 +186,13 @@ int main(int argc, char *argv[])
 
   if (is_input_b)
     {
-      gnorm = sqrt(bvalue)/sqrt(delta*delta*(Delta-delta/3.0));
-      qvalue = gnorm/g_ratio*1e12;
+      qvalue = sqrt(bvalue)/sqrt(delta*delta*(Delta-delta/3.0));
+      gvalue = qvalue/g_ratio*1e12;
     }
   else if (is_input_q)
     {
-      gnorm = qvalue*g_ratio*1e-12;
-      bvalue = gnorm*gnorm*delta*delta*(Delta-delta/3.0);
+      qvalue = gvalue*g_ratio*1e-12;
+      bvalue = qvalue*qvalue*delta*delta*(Delta-delta/3.0);
     }
 
   // Read mesh
@@ -220,14 +220,18 @@ int main(int argc, char *argv[])
     dt = T/Nsteps;
   
   double theta = 0.5;
-  message("kcoeff: %e, Nsteps: %d, dt: %f, delta: %f, Delta: %f, gnorm: %f\n",kcoeff, Nsteps, dt, delta, Delta, gnorm);
+  message("kcoeff: %e, Nsteps: %d, dt: %f, delta: %f, Delta: %f, qvalue: %f\n",kcoeff, Nsteps, dt, delta, Delta, qvalue);
   message("Gradient direction: %f %f %f",gdir.x(), gdir.y(), gdir.z());
 
   // #####################################################
   Function ft_f; PETScVector ft_fx;
-  Function gnorm_f(mesh, gnorm), kcoeff_f(mesh, kcoeff), dt_f(mesh, dt), theta_f(mesh, theta);
+  Function qvalue_f(mesh, qvalue), kcoeff_f(mesh, kcoeff), dt_f(mesh, dt), theta_f(mesh, theta);
     
   GdotX GX(mesh);
+
+  dolfin_set("Krylov relative tolerance", 1e-4);
+  dolfin_set("Krylov absolute tolerance", 1e-10);
+  dolfin_set("Krylov maximum iterations", 100000);
 
   KrylovSolver sol(bicgstab, jacobi);
 
@@ -235,7 +239,7 @@ int main(int argc, char *argv[])
   Vector ux;
   double s0;
 
-  L = new Bloch_Torrey3DLinearForm(u, GX, ft_f, gnorm_f, kcoeff_f, theta_f, dt_f);
+  L = new Bloch_Torrey3DLinearForm(u, GX, ft_f, qvalue_f, kcoeff_f, theta_f, dt_f);
   
   // Initial conditions
   u.init(mesh, ux, *L, 0);
@@ -294,14 +298,14 @@ int main(int argc, char *argv[])
   while (t < T + dt)
     {
       if (step_counter%nskip==0)
-	message("t=%f, dt=%f, gnorm=%f, step_counter=%d, Completed %.1f%%\n",t, dt, gnorm, step_counter, t/T*100);
+	message("t=%f, dt=%f, qvalue=%f, step_counter=%d, Completed %.1f%%\n",t, dt,qvalue, step_counter, t/T*100);
       ft =  FT(t, delta, Delta);
       ft_fx = ft;
       
       PETScMatrix A, Jt;
       A.dup(MSI);
       Jt.dup(J);
-      Jt *= ft*gnorm;
+      Jt *= ft*qvalue;
       Jt.apply();
       
       A += Jt;
@@ -325,7 +329,7 @@ int main(int argc, char *argv[])
   Comp_Sig3DFunctional S(u);
   double s = assembler.assemble(S);
 
-  message("b: %f, gnorm: %f, q: %f, gdir: (%f, %f, %f), s: %f\n", bvalue, gnorm, qvalue, gdir.x(), gdir.y(), gdir.z(), s/s0);
+  message("b: %f, q: %f, g: %f, gdir: (%f, %f, %f), s: %f\n", bvalue, qvalue, gvalue, gdir.x(), gdir.y(), gdir.z(), s/s0);
 
   MPI_Barrier(MPI_COMM_WORLD); 
   end = MPI_Wtime();
