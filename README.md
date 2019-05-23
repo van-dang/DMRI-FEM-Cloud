@@ -78,14 +78,12 @@ wget https://raw.githubusercontent.com/van-dang/MRI-Cloud/master/PreprocessingMu
 wget https://raw.githubusercontent.com/van-dang/MRI-Cloud/master/GCloudDmriSolver.py
 ```
 
-### Execute the code with Singularity Image
-
-##### For multi-compartment domains
+### For multi-compartment domains
 ```bash
 singularity exec -B $PWD writable_fenics_stable.simg python3 PreprocessingMultiCompt.py -o multcompt_files.h5
 mpirun -n 8 singularity exec -B $PWD writable_fenics_stable.simg python3 GCloudDmriSolver.py -f multcompt_files.h5 -M 1 -b 1000 -p 1e-5 -d 10600 -D 43100 -k 200 -gdir 0 1 0
  ```
-##### For single-compartment domains
+### For single-compartment domains
 ```bash
 singularity exec -B $PWD writable_fenics_stable.simg python3 PreprocessingOneCompt.py -o onecompt_files.h5
 mpirun -n 8 singularity exec -B $PWD writable_fenics_stable.simg python3 GCloudDmriSolver.py -f onecompt_files.h5 -M 0 -b 1000 -d 10600 -D 43100 -k 200 -K 3e-3 -gdir 1 0 0 
