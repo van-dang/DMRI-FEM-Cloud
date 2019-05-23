@@ -145,6 +145,7 @@ singularity exec -B $PWD ../../fenics-hpc-dmri.simg mpirun -n 8 ./demo -m 04b_py
 
 ##### For two-compartment domains
 ```bash
+# Compile
 cd MRI-Cloud-fenics-hpc-solvers/two-comp/ufc
 singularity exec -B $PWD ../../../fenics-hpc-dmri.simg make -j 8
 cd ../
@@ -152,10 +153,20 @@ cd ../
 singularity exec -B $PWD ../../fenics-hpc-dmri.simg make clean
 singularity exec -B $PWD ../../fenics-hpc-dmri.simg make -j 8
 
+# Create a working directory
+mkdir test_neuron_N_18_7_3_5L
 cd test_neuron_N_18_7_3_5L
 
+# Copy the executable demo to the working directory
 cp ../demo .
 
-singularity exec -B $PWD ../../../fenics-hpc-dmri.simg  ./demo -m volume_box_N_18_7_3_5L_fine.xml -c volume_N_18_7_3_5L_fine.xml -b 1000 -p 1e-5 -d 10600 -D 43100 -k 200 -v 1 0 0 
+# Download the existing meshes
+wget --quiet https://github.com/van-dang/MRI-Cloud/raw/mesh/volume_box_N_18_7_3_5L_fine.xml.zip
+wget --quiet https://github.com/van-dang/MRI-Cloud/raw/mesh/volume_N_18_7_3_5L_fine.xml.zip
+unzip -q volume_box_N_18_7_3_5L_fine.xml.zip
+unzip -q volume_N_18_7_3_5L_fine.xml.zip
+
+# Execute the demo
+mpirun -8 singularity exec -B $PWD ../../../fenics-hpc-dmri.simg  ./demo -m volume_box_N_18_7_3_5L_fine.xml -c volume_N_18_7_3_5L_fine.xml -b 1000 -p 1e-5 -d 10600 -D 43100 -k 200 -v 1 0 0 
 ```
 
