@@ -123,32 +123,46 @@ Hello world from processor dmri, rank 2 out of 3 processors
 ```bash
 wget https://github.com/van-dang/MRI-Cloud/archive/fenics-hpc-solvers.zip
 unzip fenics-hpc-solvers.zip
-cd MRI-Cloud-fenics-hpc-solvers/one-comp/
 ```
 
 ### For single-compartment domains
 
 ```bash
-# Compile
-cd MRI-Cloud-fenics-hpc-solvers/one-comp/
-singularity exec -B $PWD ../../writable_fenics-hpc-dmri.simg make -j 8
+# Compile the form files
+cd MRI-Cloud-fenics-hpc-solvers/one-comp/ufc
+singularity exec -B $PWD ../../../fenics-hpc-dmri.simg make -j 8
+cd ../
+
+# Compile main.cpp
+singularity exec -B $PWD ../../fenics-hpc-dmri.simg make clean
+singularity exec -B $PWD ../../fenics-hpc-dmri.simg make -j 8
+
+# Create a working directory
+mkdir test_04b_pyramidal7aACC
+cd test_04b_pyramidal7aACC
+
+# Copy the executable demo to the working directory
+cp ../demo .
+
 # Download the mesh
 wget https://github.com/van-dang/RealNeuronMeshes/raw/master/volume_meshes/pyramidals/04b_pyramidal7aACC.msh.zip
 unzip 04b_pyramidal7aACC.msh.zip
 # Convert .msh to .xml
 wget https://people.sc.fsu.edu/~jburkardt/py_src/dolfin-convert/dolfin-convert.py
 python dolfin-convert.py 04b_pyramidal7aACC.msh 04b_pyramidal7aACC.xml
+
 # Execute the demo
-singularity exec -B $PWD ../../fenics-hpc-dmri.simg mpirun -n 8 ./demo -m 04b_pyramidal7aACC.xml -b 1000 -d 10600 -D 43100 -k 200 -K 3e-3 -v 1 0 0  > my_output_file
+singularity exec -B $PWD ../../../fenics-hpc-dmri.simg mpirun -n 8 ./demo -m 04b_pyramidal7aACC.xml -b 1000 -d 10600 -D 43100 -k 200 -K 3e-3 -v 1 0 0  > my_output_file
 ```
 
 ### For two-compartment domains
 ```bash
-# Compile
+# Compile the form files
 cd MRI-Cloud-fenics-hpc-solvers/two-comp/ufc
 singularity exec -B $PWD ../../../fenics-hpc-dmri.simg make -j 8
 cd ../
 
+# Compile main.cpp
 singularity exec -B $PWD ../../fenics-hpc-dmri.simg make clean
 singularity exec -B $PWD ../../fenics-hpc-dmri.simg make -j 8
 
