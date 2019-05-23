@@ -110,7 +110,7 @@ sudo singularity exec --writable writable_fenics-hpc-dmri.simg apt-get install z
 ```bash
 wget https://raw.githubusercontent.com/wesleykendall/mpitutorial/gh-pages/tutorials/mpi-hello-world/code/mpi_hello_world.c
 singularity exec -B $PWD writable_fenics-hpc-dmri.simg mpicc mpi_hello_world.c -o mpi_hello_world
-singularity exec -B $PWD writable_fenics-hpc-dmri.simg mpirun -n 3  mpi_hello_world
+mpirun -n 3 singularity exec -B $PWD writable_fenics-hpc-dmri.simg  mpi_hello_world
 ```
 The results would be
 ```bash
@@ -144,6 +144,18 @@ singularity exec -B $PWD ../../fenics-hpc-dmri.simg mpirun -n 8 ./demo -m 04b_py
 ```
 
 ##### For two-compartment domains
+```bash
+cd MRI-Cloud-fenics-hpc-solvers/two-comp/ufc
+singularity exec -B $PWD ../../../fenics-hpc-dmri.simg make -j 8
+cd ../
 
-Will appear soon ...
+singularity exec -B $PWD ../../fenics-hpc-dmri.simg make clean
+singularity exec -B $PWD ../../fenics-hpc-dmri.simg make -j 8
+
+cd test_neuron_N_18_7_3_5L
+
+cp ../demo .
+
+singularity exec -B $PWD ../../../fenics-hpc-dmri.simg  ./demo -m volume_box_N_18_7_3_5L_fine.xml -c volume_N_18_7_3_5L_fine.xml -b 1000 -p 1e-5 -d 10600 -D 43100 -k 200 -v 1 0 0 
+```
 
