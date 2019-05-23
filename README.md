@@ -28,7 +28,7 @@ We designed some benchmark problems that illustrate how the diffusion MRI simula
 
 These notebooks can be connected to either a hosted runtime provided by Google Cloud or a local runtime. The hosted runtime allows us to access free resources for up to 12 hours at a time. For longer excecutions, it is more convenient to connect to the local runtimes. The instructions are available at [this link](https://github.com/van-dang/MRI-Cloud/blob/master/LocalColab.md).
 
-# Simulations on Google Cloud
+# Simulations with Singularity images on Google Cloud
 
 ## Create a VM instance
 
@@ -42,7 +42,7 @@ Nivigation menu / Compute Engine / VM instances / Create Instances / SSH connect
 sudo apt-get install singularity-container unzip
 ```
 
-## Working with FEniCS Singularity Image
+## With FEniCS
 ### Create a FEniCS Image in writable mode
 
 ```bash
@@ -90,7 +90,7 @@ mpirun -n 8 singularity exec -B $PWD writable_fenics_stable.simg python3 GCloudD
 singularity exec -B $PWD writable_fenics_stable.simg python3 PreprocessingOneCompt.py -o onecompt_files.h5
 mpirun -n 8 singularity exec -B $PWD writable_fenics_stable.simg python3 GCloudDmriSolver.py -f onecompt_files.h5 -M 0 -b 1000 -d 10600 -D 43100 -k 200 -K 3e-3 -gdir 1 0 0 
 ```
-## Working with FEniCS-HPC Singularity Image
+## With FEniCS-HPC
 ### Download existing images
 ```bash
 wget https://github.com/van-dang/MRI-Cloud/raw/singularity_images/fenics-hpc-dmri.simg
