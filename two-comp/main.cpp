@@ -206,9 +206,9 @@ double bvalue = 4000;
 double delta = 40000;
 double Delta = 40000;
 double dt = 100;
-double gnorm = sqrt(bvalue)/sqrt(delta*delta*(Delta-delta/3.0));
+double qvalue = sqrt(bvalue)/sqrt(delta*delta*(Delta-delta/3.0));
 double g_ratio = 2.675e8;
-double qvalue = gnorm/g_ratio*1e12;
+double gvalue = qvalue/g_ratio*1e12;
 double kappa = 5e-5;
 double kcoeff = 3e-3;
 
@@ -349,7 +349,7 @@ int main(int argc, char *argv[])
 	      break;
 	    case 'q':
 	      is_input_q = 1;
-	      qvalue = atof(argv[optind+1]);
+	      gvalue = atof(argv[optind+1]);
 	      break;
 	    case 'd':
 	      delta = atof(argv[optind+1]);
@@ -404,13 +404,13 @@ int main(int argc, char *argv[])
 
   if (is_input_b)
     {
-      gnorm = sqrt(bvalue)/sqrt(delta*delta*(Delta-delta/3.0));
-      qvalue = gnorm/g_ratio*1e12;
+      qvalue = sqrt(bvalue)/sqrt(delta*delta*(Delta-delta/3.0));
+      gvalue = qvalue/g_ratio*1e12;
     }
   else if (is_input_q)
     {
-      gnorm = qvalue*g_ratio*1e-12;
-      bvalue = gnorm*gnorm*delta*delta*(Delta-delta/3.0);
+      qvalue = gvalue*g_ratio*1e-12;
+      bvalue = qvalue*qvalue*delta*delta*(Delta-delta/3.0);
     }
 
   if (mpi_rank==0)
@@ -483,16 +483,23 @@ int main(int argc, char *argv[])
     dt = T/Nsteps;
   double theta = 0.5;
 
-  message("kcoeff: %e, perm: %e, Nsteps: %d, dt: %f, delta: %f, Delta: %f, gnorm: %e\n",kcoeff,kappa, Nsteps, dt, delta, Delta, gnorm);
+  message("kcoeff: %e, perm: %e, Nsteps: %d, dt: %f, delta: %f, Delta: %f, q: %e\n",kcoeff,kappa, Nsteps, dt, delta, Delta, qvalue);
   message("Gradient direction: %f %f %f",gdir.x(), gdir.y(), gdir.z());
 
   Function ft_f; PETScVector ft_fx;
-  Function gnorm_f(*mesh, gnorm), kcoeff_f(*mesh, kcoeff), dt_f(*mesh, dt), theta_f(*mesh, theta), kappa_f(*mesh, kappa);
+  Function qvalue_f(*mesh, qvalue), kcoeff_f(*mesh, kcoeff), dt_f(*mesh, dt), theta_f(*mesh, theta), kappa_f(*mesh, kappa);
     
   GdotX GX(*mesh);
 
+
+  dolfin_set("Krylov relative tolerance", 1e-4);
+  dolfin_set("Krylov absolute tolerance", 1e-10);
+  dolfin_set("Krylov maximum iterations", 100000);
+
+
   KrylovSolver sol(bicgstab, jacobi);
  
+
   Vector ux;
   double s0;
 
@@ -504,7 +511,7 @@ int main(int argc, char *argv[])
 
   MeshSize hf(*mesh);
 
-  L = new Bloch_Torrey3DLinearForm(u, Phi, GX, ft_f, gnorm_f, kcoeff_f, theta_f, dt_f, kappa_f);
+  L = new Bloch_Torrey3DLinearForm(u, Phi, GX, ft_f, qvalue_f, kcoeff_f, theta_f, dt_f, kappa_f);
 
   // Initial conditions
   up.init(*mesh, upx, *L, 0);
@@ -558,7 +565,7 @@ int main(int argc, char *argv[])
   int step_counter = 0;
   while (t < T + dt)
     {
-      message("t=%f, dt=%f, gnorm=%e, step_counter=%d, Completed %.1f%%\n",t, dt, gnorm, step_counter, t/T*100);
+      message("t=%f, dt=%f, qvalue=%e, step_counter=%d, Completed %.1f%%\n",t, dt, qvalue, step_counter, t/T*100);
       ft =  FT(t, delta, Delta);
       ift =  IFT(t, delta, Delta);
 
@@ -567,7 +574,7 @@ int main(int argc, char *argv[])
       PETScMatrix A, Jt;
       A.dup(MSI);
       Jt.dup(J);
-      Jt *= ft*gnorm;
+      Jt *= ft*qvalue;
       Jt.apply();
       
       A += Jt;
@@ -596,7 +603,7 @@ int main(int argc, char *argv[])
   Comp_Sig3DFunctional S(Phi,u);
   double s = assembler.assemble(S);
   
-  message("b: %f, gnorm: %e, q: %e, perm: %e, gdir: (%f, %f, %f), s: %f\n", bvalue, gnorm, qvalue, kappa, gdir.x(), gdir.y(), gdir.z(), s/s0);
+  message("b: %f, q: %e, g: %e, perm: %e, gdir: (%f, %f, %f), s: %e\n", bvalue, qvalue, gvalue, kappa, gdir.x(), gdir.y(), gdir.z(), s/s0);
   
   MPI_Barrier(dolfin::MPI::DOLFIN_COMM); 
   end = MPI_Wtime();
