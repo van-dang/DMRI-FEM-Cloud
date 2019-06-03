@@ -6,7 +6,7 @@ sudo apt-get singulariy-container
 #### FEniCS
 ```bash
 sudo singularity build -w writable_fenics_stable.simg docker://fenicsproject/stable
-sudo singularity exec --writable writable_fenics_stable.simg sudo apt-get install zip unzip gmsh
+sudo singularity exec -w writable_fenics_stable.simg sudo apt-get install zip unzip gmsh
 ```
 #### FEniCS-HPC
 ```bash
