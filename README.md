@@ -2,7 +2,7 @@
 ```bash
 sudo apt-get singulariy-container
 ```
-# Re-build images if neccessary
+# Re-build images with Ubuntu if needed.
 #### FEniCS
 ```bash
 wget https://raw.githubusercontent.com/van-dang/MRI-Cloud/singularity_images/Singularity_recipe_FEniCS_DMRI
