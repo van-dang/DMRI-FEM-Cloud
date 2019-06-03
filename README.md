@@ -46,23 +46,18 @@ sudo apt-get install singularity-container unzip
 ### Create a FEniCS Image in writable mode
 
 ```bash
-sudo singularity build --writable writable_fenics_stable.simg docker://fenicsproject/stable
+wget https://raw.githubusercontent.com/van-dang/MRI-Cloud/singularity_images/Singularity_recipe_FEniCS_DMRI
+sudo singularity build -w writable_fenics_dmri.simg Singularity_recipe_FEniCS_DMRI
 ```
 ### Or download the exisiting FEniCS Image and change it to writable mode
 ```bash
-wget https://github.com/van-dang/MRI-Cloud/raw/singularity_images/fenics_stable.simg
-sudo singularity build --writable writable_fenics_stable.simg fenics_stable.simg
+wget https://github.com/van-dang/MRI-Cloud/raw/singularity_images/writable_fenics_dmri.simg
 ```
 
-### Install some dependencies
-```bash
-sudo singularity exec --writable writable_fenics_stable.simg sudo apt-get update
-sudo singularity exec --writable writable_fenics_stable.simg sudo apt-get install zip unzip gmsh
-```
 ### Test if mpi4py works correctly
 ```bash
 wget https://raw.githubusercontent.com/van-dang/MRI-Cloud/master/test_mpi4py.py
-mpirun -n 3 singularity exec -B $PWD writable_fenics_stable.simg python3 test_mpi4py.py
+mpirun -n 3 singularity exec -B $PWD writable_fenics_dmri.simg python3 test_mpi4py.py
 ```
 The results would be
 ```bash
@@ -80,35 +75,31 @@ wget https://raw.githubusercontent.com/van-dang/MRI-Cloud/master/GCloudDmriSolve
 
 ### For multi-compartment domains
 ```bash
-singularity exec -B $PWD writable_fenics_stable.simg python3 PreprocessingMultiCompt.py -o multcompt_files.h5
-mpirun -n 8 singularity exec -B $PWD writable_fenics_stable.simg python3 GCloudDmriSolver.py -f multcompt_files.h5 -M 1 -b 1000 -p 1e-5 -d 10600 -D 43100 -k 200 -gdir 0 1 0
+singularity exec -B $PWD writable_fenics_dmri.simg python3 PreprocessingMultiCompt.py -o multcompt_files.h5
+mpirun -n 8 singularity exec -B $PWD writable_fenics_dmri.simg python3 GCloudDmriSolver.py -f multcompt_files.h5 -M 1 -b 1000 -p 1e-5 -d 10600 -D 43100 -k 200 -gdir 0 1 0
  ```
 ### For single-compartment domains
 ```bash
-singularity exec -B $PWD writable_fenics_stable.simg python3 PreprocessingOneCompt.py -o onecompt_files.h5
-mpirun -n 8 singularity exec -B $PWD writable_fenics_stable.simg python3 GCloudDmriSolver.py -f onecompt_files.h5 -M 0 -b 1000 -d 10600 -D 43100 -k 200 -K 3e-3 -gdir 1 0 0 
+singularity exec -B $PWD writable_fenics_dmri.simg python3 PreprocessingOneCompt.py -o onecompt_files.h5
+mpirun -n 8 singularity exec -B $PWD writable_fenics_dmri.simg python3 GCloudDmriSolver.py -f onecompt_files.h5 -M 0 -b 1000 -d 10600 -D 43100 -k 200 -K 3e-3 -gdir 1 0 0 
 ```
 ## With FEniCS-HPC
-### Download existing images
-```bash
-wget https://github.com/van-dang/MRI-Cloud/raw/singularity_images/fenics-hpc-dmri.simg
-```
+### Create a FEniCS Image in writable mode
 
-### Change to writable mode
 ```bash
-sudo singularity build --writable writable_fenics-hpc-dmri.simg fenics-hpc-dmri.simg
+wget https://raw.githubusercontent.com/van-dang/MRI-Cloud/singularity_images/Singularity_recipe_FEniCS_HPC_DMRI
+sudo singularity build -w writable_fenics_hpc_dmri.simg Singularity_recipe_FEniCS_HPC_DMRI
 ```
-
-### Install packages to the existing image
+### Or download the exisiting FEniCS Image and change it to writable mode
 ```bash
-sudo singularity exec --writable writable_fenics-hpc-dmri.simg apt-get install zip unzip gmsh
+wget https://github.com/van-dang/MRI-Cloud/raw/singularity_images/writable_fenics_hpc_dmri.simg
 ```
 
 ### Test if mpi works correctly
 ```bash
 wget https://raw.githubusercontent.com/wesleykendall/mpitutorial/gh-pages/tutorials/mpi-hello-world/code/mpi_hello_world.c
-singularity exec -B $PWD writable_fenics-hpc-dmri.simg mpicc mpi_hello_world.c -o mpi_hello_world
-mpirun -n 3 singularity exec -B $PWD writable_fenics-hpc-dmri.simg  mpi_hello_world
+singularity exec -B $PWD writable_fenics_hpc_dmri.simg mpicc mpi_hello_world.c -o mpi_hello_world
+mpirun -n 3 singularity exec -B $PWD writable_fenics_hpc_dmri.simg  mpi_hello_world
 ```
 The results would be
 ```bash
@@ -128,12 +119,12 @@ unzip fenics-hpc-solvers.zip
 ```bash
 # Compile the form files
 cd MRI-Cloud-fenics-hpc-solvers/one-comp/ufc
-singularity exec -B $PWD ../../../fenics-hpc-dmri.simg make -j 8
+singularity exec -B $PWD ../../../writable_fenics_hpc_dmri.simg make -j 8
 cd ../
 
 # Compile main.cpp
-singularity exec -B $PWD ../../fenics-hpc-dmri.simg make clean
-singularity exec -B $PWD ../../fenics-hpc-dmri.simg make -j 8
+singularity exec -B $PWD ../../writable_fenics_hpc_dmri.simg make clean
+singularity exec -B $PWD ../../writable_fenics_hpc_dmri.simg make -j 8
 
 # Create a working directory
 mkdir test_04b_pyramidal7aACC
@@ -150,19 +141,19 @@ wget https://people.sc.fsu.edu/~jburkardt/py_src/dolfin-convert/dolfin-convert.p
 python dolfin-convert.py 04b_pyramidal7aACC.msh 04b_pyramidal7aACC.xml
 
 # Execute the demo
-mpirun -n 8 singularity exec -B $PWD ../../../fenics-hpc-dmri.simg ./demo -m 04b_pyramidal7aACC.xml -b 1000 -d 10600 -D 43100 -k 200 -K 3e-3 -v 1 0 0  > my_output_file
+mpirun -n 8 singularity exec -B $PWD ../../../writable_fenics_hpc_dmri.simg ./demo -m 04b_pyramidal7aACC.xml -b 1000 -d 10600 -D 43100 -k 200 -K 3e-3 -v 1 0 0  > my_output_file
 ```
 
 ### For two-compartment domains
 ```bash
 # Compile the form files
 cd MRI-Cloud-fenics-hpc-solvers/two-comp/ufc
-singularity exec -B $PWD ../../../fenics-hpc-dmri.simg make -j 8
+singularity exec -B $PWD ../../../writable_fenics_hpc_dmri.simg make -j 8
 cd ../
 
 # Compile main.cpp
-singularity exec -B $PWD ../../fenics-hpc-dmri.simg make clean
-singularity exec -B $PWD ../../fenics-hpc-dmri.simg make -j 8
+singularity exec -B $PWD ../../writable_fenics_hpc_dmri.simg make clean
+singularity exec -B $PWD ../../writable_fenics_hpc_dmri.simg make -j 8
 
 # Create a working directory
 mkdir test_neuron_N_18_7_3_5L
@@ -178,6 +169,6 @@ unzip -q volume_box_N_18_7_3_5L_fine.xml.zip
 unzip -q volume_N_18_7_3_5L_fine.xml.zip
 
 # Execute the demo
-mpirun -8 singularity exec -B $PWD ../../../fenics-hpc-dmri.simg  ./demo -m volume_box_N_18_7_3_5L_fine.xml -c volume_N_18_7_3_5L_fine.xml -b 1000 -p 1e-5 -d 10600 -D 43100 -k 200 -v 1 0 0 
+mpirun -8 singularity exec -B $PWD ../../../writable_fenics_hpc_dmri.simg  ./demo -m volume_box_N_18_7_3_5L_fine.xml -c volume_N_18_7_3_5L_fine.xml -b 1000 -p 1e-5 -d 10600 -D 43100 -k 200 -v 1 0 0 
 ```
 
