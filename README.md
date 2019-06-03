@@ -5,13 +5,13 @@ sudo apt-get singulariy-container
 # Re-build images if neccessary
 #### FEniCS
 ```bash
-sudo singularity build -w writable_fenics_stable.simg docker://fenicsproject/stable
-sudo singularity exec -w writable_fenics_stable.simg sudo apt-get install -y zip unzip gmsh
+wget https://raw.githubusercontent.com/van-dang/MRI-Cloud/singularity_images/Singularity_recipe_FEniCS_DMRI
+sudo singularity build -w writable_fenics_stable.simg Singularity_recipe_FEniCS_DMRI
 ```
 #### FEniCS-HPC
 ```bash
-wget https://raw.githubusercontent.com/van-dang/MRI-Cloud/singularity_images/Singularity_DMRI_recipe
-sudo singularity build fenics-hpc-dmri.simg Singularity_DMRI_recipe
+https://raw.githubusercontent.com/van-dang/MRI-Cloud/singularity_images/Singularity_recipe_FEniCS_HPC_DMRI
+sudo singularity build -w writable_fenics-hpc-dmri.simg Singularity_recipe_FEniCS_HPC_DMRI
 ```
 
 # Download existing images
