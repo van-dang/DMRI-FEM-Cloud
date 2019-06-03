@@ -55,62 +55,80 @@ is_kcoeff_from_file = 1; is_T2_from_file = 1; is_IC_from_file = 0; IsDomainPerio
 PeriodicDir = [0, 0, 0]; phase = None; mesh0 = None; mesh1 = None; ic = None
 ## end default parameters
 
+comm = MPI.comm_world
+rank = comm.Get_rank()
+
 try:
     ## Input parameters from command lines
         for i in range(0, len(sys.argv)):
                 arg = sys.argv[i];
                 if arg=='-f':
                         ffile = sys.argv[i+1];
-                        print('input file:', ffile)
+                        if rank==0:
+                            print('input file:', ffile)
                 if arg=='-M':
                         IsDomainMultiple = int(sys.argv[i+1]);
-                        print('IsDomainMultiple:', IsDomainMultiple)
+                        if rank==0:
+                            print('IsDomainMultiple:', IsDomainMultiple)
                 if arg=='-IsPeriodic' or arg=='-isperiodic':
                         IsDomainPeriodic = int(sys.argv[i+1]);
-                        print('IsDomainPeriodic:', IsDomainPeriodic)
+                        if rank==0:
+                            print('IsDomainPeriodic:', IsDomainPeriodic)
                 if arg=='-N':
                         Nsteps = int(sys.argv[i+1]);
-                        print('Nsteps:', Nsteps)
+                        if rank==0:
+                            print('Nsteps:', Nsteps)
                 if arg=='-b':
                         is_input_b = 1;
                         bvalue = float(sys.argv[i+1]);
-                        print('bvalue:', bvalue)
+                        if rank==0:
+                            print('bvalue:', bvalue)
                 if arg=='-q':
                         is_input_q = 1;
                         qvalue = float(sys.argv[i+1]);
-                        print('qvalue:', bvalue)
+                        if rank==0:
+                            print('qvalue:', bvalue)
                 if arg=='-p':
                         kappa = float(sys.argv[i+1]);
-                        print('permeability:', kappa)
+                        if rank==0:
+                            print('permeability:', kappa)
                 if arg=='-D':                       
                         Delta = float(sys.argv[i+1]);
-                        print('Delta:', Delta)
+                        if rank==0:
+                            print('Delta:', Delta)
                 if arg=='-d':
                         delta = float(sys.argv[i+1]);
-                        print('delta:', delta)
+                        if rank==0:
+                            print('delta:', delta)
                 if arg=='-K':
                         is_kcoeff_from_file = 0
-                        print("Reading diffusion coefficient from command line")
+                        if rank==0:
+                            print("Reading diffusion coefficient from command line")
                         kcoeff = float(sys.argv[i+1]);
-                        print('diffusion coefficient:', kcoeff)
+                        if rank==0:
+                            print('diffusion coefficient:', kcoeff)
                 if arg=='-k':
                         is_input_dt = 1;
                         k = float(sys.argv[i+1]);
-                        print('time step size:', k)
+                        if rank==0:
+                            print('time step size:', k)
                 if arg=='-T2':
                         is_T2_from_file = 0;
                         T2 = float(sys.argv[i+1]);
-                        print('T2: ', T2)
+                        if rank==0:
+                            print('T2: ', T2)
                 if arg=='-gdir':
                         g0 = float(sys.argv[i+1]);
                         g1 = float(sys.argv[i+2]);
                         g2 = float(sys.argv[i+3]);
-                        print('(g0, g1, g2):',g0, g1, g2)
+                        if rank==0:
+                            print('(g0, g1, g2):',g0, g1, g2)
                 if arg=='-pdir':
                         PeriodicDir[0] = int(sys.argv[i+1]);
                         PeriodicDir[1] = int(sys.argv[i+2]);
                         PeriodicDir[2] = int(sys.argv[i+3]);
-                        print('PeriodicDir=[', PeriodicDir[0], PeriodicDir[1], PeriodicDir[2],']')                        
+                        if rank==0:
+                            print('PeriodicDir=[', PeriodicDir[0], PeriodicDir[1], PeriodicDir[2],']')                        
 except:
         print('Something goes wrong with the inputs!')
 
@@ -121,7 +139,8 @@ isupdate = False
 if (exists==False or isupdate==True):
     if isupdate==True:
         os.system("rm DmriFemBuitInFunc.py")
-    print("Load pre-defined functions from GitHub")
+    if rank==0:    
+        print("Load pre-defined functions from GitHub")
     os.system("wget --quiet https://raw.githubusercontent.com/van-dang/MRI-Cloud/master/DmriFemBuitInFunc.py")
 
 from DmriFemBuitInFunc import *
@@ -136,7 +155,8 @@ V_DG = FunctionSpace(mymesh, 'DG', 0)
 dofmap_DG = V_DG.dofmap()
 
 if is_kcoeff_from_file == 1:
-        print("Reading diffusion tensor from file: ", ffile)
+        if rank==0:
+            print("Reading diffusion tensor from file: ", ffile)
         d00 = Function(V_DG); d01 = Function(V_DG); d02 = Function(V_DG)
         d10 = Function(V_DG); d11 = Function(V_DG); d12 = Function(V_DG)
         d20 = Function(V_DG); d21 = Function(V_DG); d22 = Function(V_DG)
@@ -145,12 +165,14 @@ if is_kcoeff_from_file == 1:
         myf.read(d20, 'd20'); myf.read(d21, 'd21'); myf.read(d22, 'd22')
 
 if is_T2_from_file == 1:
-        print("Reading T2 from file: ", ffile)
+        if rank==0:
+            print("Reading T2 from file: ", ffile)
         T2 = Function(V_DG);
         myf.read(T2, 'T2');
                 
 if IsDomainMultiple==1:
-        print("Reading phase function, mesh0, mesh1 from file: ", ffile)        
+        if rank==0:
+            print("Reading phase function, mesh0, mesh1 from file: ", ffile)        
         phase = Function(V_DG);
         myf.read(phase, 'phase');       
         mesh0 = Mesh();  mesh1 = Mesh();
@@ -188,10 +210,12 @@ mydomain.kappa = kappa                         # Permeability
 mydomain.Apply()   # Call Apply before setting the diffusion tensor
 ################################################################################
 if is_kcoeff_from_file == 1:
-        print("Impose diffusion tensor from file: ", ffile)
+        if rank==0:
+            print("Impose diffusion tensor from file: ", ffile)
         mydomain.ImposeDiffusionTensor(d00, d01, d02, d10, d11, d12, d20, d21, d22)
 else:
-        print("Impose diffusion coefficient from command line, D0=", kcoeff)
+        if rank==0:
+            print("Impose diffusion coefficient from command line, D0=", kcoeff)
         mydomain.D0 = kcoeff
         mydomain.D = mydomain.D0;
 #################################################################################
@@ -204,7 +228,8 @@ linsolver.parameters["maximum_iterations"] = 100000
 
 ic = None
 if is_IC_from_file == 1:
-        print("Reading initial conditions from file: ", ffile)
+        if rank==0:
+            print("Reading initial conditions from file: ", ffile)
         ic = Function(V_DG);
         myf.read(ic, 'ic');
         ic=project(ic, mydomain.V)
