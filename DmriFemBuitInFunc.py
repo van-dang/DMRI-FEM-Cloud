@@ -694,46 +694,48 @@ class MRI_simulation():
           return Dirac_Delta, u_0
         
     def solve(self, mydomain, mri_para, linsolver, ic=None): 
-      
+
           self.Dirac_Delta, self.u_0 = self.InitialCondition(mydomain, ic)
-          
+
           stepcounter = 0;
 
           M = MassMatrix(mydomain);
 
-          self.t = 0;
-          ft_prev  =  mri_para.time_profile(self.t);
-          ift_prev = mri_para.itime_profile(self.t);
+          tp = 0;
+          self.t = tp + self.k;
 
           comm = MPI.comm_world
-          rank = comm.Get_rank()    
-          
+          rank = comm.Get_rank()
+
           start_time = time.time()
-          
-          while self.t < mri_para.T + self.k: # Time-stepping loop
+
+          while self.t < mri_para.T + self.k: # Time-stepping loop                                                                                                                                
               if stepcounter % self.nskip == 0 and rank==0:
                   print('t: %6.2f '%self.t, 'T: %6.2f'%mri_para.T, 'dt: %.1f'%self.k,'qvalue: %e'%mri_para.qvalue,'Completed %3.2f%%'%(float(self.t)/float(mri_para.T+self.k)*100.0));
+              tm = tp + 0.5*self.k;
 
-              ft = mri_para.time_profile(self.t);
-              ift = mri_para.itime_profile(self.t);
-                            
-              L = ThetaMethodL(ft_prev, ift_prev, mri_para, self, mydomain);
+              ft = mri_para.time_profile(tm);
+              ift = mri_para.itime_profile(tm);
+
+              L = ThetaMethodL(ft, ift, mri_para, self, mydomain);
               A = 1/self.k*M + assemble(ThetaMethodF(ft, ift, mri_para, self, mydomain))
 
               b = assemble(L);
-              
+
               linsolver.solve(A, self.u_0.vector(),b);
 
-              ft_prev  = ft;
-              ift_prev = ift;
-
+              tp = self.t;
               self.t += self.k;
               stepcounter += 1;
-
+ 
           self.elapsed_time = time.time() - start_time
-          print("Successfully Completed! Elapsed time: %f seconds"%self.elapsed_time)
+          if rank==0:
+              print("Successfully Completed! Elapsed time: %f seconds"%self.elapsed_time)
           
 def Post_processing(mydomain, mri_para, mri_simu, plt, ms=''):
+    comm = MPI.comm_world
+    rank = comm.Get_rank()    
+
     one = Function(mydomain.V)
     one.vector()[:] = 1
     whole_vol = assemble(one*dx)
@@ -745,11 +747,12 @@ def Post_processing(mydomain, mri_para, mri_simu, plt, ms=''):
         initial1 = assemble(mydomain.phase*mri_simu.Dirac_Delta*dx)
         signal1 = assemble((mydomain.phase*u1r_0)*dx);
         signal = assemble((mydomain.phase*u1r_0+(1-mydomain.phase)*u0r_0)*dx);
-        print('Signal on each compartment')
-        print('Sum initial0: %.3e, Signal0: %.3e'%(initial0, signal0))
-        print('Sum initial1: %.3e, Signal1: %.3e'%(initial1, signal1))
         out_text = 'b: %.3f, g: %.3f, q: %.3e, Signal: %.3e, Normalized signal: %.6e, kappa: %.3e, dt: %.3f, hmin: %.3e, hmax: %.3e, whole_vol: %.3f, vol_of_interest: %.3f, Free signal: %.3e, elasped time %.3f (s)\n'%(mri_para.bvalue, mri_para.gvalue, mri_para.qvalue, signal, signal/voi, mydomain.kappa, mri_simu.k, mydomain.hmin, mydomain.hmax, whole_vol, voi, exp(-mri_para.bvalue*mydomain.D0), mri_simu.elapsed_time)
-        print(out_text)
+        if rank==0:
+            print('Signal on each compartment')
+            print('Sum initial0: %.3e, Signal0: %.3e'%(initial0, signal0))
+            print('Sum initial1: %.3e, Signal1: %.3e'%(initial1, signal1))
+            print(out_text)
         V0 = FunctionSpace(mydomain.mesh0, mydomain.Ve);
         V1 = FunctionSpace(mydomain.mesh1, mydomain.Ve);
         u0r_0p = project(u0r_0,V0)
@@ -765,23 +768,20 @@ def Post_processing(mydomain, mri_para, mri_simu, plt, ms=''):
         ur, ui = split(mri_simu.u_0)
         signal = assemble(ur*dx);
         out_text = 'b: %.3f, g: %.3f, q: %.3e, Signal: %.3e, Normalized signal: %.6e, dt: %.3f, hmin: %.3e, hmax: %.3e, whole_vol: %.3f, vol_of_interest: %.3f, Free signal: %.3e, elasped time %.3f (s)\n'%(mri_para.bvalue, mri_para.gvalue, mri_para.qvalue, signal, signal/voi, mri_simu.k, mydomain.hmin, mydomain.hmax, whole_vol, voi, exp(-mri_para.bvalue*mydomain.D0), mri_simu.elapsed_time)
-        print(out_text)
+        if rank==0:
+            print(out_text)
         V = FunctionSpace(mydomain.mymesh,mydomain.Ve);
         ur_p = project(ur,V)
         if mydomain.tdim==mydomain.gdim and not(plt==None): 
             plt.figure(10000);
             plot(ur_p, cmap="coolwarm")
         File("ur.pvd")<<ur_p
-
-    comm = MPI.comm_world
-    rank = comm.Get_rank()    
-    print("rank: ", rank);
-    
-    print("save to log.txt")
+        
     if int(rank) == 0:
-            outfile = open('log.txt', 'a')
-            if not(ms == ''):
-                outfile.write('%'+ms+'\n')
-            outfile.write(out_text)
-            outfile.close()  
+        print("save to log.txt")
+        outfile = open('log.txt', 'a')
+        if not(ms == ''):
+            outfile.write('%'+ms+'\n')
+        outfile.write(out_text)
+        outfile.close()  
    
