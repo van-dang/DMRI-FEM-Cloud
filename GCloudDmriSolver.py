@@ -197,10 +197,11 @@ else:
 #################################################################################
 
 # linsolver = PETScLUSolver("mumps")
-linsolver = KrylovSolver("bicgstab")
-#linsolver.parameters["absolute_tolerance"] = 1e-4
-#linsolver.parameters["relative_tolerance"] = 1e-3
-#linsolver.parameters["maximum_iterations"] = 1000
+linsolver = KrylovSolver("bicgstab","jacobi")
+linsolver.parameters["relative_tolerance"] = 1e-9                                                                                                                                                    \
+linsolver.parameters["absolute_tolerance"] = 1e-10
+linsolver.parameters["maximum_iterations"] = 100000
+
 
 ic = None
 if is_IC_from_file == 1:
