@@ -452,28 +452,35 @@ class WeakPseudoPeriodic_1c(UserExpression):
 
 
 def MyFunctionSpaces(mydomain, periodicBD):  
+  comm = MPI.comm_world
+  rank = comm.Get_rank()
+  
   Ve = FiniteElement("CG", mydomain.mymesh.ufl_cell(), mydomain.porder)
       
   if (mydomain.IsDomainMultiple==True):
         TH = MixedElement([Ve,Ve,Ve,Ve])
-        print("Function Space for Two-compartment Domains has 4 components");
-        print("(ur0, ui0, ur1, ur1): r-real, i-imaginary")
+        if rank == 0:
+            print("Function Space for Two-compartment Domains has 4 components");
+            print("(ur0, ui0, ur1, ur1): r-real, i-imaginary")
   else:
-        TH = MixedElement([Ve,Ve])    
-        print("Function Space for Single Domains has 2 components");
-        print("(ur, ui): r-real, i-imaginary")
+        TH = MixedElement([Ve,Ve])   
+        if rank == 0:
+            print("Function Space for Single Domains has 2 components");
+            print("(ur, ui): r-real, i-imaginary")
   if mydomain.IsDomainPeriodic==False or periodicBD==None:
-        print("Initialize a standard function space.")
-        if sum(mydomain.PeriodicDir)>0:
+        if rank == 0:
+            print("Initialize a standard function space.")
+        if sum(mydomain.PeriodicDir)>0 and rank==0:
             print("The pseudo-periodic BCS are weakly imposed.")
             print("The mesh does not need to be periodic.")
         V_DG = FunctionSpace(mydomain.mymesh, 'DG', 0)    
         V = FunctionSpace(mydomain.mymesh,Ve);
         W = FunctionSpace(mydomain.mymesh, TH)
   else:
-        print("Initialize peridodic function spaces.")
-        print("The pseudo-periodic BCS are strongly imposed.")
-        print("The mesh needs to be periodic.")
+        if rank == 0:
+            print("Initialize peridodic function spaces.")
+            print("The pseudo-periodic BCS are strongly imposed.")
+            print("The mesh needs to be periodic.")
         V_DG = FunctionSpace(mydomain.mymesh, 'DG', 0, constrained_domain=periodicBD)
         V = FunctionSpace(mydomain.mymesh,Ve, constrained_domain=periodicBD)
         W = FunctionSpace(mydomain.mymesh, TH, constrained_domain=periodicBD)    
