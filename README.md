@@ -16,7 +16,7 @@ sudo singularity build -w writable_fenics_hpc.simg build_fenics_hpc_image_recipe
 ### Test if mpi works correctly with the FEniCS-HPC image
 ```bash
 wget https://raw.githubusercontent.com/wesleykendall/mpitutorial/gh-pages/tutorials/mpi-hello-world/code/mpi_hello_world.c
-singularity exec -B $PWD writable_fenics_hpc_dmri.simg mpicc mpi_hello_world.c -o mpi_hello_world
+singularity exec -B $PWD writable_fenics_hpc.simg mpicc mpi_hello_world.c -o mpi_hello_world
 mpirun -n 3 singularity exec -B $PWD writable_fenics_hpc.simg  mpi_hello_world
 ```
 The results would be
