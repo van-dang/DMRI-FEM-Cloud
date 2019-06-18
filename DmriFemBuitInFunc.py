@@ -229,7 +229,7 @@ def BTPDE_dUdt_wBC1c(ft, ift, mri_para, w , v, mydomain):
       a_pbc = -mydomain.kappa_e*(u0r*v0r   + u0i*v0i)*ds;
     return a0+a_pbc
   
-def BTPDE_dUdt(ft, ift, mri_para, mri_simu, w, v, mydomain):
+def BTPDE_dUdt(ft, ift, mri_para, w, v, mydomain):
     if (mydomain.IsDomainMultiple==True):
       if (mydomain.IsDomainPeriodic==True) and sum(mydomain.PeriodicDir)>0:
           F = BTPDE_dUdt_sBC2c(ft, ift, mri_para, w, v, mydomain)
