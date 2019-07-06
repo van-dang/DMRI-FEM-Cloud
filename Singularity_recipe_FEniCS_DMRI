@@ -6,6 +6,7 @@ From: ubuntu:bionic
     add-apt-repository -y ppa:fenics-packages/fenics
     apt-get -y update
     apt-get -y install --no-install-recommends fenics
+    apt-get install -y openssh-server
     apt-get install -y zip unzip gmsh
 
   # Clean up downloaded and temporary files...
