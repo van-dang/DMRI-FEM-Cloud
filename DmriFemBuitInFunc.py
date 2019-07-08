@@ -739,7 +739,7 @@ class MRI_simulation():
           self.elapsed_time = time.time() - start_time
           if rank==0:
               print("Successfully Completed! Elapsed time: %f seconds"%self.elapsed_time)
-          
+
 def Post_processing(mydomain, mri_para, mri_simu, plt, ms=''):
     comm = MPI.comm_world
     rank = comm.Get_rank()    
@@ -761,11 +761,22 @@ def Post_processing(mydomain, mri_para, mri_simu, plt, ms=''):
             print('Sum initial0: %.3e, Signal0: %.3e'%(initial0, signal0))
             print('Sum initial1: %.3e, Signal1: %.3e'%(initial1, signal1))
             print(out_text)
-        try:
+        try:               
+            dm = mydomain.V_DG.dofmap()
+            mydomain.mphase = MeshFunction("size_t", mydomain.V_DG.mesh(), mydomain.V_DG.mesh().topology().dim())
+            for cell in cells(mydomain.V_DG.mesh()):
+                  mydomain.mphase[cell] = mydomain.phase.vector()[dm.cell_dofs(cell.index())]
+                
+            mydomain.mesh0 = SubMesh(mydomain.mymesh, mydomain.mphase, 0)
+            mydomain.mesh1 = SubMesh(mydomain.mymesh, mydomain.mphase, 1)
+            
             V0 = FunctionSpace(mydomain.mesh0, mydomain.Ve);
             V1 = FunctionSpace(mydomain.mesh1, mydomain.Ve);
             u0r_0p = project(u0r_0,V0)
             u1r_0p = project(u1r_0,V1)
+            u0i_0p = project(u0i_0,V0)
+            u1i_0p = project(u1i_0,V1)
+            
             if mydomain.tdim==mydomain.gdim and not(plt==None):
                 plt.figure(10000);
                 plot(u0r_0p, cmap="coolwarm")
@@ -773,6 +784,8 @@ def Post_processing(mydomain, mri_para, mri_simu, plt, ms=''):
                 plot(u1r_0p, cmap="coolwarm")  
             File("u0r.pvd")<<u0r_0p
             File("u1r.pvd")<<u1r_0p
+            File("u0i.pvd")<<u0i_0p
+            File("u1i.pvd")<<u1i_0p
         except:
             print("Could not post-process the solutions for the visualization purposes due to some reasons.")
     else:
@@ -794,5 +807,4 @@ def Post_processing(mydomain, mri_para, mri_simu, plt, ms=''):
         if not(ms == ''):
             outfile.write('%'+ms+'\n')
         outfile.write(out_text)
-        outfile.close()  
-   
+        outfile.close()
