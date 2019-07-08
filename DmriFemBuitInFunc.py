@@ -162,86 +162,7 @@ def outer_interface(ift, qvalue, D, fn, ur, ui, vr, vi, g):
 def FuncF_sBC(ift, qvalue, g, ur, ui, vr, vi, D, T2):
     Fr =   ift*qvalue*(inner(g,D*grad(ui))+inner(grad(ui),D*g))*vr - inner(g,D*g)*qvalue*qvalue*ift*ift*ur*vr-1./T2*ur*vr-inner(D*grad(ur), grad(vr))
     Fi = - ift*qvalue*(inner(g,D*grad(ur))+inner(grad(ur),D*g))*vi - inner(g,D*g)*qvalue*qvalue*ift*ift*ui*vi-1./T2*ui*vi-inner(D*grad(ui), grad(vi))
-    return Fr + Fi
-
-  
-def BTPDE_dUdt_sBC2c(ft, ift, mri_para, w, v, mydomain):
-    D = mydomain.D 
-    T2 = mri_para.T2      
-    qvalue = mri_para.qvalue
-    g = mri_para.g
-    fn = mydomain.fn
-    fn0 = mydomain.fn0
-    kappa = mydomain.kappa
-    phase = mydomain.phase
-    v0r, v0i, v1r, v1i = v[0], v[1], v[2], v[3]
-    u0r, u0i, u1r, u1i = w[0], w[1], w[2], w[3]
-    a0 = (  FuncF_sBC(ift, qvalue, g, u0r  , u0i  , v0r, v0i, D, T2))*(1-phase)*dx
-    a1 = (  FuncF_sBC(ift, qvalue, g, u1r  , u1i  , v1r, v1i, D, T2))*phase*dx
-    a_inner_bc  = (  (-inner_interface(ift, kappa, qvalue, u0r  , u1r  , v0r, v1r, u0i  , u1i  , v0i, v1i, fn0, g, D, D)))*abs(jump(phase))*dS;
-    a0_outer_bc = -outer_interface(ift, qvalue , D, fn, u0r, u0i, v0r, v0i, g)*ds
-    a1_outer_bc = -outer_interface(ift, qvalue , D, fn, u1r, u1i, v1r, v1i, g)*ds
-    return a0+a1 +a_inner_bc + a0_outer_bc + a1_outer_bc
-
-def BTPDE_dUdt_wBC2c(ft, ift, mri_para, w , v, mydomain):
-    D = mydomain.D
-    mymesh = mydomain.mymesh
-    qvalue = mri_para.qvalue
-    gdir = mri_para.gdir
-    kappa = mydomain.kappa
-    phase = mydomain.phase
-    T2 = mri_para.T2
-    v0r, v0i, v1r, v1i = v[0], v[1], v[2], v[3]
-    u0r, u0i, u1r, u1i = w[0], w[1], w[2], w[3]
-    a0 = (  FuncF_wBC(ft, qvalue, gdir, u0r  , u0i  , v0r, v0i, D, mymesh, T2))*(1-phase)*dx
-    a1 = (  FuncF_wBC(ft, qvalue, gdir, u1r  , u1i  , v1r, v1i, D, mymesh, T2))*phase*dx
-    a_bc = avg(  (-icondition_wBC(kappa, u0r  , u1r  , v0r, v1r, u0i  , u1i  , v0i, v1i)))*abs(jump(phase))*dS;
-    
-    a_pbc = 0;
-    if sum(mydomain.PeriodicDir)>0:
-      a_pbc = -mydomain.kappa_e*(u1r*v1r   + u1i*v1i)*phase*ds - mydomain.kappa_e*(u0r*v0r   + u0i*v0i)*(1-phase)*ds;
-      
-    return a0+a1+a_bc+a_pbc
-
-def BTPDE_dUdt_sBC1c(ft, ift, mri_para, w, v, mydomain):
-    D = mydomain.D  
-    T2 = mri_para.T2  
-    qvalue = mri_para.qvalue
-    g = mri_para.g
-    fn = mydomain.fn
-    v0r, v0i = v[0], v[1]
-    u0r, u0i = w[0], w[1]
-    a0 = (  FuncF_sBC(ift, qvalue, g, u0r  , u0i  , v0r, v0i, D, T2))*dx
-    a0_outer_bc = -outer_interface(ift, qvalue , D, fn, u0r, u0i, v0r, v0i, g)*ds
-    return a0 + a0_outer_bc 
-  
-def BTPDE_dUdt_wBC1c(ft, ift, mri_para, w , v, mydomain):
-    D = mydomain.D
-    mymesh = mydomain.mymesh
-    qvalue = mri_para.qvalue
-    gdir = mri_para.gdir
-    T2 = mri_para.T2
-    v0r, v0i = v[0], v[1]
-    u0r, u0i = w[0], w[1]
-    a0 = (  FuncF_wBC(ft, qvalue, gdir, u0r, u0i, v0r, v0i, D, mymesh, T2))*dx
-    a_pbc = 0;
-    if sum(mydomain.PeriodicDir)>0:
-      a_pbc = -mydomain.kappa_e*(u0r*v0r   + u0i*v0i)*ds;
-    return a0+a_pbc
-  
-def BTPDE_dUdt(ft, ift, mri_para, w, v, mydomain):
-    if (mydomain.IsDomainMultiple==True):
-      if (mydomain.IsDomainPeriodic==True) and sum(mydomain.PeriodicDir)>0:
-          F = BTPDE_dUdt_sBC2c(ft, ift, mri_para, w, v, mydomain)
-      else:
-          F = BTPDE_dUdt_wBC2c(ft, ift, mri_para, w, v, mydomain)
-    else:
-      if (mydomain.IsDomainPeriodic==True) and sum(mydomain.PeriodicDir)>0:
-          F = BTPDE_dUdt_sBC1c(ft, ift, mri_para, w, v, mydomain)
-      else:
-          F = BTPDE_dUdt_wBC1c(ft, ift, mri_para, w, v, mydomain)
-    return F  
-
+    return Fr + Fi 
   
 def ThetaMethodF_sBC1c(ft, ift, mri_para, w, v, sp, mydomain):
     D = mydomain.D  
@@ -787,7 +708,7 @@ class MRI_simulation():
           M = MassMatrix(mydomain);
 
           tp = 0;
-          self.t = tp + self.k;
+          self.t = tp;
 
           comm = MPI.comm_world
           rank = comm.Get_rank()
@@ -799,10 +720,13 @@ class MRI_simulation():
                   print('t: %6.2f '%self.t, 'T: %6.2f'%mri_para.T, 'dt: %.1f'%self.k,'qvalue: %e'%mri_para.qvalue,'Completed %3.2f%%'%(float(self.t)/float(mri_para.T+self.k)*100.0));
               tm = tp + 0.5*self.k;
 
-              ft = mri_para.time_profile(tm);
-              ift = mri_para.itime_profile(tm);
+              ft = mri_para.time_profile(self.t);
+              ift = mri_para.itime_profile(self.t);
 
-              L = ThetaMethodL(ft, ift, mri_para, self, mydomain);
+              ft_p = mri_para.time_profile(tp);
+              ift_p = mri_para.itime_profile(tp);
+              
+              L = ThetaMethodL(ft_p, ift_p, mri_para, self, mydomain);
               A = 1/self.k*M + assemble(ThetaMethodF(ft, ift, mri_para, self, mydomain))
 
               b = assemble(L);
