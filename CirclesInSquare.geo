@@ -34,3 +34,6 @@ BooleanUnion{ Surface{ f1() }; Delete; }{ Surface{ f2() }; Delete; }
 
 Physical Surface(0) = {1};
 Physical Surface(1) = {4, 3, 6, 5, 2};
+
+Mesh 2;
+Coherence Mesh;
