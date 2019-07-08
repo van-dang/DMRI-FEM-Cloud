@@ -1,9 +1,9 @@
 SetFactory("OpenCASCADE");
 
-Mesh.CharacteristicLengthMin = 0.7;
-Mesh.CharacteristicLengthMax = 0.7;
+Mesh.CharacteristicLengthMin = 0.5;
+Mesh.CharacteristicLengthMax = 0.5;
 
-r = 4;
+r = 4.0;
 L = 10;
 
 Box(1) = {0,0,0,L, L, L};
@@ -28,8 +28,9 @@ Sphere(10) = {L/2, L/2, L/2, r, -Pi/2, Pi/2, 2*Pi};
 f1() = BooleanDifference{ Volume{1}; }{ Volume{2:10}; };
 f2() = BooleanIntersection{ Volume{1}; Delete; }{ Volume{2:10}; Delete; };
 
-Physical Volume(0) = {11};
-Physical Volume(1) = {3, 4, 5, 7, 2, 8, 10};
+Physical Volume(0) = {4, 8, 10, 3, 6, 5, 9, 2, 7};
+Physical Volume(1) = {11};
+
 
 Mesh 3;
 Coherence Mesh;
