@@ -761,17 +761,20 @@ def Post_processing(mydomain, mri_para, mri_simu, plt, ms=''):
             print('Sum initial0: %.3e, Signal0: %.3e'%(initial0, signal0))
             print('Sum initial1: %.3e, Signal1: %.3e'%(initial1, signal1))
             print(out_text)
-        V0 = FunctionSpace(mydomain.mesh0, mydomain.Ve);
-        V1 = FunctionSpace(mydomain.mesh1, mydomain.Ve);
-        u0r_0p = project(u0r_0,V0)
-        u1r_0p = project(u1r_0,V1)
-        if mydomain.tdim==mydomain.gdim and not(plt==None):
-            plt.figure(10000);
-            plot(u0r_0p, cmap="coolwarm")
-            plt.figure(10001);            
-            plot(u1r_0p, cmap="coolwarm")  
-        File("u0r.pvd")<<u0r_0p
-        File("u1r.pvd")<<u1r_0p
+        try:
+            V0 = FunctionSpace(mydomain.mesh0, mydomain.Ve);
+            V1 = FunctionSpace(mydomain.mesh1, mydomain.Ve);
+            u0r_0p = project(u0r_0,V0)
+            u1r_0p = project(u1r_0,V1)
+            if mydomain.tdim==mydomain.gdim and not(plt==None):
+                plt.figure(10000);
+                plot(u0r_0p, cmap="coolwarm")
+                plt.figure(10001);            
+                plot(u1r_0p, cmap="coolwarm")  
+            File("u0r.pvd")<<u0r_0p
+            File("u1r.pvd")<<u1r_0p
+        except:
+            print("Could not post-process the solutions for some reasons.")
     else:
         ur, ui = split(mri_simu.u_0)
         signal = assemble(ur*dx);
