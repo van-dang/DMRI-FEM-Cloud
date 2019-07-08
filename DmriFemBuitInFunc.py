@@ -718,7 +718,6 @@ class MRI_simulation():
           while self.t < mri_para.T + self.k: # Time-stepping loop                                                                                                                                
               if stepcounter % self.nskip == 0 and rank==0:
                   print('t: %6.2f '%self.t, 'T: %6.2f'%mri_para.T, 'dt: %.1f'%self.k,'qvalue: %e'%mri_para.qvalue,'Completed %3.2f%%'%(float(self.t)/float(mri_para.T+self.k)*100.0));
-              tm = tp + 0.5*self.k;
 
               ft = mri_para.time_profile(self.t);
               ift = mri_para.itime_profile(self.t);
