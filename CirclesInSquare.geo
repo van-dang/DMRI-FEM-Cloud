@@ -1,7 +1,7 @@
 SetFactory("OpenCASCADE");
 
-Mesh.CharacteristicLengthMin = 0.5;
-Mesh.CharacteristicLengthMax = 0.5;
+Mesh.CharacteristicLengthMin = 0.2;
+Mesh.CharacteristicLengthMax = 0.2;
 
 L = 10;
 Point(1) = {-L/2, -L/2, 0};
@@ -30,10 +30,9 @@ Disk(6) = {-L/2, L/2, 0, r};
 
 f1() = BooleanDifference{ Surface{1}; }{ Surface{2:6}; };
 f2() = BooleanIntersection{ Surface{1}; Delete; }{ Surface{2:6}; Delete; };
-BooleanUnion{ Surface{ f1() }; Delete; }{ Surface{ f2() }; Delete; }
 
-Physical Surface(0) = {1};
-Physical Surface(1) = {4, 3, 6, 5, 2};
+Physical Surface(0) = {7};
+Physical Surface(1) = {6, 5, 4, 3, 2};
 
 Mesh 2;
 Coherence Mesh;
