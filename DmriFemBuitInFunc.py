@@ -774,7 +774,7 @@ def Post_processing(mydomain, mri_para, mri_simu, plt, ms=''):
             File("u0r.pvd")<<u0r_0p
             File("u1r.pvd")<<u1r_0p
         except:
-            print("Could not post-process the solutions for some reasons.")
+            print("Could not post-process the solutions for the visualization purposes due to some reasons.")
     else:
         ur, ui = split(mri_simu.u_0)
         signal = assemble(ur*dx);
