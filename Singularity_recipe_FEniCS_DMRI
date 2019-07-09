@@ -9,7 +9,7 @@ From: ubuntu:bionic
         apt-get -y --with-new-pkgs -o Dpkg::Options::="--force-confold" upgrade
         apt-get -y install software-properties-common
         # SSH client is needed for OpenMPI
-        apt-get -y install ssh
+        apt-get -y install ssh unzip gmsh
         # Install FEniCS
         add-apt-repository ppa:fenics-packages/fenics
         apt-get update
