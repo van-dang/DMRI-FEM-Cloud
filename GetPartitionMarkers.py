@@ -16,9 +16,12 @@ def GetPartitionMarkers(mshfile, pfile=""):
   lineList = f.readlines()
   f.close()
 
-  lastline = lineList[len(lineList)-2].split(" ")
-  last_id = int(lastline[0])
+  lastline_index = lineList.index('$EndElements\n');
+  print(lineList[lastline_index -1]);
 
+  lastline = lineList[lastline_index-1].split(" ")
+  last_id = int(lastline[0])
+    
   first_id = -100;
 
   for x in lineList:
