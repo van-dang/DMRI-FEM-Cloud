@@ -22,6 +22,8 @@ We designed some benchmark problems that illustrate how the diffusion MRI simula
 
 * [Multilayered Structures](https://colab.research.google.com/github/van-dang/MRI-Cloud/blob/master/MultilayeredStructures.ipynb)
 
+* [Periodicity](https://colab.research.google.com/github/van-dang/MRI-Cloud/blob/master/PeriodicDomains.ipynb)
+
 * [T2-relaxation](https://colab.research.google.com/github/van-dang/MRI-Cloud/blob/master/T2_Relaxation.ipynb)
 
 * [Explicit Implementation](https://colab.research.google.com/github/van-dang/MRI-Cloud/blob/master/ExplicitImplementation.ipynb)
