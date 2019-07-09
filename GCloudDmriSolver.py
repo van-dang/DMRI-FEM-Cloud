@@ -52,7 +52,7 @@ parameters['allow_extrapolation'] = True
 g0, g1, g2 = 0, 1, 0; kcoeff = 3e-3; porder = 1; Nsteps = 100; bvalue = 1000; kappa = 1e-5;
 delta, Delta = 10600, 43100; T2 = 1e16; k = 200; nskip = 5; is_input_dt = 0; is_input_b = 0; is_input_q = 0;
 is_kcoeff_from_file = 1; is_T2_from_file = 1; is_IC_from_file = 0; IsDomainPeriodic = False; IsDomainMultiple = False
-PeriodicDir = [0, 0, 0]; phase = None; mesh0 = None; mesh1 = None; ic = None
+PeriodicDir = [0, 0, 0]; phase = None; ic = None
 ## end default parameters
 
 comm = MPI.comm_world
@@ -172,12 +172,9 @@ if is_T2_from_file == 1:
                 
 if IsDomainMultiple==1:
         if rank==0:
-            print("Reading phase function, mesh0, mesh1 from file: ", ffile)        
+            print("Reading phase function from file: ", ffile)        
         phase = Function(V_DG);
-        myf.read(phase, 'phase');       
-        mesh0 = Mesh();  mesh1 = Mesh();
-        myf.read(mesh0, 'mesh0', False)
-        myf.read(mesh1, 'mesh1', False)
+        myf.read(phase, 'phase');
 
 mri_simu = MRI_simulation()
 mri_para = MRI_parameters()
@@ -201,8 +198,6 @@ mri_simu.nskip = 5;                                  # frequency to print ouputs
 
 mydomain = MyDomain(mymesh, mri_para)
 mydomain.phase = phase
-mydomain.mesh0 = mesh0
-mydomain.mesh1 = mesh1
 mydomain.PeriodicDir = PeriodicDir;            # Direction of the periodicity
 mydomain.IsDomainPeriodic = IsDomainPeriodic   # Confirm if the mesh if periodic
 mydomain.IsDomainMultiple = IsDomainMultiple   # Confirm if the mesh is multiple
