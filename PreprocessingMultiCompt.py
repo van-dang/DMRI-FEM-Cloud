@@ -97,6 +97,22 @@ if geo_choice == 4:
     cmpt_mesh = Mesh('volume_N_18_7_3_5L_fine.xml')
     cellmarker, phase, partition_marker, partion_list = Create_phase_func(mymesh, cmpt_mesh, None)
 
+if geo_choice == 5:
+    print("Working with mesh_226cylinders.xml")
+    is_mesh_file_exist = os.path.isfile('mesh_226cylinders.xml.zip')
+    if is_mesh_file_exist==False:
+        os.system('wget --quiet https://github.com/van-dang/MRI-Cloud/raw/mesh/mesh_226cylinders.xml.zip')
+	os.system('wget --quiet https://github.com/van-dang/MRI-Cloud/raw/mesh/submesh_226cylinders.xml.zip')
+        os.system('rm -rf mesh_226cylinders.xml submesh_226cylinders.xml __MACOSX')
+        os.system('unzip mesh_226cylinders.xml.zip')
+        os.system('unzip submesh_226cylinders.xml.zip')
+    is_partition_function_exist = os.path.isfile('GetPartitionMarkers.py')
+    if is_partition_function_exist==False:
+	os.system('wget --quiet https://raw.githubusercontent.com/van-dang/MRI-Cloud/mesh/GetPartitionMarkers.py')
+    mymesh = Mesh("mesh_226cylinders.xml");
+    cmpt_mesh = Mesh('submesh_226cylinders.xml')
+    cellmarker, phase, partition_marker, partion_list = Create_phase_func(mymesh, cmpt_mesh, None)
+    
 ################################################################################
 ############## Save, Plot phase functions and submeshes to verify ##############
 print("Save phase function")
