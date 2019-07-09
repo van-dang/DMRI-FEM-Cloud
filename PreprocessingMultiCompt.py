@@ -119,8 +119,6 @@ print("Save phase function")
 File("phase.pvd")<<phase    
 
 print("Partition markers:", partion_list)
-mesh0 = SubMesh(mymesh, cellmarker, 0)
-mesh1 = SubMesh(mymesh, cellmarker, 1)
 
 V_DG = FunctionSpace(mymesh, 'DG', 0)
 
@@ -157,8 +155,7 @@ filename, file_extension = os.path.splitext(ofile)
 ofile = filename+'.h5'
 
 f = HDF5File(mymesh.mpi_comm(), ofile, 'w')
-f.write(mymesh, 'mesh'); f.write(mesh0, 'mesh0'); f.write(mesh1, 'mesh1') 
-f.write(T2, 'T2');  f.write(disc_ic, 'ic'); f.write(phase, 'phase');
+f.write(mymesh, 'mesh');  f.write(T2, 'T2'); f.write(disc_ic, 'ic'); f.write(phase, 'phase');
 f.write(d00, 'd00'); f.write(d01, 'd01'); f.write(d02, 'd02')
 f.write(d10, 'd10'); f.write(d11, 'd11'); f.write(d12, 'd12')
 f.write(d20, 'd20'); f.write(d21, 'd21'); f.write(d22, 'd22')
