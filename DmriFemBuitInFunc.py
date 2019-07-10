@@ -505,7 +505,6 @@ class MyDomain():
             self.zmax = mymesh.coordinates()[:, 2].max()        
         self.gdir = mri_para.gdir        
         self.qvalue = mri_para.qvalue 
-        self.D0 = 3e-3
         self.kappa_e_scalar = 3e-3/self.hmin
 
     def WeakPseudoPeridicMarker(self):        
