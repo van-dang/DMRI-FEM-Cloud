@@ -755,7 +755,7 @@ def Post_processing(mydomain, mri_para, mri_simu, plt, ms=''):
         initial1 = assemble(mydomain.phase*mri_simu.Dirac_Delta*dx)
         signal1 = assemble((mydomain.phase*u1r_0)*dx);
         signal = assemble((mydomain.phase*u1r_0+(1-mydomain.phase)*u0r_0)*dx);
-        out_text = 'b: %.3f, g: %.3f, q: %.3e, Signal: %.3e, Normalized signal: %.6e, kappa: %.3e, dt: %.3f, hmin: %.3e, hmax: %.3e, whole_vol: %.3f, vol_of_interest: %.3f, Free signal: %.3e, elasped time %.3f (s)\n'%(mri_para.bvalue, mri_para.gvalue, mri_para.qvalue, signal, signal/voi, mydomain.kappa, mri_simu.k, mydomain.hmin, mydomain.hmax, whole_vol, voi, exp(-mri_para.bvalue*mydomain.D0), mri_simu.elapsed_time)
+        out_text = 'b: %.3f, g: %.3f, q: %.3e, Signal: %.3e, Normalized signal: %.6e, kappa: %.3e, dt: %.3f, hmin: %.3e, hmax: %.3e, whole_vol: %.3f, vol_of_interest: %.3f, elasped time %.3f (s)\n'%(mri_para.bvalue, mri_para.gvalue, mri_para.qvalue, signal, signal/voi, mydomain.kappa, mri_simu.k, mydomain.hmin, mydomain.hmax, whole_vol, voi, mri_simu.elapsed_time)
         if rank==0:
             print('Signal on each compartment')
             print('Sum initial0: %.3e, Signal0: %.3e'%(initial0, signal0))
@@ -792,7 +792,7 @@ def Post_processing(mydomain, mri_para, mri_simu, plt, ms=''):
     else:
         ur, ui = split(mri_simu.u_0)
         signal = assemble(ur*dx);
-        out_text = 'b: %.3f, g: %.3f, q: %.3e, Signal: %.3e, Normalized signal: %.6e, dt: %.3f, hmin: %.3e, hmax: %.3e, whole_vol: %.3f, vol_of_interest: %.3f, Free signal: %.3e, elasped time %.3f (s)\n'%(mri_para.bvalue, mri_para.gvalue, mri_para.qvalue, signal, signal/voi, mri_simu.k, mydomain.hmin, mydomain.hmax, whole_vol, voi, exp(-mri_para.bvalue*mydomain.D0), mri_simu.elapsed_time)
+        out_text = 'b: %.3f, g: %.3f, q: %.3e, Signal: %.3e, Normalized signal: %.6e, dt: %.3f, hmin: %.3e, hmax: %.3e, whole_vol: %.3f, vol_of_interest: %.3f, elasped time %.3f (s)\n'%(mri_para.bvalue, mri_para.gvalue, mri_para.qvalue, signal, signal/voi, mri_simu.k, mydomain.hmin, mydomain.hmax, whole_vol, voi, mri_simu.elapsed_time)
         if rank==0:
             print(out_text)
         V = FunctionSpace(mydomain.mymesh,mydomain.Ve);
