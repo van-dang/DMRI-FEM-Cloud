@@ -2,7 +2,12 @@
   Contributor: Tamara Dancheva
   
   Google Colab notebooks can be connected to either a hosted runtime provided by Google Cloud or a local runtime. The hosted runtime allows us to access free resources for up to 12 hours at a time. For longer excecutions, it is more convenient to connect to the local runtimes. We consider two options: direct local runtime and local runtime with FEniCS containers.
- 
+
+```diff
++ this will be highlighted in green
+- this will be highlighted in red
+```
+
 <font color="red"> WARNINGS: It is very important to know that this option allows you to execute code on your local hardware and have access to your local file system. Please be careful when removing folders or files.  </font>
   
   ## Direct local runtime
