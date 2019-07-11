@@ -5,8 +5,9 @@
 
 ![#f03c15](https://placehold.it/15/f03c15/000000?text=+) `WARNINGS`
 
-### It is very important to know that this option allows you to execute code on your local hardware and have access to your local file system. Please be careful when removing folders or files.
-### We are not reponsible for any data loss due to the use of this functionality.
+(1) It is very important to know that this option allows you to execute code on your local hardware and have access to your local file system. Please be careful when removing folders or files.
+
+(2) We are not reponsible for any data loss due to the use of this functionality.
  
   ## Direct local runtime
   This option allows for a direct connection to a local computer. The full instruction is available here https://research.google.com/colaboratory/local-runtimes.html
