@@ -710,7 +710,9 @@ def Create_phase_func(mymesh, cmpt_mesh , pmk):
             
     if pmk==None:
         pmk = cellmarker
-    return cellmarker, phase, pmk, partion_list 
+        return phase, pmk, partion_list
+    else:
+        return phase, partion_list 
 
 class MRI_parameters():
     def __init__(self):
