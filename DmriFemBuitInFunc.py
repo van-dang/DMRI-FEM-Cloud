@@ -711,7 +711,6 @@ def Create_phase_func(mymesh, cmpt_mesh , pmk):
         return phase, partion_list, cellmarker
     else:
         return phase, partion_list 
-
 def CreatePhaseFunc(mymesh, evengroup, oddgroup, partition_marker):
     V_DG = FunctionSpace(mymesh, 'DG', 0)
     dofmap_DG = V_DG.dofmap()
@@ -720,7 +719,8 @@ def CreatePhaseFunc(mymesh, evengroup, oddgroup, partition_marker):
         partion_list = [];
         for cell in cells(mymesh):
             cmk = partition_marker[cell.index()]
-            partion_list.append(cmk)
+            if (len(partion_list)==0 or not(cmk in partion_list)):
+                partion_list.append(cmk)
             phase.vector()[dofmap_DG.cell_dofs(cell.index())] = cmk % 2  
         return phase, partion_list
     else: # partition_marker is not given
