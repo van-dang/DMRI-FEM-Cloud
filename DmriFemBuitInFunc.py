@@ -726,13 +726,11 @@ def CreatePhaseFunc(mymesh, evengroup, oddgroup, partition_marker):
         return phase, partion_list
     else: # partition_marker is not given
         partition_marker = MeshFunction("size_t", mymesh, mymesh.topology().dim())
-        evenstart, oddstart = 2, 3
+        partion_list = [-1]*(len(evengroup)+len(oddgroup))
         if len(evengroup)==0:
             phase.vector()[:] = 0
-            oddstart = 1;
         elif len(oddgroup)==0:
             phase.vector()[:] = 1
-            evenstart = 0
         elif (len(evengroup)+len(oddgroup)==0):
             print("At least one of evengroup, oddgroup, partition_marker is not empty!")
             
@@ -741,22 +739,23 @@ def CreatePhaseFunc(mymesh, evengroup, oddgroup, partition_marker):
             for submesh_id in range(0, len(evengroup)):
                 is_inside = evengroup[submesh_id].bounding_box_tree().compute_first_entity_collision(p)<4294967295
                 if is_inside==True:
-                    cmk = 2*submesh_id + evenstart;
+                    cmk = 2*submesh_id + 2;
+                    partion_list[submesh_id] = cmk;
                     partition_marker[cell.index()] = cmk;
                     phase.vector()[dofmap_DG.cell_dofs(cell.index())] = 0;
                     break;
             for submesh_id in range(0, len(oddgroup)):
                 is_inside = oddgroup[submesh_id].bounding_box_tree().compute_first_entity_collision(p)<4294967295
                 if is_inside==True:
-                    cmk = 2*submesh_id + oddstart
+                    cmk = 2*submesh_id + 1
+                    partion_list[submesh_id+len(evengroup)] = cmk;
                     partition_marker[cell.index()] = cmk;
                     phase.vector()[dofmap_DG.cell_dofs(cell.index())] = 1;
                     break;
-        partion_list = [];
         for cell in cells(mymesh):
             cmk = partition_marker[cell.index()]
             if (len(partion_list)==0 or not(cmk in partion_list)):
-                partion_list.append(cmk)
+                partion_list.insert(0,cmk)
         return phase, partion_list, partition_marker
       
 class MRI_parameters():
