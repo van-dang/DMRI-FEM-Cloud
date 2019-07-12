@@ -485,6 +485,83 @@ def MyFunctionSpaces(mydomain, periodicBD):
         W = FunctionSpace(mydomain.mymesh, TH, constrained_domain=periodicBD)    
   return Ve, V, W, V_DG
 
+def CheckAndCorrectPeriodicity(mesh, direction, tol):
+    print("Check and correct the periodicity in direction "+str(direction))
+    gdim = mesh.geometry().dim()
+    if (direction>=gdim):
+        print("  Direction "+str(direction)+" is invalid");
+        return;
+    bmesh  = BoundaryMesh(mesh, "exterior")   # surface boundary mesh
+    mesh_points=mesh.coordinates()
+    bmesh_points=bmesh.coordinates()
+    
+    vertmap = bmesh.entity_map(0)
+
+    xmin = bmesh_points[:, 0].min()
+    xmax = bmesh_points[:, 0].max()
+
+    ymin = bmesh_points[:, 1].min()
+    ymax = bmesh_points[:, 1].max()
+
+    zmin, zmax = 0, 0;
+    if (gdim==3):
+        zmin = bmesh_points[:, 2].min()
+        zmax = bmesh_points[:, 2].max()
+
+    if direction==0:
+        cmin, cmax = xmin, xmax
+    if direction==1:
+        cmin, cmax = ymin, ymax
+    if direction==2:
+        cmin, cmax = zmin, zmax
+
+    master=[];slave=[];
+
+    for v in vertices(bmesh):
+        global_vindex = vertmap[v.index()]
+        x = bmesh_points[v.index()];
+        x2 = 0;
+        if (gdim==3):
+            x2 = x[2]
+            
+        if abs(x[direction]-cmin)<tol:
+            master.append((x[0],x[1],x2, global_vindex))
+        if abs(x[direction]-cmax)<tol:
+            slave.append((x[0],x[1],x2, global_vindex))
+
+    if not(len(master)==len(slave)):
+          print("  The mesh is not periodic! The number of vertices on the opposite sides is not the same.");
+          return
+        
+    sorter = lambda x: (x[0], x[1], x[2])
+
+    sorted_master = sorted(master)
+    sorted_slave = sorted(slave)
+
+    x_str=["x-", "y-", "z-"];
+    
+    import numpy
+    for i in range(0,3):
+        if not(i==direction):
+            masterX = list(zip(*sorted_master))[i]
+            slaveX = list(zip(*sorted_slave))[i]
+            error = abs(numpy.subtract(masterX, slaveX)).max()
+            print("  The maximum error in "+x_str[i]+"component is: "+str(error))
+            if (error>tol):
+                print("  The mesh is not periodic with the given tol="+str(tol))
+                return
+              
+    masterID = list(zip(*sorted_master))[3]
+    slaveID = list(zip(*sorted_slave))[3] 
+
+    for i in range(0,len(masterID)):
+        for j in range(0,gdim):
+          if not(j==direction):
+              mesh_points[masterID[i]][j]=mesh_points[slaveID[i]][j]
+          else:
+              mesh_points[masterID[i]][j]=-mesh_points[slaveID[i]][j]
+    print("  The mesh was successfully corrected for this direction.")
+
 def GetGlobalDomainSize(mesh, mpi4py, numpy):
     gdim = mesh.geometry().dim()
     comm = mesh.mpi_comm()
