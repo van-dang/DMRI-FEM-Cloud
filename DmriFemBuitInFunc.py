@@ -485,27 +485,26 @@ def MyFunctionSpaces(mydomain, periodicBD):
         W = FunctionSpace(mydomain.mymesh, TH, constrained_domain=periodicBD)    
   return Ve, V, W, V_DG
 
+def GetGlobalDomainSize(mesh, mpi4py, numpy):
+    gdim = mesh.geometry().dim()
+    comm = mesh.mpi_comm()
+    bmesh  = BoundaryMesh(mesh, "exterior")   # surface boundary mesh
+    mcoors = bmesh.coordinates()
+    lxmin, lymin = mcoors[:,0].min(), mcoors[:,1].min()
+    lxmax, lymax = mcoors[:,0].max(), mcoors[:,1].max()
+    lzmin, lzmax = 0, 0
+    if gdim==3:
+        lzmin, lzmax = mcoors[:,2].min(), mcoors[:,2].max()
 
-class MyDomain():
-    def GetGlobalDomainSize(mesh, mpi4py, numpy):
-        gdim = mesh.geometry().dim()
-        comm = mesh.mpi_comm()
-        bmesh  = BoundaryMesh(mesh, "exterior")   # surface boundary mesh
-        mcoors = bmesh.coordinates()
-        lxmin, lymin = mcoors[:,0].min(), mcoors[:,1].min()
-        lxmax, lymax = mcoors[:,0].max(), mcoors[:,1].max()
-        lzmin, lzmax = 0, 0
-        if gdim==3:
-            lzmin, lzmax = mcoors[:,2].min(), mcoors[:,2].max()
+    Dsize = [lxmin, lymin, lzmin, lxmax, lymax, lzmax]
+    local_size = numpy.array(Dsize, 'd')
+    global_size = numpy.zeros(len(Dsize), dtype='d')
 
-        Dsize = [lxmin, lymin, lzmin, lxmax, lymax, lzmax]
-        local_size = numpy.array(Dsize, 'd')
-        global_size = numpy.zeros(len(Dsize), dtype='d')
-
-        comm.Allreduce(local_size[0:3], global_size[0:3], mpi4py.MPI.MIN)
-        comm.Allreduce(local_size[3:6], global_size[3:6], mpi4py.MPI.MAX)
-        return global_size
+    comm.Allreduce(local_size[0:3], global_size[0:3], mpi4py.MPI.MIN)
+    comm.Allreduce(local_size[3:6], global_size[3:6], mpi4py.MPI.MAX)
+    return global_size
   
+class MyDomain():  
     def __init__(self, mymesh, mri_para):
         comm = mymesh.mpi_comm()
         rank = comm.Get_rank()
