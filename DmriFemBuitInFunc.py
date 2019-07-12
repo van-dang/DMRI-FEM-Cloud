@@ -28,7 +28,7 @@
 from dolfin import *
 import sympy as sp
 
-import time, os, sys, shutil
+import time, os, sys, shutil, mpi4py, numpy
 
 def GdotX(gdir, mymesh):
   gdim = mymesh.geometry().dim()
@@ -487,22 +487,38 @@ def MyFunctionSpaces(mydomain, periodicBD):
 
 
 class MyDomain():
+    def GetGlobalDomainSize(mesh, mpi4py, numpy):
+        gdim = mesh.geometry().dim()
+        comm = mesh.mpi_comm()
+        bmesh  = BoundaryMesh(mesh, "exterior")   # surface boundary mesh
+        mcoors = bmesh.coordinates()
+        lxmin, lymin = mcoors[:,0].min(), mcoors[:,1].min()
+        lxmax, lymax = mcoors[:,0].max(), mcoors[:,1].max()
+        lzmin, lzmax = 0, 0
+        if gdim==3:
+            lzmin, lzmax = mcoors[:,2].min(), mcoors[:,2].max()
+
+        Dsize = [lxmin, lymin, lzmin, lxmax, lymax, lzmax]
+        local_size = numpy.array(Dsize, 'd')
+        global_size = numpy.zeros(len(Dsize), dtype='d')
+
+        comm.Allreduce(local_size[0:3], global_size[0:3], mpi4py.MPI.MIN)
+        comm.Allreduce(local_size[3:6], global_size[3:6], mpi4py.MPI.MAX)
+        return global_size
+  
     def __init__(self, mymesh, mri_para):
-        self.mymesh = mymesh;
+        comm = mymesh.mpi_comm()
+        rank = comm.Get_rank()
         self.porder = 1                                  # order of basis functions of FEM
-        self.tol = 1e-2*mymesh.hmin()
+        self.hmin = MPI.min(comm, mymesh.hmin())
+        self.hmax = MPI.max(comm, mymesh.hmax())
+        self.tol = 1e-2*self.hmin
         self.gdim = mymesh.geometry().dim()
         self.tdim = mymesh.topology().dim()
-        self.hmin = mymesh.hmin()
-        self.hmax = mymesh.hmax()      
-        self.xmin = mymesh.coordinates()[:, 0].min()
-        self.xmax = mymesh.coordinates()[:, 0].max()
-        self.ymin = mymesh.coordinates()[:, 1].min()
-        self.ymax = mymesh.coordinates()[:, 1].max()
-        self.zmin, self.zmax = 0, 0 
-        if (self.gdim==3):
-            self.zmin = mymesh.coordinates()[:, 2].min()
-            self.zmax = mymesh.coordinates()[:, 2].max()        
+        self.xmin, self.ymin, self.zmin, self.xmax, self.ymax, self.zmax=GetGlobalDomainSize(mymesh, mpi4py, numpy)
+        if rank == 0:
+            print("Domain size: xmin=%f, ymin=%f, zmin=%f, xmax=%f, ymax=%f, zmax=%f"%(self.xmin, self.ymin, self.zmin, self.xmax, self.ymax, self.zmax))
+        self.mymesh = mymesh;            
         self.gdir = mri_para.gdir        
         self.qvalue = mri_para.qvalue 
         self.kappa_e_scalar = 3e-3/self.hmin
