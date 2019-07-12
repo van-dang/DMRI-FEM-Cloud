@@ -709,8 +709,7 @@ def Create_phase_func(mymesh, cmpt_mesh , pmk):
             partion_list.append(cmk0)
             
     if pmk==None:
-        pmk = cellmarker
-        return phase, pmk, partion_list
+        return phase, partion_list, cellmarker
     else:
         return phase, partion_list 
 
