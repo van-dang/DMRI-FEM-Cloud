@@ -726,10 +726,13 @@ def CreatePhaseFunc(mymesh, evengroup, oddgroup, partition_marker):
         return phase, partion_list
     else: # partition_marker is not given
         partition_marker = MeshFunction("size_t", mymesh, mymesh.topology().dim())
+        evenstart, oddstart = 2, 3
         if len(evengroup)==0:
             phase.vector()[:] = 0
+            oddstart = 1;
         elif len(oddgroup)==0:
             phase.vector()[:] = 1
+            evenstart = 0
         elif (len(evengroup)+len(oddgroup)==0):
             print("At least one of evengroup, oddgroup, partition_marker is not empty!")
             
@@ -738,14 +741,14 @@ def CreatePhaseFunc(mymesh, evengroup, oddgroup, partition_marker):
             for submesh_id in range(0, len(evengroup)):
                 is_inside = evengroup[submesh_id].bounding_box_tree().compute_first_entity_collision(p)<4294967295
                 if is_inside==True:
-                    cmk = 2*submesh_id + 2;
+                    cmk = 2*submesh_id + evenstart;
                     partition_marker[cell.index()] = cmk;
                     phase.vector()[dofmap_DG.cell_dofs(cell.index())] = 0;
                     break;
             for submesh_id in range(0, len(oddgroup)):
                 is_inside = oddgroup[submesh_id].bounding_box_tree().compute_first_entity_collision(p)<4294967295
                 if is_inside==True:
-                    cmk = 2*submesh_id + 3
+                    cmk = 2*submesh_id + oddstart
                     partition_marker[cell.index()] = cmk;
                     phase.vector()[dofmap_DG.cell_dofs(cell.index())] = 1;
                     break;
