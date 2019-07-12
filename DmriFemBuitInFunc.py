@@ -610,12 +610,11 @@ class MyDomain():
                              eps=self.tol, p0 = self.PeriodicDir[0], p1 = self.PeriodicDir[1], p2 = self.PeriodicDir[2], domain=self.mymesh, degree=1);
         return pmk
     def ImposeDiffusionTensor(self, k00, k01, k02, k10, k11, k12, k20, k21, k22):
-        print("Impose Diffusion Tensor")
+        print("Impose Diffusion Tensor ...")
         if self.gdim==2:
             self.D = as_matrix(((k00, k01), (k10, k11)))
         if self.gdim==3:
             self.D = as_matrix(((k00, k01, k02), (k10, k11, k12), (k20, k21, k22)))
-        print(self.D)
         
     def Apply(self):      
         self.fn = FacetNormal(self.mymesh);
