@@ -713,6 +713,49 @@ def Create_phase_func(mymesh, cmpt_mesh , pmk):
     else:
         return phase, partion_list 
 
+def CreatePhaseFunc(mymesh, evengroup, oddgroup, partition_marker):
+    V_DG = FunctionSpace(mymesh, 'DG', 0)
+    dofmap_DG = V_DG.dofmap()
+    phase = Function(V_DG)
+    if not(partition_marker==None): # partition_marker is given
+        partion_list = [];
+        for cell in cells(mymesh):
+            cmk = partition_marker[cell.index()]
+            partion_list.append(cmk)
+            phase.vector()[dofmap_DG.cell_dofs(cell.index())] = cmk % 2  
+        return phase, partion_list
+    else: # partition_marker is not given
+        partition_marker = MeshFunction("size_t", mymesh, mymesh.topology().dim())
+        if len(evengroup)==0:
+            phase.vector()[:] = 0
+        elif len(oddgroup)==0:
+            phase.vector()[:] = 1
+        elif (len(evengroup)+len(oddgroup)==0):
+            print("At least one of evengroup, oddgroup, partition_marker is not empty!")
+            
+        for cell in cells(mymesh):
+            p = cell.midpoint();
+            for submesh_id in range(0, len(evengroup)):
+                is_inside = evengroup[submesh_id].bounding_box_tree().compute_first_entity_collision(p)<4294967295
+                if is_inside==True:
+                    cmk = 2*submesh_id + 2;
+                    partition_marker[cell.index()] = cmk;
+                    phase.vector()[dofmap_DG.cell_dofs(cell.index())] = 0;
+                    break;
+            for submesh_id in range(0, len(oddgroup)):
+                is_inside = oddgroup[submesh_id].bounding_box_tree().compute_first_entity_collision(p)<4294967295
+                if is_inside==True:
+                    cmk = 2*submesh_id + 3
+                    partition_marker[cell.index()] = cmk;
+                    phase.vector()[dofmap_DG.cell_dofs(cell.index())] = 1;
+                    break;
+        partion_list = [];
+        for cell in cells(mymesh):
+            cmk = partition_marker[cell.index()]
+            if (len(partion_list)==0 or not(cmk in partion_list)):
+                partion_list.append(cmk)
+        return phase, partion_list, partition_marker
+      
 class MRI_parameters():
     def __init__(self):
         # Initialize default parameters
