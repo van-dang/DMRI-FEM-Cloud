@@ -876,7 +876,7 @@ class MRI_simulation():
           if rank==0:
               print("Successfully Completed! Elapsed time: %f seconds"%self.elapsed_time)
 
-def Post_processing(mydomain, mri_para, mri_simu, plt, ms=''):
+def PostProcessing(mydomain, mri_para, mri_simu, plt, ms=''):
     comm = MPI.comm_world
     rank = comm.Get_rank()    
 
