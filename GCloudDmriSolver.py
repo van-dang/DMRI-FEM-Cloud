@@ -232,5 +232,5 @@ if is_IC_from_file == 1:
 mri_simu.solve(mydomain, mri_para, linsolver)
 
 ctext = ''
-Post_processing(mydomain, mri_para, mri_simu, ic, ctext)
+PostProcessing(mydomain, mri_para, mri_simu, ic, ctext)
 
