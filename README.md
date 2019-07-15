@@ -5,16 +5,70 @@ Here we provide recipes to build Singularity images of FEniCS and FEniCS-HPC. Th
 sudo apt-get singulariy-container
 ```
 
-# Build the FEniCS-HPC image
+# Simulations with Singularity images on Google Cloud
+
+## Create a VM instance
+
+Access https://cloud.google.com
+
+Go to console
+
+Nivigation menu / Compute Engine / VM instances / Create Instances / SSH connect
+
+```bash
+sudo apt-get install singularity-container unzip
+```
+
+## With FEniCS
+### Create a FEniCS Image in writable mode
+
+```bash
+wget https://raw.githubusercontent.com/van-dang/MRI-Cloud/singularity_images/Singularity_recipe_FEniCS_DMRI
+sudo singularity build -w writable_fenics_dmri.simg Singularity_recipe_FEniCS_DMRI
+```
+
+### Test if mpi4py works correctly
+```bash
+wget https://raw.githubusercontent.com/van-dang/MRI-Cloud/master/test_mpi4py.py
+mpirun -n 3 singularity exec -B $PWD writable_fenics_dmri.simg python3 test_mpi4py.py
+```
+The results would be
+```bash
+My rank is  1
+My rank is  2
+My rank is  0
+```
+
+### Copy Python solvers to the VM instance
+```bash
+wget https://raw.githubusercontent.com/van-dang/MRI-Cloud/master/PreprocessingOneCompt.py
+wget https://raw.githubusercontent.com/van-dang/MRI-Cloud/master/PreprocessingMultiCompt.py
+wget https://raw.githubusercontent.com/van-dang/MRI-Cloud/master/GCloudDmriSolver.py
+```
+
+### For multi-compartment domains
+```bash
+singularity exec -B $PWD writable_fenics_dmri.simg python3 PreprocessingMultiCompt.py -o multcompt_files.h5
+mpirun -n 8 singularity exec -B $PWD writable_fenics_dmri.simg python3 GCloudDmriSolver.py -f multcompt_files.h5 -M 1 -b 1000 -p 1e-5 -d 10600 -D 43100 -k 200 -gdir 0 1 0
+ ```
+### For single-compartment domains
+```bash
+singularity exec -B $PWD writable_fenics_dmri.simg python3 PreprocessingOneCompt.py -o onecompt_files.h5
+mpirun -n 8 singularity exec -B $PWD writable_fenics_dmri.simg python3 GCloudDmriSolver.py -f onecompt_files.h5 -M 0 -b 1000 -d 10600 -D 43100 -k 200 -K 3e-3 -gdir 1 0 0 
+```
+## With FEniCS-HPC
+### Create a FEniCS Image in writable mode
+
 ```bash
 wget https://raw.githubusercontent.com/van-dang/MRI-Cloud/singularity_images/Singularity_recipe_FEniCS_HPC_DMRI
-sudo singularity build -w writable_fenics_hpc.simg Singularity_recipe_FEniCS_HPC_DMRI
+sudo singularity build -w writable_fenics_hpc_dmri.simg Singularity_recipe_FEniCS_HPC_DMRI
 ```
-# Test if mpi works correctly with the FEniCS-HPC image
+
+### Test if mpi works correctly
 ```bash
 wget https://raw.githubusercontent.com/wesleykendall/mpitutorial/gh-pages/tutorials/mpi-hello-world/code/mpi_hello_world.c
-singularity exec -B $PWD writable_fenics_hpc.simg mpicc mpi_hello_world.c -o mpi_hello_world
-singularity exec -B $PWD writable_fenics_hpc.simg mpirun -n 3 ./mpi_hello_world
+singularity exec -B $PWD writable_fenics_hpc_dmri.simg mpicc mpi_hello_world.c -o mpi_hello_world
+mpirun -n 3 singularity exec -B $PWD writable_fenics_hpc_dmri.simg  mpi_hello_world
 ```
 The results would be
 ```bash
@@ -22,9 +76,67 @@ Hello world from processor dmri, rank 0 out of 3 processors
 Hello world from processor dmri, rank 1 out of 3 processors
 Hello world from processor dmri, rank 2 out of 3 processors
 ```
-# Note
-For a multi-node system, openmpi needs to be compatible between the hosted machine and the image to launch with many processors beyond one node. It requires to install the same version of openmpi on the hosted machine and the image. The command to launch the demo is
+
+### Download the solvers
 ```bash
-mpirun -n 30 singularity exec -B $PWD writable_fenics_hpc.simg ./mpi_hello_world
+wget https://github.com/van-dang/MRI-Cloud/archive/fenics-hpc-solvers.zip
+unzip fenics-hpc-solvers.zip
 ```
 
+### For single-compartment domains
+
+```bash
+# Compile the form files
+cd MRI-Cloud-fenics-hpc-solvers/one-comp/ufc
+singularity exec -B $PWD ../../../writable_fenics_hpc_dmri.simg make -j 8
+cd ../
+
+# Compile main.cpp
+singularity exec -B $PWD ../../writable_fenics_hpc_dmri.simg make clean
+singularity exec -B $PWD ../../writable_fenics_hpc_dmri.simg make -j 8
+
+# Create a working directory
+mkdir test_04b_pyramidal7aACC
+cd test_04b_pyramidal7aACC
+
+# Copy the executable demo to the working directory
+cp ../demo .
+
+# Download the mesh
+wget https://github.com/van-dang/RealNeuronMeshes/raw/master/volume_meshes/pyramidals/04b_pyramidal7aACC.msh.zip
+unzip 04b_pyramidal7aACC.msh.zip
+# Convert .msh to .xml
+wget https://people.sc.fsu.edu/~jburkardt/py_src/dolfin-convert/dolfin-convert.py
+python dolfin-convert.py 04b_pyramidal7aACC.msh 04b_pyramidal7aACC.xml
+
+# Execute the demo
+mpirun -n 8 singularity exec -B $PWD ../../../writable_fenics_hpc_dmri.simg ./demo -m 04b_pyramidal7aACC.xml -b 1000 -d 10600 -D 43100 -k 200 -K 3e-3 -v 1 0 0  > my_output_file
+```
+
+### For two-compartment domains
+```bash
+# Compile the form files
+cd MRI-Cloud-fenics-hpc-solvers/two-comp/ufc
+singularity exec -B $PWD ../../../writable_fenics_hpc_dmri.simg make -j 8
+cd ../
+
+# Compile main.cpp
+singularity exec -B $PWD ../../writable_fenics_hpc_dmri.simg make clean
+singularity exec -B $PWD ../../writable_fenics_hpc_dmri.simg make -j 8
+
+# Create a working directory
+mkdir test_neuron_N_18_7_3_5L
+cd test_neuron_N_18_7_3_5L
+
+# Copy the executable demo to the working directory
+cp ../demo .
+
+# Download the existing meshes
+wget --quiet https://github.com/van-dang/MRI-Cloud/raw/mesh/volume_box_N_18_7_3_5L_fine.xml.zip
+wget --quiet https://github.com/van-dang/MRI-Cloud/raw/mesh/volume_N_18_7_3_5L_fine.xml.zip
+unzip -q volume_box_N_18_7_3_5L_fine.xml.zip
+unzip -q volume_N_18_7_3_5L_fine.xml.zip
+
+# Execute the demo
+mpirun -8 singularity exec -B $PWD ../../../writable_fenics_hpc_dmri.simg  ./demo -m volume_box_N_18_7_3_5L_fine.xml -c volume_N_18_7_3_5L_fine.xml -b 1000 -p 1e-5 -d 10600 -D 43100 -k 200 -v 1 0 0 
+```
