@@ -1,11 +1,11 @@
+# Simulations with Singularity images on Google Cloud
+
 Here we provide recipes to build Singularity images of FEniCS and FEniCS-HPC. The following instructions were tested with Ubuntu 18.04
-# Requirements:
+## Requirements:
 * Singularity container
 ```bash
 sudo apt-get singulariy-container
 ```
-
-# Simulations with Singularity images on Google Cloud
 
 ## Create a VM instance
 
