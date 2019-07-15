@@ -8,7 +8,7 @@ sudo apt-get singulariy-container
 # Build the FEniCS-HPC image
 ```bash
 wget https://raw.githubusercontent.com/van-dang/MRI-Cloud/singularity_images/Singularity_recipe_FEniCS_HPC_DMRI
-sudo singularity build -w writable_fenics_hpc.simg build_fenics_hpc_image_recipe
+sudo singularity build -w writable_fenics_hpc.simg Singularity_recipe_FEniCS_HPC_DMRI
 ```
 # Test if mpi works correctly with the FEniCS-HPC image
 ```bash
