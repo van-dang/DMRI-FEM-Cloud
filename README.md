@@ -1,4 +1,4 @@
-The following instructions were tested with Ubuntu 18.04
+Here we provide recipes to build Singularity images of FEniCS and FEniCS-HPC. The following instructions were tested with Ubuntu 18.04
 # Requirements:
 * Singularity container
 ```bash
