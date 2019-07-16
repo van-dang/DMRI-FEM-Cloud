@@ -31,7 +31,7 @@ if geo_choice == 1:
     domain.set_subdomain(1, circle)
     mymesh = generate_mesh(domain, 15) # 15 is the resolution
     cmpt_mesh = generate_mesh(circle, 15)
-    cellmarker, phase, partition_marker, partion_list = Create_phase_func(mymesh, cmpt_mesh, None)    
+    phase, partion_list, partition_marker = CreatePhaseFunc(mymesh, evengroup, oddgroup, None)
 
 ################################################################################
 ############## Create multilayered domains using gmsh ##########################
@@ -68,7 +68,7 @@ if geo_choice == 2:
 
     File("pmk_"+mesh_name+".xml")>>partition_marker
 
-    cellmarker, phase, partition_marker, partion_list = Create_phase_func(mymesh, None, partition_marker)    
+    phase, partion_list = CreatePhaseFunc(mymesh, [], [], partition_marker)    
 
 ################################################################################
 ############## Download the existing mesh and submesh ##########################
@@ -82,7 +82,7 @@ if geo_choice == 3:
 
     mymesh = Mesh("multi_layer_torus.xml");  
     cmpt_mesh = Mesh('multi_layer_torus_compt1.xml')
-    cellmarker, phase, partition_marker, partion_list = Create_phase_func(mymesh, cmpt_mesh, None)    
+    phase, partion_list, partition_marker = CreatePhaseFunc(mymesh, [], [cmpt_mesh], None)
 
     
 if geo_choice == 4:
@@ -95,7 +95,7 @@ if geo_choice == 4:
         os.system('unzip -q volume_N_18_7_3_5L_fine.xml.zip')
     mymesh = Mesh("volume_box_N_18_7_3_5L_fine.xml");
     cmpt_mesh = Mesh('volume_N_18_7_3_5L_fine.xml')
-    cellmarker, phase, partition_marker, partion_list = Create_phase_func(mymesh, cmpt_mesh, None)
+    phase, partion_list, partition_marker = CreatePhaseFunc(mymesh, [], [cmpt_mesh], None)
 
 if geo_choice == 5:
     print("Working with mesh_226cylinders.xml")
@@ -111,7 +111,7 @@ if geo_choice == 5:
 	os.system('wget --quiet https://raw.githubusercontent.com/van-dang/MRI-Cloud/mesh/GetPartitionMarkers.py')
     mymesh = Mesh("mesh_226cylinders.xml");
     cmpt_mesh = Mesh('submesh_226cylinders.xml')
-    cellmarker, phase, partition_marker, partion_list = Create_phase_func(mymesh, cmpt_mesh, None)
+    phase, partion_list, partition_marker = CreatePhaseFunc(mymesh, [], [cmpt_mesh], None)
     
 ################################################################################
 ############## Save, Plot phase functions and submeshes to verify ##############
