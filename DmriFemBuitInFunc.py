@@ -686,31 +686,6 @@ def convert_q2g(qvalue):
     g_ratio = 2.675e8;
     return qvalue/g_ratio*1e12
 
-def Create_phase_func(mymesh, cmpt_mesh , pmk):
-    V_DG = FunctionSpace(mymesh, 'DG', 0)
-    dofmap_DG = V_DG.dofmap()
-    phase = Function(V_DG)
-    cellmarker = MeshFunction("size_t", mymesh, mymesh.topology().dim())
-    partion_list = [];
-    for cell in cells(mymesh):
-        cmk0, cmk = 0, 0
-        if not(pmk==None):
-            cmk0 = pmk[cell.index()]
-            cmk = cmk0 % 2    
-        if not(cmpt_mesh==None):
-            p = cell.midpoint();
-            cmk0 = cmpt_mesh.bounding_box_tree().compute_first_entity_collision(p)<4294967295
-            cmk = cmk0
-        phase.vector()[dofmap_DG.cell_dofs(cell.index())] = cmk;
-        cellmarker[cell.index()] = cmk; 
-        
-        if (len(partion_list)==0 or not(cmk0 in partion_list)):
-            partion_list.append(cmk0)
-            
-    if pmk==None:
-        return phase, partion_list, cellmarker
-    else:
-        return phase, partion_list 
 def CreatePhaseFunc(mymesh, evengroup, oddgroup, partition_marker):
     V_DG = FunctionSpace(mymesh, 'DG', 0)
     dofmap_DG = V_DG.dofmap()
