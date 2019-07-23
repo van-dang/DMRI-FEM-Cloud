@@ -28,7 +28,7 @@ We designed some benchmark problems that illustrate how the diffusion MRI simula
 
 * [Explicit Implementation](https://colab.research.google.com/github/van-dang/DMRI-FEM-Cloud/blob/master/ExplicitImplementation.ipynb)
 
-These notebooks can be connected to either a hosted runtime provided by Google Cloud or a local runtime. The hosted runtime allows us to access free resources for up to 12 hours at a time. For longer excecutions, it is more convenient to connect to the local runtimes. The instructions are available at [this link](https://github.com/van-dang/MRI-Cloud/blob/master/LocalColab.md).
+These notebooks can be connected to either a hosted runtime provided by Google Cloud or a local runtime. The hosted runtime allows us to access free resources for up to 12 hours at a time. For longer excecutions, it is more convenient to connect to the local runtimes. The instructions are available at [this link](https://github.com/van-dang/DMRI-FEM-Cloud/blob/master/LocalColab.md).
 
 # Simulations with Singularity images on Google Cloud
 
@@ -48,17 +48,17 @@ sudo apt-get install singularity-container unzip
 ### Create a FEniCS Image in writable mode
 
 ```bash
-wget https://raw.githubusercontent.com/van-dang/MRI-Cloud/singularity_images/Singularity_recipe_FEniCS_DMRI
+wget https://raw.githubusercontent.com/van-dang/DMRI-FEM-Cloud/singularity_images/Singularity_recipe_FEniCS_DMRI
 sudo singularity build -w writable_fenics_dmri.simg Singularity_recipe_FEniCS_DMRI
 ```
 ### Or download the exisiting FEniCS Image and change it to writable mode
 ```bash
-wget https://github.com/van-dang/MRI-Cloud/raw/singularity_images/writable_fenics_dmri.simg
+wget https://github.com/van-dang/DMRI-FEM-Cloud/raw/singularity_images/writable_fenics_dmri.simg
 ```
 
 ### Test if mpi4py works correctly
 ```bash
-wget https://raw.githubusercontent.com/van-dang/MRI-Cloud/master/test_mpi4py.py
+wget https://raw.githubusercontent.com/van-dang/DMRI-FEM-Cloud/master/test_mpi4py.py
 mpirun -n 3 singularity exec -B $PWD writable_fenics_dmri.simg python3 test_mpi4py.py
 ```
 The results would be
@@ -70,9 +70,9 @@ My rank is  0
 
 ### Copy Python solvers to the VM instance
 ```bash
-wget https://raw.githubusercontent.com/van-dang/MRI-Cloud/master/PreprocessingOneCompt.py
-wget https://raw.githubusercontent.com/van-dang/MRI-Cloud/master/PreprocessingMultiCompt.py
-wget https://raw.githubusercontent.com/van-dang/MRI-Cloud/master/GCloudDmriSolver.py
+wget https://raw.githubusercontent.com/van-dang/DMRI-FEM-Cloud/master/PreprocessingOneCompt.py
+wget https://raw.githubusercontent.com/van-dang/DMRI-FEM-Cloud/master/PreprocessingMultiCompt.py
+wget https://raw.githubusercontent.com/van-dang/DMRI-FEM-Cloud/master/GCloudDmriSolver.py
 ```
 
 ### For multi-compartment domains
@@ -89,12 +89,12 @@ mpirun -n 8 singularity exec -B $PWD writable_fenics_dmri.simg python3 GCloudDmr
 ### Create a FEniCS Image in writable mode
 
 ```bash
-wget https://raw.githubusercontent.com/van-dang/MRI-Cloud/singularity_images/Singularity_recipe_FEniCS_HPC_DMRI
+wget https://raw.githubusercontent.com/van-dang/DMRI-FEM-Cloud/singularity_images/Singularity_recipe_FEniCS_HPC_DMRI
 sudo singularity build -w writable_fenics_hpc_dmri.simg Singularity_recipe_FEniCS_HPC_DMRI
 ```
 ### Or download the exisiting FEniCS Image and change it to writable mode
 ```bash
-wget https://github.com/van-dang/MRI-Cloud/raw/singularity_images/writable_fenics_hpc_dmri.simg
+wget https://github.com/van-dang/DMRI-FEM-Cloud/raw/singularity_images/writable_fenics_hpc_dmri.simg
 ```
 
 ### Test if mpi works correctly
@@ -112,7 +112,7 @@ Hello world from processor dmri, rank 2 out of 3 processors
 
 ### Download the solvers
 ```bash
-wget https://github.com/van-dang/MRI-Cloud/archive/fenics-hpc-solvers.zip
+wget https://github.com/van-dang/DMRI-FEM-Cloud/archive/fenics-hpc-solvers.zip
 unzip fenics-hpc-solvers.zip
 ```
 
@@ -120,7 +120,7 @@ unzip fenics-hpc-solvers.zip
 
 ```bash
 # Compile the form files
-cd MRI-Cloud-fenics-hpc-solvers/one-comp/ufc
+cd DMRI-FEM-Cloud-fenics-hpc-solvers/one-comp/ufc
 singularity exec -B $PWD ../../../writable_fenics_hpc_dmri.simg make -j 8
 cd ../
 
@@ -149,7 +149,7 @@ mpirun -n 8 singularity exec -B $PWD ../../../writable_fenics_hpc_dmri.simg ./de
 ### For two-compartment domains
 ```bash
 # Compile the form files
-cd MRI-Cloud-fenics-hpc-solvers/two-comp/ufc
+cd DMRI-FEM-Cloud-fenics-hpc-solvers/two-comp/ufc
 singularity exec -B $PWD ../../../writable_fenics_hpc_dmri.simg make -j 8
 cd ../
 
@@ -165,8 +165,8 @@ cd test_neuron_N_18_7_3_5L
 cp ../demo .
 
 # Download the existing meshes
-wget --quiet https://github.com/van-dang/MRI-Cloud/raw/mesh/volume_box_N_18_7_3_5L_fine.xml.zip
-wget --quiet https://github.com/van-dang/MRI-Cloud/raw/mesh/volume_N_18_7_3_5L_fine.xml.zip
+wget --quiet https://github.com/van-dang/DMRI-FEM-Cloud/raw/mesh/volume_box_N_18_7_3_5L_fine.xml.zip
+wget --quiet https://github.com/van-dang/DMRI-FEM-Cloud/raw/mesh/volume_N_18_7_3_5L_fine.xml.zip
 unzip -q volume_box_N_18_7_3_5L_fine.xml.zip
 unzip -q volume_N_18_7_3_5L_fine.xml.zip
 
