@@ -8,14 +8,14 @@ if (nprocs>1):
     sys.exit()
 
 
-exists = os.path.isfile('DmriFemBuitInFunc.py')
+exists = os.path.isfile('DmriFemLib.py')
 isupdate = False
 if (exists==False or isupdate==True):
     if isupdate==True:
-        os.system("rm DmriFemBuitInFunc.py")
+        os.system("rm DmriFemLib.py")
     print("Load pre-defined functions from GitHub")
-    os.system("wget --quiet https://raw.githubusercontent.com/van-dang/MRI-Cloud/master/DmriFemBuitInFunc.py")
-from DmriFemBuitInFunc import *
+    os.system("wget --quiet https://raw.githubusercontent.com/van-dang/DMRI-FEM-Cloud/master/DmriFemLib.py")
+from DmriFemLib import *
 
 
 """# Working on the mesh"""
@@ -24,7 +24,7 @@ geo_choice = 2
 
 if geo_choice == 0:
       mesh_file='2E_ExtraCellular_group_10um_vol'
-      file_dir='https://raw.githubusercontent.com/van-dang/MRI-Cloud/mesh/'+mesh_file+'.msh.zip'
+      file_dir='https://raw.githubusercontent.com/van-dang/DMRI-FEM-Cloud/mesh/'+mesh_file+'.msh.zip'
       zip_exists = os.path.isfile(mesh_file+".msh.zip")
       mesh_file_exists = os.path.isfile(mesh_file)
       if (zip_exists==False):
@@ -38,7 +38,7 @@ if geo_choice == 1:
       zip_exists = os.path.isfile(mesh_file+".zip")
       mesh_file_exists = os.path.isfile(mesh_file)
       if (zip_exists==False):
-            os.system("wget https://raw.githubusercontent.com/van-dang/MRI-Cloud/mesh/"+mesh_file+".zip")
+            os.system("wget https://raw.githubusercontent.com/van-dang/DMRI-FEM-Cloud/mesh/"+mesh_file+".zip")
       if (mesh_file_exists==False):
             os.system("unzip -q "+mesh_file+".zip")
       mymesh = Mesh(mesh_file);
