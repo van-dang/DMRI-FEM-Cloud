@@ -12,10 +12,10 @@ exists = os.path.isfile('DmriFemBuitInFunc.py')
 isupdate = False
 if (exists==False or isupdate==True):
     if isupdate==True:
-        os.system("rm DmriFemBuitInFunc.py")
+        os.system("rm DmriFemLib.py")
     print("Load pre-defined functions from GitHub")
-    os.system("wget --quiet https://raw.githubusercontent.com/van-dang/MRI-Cloud/master/DmriFemBuitInFunc.py")
-from DmriFemBuitInFunc import *
+    os.system("wget --quiet https://raw.githubusercontent.com/van-dang/DMRI-FEM-Cloud/master/DmriFemLib.py")
+from DmriFemLib import *
 
 
 """# Working on the mesh"""
@@ -43,11 +43,11 @@ if geo_choice == 2:
     
     is_partition_function_exist = os.path.isfile('GetPartitionMarkers.py')
     if is_partition_function_exist==False:
-        os.system('wget --quiet https://raw.githubusercontent.com/van-dang/MRI-Cloud/mesh/GetPartitionMarkers.py')
+        os.system('wget --quiet https://raw.githubusercontent.com/van-dang/DMRI-FEM-Cloud/mesh/GetPartitionMarkers.py')
 
     is_geo_file_exist = os.path.isfile(mesh_name+'.geo')  
     if is_geo_file_exist==False:
-        os.system('wget --quiet https://raw.githubusercontent.com/van-dang/MRI-Cloud/mesh/'+mesh_name+'.geo')
+        os.system('wget --quiet https://raw.githubusercontent.com/van-dang/DMRI-FEM-Cloud/mesh/'+mesh_name+'.geo')
 
     # Modify .geo file from 4 layers to 3 layers      
     os.system("sed -i 's/5, 7.5, 10, 13/5, 7.5, 10/g' "+mesh_name+".geo")
@@ -75,8 +75,8 @@ if geo_choice == 2:
 if geo_choice == 3:
     is_file_exist = os.path.isfile("multi_layer_torus.xml")  
     if is_file_exist==False:
-        os.system('wget --quiet https://raw.githubusercontent.com/van-dang/MRI-Cloud/master/comri/meshes/multi_layer_torus.xml.zip')
-        os.system('wget --quiet https://raw.githubusercontent.com/van-dang/MRI-Cloud/master/comri/meshes/multi_layer_torus_compt1.xml.zip')
+        os.system('wget --quiet https://raw.githubusercontent.com/van-dang/DMRI-FEM-Cloud/master/comri/meshes/multi_layer_torus.xml.zip')
+        os.system('wget --quiet https://raw.githubusercontent.com/van-dang/DMRI-FEM-Cloud/master/comri/meshes/multi_layer_torus_compt1.xml.zip')
         os.system('unzip -q multi_layer_torus.xml.zip')
         os.system('unzip -q multi_layer_torus_compt1.xml.zip')
 
@@ -89,8 +89,8 @@ if geo_choice == 4:
     print("Working with volume_box_N_18_7_3_5L_fine.xml")
     is_file_exist = os.path.isfile("volume_box_N_18_7_3_5L_fine.xml")
     if is_file_exist==False:
-        os.system('wget --quiet https://github.com/van-dang/MRI-Cloud/raw/mesh/volume_box_N_18_7_3_5L_fine.xml.zip')
-        os.system('wget --quiet https://github.com/van-dang/MRI-Cloud/raw/mesh/volume_N_18_7_3_5L_fine.xml.zip')
+        os.system('wget --quiet https://github.com/van-dang/DMRI-FEM-Cloud/raw/mesh/volume_box_N_18_7_3_5L_fine.xml.zip')
+        os.system('wget --quiet https://github.com/van-dang/DMRI-FEM-Cloud/raw/mesh/volume_N_18_7_3_5L_fine.xml.zip')
         os.system('unzip -q volume_box_N_18_7_3_5L_fine.xml.zip')
         os.system('unzip -q volume_N_18_7_3_5L_fine.xml.zip')
     mymesh = Mesh("volume_box_N_18_7_3_5L_fine.xml");
@@ -101,14 +101,14 @@ if geo_choice == 5:
     print("Working with mesh_226cylinders.xml")
     is_mesh_file_exist = os.path.isfile('mesh_226cylinders.xml.zip')
     if is_mesh_file_exist==False:
-        os.system('wget --quiet https://github.com/van-dang/MRI-Cloud/raw/mesh/mesh_226cylinders.xml.zip')
-	os.system('wget --quiet https://github.com/van-dang/MRI-Cloud/raw/mesh/submesh_226cylinders.xml.zip')
+        os.system('wget --quiet https://github.com/van-dang/DMRI-FEM-Cloud/raw/mesh/mesh_226cylinders.xml.zip')
+	os.system('wget --quiet https://github.com/van-dang/DMRI-FEM-Cloud/raw/mesh/submesh_226cylinders.xml.zip')
         os.system('rm -rf mesh_226cylinders.xml submesh_226cylinders.xml __MACOSX')
         os.system('unzip mesh_226cylinders.xml.zip')
         os.system('unzip submesh_226cylinders.xml.zip')
     is_partition_function_exist = os.path.isfile('GetPartitionMarkers.py')
     if is_partition_function_exist==False:
-	os.system('wget --quiet https://raw.githubusercontent.com/van-dang/MRI-Cloud/mesh/GetPartitionMarkers.py')
+	os.system('wget --quiet https://raw.githubusercontent.com/van-dang/DMRI-FEM-Cloud/mesh/GetPartitionMarkers.py')
     mymesh = Mesh("mesh_226cylinders.xml");
     cmpt_mesh = Mesh('submesh_226cylinders.xml')
     phase, partion_list, partition_marker = CreatePhaseFunc(mymesh, [], [cmpt_mesh], None)
