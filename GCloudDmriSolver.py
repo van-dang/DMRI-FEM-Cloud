@@ -134,16 +134,16 @@ except:
 
 """#Load pre-defined functions"""
 
-exists = os.path.isfile('DmriFemBuitInFunc.py')
+exists = os.path.isfile('DmriFemLib.py')
 isupdate = False
 if (exists==False or isupdate==True):
     if isupdate==True:
-        os.system("rm DmriFemBuitInFunc.py")
+        os.system("rm DmriFemLib.py")
     if rank==0:    
         print("Load pre-defined functions from GitHub")
-    os.system("wget --quiet https://raw.githubusercontent.com/van-dang/MRI-Cloud/master/DmriFemBuitInFunc.py")
+    os.system("wget --quiet https://raw.githubusercontent.com/van-dang/DMRI-FEM-Cloud/master/DmriFemLib.py")
 
-from DmriFemBuitInFunc import *
+from DmriFemLib import *
 
 """# Solve the Bloch-Torrey equation"""
 
