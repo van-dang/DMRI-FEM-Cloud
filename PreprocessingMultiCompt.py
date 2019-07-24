@@ -8,7 +8,7 @@ if (nprocs>1):
     sys.exit()
 
 
-exists = os.path.isfile('DmriFemBuitInFunc.py')
+exists = os.path.isfile('DmriFemLib.py')
 isupdate = False
 if (exists==False or isupdate==True):
     if isupdate==True:
@@ -41,10 +41,6 @@ if geo_choice == 2:
     # mesh_name = "multi_layered_sphere"
     # mesh_name = "multi_layered_torus"
     
-    is_partition_function_exist = os.path.isfile('GetPartitionMarkers.py')
-    if is_partition_function_exist==False:
-        os.system('wget --quiet https://raw.githubusercontent.com/van-dang/DMRI-FEM-Cloud/mesh/GetPartitionMarkers.py')
-
     is_geo_file_exist = os.path.isfile(mesh_name+'.geo')  
     if is_geo_file_exist==False:
         os.system('wget --quiet https://raw.githubusercontent.com/van-dang/DMRI-FEM-Cloud/mesh/'+mesh_name+'.geo')
@@ -59,8 +55,6 @@ if geo_choice == 2:
     os.system('dolfin-convert '+mesh_name+'.msh '+mesh_name+'.xml')
        
     mymesh = Mesh(mesh_name+".xml");  
-
-    from GetPartitionMarkers import *
 
     GetPartitionMarkers(mesh_name+".msh", "pmk_"+mesh_name+".xml")
 
@@ -106,9 +100,6 @@ if geo_choice == 5:
         os.system('rm -rf mesh_226cylinders.xml submesh_226cylinders.xml __MACOSX')
         os.system('unzip mesh_226cylinders.xml.zip')
         os.system('unzip submesh_226cylinders.xml.zip')
-    is_partition_function_exist = os.path.isfile('GetPartitionMarkers.py')
-    if is_partition_function_exist==False:
-	os.system('wget --quiet https://raw.githubusercontent.com/van-dang/DMRI-FEM-Cloud/mesh/GetPartitionMarkers.py')
     mymesh = Mesh("mesh_226cylinders.xml");
     cmpt_mesh = Mesh('submesh_226cylinders.xml')
     phase, partion_list, partition_marker = CreatePhaseFunc(mymesh, [], [cmpt_mesh], None)
