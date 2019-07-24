@@ -890,21 +890,22 @@ class MRI_simulation():
           comm = MPI.comm_world
           rank = comm.Get_rank()
 
-          start_time = time.time()
+          ft_f, ift_f, ft_p_f, ift_p_f = Function(mydomain.V), Function(mydomain.V), Function(mydomain.V), Function(mydomain.V);
+          F = ThetaMethodF(ft_f, ift_f, mri_para, mri_simu, mydomain)
+          L = ThetaMethodL(ft_p_f, ift_p_f, mri_para, mri_simu, mydomain)
 
+          start_time = time.time()
           while self.t < mri_para.T + self.k: # Time-stepping loop                                                                                                                                
               if stepcounter % self.nskip == 0 and rank==0:
                   print('t: %6.2f '%self.t, 'T: %6.2f'%mri_para.T, 'dt: %.1f'%self.k,'qvalue: %e'%mri_para.qvalue,'Completed %3.2f%%'%(float(self.t)/float(mri_para.T+self.k)*100.0));
 
-              ft = mri_para.time_profile(self.t);
-              ift = mri_para.itime_profile(self.t);
-
-              ft_p = mri_para.time_profile(tp);
-              ift_p = mri_para.itime_profile(tp);
+              ft_f.vector()[:]   = mri_para.time_profile(self.t);   ift_f.vector()[:]   = mri_para.itime_profile(self.t);
+              ft_p_f.vector()[:] = mri_para.time_profile(tp);       ift_p_f.vector()[:] = mri_para.itime_profile(tp);
               
-              L = ThetaMethodL(ft_p, ift_p, mri_para, self, mydomain);
-              A = 1/self.k*M + assemble(ThetaMethodF(ft, ift, mri_para, self, mydomain))
-
+              # L = ThetaMethodL(ft_p, ift_p, mri_para, self, mydomain);
+              # A = 1/self.k*M + assemble(ThetaMethodF(ft, ift, mri_para, self, mydomain))
+              
+              A = 1/mri_simu.k*M + assemble(F);
               b = assemble(L);
 
               linsolver.solve(A, self.u_0.vector(),b);
