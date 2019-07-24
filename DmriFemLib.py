@@ -891,8 +891,8 @@ class MRI_simulation():
           rank = comm.Get_rank()
 
           ft_f, ift_f, ft_p_f, ift_p_f = Function(mydomain.V), Function(mydomain.V), Function(mydomain.V), Function(mydomain.V);
-          F = ThetaMethodF(ft_f, ift_f, mri_para, mri_simu, mydomain)
-          L = ThetaMethodL(ft_p_f, ift_p_f, mri_para, mri_simu, mydomain)
+          F = ThetaMethodF(ft_f, ift_f, mri_para, self, mydomain)
+          L = ThetaMethodL(ft_p_f, ift_p_f, mri_para, self, mydomain)
 
           start_time = time.time()
           while self.t < mri_para.T + self.k: # Time-stepping loop                                                                                                                                
