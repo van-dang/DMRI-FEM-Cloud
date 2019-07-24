@@ -901,11 +901,8 @@ class MRI_simulation():
 
               ft_f.vector()[:]   = mri_para.time_profile(self.t);   ift_f.vector()[:]   = mri_para.itime_profile(self.t);
               ft_p_f.vector()[:] = mri_para.time_profile(tp);       ift_p_f.vector()[:] = mri_para.itime_profile(tp);
-              
-              # L = ThetaMethodL(ft_p, ift_p, mri_para, self, mydomain);
-              # A = 1/self.k*M + assemble(ThetaMethodF(ft, ift, mri_para, self, mydomain))
-              
-              A = 1/mri_simu.k*M + assemble(F);
+                            
+              A = 1/self.k*M + assemble(F);
               b = assemble(L);
 
               linsolver.solve(A, self.u_0.vector(),b);
