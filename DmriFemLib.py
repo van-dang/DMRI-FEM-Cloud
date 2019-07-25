@@ -565,7 +565,9 @@ def CheckAndCorrectPeriodicity(mesh, direction, tol):
 def GetGlobalDomainSize(mesh, mpi4py, numpy):
     gdim = mesh.geometry().dim()
     comm = mesh.mpi_comm()
+    parameters['ghost_mode'] = 'none'
     bmesh  = BoundaryMesh(mesh, "exterior")   # surface boundary mesh
+    parameters['ghost_mode'] = 'shared_facet'
     mcoors = bmesh.coordinates()
     lxmin, lymin = mcoors[:,0].min(), mcoors[:,1].min()
     lxmax, lymax = mcoors[:,0].max(), mcoors[:,1].max()
