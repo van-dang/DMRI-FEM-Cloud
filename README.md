@@ -51,10 +51,6 @@ sudo apt-get install singularity-container unzip
 wget https://raw.githubusercontent.com/van-dang/DMRI-FEM-Cloud/singularity_images/Singularity_recipe_FEniCS_DMRI
 sudo singularity build -w writable_fenics_dmri.simg Singularity_recipe_FEniCS_DMRI
 ```
-### Or download the exisiting FEniCS Image and change it to writable mode
-```bash
-wget https://github.com/van-dang/DMRI-FEM-Cloud/raw/singularity_images/writable_fenics_dmri.simg
-```
 
 ### Test if mpi4py works correctly
 ```bash
@@ -91,10 +87,6 @@ mpirun -n 8 singularity exec -B $PWD writable_fenics_dmri.simg python3 GCloudDmr
 ```bash
 wget https://raw.githubusercontent.com/van-dang/DMRI-FEM-Cloud/singularity_images/Singularity_recipe_FEniCS_HPC_DMRI
 sudo singularity build -w writable_fenics_hpc_dmri.simg Singularity_recipe_FEniCS_HPC_DMRI
-```
-### Or download the exisiting FEniCS Image and change it to writable mode
-```bash
-wget https://github.com/van-dang/DMRI-FEM-Cloud/raw/singularity_images/writable_fenics_hpc_dmri.simg
 ```
 
 ### Test if mpi works correctly
