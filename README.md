@@ -20,7 +20,7 @@ You should have received a copy of the GNU General Public License along with thi
 
 We designed some benchmark problems that illustrate how the diffusion MRI simulations can be performed on Google Colab. Users can open the files in Github and execute it directly with Google Colab. The list of benchmarks problems are as follows
 
-* [Arbitrary time profile](https://colab.research.google.com/github/van-dang/DMRI-FEM-Cloud/blob/master/ArbitraryTimeSequence.ipynb)
+* [Arbitrary diffusion pulses](https://colab.research.google.com/github/van-dang/DMRI-FEM-Cloud/blob/master/ArbitraryTimeSequence.ipynb) (PGSE, OGSE, Double-PGSE, Double-OGSE, Trapezoidal PGSE,...)
 
 * [Extracellular Space](https://colab.research.google.com/github/van-dang/DMRI-FEM-Cloud/blob/master/ExtracellularSpace.ipynb)
 
