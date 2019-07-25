@@ -2,11 +2,10 @@
 
 DMRI-FEM-Cloud is an effort to bring Cloud Computing to computational diffusion MRI. It supports
 
-(1) Single domains, Multilayered structures, manifolds
-(2) Membrane permeability for internal interfaces
-    Artificial permeability at the external interfaces
-(3) pure homogeneous Neumann BCs 
-(4) pseudo-periodic BCs
+(1) Single domains, Multilayered structures, Manifolds
+(2) Membrane permeability for internal interfaces and Artificial permeability at the external interfaces
+(3) Pure homogeneous Neumann BCs and Pseudo-periodic BCs
+(4) Web interface Google Colab / Python notebooks and TUI.
 (5) Serial and parallel executions
 
 Copyright (C) 2019 Van-Dang Nguyen
