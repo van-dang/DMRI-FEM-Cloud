@@ -74,28 +74,21 @@ if geo_choice == 2:
 
       mesh_file = neuron_list[neuron_id];
       
-      neuron_dir='https://raw.githubusercontent.com/van-dang/RealNeuronMeshes/master/'+neuron_type+'/'+mesh_file+'.msh.zip'
+      neuron_dir='https://github.com/van-dang/RealNeuronMeshes/raw/master/volume_meshes/'+neuron_type+'/'+mesh_file+'.msh.zip'
 
       zip_exists = os.path.isfile(mesh_file+".msh.zip")
-      mesh_file_exists = os.path.isfile(mesh_file+".xml")
+
       if (zip_exists==False):
               os.system("wget -q "+neuron_dir)
-      if (mesh_file_exists==False):
-              os.system("unzip -q "+mesh_file+".msh.zip")
-              os.system("dolfin-convert "+mesh_file+".msh "+mesh_file+".xml")
+      os.system("unzip -q "+mesh_file+".msh.zip")
+      os.system("dolfin-convert "+mesh_file+".msh "+mesh_file+".xml")
 
 print('Mesh file: ', mesh_file)
 
 mesh = Mesh(mesh_file+".xml")
 
-cmpt_mesh = None
-partition_marker = None
-
-cellmarker, phase, partition_marker, partition_list = Create_phase_func(mesh, cmpt_mesh, partition_marker)    
-
 V_DG = FunctionSpace(mesh, 'DG', 0)
 
-print('Partition list: ', partition_list)
 D0_array = [3e-3]
 IC_array = [1]
 T2_array = [1e6]
@@ -107,14 +100,24 @@ d10 = Function(V_DG); d11 = Function(V_DG); d12 = Function(V_DG)
 d20 = Function(V_DG); d21 = Function(V_DG); d22 = Function(V_DG)
 T2 = Function(V_DG); disc_ic = Function(V_DG);
         
+
+print('Setting parameters to %d cells'%(mesh.num_cells()))
+
+T2.vector()[:]      = T2_array[0];
+disc_ic.vector()[:] = IC_array[0];
+d00.vector()[:]     = D0_array[0];
+d11.vector()[:]     = D0_array[0];
+d22.vector()[:]     = D0_array[0];
+                             
+'''
 for cell in cells(mesh):
       cell_dof = dofmap_DG.cell_dofs(cell.index())
-      cmk = partition_marker[cell.index()]
-      T2.vector()[cell_dof]      = T2_array[cmk];
-      disc_ic.vector()[cell_dof] = IC_array[cmk]; 
-      d00.vector()[cell_dof]     = D0_array[cmk]; 
-      d11.vector()[cell_dof]     = D0_array[cmk]; 
-      d22.vector()[cell_dof]     = D0_array[cmk];
+      T2.vector()[cell_dof]      = T2_array[0];
+      disc_ic.vector()[cell_dof] = IC_array[0];
+      d00.vector()[cell_dof]     = D0_array[0];
+      d11.vector()[cell_dof]     = D0_array[0];
+      d22.vector()[cell_dof]     = D0_array[0];
+'''
 
 ofile = 'files.h5';
 
@@ -125,13 +128,15 @@ for i in range(0, len(sys.argv)):
 
 filename, file_extension = os.path.splitext(ofile)
 
+
 ofile = filename+'.h5'
 
+print("Write to ",ofile)
 f = HDF5File(mesh.mpi_comm(), ofile, 'w')
 f.write(mesh, 'mesh')
-f.write(T2, 'T2');  f.write(disc_ic, 'ic'); f.write(phase, 'phase');
+f.write(T2, 'T2');  f.write(disc_ic, 'ic'); 
 f.write(d00, 'd00'); f.write(d01, 'd01'); f.write(d02, 'd02')
 f.write(d10, 'd10'); f.write(d11, 'd11'); f.write(d12, 'd12')
 f.write(d20, 'd20'); f.write(d21, 'd21'); f.write(d22, 'd22')
 
-print("Write to ",ofile)
+print("Done")
