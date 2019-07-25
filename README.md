@@ -1,6 +1,6 @@
 # ABOUT
 
-DMRI-FEM-Cloud is an effort to bring Cloud Computing to simulations of diffusion MRI. It supports
+DMRI-FEM-Cloud is an effort to bring Cloud Computing to computational diffusion MRI. It supports
 
 (1) Single domains, Multilayered structures, manifolds
 (2) Membrane permeability for internal interfaces
