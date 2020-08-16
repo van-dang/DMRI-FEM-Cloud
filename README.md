@@ -32,6 +32,8 @@ We designed some benchmark problems that illustrate how the diffusion MRI simula
 
 * [Multilayered Structures](https://colab.research.google.com/github/van-dang/DMRI-FEM-Cloud/blob/master/MultilayeredStructures.ipynb)
 
+* [Multilayered Disk with Variable Permeability](https://colab.research.google.com/github/van-dang/DMRI-FEM-Cloud/blob/master/MultilayeredDiskVariablePermeability.ipynb)
+
 * [Pseudo-Periodicity](https://colab.research.google.com/github/van-dang/DMRI-FEM-Cloud/blob/master/PeriodicDomains.ipynb)
 
 * [T2-relaxation](https://colab.research.google.com/github/van-dang/DMRI-FEM-Cloud/blob/master/T2_Relaxation.ipynb)
